@@ -886,7 +886,7 @@
         <input type="number" name="quantity_edit[]" class="quantity_input" min="0">
         </td>
         <td>
-        <input type="text" name="unit[]" class="unit" min="0">
+        <input type="text" name="unit_edit[]" class="unit_edit" min="0">
         </td>
         <td><input type="number" name="price_import_edit[]" class="price_import" min="0"></td>
         <td class="total_amount text-center" name="total_amount"></td>

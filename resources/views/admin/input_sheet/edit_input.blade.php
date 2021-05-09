@@ -60,6 +60,7 @@
 						<tr>
 							<th>Tên sản phẩm <button class="btn btn-success btn-sm" type="button" id="add_product">Thêm sản phẩm <i class="fas fa-plus"></i></button></th>
 							<th>Số lượng</th>
+							<th>Đơn vị</th>
 							<th>Giá nhập</th>
 							<th>Tổng tiền</th>
 							<th class="text-center">Thao tác</th>
@@ -77,6 +78,7 @@
 								<input type="hidden" name="" value="{{ $value->id }}" class="input_id">
 							</td>
 							<td><input type="number" name="quantity[]" class="quantity_input" min="0" value="{{ $value->quantity }}"></td>
+							<td><input type="text" name="unit[]" class="unit" min="0" value="{{ $value->unit }}"></td>
 							<td><input type="number" name="price_import[]" class="price_import" min="0" value="{{ $value->price_import }}"></td>
 							<td class="total_amount text-center" name="total_amount">{{ currency_format($value->quantity*$value->price_import) }}</td>
 							<td class="text-center"><a data-href="" class="delete-input" style="cursor:pointer;"><i class="fa fa-times text-danger"></i></a></td>

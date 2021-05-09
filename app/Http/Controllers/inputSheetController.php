@@ -225,16 +225,22 @@ public function update_input($id,editInputRequest $req)
     if ($key1==$key2) {
       foreach ($price_import_edit as $key3=> $gianhap) {
         if ($key2==$key3) {
-          $inputSheet_detail = new inputSheetDetail;
-          $inputSheet_detail->product_id = $product;
-          $inputSheet_detail->inward_slip_id = $id;
-          $inputSheet_detail->quantity = $soluong;
-          $inputSheet_detail->price_import = $gianhap;
-          $inputSheet_detail->save();
+          foreach ($req->unit_edit as $key4=> $unit) {
+           if ($key3==$key4) {
+            $inputSheet_detail = new inputSheetDetail;
+            $inputSheet_detail->product_id = $product;
+            $inputSheet_detail->inward_slip_id = $id;
+            $inputSheet_detail->quantity = $soluong;
+            $inputSheet_detail->unit = $unit;
+            $inputSheet_detail->price_import = $gianhap;
+            $inputSheet_detail->save();
+          }
+          
         }
-      } 
-    }
+      }
+    } 
   }
+}
 }
 }
 
@@ -269,13 +275,18 @@ foreach ($product_id as $key1 => $product) {
   if ($key1==$key2) {
     foreach ($price_import as $key3=> $gianhap) {
       if ($key2==$key3) {
-        foreach ($inputSheet_detail as $key4=> $value) {     
+        foreach ($req->unit as $key4=> $unit) {
           if ($key3==$key4) {
-            $value->product_id = $product;
-            $value->inward_slip_id = $id;
-            $value->quantity = $soluong;
-            $value->price_import = $gianhap;
-            $value->save();
+            foreach ($inputSheet_detail as $key5=> $value) {     
+              if ($key4==$key5) {
+                $value->product_id = $product;
+                $value->inward_slip_id = $id;
+                $value->quantity = $soluong;
+                $value->unit = $unit;
+                $value->price_import = $gianhap;
+                $value->save();
+              }
+            }
           }
         }
       }

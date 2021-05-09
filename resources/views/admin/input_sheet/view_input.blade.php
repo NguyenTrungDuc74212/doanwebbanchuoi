@@ -55,6 +55,7 @@
 						<tr>
 							<th>Tên sản phẩm</th>
 							<th>Số lượng</th>
+							<th>Đơn vị</th>
 							<th>Giá nhập</th>
 							<th>Tổng tiền</th>
 						</tr>
@@ -69,6 +70,7 @@
 								<input type="hidden" name="" value="{{ $value->id }}" class="input_id">
 							</td>
 							<td><input type="number" name="quantity[]" class="quantity_input" min="0" value="{{ $value->quantity }}" readonly="true"></td>
+							<td><input type="text" name="unit[]" class="unit" min="0" value="{{ $value->unit }}" readonly="true"></td>
 							<td><input type="number" name="price_import[]" class="price_import" min="0" value="{{ $value->price_import }}" readonly="true"></td>
 							<td class="total_amount text-center" name="total_amount" readonly="true">{{ currency_format($value->quantity*$value->price_import) }}</td>
 						</tr>
