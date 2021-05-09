@@ -1,0 +1,150 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Auth;
+use App\Models\User;
+use App\Models\Roles;
+use Mail;
+use Session;
+use App\Http\Requests\changeRequest;
+use App\Http\Requests\UserRegisterRequest;
+use Gate;
+
+class AuthController extends Controller
+{
+	public function dashboard()
+	{
+		return view('admin.dashboard.dashboard_view');
+	}
+	public function login()
+	{
+		return view('admin.auth.login_view');
+	}
+	public function check_login(Request $req)
+	{
+		$username = $req->input('email');
+		$password = $req->input('password');
+
+		if (Auth::attempt([
+			'email'=>$username,
+			'password'=>$password,
+
+		])) {
+            // echo Auth::loginUsingId(Auth::id())->name;
+			return redirect()->route('trangchu_admin')->with('thongbao','đăng nhập thành công');
+		}
+		else {
+			return redirect()->back()->with('error','Đăng nhập thất bại');
+		}
+	}
+	public function admin_logout()
+	{
+		Auth::logout();
+		return redirect()->route('login');
+	}
+	public function view_forgot()
+	{
+		return view('admin.auth.forgot');
+	}
+	public function send_mail(Request $req)
+	{
+		$req->session()->forget('token');
+		$user_reset = User::where('email',$req->email)->first();
+		if ($user_reset) {
+			$reset_password_token = md5(rand(0,30));
+			$user = User::find($user_reset->id);
+			$user->reset_password_token = $reset_password_token;
+			$user->save();
+			$data = [
+				'subject' => "Reset password",
+				'name' => "E-shopper",
+				'email' => $req->email,
+				'content' => "Vui lòng mời bạn truy cập link: http://myweb.local.com/banchuoi/reset-password/".$user->reset_password_token." "."để thay đổi password"
+			];
+
+			Mail::send('admin.auth.email-template', $data, function($message) use ($data) {
+				$message->to($data['email'])
+				->subject($data['subject'])
+				->from('ductrungthug@gmail.com',$data['name']);  /*mail người gửi(mail của mình), tên người gửi(Tên của mình)*/
+			});
+			return redirect()->back()->with('thongbao','vui lòng check mail để thay đổi mật khẩu');
+		}
+		return redirect()->back()->with('error','Email không chính xác');
+	}
+	public function reset_password($reset_password_token)
+	{
+		$user_reset = User::where('reset_password_token',$reset_password_token)->first();
+		if ($user_reset) {
+			Session::put('token',$reset_password_token);
+			return view('admin.auth.change_password');
+		}
+		return redirect()->route('login')->with('error','Thích hack à!!!');
+	}
+	public function change_password(changeRequest $req)
+	{
+		$user_reset = User::where('email',$req->email)->where('reset_password_token',Session::get('token'))->first();
+		if ($user_reset) {
+			$user_reset->password = bcrypt($req->password);
+			$user_reset->save();
+			return redirect()->route('login')->with('sucsses','Reset mật khẩu thành công');
+		}
+		return redirect()->back()->with('error','Email không tồn tại!!!');
+	}
+	public function list_user()
+	{
+		$admin = User::with('roles')->orderby('id','DESC')->paginate(5);
+		return view('admin.auth.list_user',compact('admin'));
+	}
+	public function assign_role(Request $req)
+	{
+
+		$user = User::where('email',$req->email)->first();
+		$user->roles()->detach();
+		$author = Roles::where('name','author')->first();
+		$admin = Roles::where('name','admin')->first();
+		$user_1 = Roles::where('name','user')->first();
+
+
+		if ($req->author_role) {
+			$user->roles()->attach($author->id);
+		}
+		if ($req->admin_role) {
+			$user->roles()->attach($admin->id);
+		}
+		if ($req->user_role) {
+			$user->roles()->attach($user_1->id);
+		}
+		/*bắt lỗi không có admin*/
+		$all = User::has('roles')->get();
+		$pos='';
+		foreach ($all as $value) {
+			$admin_role = $value->roles()->where('name','admin')->first();
+			$pos .= strpos($admin_role['name'], "admin");
+		}
+		if ($req->admin_role==null&&$pos=='') {
+			$user->roles()->attach($admin->id);
+			return redirect()->back()->with('error','Phải có 1 admin để quản lý và điều hành, bạn không thể vào trang này mà không có người nào có quyền admin');
+		}
+		/*end bắt lỗi*/
+		
+		return redirect()->back()->with('thongbao','phân quyền thành công');
+
+	}
+	public function register()
+	{
+		return view('admin.auth.register');
+	}
+	public function save_user(UserRegisterRequest $req)
+	{
+		$user = new User;
+		$user->name = $req->input('name');
+		$user->phone = $req->input('phone');
+		$user->email = $req->input('email');
+		$user->gender = $req->input('gender');
+		$user->password =bcrypt($req->input('password'));
+		$user->save();
+		return redirect()->route('list_user')->with('thongbao','Đăng ký thành công');
+	}
+
+}
