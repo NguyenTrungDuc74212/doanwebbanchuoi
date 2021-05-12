@@ -64,11 +64,13 @@ Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
 		Route::get('edit-product/{id}','ProductController@edit_product')->name('edit_product');
 		Route::post('update-product/{id}','ProductController@update_product')->name('update_product');
 		Route::get('delete-product/{id}','ProductController@delete_product')->name('delete_product');
-		/*ajax*/
-		Route::get('/live_search', 'ProductController@index')->name('search-product');
-		Route::get('Search','ProductController@action')->name('action');
-		Route::get('xoa','ProductController@xoa_ajax')->name('xoa_ajax');
-		Route::get('get-product','ProductController@get_more_product')->name('get_more_product');
+		//gallery
+		Route::get('add-gallery/{id}','ProductController@add_gallery')->name('add_gallery');
+	Route::post('select-gallery','ProductController@select_gallery')->name('select_gallery');
+	Route::post('insert-gallery/{id}','ProductController@insert_gallery')->name('insert_gallery');
+	Route::post('update_gallery_name','ProductController@update_gallery')->name('update_gallery');
+	Route::post('delete_gallery','ProductController@delete_gallery')->name('delete_gallery');
+	Route::post('update_image','ProductController@update_image')->name('update_image');
 
 	});
 
