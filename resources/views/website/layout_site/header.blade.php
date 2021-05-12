@@ -58,7 +58,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Trang chủ</a></li>
+                <li class="active"><a href="{{ route('get_home_page') }}">Trang chủ</a></li>
                 <li><a href="./shop-grid.html">Giới thiệu</a></li>
                 <li><a href="./blog.html">Mua hàng</a></li>
                 <li><a href="./contact.html">Dich vụ</a></li>
@@ -137,7 +137,7 @@
                 <div class="col-lg-6">
                     <nav class="header__menu text-nowrap">
                         <ul>
-                            <li class="active"><a href="./index.html">Trang chủ</a></li>
+                            <li class="active"><a href="{{ route('get_home_page') }}">Trang chủ</a></li>
                             <li><a href="./blog.html">Mua hàng</a></li>
                             <li><a href="./contact.html">Dich vụ</a></li>
                             <li><a href="#">Blog</a>

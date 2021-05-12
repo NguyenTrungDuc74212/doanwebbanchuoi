@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-});
 
 
 /*admin*/
@@ -183,5 +180,5 @@ Route::get('add_user', function() {
 /*website*/
 
 Route::get('/','homePageController@getHomePage')->name('get_home_page');
-Route::get('sanpham/{id}','productSiteController@getHomePage')->name('get_home_page');
+Route::get('sanpham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
 /* end website*/
