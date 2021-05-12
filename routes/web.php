@@ -178,6 +178,10 @@ Route::get('add_user', function() {
 	
 });
 
-
-
 /*end admin*/
+
+/*website*/
+
+Route::get('/','homePageController@getHomePage')->name('get_home_page');
+Route::get('sanpham/{id}','productSiteController@getHomePage')->name('get_home_page');
+/* end website*/
