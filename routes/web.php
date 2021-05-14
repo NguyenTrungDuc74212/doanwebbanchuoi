@@ -183,4 +183,6 @@ Route::get('add_user', function() {
 
 Route::get('/','homePageController@getHomePage')->name('get_home_page');
 Route::get('sanpham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
+Route::get('baiviet','PostSiteController@getViewBlog')->name('get_view_blog');
+Route::get('baiviet/{slug}','PostSiteController@getBlogDetail')->name('get_view_blog_details');
 /* end website*/

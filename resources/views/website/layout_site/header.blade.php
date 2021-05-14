@@ -64,9 +64,9 @@
                 <li><a href="./contact.html">Dich vụ</a></li>
                 <li><a href="#">Blog</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Sản xuất</a></li>
-                        <li><a href="./shoping-cart.html">Tin tức</a></li>
-                        <li><a href="./checkout.html">Góc chia sẻ</a></li>
+                        @foreach ($postCategoryHeader as $item)
+                        <li><a href="./shop-details.html">{{$item->name}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li><a href="./shop-grid.html">Liên hệ</a></li>
