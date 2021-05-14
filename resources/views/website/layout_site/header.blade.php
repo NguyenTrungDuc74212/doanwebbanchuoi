@@ -1,170 +1,182 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+	<meta charset="utf-8">
+	<title>Hoa quả sạch fuji | Hệ thống hoa quả sạch nhập khẩu Fuji | Hệ thống hoa quả sạch nhập khẩu Fuji</title>
+	<meta name="description"
+		content="Hệ thống hoa quả sạch Fuji với chuỗi 35 cửa hàng chuyên cung cấp hoa quả nhập khẩu, trái cây đặc sản vùng miền toàn quốc. Cam kết chất lượng,an toàn,uy tín" />
+	<link rel="canonical" href="https://hoaquafuji.com">
+	<meta name="robots" content="index, follow" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Hoa quả sạch fuji | Hệ thống hoa quả sạch nhập khẩu Fuji" />
+	<meta property="og:description"
+		content="Hệ thống hoa quả sạch Fuji với chuỗi 35 cửa hàng chuyên cung cấp hoa quả nhập khẩu, trái cây đặc sản vùng miền toàn quốc. Cam kết chất lượng,an toàn,uy tín" />
+	<meta property="og:image"
+		content="https://hoaquafuji.com/storage/app/media/mua-gio-trai-cay-dep-gia-re-o-dau-000.jpg" />
+	<meta property="og:url" content="https://hoaquafuji.com" />
+	<meta property="og:locale" content="vi_VN" />
+	<meta property="fb:app_id" content="3205375276187307" />
+	<meta name="twitter:title" content="Hoa quả sạch fuji | Hệ thống hoa quả sạch nhập khẩu Fuji">
+	<meta name="twitter:description"
+		content="Hệ thống hoa quả sạch Fuji với chuỗi 35 cửa hàng chuyên cung cấp hoa quả nhập khẩu, trái cây đặc sản vùng miền toàn quốc. Cam kết chất lượng,an toàn,uy tín">
+	<meta name="twitter:image"
+		content="https://hoaquafuji.com/storage/app/media/mua-gio-trai-cay-dep-gia-re-o-dau-000.jpg" />
+	<!-- Additional meta tags -->
+	<meta name="google-site-verification" content="WXsKJfp0gesXTn2YHVyXTDWxlfNM-OyjHWgflGz4PRE" />
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="{{asset('public/public_site/css/bootstrap.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('public/public_site/css/font-awesome.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('public/public_site/css/elegant-icons.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('public/public_site/css/nice-select.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('public/public_site/css/jquery-ui.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('public/public_site/css/owl.carousel.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('public/public_site/css/slicknav.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('public/public_site/css/style.css')}}" type="text/css">
+	<meta name="author" content="QuangtrongOnline">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="generator" content="QuangtrongOnline">
+
+	<link rel="icon" href="https://hoaquafuji.com/themes/hoaquafuji/assets/img/favicon.png" sizes="50x50">
+	<link rel="stylesheet" href="{{asset('public/public_site/css/fonts.css')}}">
+
+	<link href="{{asset('public/public_site/css/app.css')}}" rel="stylesheet">
+
+	<link href="{{asset('public/public_site/css/fontawesome-all.min.css')}}" rel="stylesheet">
+
+	<link href="{{asset('public/public_site/css/meanmenu.min.css')}}" rel="stylesheet" />
+
+	<!-- Load Facebook SDK for JavaScript -->
+
+	<div id="fb-root"></div>
+
+	<script>(function (d, s, id) {
+
+			var js, fjs = d.getElementsByTagName(s)[0];
+
+			if (d.getElementById(id)) return;
+
+			js = d.createElement(s); js.id = id;
+
+			js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+
+			fjs.parentNode.insertBefore(js, fjs);
+
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
-    <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
-        </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
-        <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
-            </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
-        </div>
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="{{ route('get_home_page') }}">Trang chủ</a></li>
-                <li><a href="./shop-grid.html">Giới thiệu</a></li>
-                <li><a href="./blog.html">Mua hàng</a></li>
-                <li><a href="./contact.html">Dich vụ</a></li>
-                <li><a href="#">Blog</a>
-                    <ul class="header__menu__dropdown">
-                        @foreach ($postCategoryHeader as $item)
-                        <li><a href="./shop-details.html">{{$item->name}}</a></li>
-                        @endforeach
-                    </ul>
-                </li>
-                <li><a href="./shop-grid.html">Liên hệ</a></li>
-        
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
-        <div class="humberger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
-            </ul>
-        </div>
-    </div>
-    <!-- Humberger End -->
+	<div class="clearfix"></div>
+	<!-- Header -->
+	<header id="header">
 
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <img src="img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </div>
-                            <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu text-nowrap">
-                        <ul>
-                            <li class="active"><a href="{{ route('get_home_page') }}">Trang chủ</a></li>
-                            <li><a href="./blog.html">Mua hàng</a></li>
-                            <li><a href="./contact.html">Dich vụ</a></li>
-                            <li><a href="#">Blog</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-grid.html">Giới thiệu</a></li>
-                                    <li><a href="./shop-details.html">Sản xuất</a></li>
-                                    <li><a href="./shoping-cart.html">Tin tức</a></li>
-                                    <li><a href="./checkout.html">Góc chia sẻ</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./shop-grid.html">Liên hệ</a></li>
-                    
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
+		<div class="clearfix"></div>
+		<div class="d-none d-md-block">
+			<div class="top-header py-3 font-weight-bold">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6"><i class="fas fa-phone-square mr-2"></i>Chuối Việt Nam: <a
+								href="tel:0329294747">0329294747</a></div>
+						<div class="col-md-6 text-right">
+							<a href="https://hoaquafuji.com/cart/list" class="text-dark">
+								<i class="fas fa-shopping-cart align-middle text-primar"></i>
+								<span id="cart-info"> Giỏ hàng trống
+								</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<script>
+					(function (i, s, o, g, r, a, m) {
+						i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+							(i[r].q = i[r].q || []).push(arguments)
+						}, i[r].l = 1 * new Date(); a = s.createElement(o),
+							m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+					})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+					ga('create', 'UA-145372992-1', 'auto');
+					ga('send', 'pageview');
+
+				</script>
+			</div>
+			<div class="middle-header bg-primary py-4 text-light">
+				<div class="container">
+					<div class="row align-content-center">
+						<div class="col-md-5 col-lg-4">
+							<form action="https://hoaquafuji.com/search" method="get" class="form-inline w-75">
+								<div class="input-group">
+									<input name="q" type="text" class="form-control" placeholder="Tìm kiếm"
+										aria-label="Tìm kiếm" aria-describedby="search-box">
+									<div class="input-group-prepend">
+										<button class="input-group-text bg-light" id="search-box" type="submit"><i
+												class="fas fa-search text-dark"></i></button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-2 col-lg-4 text-center">
+							<a href="/"><img class="bg-light logo"
+									src="https://hoaquafuji.com/themes/hoaquafuji/assets/img/logo.png"
+									alt="Hoa quả fuji"></a>
+						</div>
+						<div class="col-md-5 col-lg-4">
+							<div class="cart bg-light w-75 ml-auto text-dark text-center py-2 rounded">
+								<a href="https://hoaquafuji.com/danh-sach-cua-hang-fuji-fruit" class="text-second"><i
+										class="fas fa-map-marked-alt align-middle fa-17 mr-3"></i>Hệ thống cửa hàng</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="menu-mobile"></div>
+
+		<div class="clearfix"></div>
+
+
+
+		<div class="nav-desktop">
+			<nav class="bg-light">
+				<div class="container">
+					<ul class="d-lg-flex flex-row justify-content-center align-items-center">
+						<li class="sub-logo mr-auto"><a href="https://hoaquafuji.com"><img
+									src="https://hoaquafuji.com/themes/hoaquafuji/assets/img/logo.png"
+									alt="Hoa quả sạch fuji"></a></li>
+						<li role="presentation" class="active py-lg-2">
+							<a href="#">
+								Home
+							</a>
+						</li>
+						<li role="presentation" class="py-lg-2">
+							<a href="#">Giới thiệu</a>
+                        </li>
+                        <li role="presentation" class="py-lg-2">
+							<a href="#">Tin tức</a>
+                        </li>
+                        <li role="presentation" class="py-lg-2">
+							<a href="#">Sản xuất</a>
+                        </li>
+                        <li role="presentation" class="py-lg-2">
+							<a href="#">Dịch vụ</a>
+                        </li>
+                        <li role="presentation" class="py-lg-2">
+							<a href="#">Bán hàng online</a>
+                        </li>
+                        <li role="presentation" class="py-lg-2">
+							<a href="#">Góc chia sẻ</a>
+                        </li>
+                        <li role="presentation" class="py-lg-2">
+							<a href="#">Liên hệ</a>
+                        </li>
+
+						<li class="btn-cart" id="btn-cart-navbar">
+							<a href="https://hoaquafuji.com/cart/list">
+								<i class="fas fa-shopping-cart align-middle text-primary fa-2x"></i>
+								<span>0</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
