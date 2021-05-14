@@ -332,74 +332,22 @@
         <div class="title text-center font-weight-bold mb-4">TIN TỨC</div>
         <div class="container">
             <div class="row">
+                @foreach ($postTop as $item)
                 <div class="col-md-6">
                     <div class="hvr-outline-out p-3">
                         <div class="media align-items-center">
                             <a href="/post/sinh-nhat-lon-sale-cuc-lon"><img class="mr-3 hvr-grow"
-                                    src="https://hoaquafuji.com/storage/app/uploads/public/93c/0e1/4cd/thumb__300_300_0_0_auto.jpg"
+                                    src="{{asset('public/upload/post/'.$item->image)}}"
                                     alt="SINH NHẬT LỚN-SALE CỰC LỚN"
                                     style="width: 150px;height: 150px;object-fit: cover"></a>
                             <div class="media-body">
-                                <h5 class="mt-0"><a href="/post/sinh-nhat-lon-sale-cuc-lon">SINH NHẬT LỚN-SALE CỰC
-                                        LỚN</a></h5>
-                                <p class="des">🎂 Nhân dịp sinh nhật #FujiFruit tròn 6 tuổi, từ ngày
-                                    09/05-09/05/2021&nbsp;thay lời cảm ơn chân thành nhất dành cho quý khách hàng đã
-                                    luôn ủng hộ Fuji, Fuji xin gửi tới quý khách "SALE CỰC LỚN" lớn nhất tháng 5
-                                    này!&nbsp;</p>
+                                <h5 class="mt-0"><a href="/post/sinh-nhat-lon-sale-cuc-lon">{{$item->title}}</a></h5>
+                                {!!$item->desc!!}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="hvr-outline-out p-3">
-                        <div class="media align-items-center">
-                            <a href="/post/sinh-nhat-fuji-cung-di-rinh-vang"><img class="mr-3 hvr-grow"
-                                    src="https://hoaquafuji.com/storage/app/uploads/public/ac8/77a/8e3/thumb__300_300_0_0_auto.jpg"
-                                    alt="Sinh nhật Fuji cùng đi rinh “ VÀNG “"
-                                    style="width: 150px;height: 150px;object-fit: cover"></a>
-                            <div class="media-body">
-                                <h5 class="mt-0"><a href="/post/sinh-nhat-fuji-cung-di-rinh-vang">Sinh nhật Fuji
-                                        cùng đi rinh “ VÀNG “</a></h5>
-                                <p class="des">
-                                    Nhân dịp kỷ niệm 6 năm thành lập, Fuji Fruit &nbsp;triển khai nhiều khuyến mãi
-                                    với quà tặng hấp dẫn, tổng trị giá lên đến 30 triệu đồng.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="hvr-outline-out p-3">
-                        <div class="media align-items-center">
-                            <a href="/post/hqs-fuji-nhung-hoat-dong-xa-hoi-tu-thien-y-nghia"><img
-                                    class="mr-3 hvr-grow"
-                                    src="https://hoaquafuji.com/storage/app/uploads/public/387/f7f/933/thumb__300_300_0_0_auto.jpg"
-                                    alt="HQS FUJI &amp; NHỮNG HOẠT ĐỘNG XÃ HỘI, TỪ THIỆN Ý NGHĨA"
-                                    style="width: 150px;height: 150px;object-fit: cover"></a>
-                            <div class="media-body">
-                                <h5 class="mt-0"><a
-                                        href="/post/hqs-fuji-nhung-hoat-dong-xa-hoi-tu-thien-y-nghia">HQS FUJI &amp;
-                                        NHỮNG HOẠT ĐỘNG XÃ HỘI, TỪ THIỆN Ý NGHĨA</a></h5>
-                                <p class="des"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="hvr-outline-out p-3">
-                        <div class="media align-items-center">
-                            <a href="/post/gio-qua-fuji-trao-loi-yeu-thuong-2010"><img class="mr-3 hvr-grow"
-                                    src="https://hoaquafuji.com/storage/app/uploads/public/a0b/f0e/402/thumb__300_300_0_0_auto.jpg"
-                                    alt="GIỎ QUẢ FUJI - TRAO LỜI YÊU THƯƠNG 20/10"
-                                    style="width: 150px;height: 150px;object-fit: cover"></a>
-                            <div class="media-body">
-                                <h5 class="mt-0"><a href="/post/gio-qua-fuji-trao-loi-yeu-thuong-2010">GIỎ QUẢ FUJI
-                                        - TRAO LỜI YÊU THƯƠNG 20/10</a></h5>
-                                <p class="des">&nbsp;Nhân dịp ngày Phụ nữ Việt Nam, Fuji xin gợi ý món quà để tri ân
-                                    tới một nửa thế giới: GIỎ QUÀ TRÁI CÂY - THAY LỜI YÊU THƯƠNG</p>
-                            </div>
-                        </div>
-                    </div>
+                @endforeach
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ class homePageController extends Controller
         ->where('tbl_category_post.name','Giới thiệu')->select('tbl_post.*')->limit(3)->get();
         $productLatest = $product_query->latest()->get();
         $product_all = $product_query->latest()->paginate(8);
-        $postTop=DB::table('tbl_post')->orderByDesc("created_at")->limit(3)->get();
+        $postTop=DB::table('tbl_post')->orderByDesc("created_at")->limit(4)->get();
         $product_top_sale=Product::orderBy('product_sold','DESC')->limit(10)->get();
         return view("website.home_page",compact('productCategory','slides','productLatest','product_all','product_top_sale','postTop','postIntro'));
 
