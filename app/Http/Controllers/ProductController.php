@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\CategoryProduct;
 use App\Models\Product;
@@ -41,6 +39,8 @@ class ProductController extends Controller
 		$product->desc = $req->input('desc');
 		$product->meta_keywords = $req->input('meta_keywords');
 		$product->meta_title = $req->input('meta_title');
+		$product->product_sold=0;
+		$product->persent_discount=0;
 		$product->save();
 		event(new \App\Events\CategoryProductCreated($product));
 		return redirect()->route('list_product')->with('thongbao','Thêm sản phẩm thành công');
@@ -118,7 +118,6 @@ class ProductController extends Controller
 		$data.='<form>';
 		$data.=''.csrf_field().'';
 		foreach ($gallery as $value) {
-			
 		    $data .='<tr>
                         <td contenteditable class="edit_gallery_name" data-gallery_id="'.$value->id.'">'.$value->name.'</td>
                         <td><img src="'.asset('public/upload/gallery/'.$value->image).'" alt="" style="width:30%;">

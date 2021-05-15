@@ -146,7 +146,7 @@
                                 <i class="fas fa-star"></i>
                             </div>
                             <div class="card-img hvr-grow">
-                                <a href="/product/tao-envy-new-zealand"><img class="card-img-top"
+                                <a href="{{route('get_product_detail',$item->slug)}}"><img class="card-img-top"
                                         src="{{asset('public/upload/product/'.$item->image)}}"
                                         alt="{{$item->name}}"></a>
                                 <div class="box-control">
@@ -158,13 +158,13 @@
                                         <span class="text">Thêm giỏ hàng</span>
                                     </div>
                                     <div class="item">
-                                        <a href="/product/tao-envy-new-zealand"><i class="fas fa-plus"></i></a>
+                                        <a href="{{route('get_product_detail',$item->slug)}}"><i class="fas fa-plus"></i></a>
                                         <span class="text">Xem chi tiết</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h2><a href="/product/tao-envy-new-zealand">{{$item->name}}</a></h2>
+                                <h2><a href="{{route('get_product_detail',$item->slug)}}">{{$item->name}}</a></h2>
                                 <div class="box-price">
                                     @if($item->persent_discount>0)
                                     <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}<sup>đ</sup></div>
@@ -197,7 +197,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="card-img hvr-grow">
-                            <a href="/product/tao-envy-new-zealand"><img class="card-img-top"
+                            <a href="{{route('get_product_detail',$item->slug)}}"><img class="card-img-top"
                                 src="{{asset('public/upload/product/'.$item->image)}}"
                                 alt="{{$item->name}}"></a>
                             <div class="box-control">
@@ -209,13 +209,13 @@
                                     <span class="text">Thêm giỏ hàng</span>
                                 </div>
                                 <div class="item">
-                                    <a href="/product/tao-envy-new-zealand"><i class="fas fa-plus"></i></a>
+                                    <a href="{{route('get_product_detail',$item->slug) }}"><i class="fas fa-plus"></i></a>
                                     <span class="text">Xem chi tiết</span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <h2><a href="/product/tao-envy-new-zealand">{{$item->name}}</a></h2>
+                            <h2><a href="{{route('get_product_detail',$item->slug)}}">{{$item->name}}</a></h2>
                             <div class="box-price">
                                 @if($item->persent_discount>0)
                                     <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}<sup>đ</sup></div>
@@ -243,7 +243,7 @@
                 @foreach ($productCategory as $item)
                 <div class="col-md-4 mb-5">
                     <div class="box-category" style="background-image:url('https://hoaquafuji.com/storage/app/uploads/public/463/6a0/ad7/thumb__525_420_0_0_auto.jpg') ">
-                        <h3 class="title"><a href=" /products/gio-trai-cay">{{$item->name}}</a></h3>
+                        <h3 class="title"><a href="{{route('get_product_by_category',$item->slug)}}">{{$item->name}}</a></h3>
                         <p><br></p> <p><br></p> <p><br></p>
                     </div>
                 </div>

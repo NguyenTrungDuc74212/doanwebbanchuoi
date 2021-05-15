@@ -185,4 +185,7 @@ Route::get('/','homePageController@getHomePage')->name('get_home_page');
 Route::get('sanpham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
 Route::get('baiviet','PostSiteController@getViewBlog')->name('get_view_blog');
 Route::get('baiviet/{slug}','PostSiteController@getBlogDetail')->name('get_view_blog_details');
+Route::get('danhmucsanpham/{slug}','productSiteController@getProductByCategory')->name('get_product_by_category');
+Route::get('danhmuvbaiviet/{slug}','PostSiteController@getPostByCategory')->name('get_post_by_category');
+
 /* end website*/

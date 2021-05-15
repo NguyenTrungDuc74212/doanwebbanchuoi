@@ -56,15 +56,8 @@
 			fjs.parentNode.insertBefore(js, fjs);
 
 		}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-
-
 </head>
-
 <body>
-
 	<div class="clearfix"></div>
 	<!-- Header -->
 	<header id="header">
@@ -115,7 +108,7 @@
 						</div>
 						<div class="col-md-2 col-lg-4 text-center">
 							<a href="/"><img class="bg-light logo"
-									src="https://hoaquafuji.com/themes/hoaquafuji/assets/img/logo.png"
+									src="{{asset('public/upload/slide/logo_chuoi.png')}}"
 									alt="Hoa quả fuji"></a>
 						</div>
 						<div class="col-md-5 col-lg-4">
@@ -128,20 +121,15 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="menu-mobile"></div>
-
 		<div class="clearfix"></div>
-
-
-
 		<div class="nav-desktop">
 			<nav class="bg-light">
 				<div class="container">
 					<ul class="d-lg-flex flex-row justify-content-center align-items-center">
 						<li class="sub-logo mr-auto"><a href="https://hoaquafuji.com"><img
-									src="https://hoaquafuji.com/themes/hoaquafuji/assets/img/logo.png"
-									alt="Hoa quả sạch fuji"></a></li>
+									src="{{asset('public/upload/slide/logo_chuoi.png')}}"
+									alt="Fresh Banana"></a></li>
 						<li role="presentation" class="active py-lg-2">
 							<a href="#">
 								Home
@@ -152,6 +140,13 @@
                         </li>
                         <li role="presentation" class="py-lg-2">
 							<a href="#">Tin tức</a>
+							<ul class="sub-menu">
+								@foreach ($postCategoryHeader as $item)
+                                <li role="presentation" class="py-lg-2">
+                                    <a href="{{route('get_post_by_category',$item->slug)}}">{{$item->name}}</a>
+                                </li>
+								@endforeach
+                            </ul>
                         </li>
                         <li role="presentation" class="py-lg-2">
 							<a href="#">Sản xuất</a>
@@ -168,7 +163,6 @@
                         <li role="presentation" class="py-lg-2">
 							<a href="#">Liên hệ</a>
                         </li>
-
 						<li class="btn-cart" id="btn-cart-navbar">
 							<a href="https://hoaquafuji.com/cart/list">
 								<i class="fas fa-shopping-cart align-middle text-primary fa-2x"></i>
