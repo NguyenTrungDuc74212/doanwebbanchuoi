@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\Vendors;
+use App\Models\Gallery;
 use App\Http\Requests\addProductRequest;
 use App\Http\Requests\editProductRequest;
 use Str;
@@ -40,6 +39,8 @@ class ProductController extends Controller
 		$product->desc = $req->input('desc');
 		$product->meta_keywords = $req->input('meta_keywords');
 		$product->meta_title = $req->input('meta_title');
+		$product->product_sold=0;
+		$product->persent_discount=0;
 		$product->save();
 		event(new \App\Events\CategoryProductCreated($product));
 		return redirect()->route('list_product')->with('thongbao','Thêm sản phẩm thành công');
@@ -49,7 +50,7 @@ class ProductController extends Controller
 	{
 		$product_query = Product::query();
 		$product_query->latest();
-		$product = $product_query->paginate(5);
+		$product = $product_query->get();
 		return view('admin.product.list_product',compact('product'));
 	}
 	public function edit_product($id)
@@ -95,58 +96,98 @@ class ProductController extends Controller
 		$product->delete();
 		return redirect()->back()->with('thongbao','Xóa sản phẩm thành công');
 	}
+	/*thêm nhiều ảnh*/
+	public function add_gallery($product_id)
+	{
+		return view('admin.product.add_gallery',compact('product_id'));
+	}
+	public function select_gallery(Request $req)
+	{
+		$product_id =  $req->product_id;
+		$gallery = Gallery::where('product_id',$product_id)->get();
+		$data = '';
+		$data .= '<table class="table table-hover">
+		<thead>
+		<tr class="text-nowrap">
+		<th>Tên hình ảnh</th>
+		<th>Hình ảnh</th>
+		<th>Thao tác</th>
+		</tr>
+		</thead>
+		 <tbody>';
+		$data.='<form>';
+		$data.=''.csrf_field().'';
+		foreach ($gallery as $value) {
+		    $data .='<tr>
+                        <td contenteditable class="edit_gallery_name" data-gallery_id="'.$value->id.'">'.$value->name.'</td>
+                        <td><img src="'.asset('public/upload/gallery/'.$value->image).'" alt="" style="width:30%;">
+                          <input type="file" class="file_name" style="width:40%" name="file" data-image_id="'.$value->id.'" id="file_name_'.$value->id.'">
+                        </td>
 
-	public function index()
-	{
-		$data = Product::orderBy('id','DESC')->paginate(5);
-		return view('admin.product.search_ajax',compact('data'));
+                        <td><button data-id="'.$value->id.'" class="btn btn-xs btn-danger delete-image">Xóa</button></td>
+                    </tr>';
+                
+		}
+		    $data.='</form>';
+		$data.='</tbody>';
+		$data.='</table>';
+		echo $data;
+
+
 	}
-	public function action(Request $req)
+	public function insert_gallery(Request $req,$product_id)
 	{
-		$query = $req['query'];
-		if ($query!=null) {
-			$data = Product::orderBy('id','DESC')->where('name','like',"%{$query}%")->get();
-		}
-		else {
-			$data = Product::orderBy('id','DESC')->get();
-		}
-		$total = $data->count();
-		$output="";
-		if ($total>0) {
-			foreach ($data as $value) {
-				$output.='<tr>';
-				$output.='
-				<td><img src='.asset('public/upload/product/'.$value->image).' height="100" width="100"></td>';
-				$output.='<td>'.$value->name.'</td>';
-				$output.='<td>'.$value->category_product->name.'</td>';
-				$output.='<td>'.currency_format($value->price).'</td>';
-				$output.='<td>';
-				$output.='<a href="" class="btn btn-danger xoa-product" data-id='.$value->id.'><i class="fas fa-trash-alt"></i></a>
-				<a href='.route('edit_product',$value->id).' class="btn btn-success"><i class="fas fa-edit"></i></a>';
-				$output.='</td>';
-				$output.='</tr>';
-			}
-		}
-		else {
-			$output ='<tr>
-			<td>No data found</td>
-			</tr>';
-		}
-		$ketqua= response()->json([
-			'table_data' => $output,
-		]);
-		return $ketqua;
+         $image = $req->file('image');
+         if ($image) {
+         	foreach ($image as $value) {
+            $name_offical = $value->getClientOriginalName();
+			$name_jpg = explode(".", $name_offical);
+			$file_name =$name_jpg[0].rand(0,99).".".$value->getClientOriginalExtension();
+			$value->move('public/upload/gallery',$file_name);
+			$gallery = new Gallery();
+			$gallery->name = $file_name;
+			$gallery->image =$file_name;
+			$gallery->product_id =$product_id;
+			$gallery->save();
+         }
+         }
+         else {
+         	return redirect()->back()->with('error','Bạn phải chọn ảnh!!!');
+         }
+          return redirect()->back()->with('thongbao','Thêm thư viện ảnh thành công');
+
+         
 	}
-	public function xoa_ajax(Request $req)
+	public function update_gallery(Request $req)
 	{
-		$product = Product::find($req->id);
-		$product->delete();
+            $gallery = Gallery::find($req->gallery_id);
+			$gallery->name = $req->gallery_text;
+			$gallery->save();
 	}
-	// public function get_more_product(Request $req)
-	// {
-	// 	if ($req->ajax()) {
-	// 		$data = Product::orderBy('id','DESC')->paginate(5);
-	// 		return view('admin.product.pagination',compact('data'));
-	// 	}
-	// }
+	public function delete_gallery(Request $req)
+	{
+		$gallery = Gallery::find($req->gallery_id);
+		$gallery->delete();
+		unlink('public/upload/gallery/'.$gallery->name);
+	}
+	public function update_image(Request $req)
+	{
+       $file_image = $req->file('file');
+       $id_image =$req->image_id;
+        if ($file_image) {
+            $name_offical = $file_image->getClientOriginalName();
+			$name_jpg = explode(".", $name_offical);
+			$file_name =$name_jpg[0].rand(0,99).".".$file_image->getClientOriginalExtension();
+			$file_image->move('public/upload/gallery',$file_name);
+			$gallery = Gallery::find($id_image);
+			unlink('public/upload/gallery/'.$gallery->image);
+			$gallery->image =$file_name;
+			$gallery->save();
+
+         }
+   
+
+	}
+	/*end thêm nhiều ảnh*/
+	
 }

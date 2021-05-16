@@ -10,23 +10,14 @@
 			@if (session('thongbao'))
 			<p class="text-success">{{ session('thongbao') }}</p>
 			@endif
-			<div class="card-tools">
-				<div class="input-group input-group-sm" style="width: 150px;">
-					<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-					<div class="input-group-append">
-						<button type="submit" class="btn btn-default">
-							<i class="fas fa-search"></i>
-						</button>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- /.card-header -->
 		<div class="card-body table-responsive p-0">
-			<table class="table table-hover text-nowrap text-center">
+			<table class="table table-hover text-nowrap text-center" id="table_product">
 				<thead>
 					<tr>
 						<th>ảnh minh họa</th>
+						<th>Thư viện ảnh</th>
 						<th>Tên sản phẩm</th>
 						<th>danh mục sản phẩm</th>
 						<th>Giá sản phẩm</th>
@@ -39,6 +30,7 @@
 						<td>
 							<img src="{{asset('public/upload/product/'.$value->image)}}" height="100" width="100">
 						</td>
+						<td><a href="{{ route('add_gallery',$value->id) }}">Thêm thư viện ảnh</a></td>
 						<td>{{ $value->name }}</td>
 						<td>{{   $value->category_product->name }}</td>
 						<td>{{currency_format($value->price) }}</td>
@@ -58,8 +50,4 @@
 	</div>
 	<!-- /.card -->
 </div>      
-<div class="card-footer" style="padding:10px 20px">
-	{{ $product->appends(Request()->all())}}
-	<p class="text-right">Hiển thị {{ $product->perPage() }} trên {{ $product->total() }} sản phẩm</p>
-</div>
 @stop

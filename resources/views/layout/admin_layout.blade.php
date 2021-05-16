@@ -336,7 +336,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('search-product') }}" class="nav-link">
+              <a href="{{ route('list_product') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Liệt kê sản phẩm</p>
               </a>
@@ -581,6 +581,7 @@
     $('#table_vendors').DataTable();
     $('#table_warehouse').DataTable();
     $('#table_input').DataTable();
+    $('#table_product').DataTable();
   } );
 </script>
 <script type="text/javascript">
@@ -589,6 +590,140 @@
     CKEDITOR.replace('ck_1');
   });
 </script>
+{{-- xử lý chọn nhiều ảnh --}}
+<script type="text/javascript">
+  $(document).ready(function() {
+    load_image();
+    function load_image()
+    {
+      var product_id = $('.product_id').val();
+      var token =$('input[name="_token"]').val();
+      $.ajax({
+                url: '{{ route('select_gallery') }}',
+                type: 'POST',
+                data:{
+                    product_id:product_id,
+                    _token:token,
+
+                }, /*name:biến var*/
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                {
+                     $('#load_image').html(data);
+                }
+            });
+    }
+    $('#file').change(function(event) {
+      var files = $('#file')[0].files;
+      var error = '';
+     if (files.length>5) {
+       error+='<p class="text-danger">Bạn chỉ được chọn tối đa 5 ảnh</p>';
+     }
+     else if(files.length=='')
+     {
+      error+='<p class="text-danger">Bạn không được bỏ trống ảnh</p>';
+     }
+
+     if (error=='') {
+     }
+     else {
+       $('#file').val('');
+       $('#error_image').html(error);
+     }
+
+    });
+
+    $(document).on('blur','.edit_gallery_name',function(){
+          var gallery_id = $(this).data('gallery_id');
+          var gallery_text =$(this).text();
+          var token =$('input[name="_token"]').val();
+          $.ajax({
+                url: '{{ route('update_gallery') }}',
+                type: 'POST',
+                data:{
+                    gallery_id:gallery_id,
+                    gallery_text:gallery_text,
+                    _token:token,
+
+                }, /*name:biến var*/
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                {
+                    load_image();
+                }
+            });
+    });
+    $(document).on('click','.delete-image',function(e){
+      e.preventDefault();
+          var gallery_id = $(this).data('id');
+          var token =$('input[name="_token"]').val();
+          swal({
+          title: 'Bạn có muốn xóa hình ảnh này không!!!',
+          icon: "warning",
+          buttons:["không","ok"],
+      }).then((ok)=>{
+             if (ok) {
+               $.ajax({
+                url: '{{ route('delete_gallery') }}',
+                type: 'POST',
+                data:{
+                    gallery_id:gallery_id,
+                    _token:token,
+
+                }, /*name:biến var*/
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                {
+                  swal({
+                  title: 'Xóa thành công',
+                  icon: "success",
+                  button:"quay lại",
+                   }).then(ok=>{
+                       window.location.reload(); 
+                   });
+                  
+                }
+            });
+          }
+          else {  
+            swal({
+                  title: 'images have been verity safe',
+                  icon: "success",
+                  button:"quay lại",
+                  });
+          }
+      });
+          
+    });
+    $(document).on('change','.file_name',function(){
+          var image_id = $(this).data('image_id');
+          var file =document.getElementById('file_name_'+image_id).files[0];
+
+          form_data = new FormData(); 
+          form_data.append('file',document.getElementById('file_name_'+image_id).files[0]);
+          form_data.append('image_id',image_id);
+          $.ajax({
+                url: '{{ route('update_image') }}',
+                type: 'POST',
+                headers:{
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: form_data, /*name:biến var*/
+                contentType:false,
+                cache:false,
+                processData:false,
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                { 
+                  swal({
+                  title: 'Đã upload ảnh thành công',
+                  icon: "success",
+                  button:"quay lại",
+                  });
+                   load_image();
+
+                }
+            });
+    });
+  });
+</script>
+{{-- end xử lý chọn nhiều ảnh --}}
 
 {{-- xử lý phiếu nhập --}} 
 <script type="text/javascript">
@@ -1092,70 +1227,5 @@
   });
 </script>
 {{-- end feeship --}}
-
-{{-- js xử lý search --}}
-<script type="text/javascript">
-  $(document).ready(function() {
-    fetch_product_data();
-    function fetch_product_data(query='')
-    {
-     $.ajax({
-      url: '{{ route('action')}}',
-      type: 'GET',
-      data:{
-        query:query
-      }, /*name:biến var*/
-      // dataType:'json',
-
-      success:function(data) /*dữ liệu(data) trả về bên function*/
-      {
-        $('.wrap-product').html(data.table_data);
-        $('.xoa-product').click(function(e) {
-          e.preventDefault();
-          swal({
-            title: 'Bạn muốn xóa sản phẩm này không?',
-            icon: "error",
-            buttons:['không','Có'],
-          }).then((ok)=>{
-            if(ok)
-            {
-             $('.xoa-product').unbind('click').click();
-             var id =$(this).data('id');
-             $.ajax({
-              url: '{{ route('xoa_ajax') }}',
-              type: 'GET',
-              data:{
-               id:id,    
-
-             }, /*name:biến var*/
-             success:function(data) /*dữ liệu(data) trả về bên function*/
-             { swal({
-              title: 'Xóa thành công',
-              icon: "success",
-            })
-             fetch_product_data();
-           }
-
-         });  
-
-           }
-           else {
-
-           }
-         });
-        });
-      }
-
-    }); 
-   }
-   $(document).on('keyup', '#search', function(){
-    var query = $(this).val();
-    fetch_product_data(query);
-  });
-
-
- });
-</script>
-{{-- end search --}}
 </body>
 </html>

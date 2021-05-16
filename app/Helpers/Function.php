@@ -1,8 +1,15 @@
+
 <?php 
+
+
 function currency_format($number, $suffix = 'đ') {
   if (!empty($number)) {
     return number_format($number, 0, ',', '.') . "{$suffix}";
   }
+}
+ function format_date($date)
+{
+    return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
 }
 function convert_vi_to_en($str) {
   $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", "a", $str);

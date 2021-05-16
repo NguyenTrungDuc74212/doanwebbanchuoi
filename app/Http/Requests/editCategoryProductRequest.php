@@ -24,7 +24,7 @@ class editCategoryProductRequest extends FormRequest
      public function rules()
     {
         return [
-            "name"=>"required|unique:tbl_category_product,name",
+            "name"=>"required",
             "desc"=>"required",
             "meta_title"=>"required",
             "meta_keywords"=>"required",
@@ -35,7 +35,6 @@ class editCategoryProductRequest extends FormRequest
     {
         return [
             "name.required"=>"tên danh mục không được bỏ trống",
-            "name.unique"=>"danh mục đã tồn tại",
             "desc.required"=>"mô tả danh mục không được bỏ trống",
             "meta_title.required"=>"thẻ meta danh mục không được bỏ trống",
             "meta_keywords.required"=>"thẻ meta danh mục không được bỏ trống",
