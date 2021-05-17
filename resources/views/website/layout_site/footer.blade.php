@@ -232,6 +232,7 @@
 
 	<script type="text/javascript" async="async" src="{{asset('public/public_site/js/menu.js')}}"></script>
 	<script type="text/javascript" src="{{asset('public/public_site/js/jquery.meanmenu.min.js')}}"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function () {
 			jQuery('header nav').meanmenu({

@@ -189,4 +189,21 @@ Route::get('danh-muc-sanp-ham/{slug}','productSiteController@getProductByCategor
 Route::get('danh-muc-bai-viet/{slug}','PostSiteController@getPostByCategory')->name('get_post_by_category');
 Route::get('dia-chi-lien-he','addressController@getViewAddress')->name('get_address');
 Route::get('gioi-thieu','addressController@getViewAddress')->name('get_address');
+// /* end website*/
+// Route::get('sanpham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
+// Route::get('baiviet','PostSiteController@getViewBlog')->name('get_view_blog');
+// Route::get('baiviet/{slug}','PostSiteController@getBlogDetail')->name('get_view_blog_details');
+
+//giỏ hàng
+Route::post('add-cart-ajax','cartController@add_cart_ajax')->name('add_cart_ajax');
+Route::get('get-cart-ajax','cartController@get_cart')->name('get_cart');
+Route::get('xoa-cart-ajax','cartController@delete_cart_ajax')->name('delete_cart_ajax');
+Route::get('huy-don-hang','cartController@cancel_cart')->name('cancel_cart');
+Route::post('update-cart-ajax','cartController@update_cart_ajax')->name('update_cart_ajax');
+Route::post('check-coupon','cartController@check_coupon')->name('check_coupon');
+
+//checkout
+Route::get('checkout','checkoutController@get_checkout')->name('view_checkout');
+
+
 /* end website*/
