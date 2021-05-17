@@ -77,10 +77,22 @@
 						<div class="col-md-6"><i class="fas fa-phone-square mr-2"></i>Chuối Việt Nam: <a
 								href="tel:0329294747">0329294747</a></div>
 						<div class="col-md-6 text-right">
-							<a href="https://hoaquafuji.com/cart/list" class="text-dark">
+							<a href="{{ route('get_cart') }}" class="text-dark">
 								<i class="fas fa-shopping-cart align-middle text-primar"></i>
-								<span id="cart-info"> Giỏ hàng trống
-								</span>
+								@php
+									$cart = Session::get('cart');
+								@endphp
+								@if ($cart)
+								@php
+								$quantity = 0;
+									foreach ($cart as $value) {
+										$quantity = $quantity + $value['product_qty'];
+									}
+								@endphp
+								 <span id="cart-info"> Có {{$quantity}} sp trong giỏ hàng</span>
+							    @else
+							    <span id="cart-info"> Giỏ hàng trống</span>
+								@endif
 							</a>
 						</div>
 					</div>
@@ -172,7 +184,11 @@
 						<li class="btn-cart" id="btn-cart-navbar">
 							<a href="https://hoaquafuji.com/cart/list">
 								<i class="fas fa-shopping-cart align-middle text-primary fa-2x"></i>
+								@if ($cart)
+									<span>{{ $quantity }}</span>
+								@else
 								<span>0</span>
+								@endif
 							</a>
 						</li>
 					</ul>
