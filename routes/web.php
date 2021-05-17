@@ -204,6 +204,9 @@ Route::post('check-coupon','cartController@check_coupon')->name('check_coupon');
 
 //checkout
 Route::get('checkout','checkoutController@get_checkout')->name('view_checkout');
+Route::post('login_customer','checkoutController@login_customer')->name('login_customer');
+Route::post('add-customer','checkoutController@add_customer')->name('add_customer');
+Route::post('logout-customer','checkoutController@logout_customer')->name('logout_customer');
 
 
 /* end website*/

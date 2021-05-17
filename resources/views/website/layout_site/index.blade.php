@@ -2,6 +2,23 @@
 @yield("content")
 @include("website.layout_site.footer")
 <script type="text/javascript">
+	$(document).ready(function() 
+	{             
+		$('.dangky').click(function(event) {
+			$('#signupModal').modal('show');
+			$('#loginModal').modal('hide');
+			// $(function () {
+			// 	$('[data-toggle="tooltip"]').tooltip()
+			// })
+		});
+		$('.dangnhap').click(function(event) {
+			$('#loginModal').modal('show');
+			$('#signupModal').modal('hide');
+			
+		});
+	});
+</script>
+<script type="text/javascript">
 	$(document).ready(function() {
 		$('.cart_thanhtoan').click(function(event) {
 			event.preventDefault();
@@ -50,7 +67,7 @@
 					buttons:["Quay về trang chủ","Xem tiếp"],
 				}).then((ok)=>{
 					if (ok) {
-                           
+
 					}
 					else {
 						window.location.href = "{{ route('get_home_page') }}";

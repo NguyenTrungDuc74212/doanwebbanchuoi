@@ -1,7 +1,6 @@
 	<!-- footer -->
 
 	<footer>
-
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
@@ -241,6 +240,26 @@
 			});
 		});
 	</script>
+	@if (session('errors')||session('thongbao'))
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+					$('#signupModal').modal('show');
+					$(function () {
+					$('[data-toggle="tooltip"]').tooltip()
+				})
+			});
+		</script>
+	@endif
+	@if (session('thongbao_thatbai'))
+	<script type="text/javascript">
+			$(document).ready(function() {
+					$('#loginModal').modal('show');
+			});
+		</script>
+	@endif
+	@include('website.checkout.sign_up_modal')
+	@include('website.checkout.login_modal')
 </body>
 
 </html>
