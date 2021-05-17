@@ -14,6 +14,7 @@ class cartController extends Controller
 	{
         // $req->session()->flush();
 		$data = $req->all(); /*mảng product trả về*/
+		$soluong = 0;
 		$session_id = substr(md5(microtime()), rand(0,26),5); /*tạo ra chuỗi ngẫu nhiên có 5 số*/
 		$cart = Session::get('cart');
 		if ($cart==true) {
@@ -61,6 +62,10 @@ class cartController extends Controller
 			);
 			Session::put('cart',$cart);
 		}
+		foreach ($cart as $value) {
+				$soluong = $soluong + $value['product_qty'];
+			}
+			echo $soluong;
 
 	}
 	public function get_cart()

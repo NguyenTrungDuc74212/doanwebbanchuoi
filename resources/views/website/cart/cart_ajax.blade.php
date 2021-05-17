@@ -63,7 +63,7 @@
 												{{ $value['product_unit'] }}
 											</td>
 											<td>
-												<span class="product-price">{{ currency_format($value['product_price']) }}</span>
+												<span class="product-price">{{ currency_format($value['product_price']*$value['product_qty']) }}</span>
 											</td>
 											<td>
 												<a class="delete_cart" title="Xóa" data-id="{{ $value['session_id'] }}" href="">
@@ -166,7 +166,11 @@
 									Session::put('total',$total_offical);
 									@endphp --}}
 								</table>
-								<a href="{{ route('view_checkout') }}" class="btn btn-lg btn-style pull-xs-right btn-checkout width100" title="Tiến hành thanh toán">Thanh toán</a>
+								@if ($cart)
+									<a href="{{ route('view_checkout') }}" class="btn btn-lg btn-style pull-xs-right btn-checkout width100" title="Tiến hành thanh toán">Thanh toán</a>
+								@else
+								<button disabled class="btn btn-lg btn-style pull-xs-right btn-checkout width100" title="Tiến hành thanh toán">Thanh toán</button>
+								@endif
 							</div>
 						</div>
 					</div>	            

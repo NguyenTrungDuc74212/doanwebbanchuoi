@@ -22,6 +22,10 @@
 					data:{cart_product_name:cart_product_name,cart_product_image:cart_product_image,cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,_token:token,cart_product_id:cart_product_id,quantity_storage:quantity_storage,cart_product_unit:cart_product_unit}, /*name:biến var*/
 					success:function(data) /*dữ liệu(data) trả về bên function*/
 					{
+						var soluong = parseInt(data);
+						$('.giohang_show').html(`<span id="cart-info"> Có ${soluong} sp trong giỏ hàng</span>`);
+						$('.giohang_show_2').html(`<i class="fas fa-shopping-cart align-middle text-primary fa-2x"></i><span>${soluong}</span>`);
+
 						swal({
 							title: 'Thêm giỏ hàng thành công!!!',
 							text:"bạn muốn đến giỏ hàng chứ!!",
@@ -46,7 +50,7 @@
 					buttons:["Quay về trang chủ","Xem tiếp"],
 				}).then((ok)=>{
 					if (ok) {
-
+                           
 					}
 					else {
 						window.location.href = "{{ route('get_home_page') }}";
