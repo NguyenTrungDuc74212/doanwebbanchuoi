@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 use App\Models\CategoryPost;
+use App\Models\CategoryProduct;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
          Paginator::useBootstrap();
          $postCategoryHeader=CategoryPost::all();
-         View::share('postCategoryHeader', $postCategoryHeader);
+         $productCategoryHeader=CategoryProduct::all();
+         View::share(compact('postCategoryHeader','productCategoryHeader'));
     }
 }

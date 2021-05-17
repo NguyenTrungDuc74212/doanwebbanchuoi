@@ -11,8 +11,8 @@
 								tin</a></li>
 						<li><a href="https://hoaquafuji.com/quy-dinh-va-hinh-thuc-thanh-toan">Quy định và hình thức
 								thanh toán</a></li>
-						<li><a href="https://hoaquafuji.com/chinh-sach-thanh-vien-fuji">Chính sách thành viên Fuji</a>
-						</li>
+						{{-- <li><a href="https://hoaquafuji.com/chinh-sach-thanh-vien-fuji">Chính sách thành viên Fuji</a>
+						</li> --}}
 						<li><a href="https://hoaquafuji.com/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
 						<li><a href="https://hoaquafuji.com/chinh-sach-van-chuyen">Chính sách vận chuyển</a></li>
 						<li><a href="https://hoaquafuji.com/cau-hoi-thuong-gap">Câu hỏi thường gặp</a></li>
@@ -22,21 +22,20 @@
 				<div class="col-md-4">
 					<div class="title">Hỗ trợ mua hàng</div>
 					<ul class="list-unstyled">
-						<li><a href="https://hoaquafuji.com/danh-sach-cua-hang-fuji-fruit">Hệ thống cửa hàng</a></li>
-						<li><a href="https://hoaquafuji.com/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li>
-						<li><a href="https://hoaquafuji.com/hoa-don-vat">Hóa đơn VAT</a></li>
+						<li><a href="https://hoaquafuji.com/danh-sach-cua-hang-fuji-fruit">Chính sách vận chuyển</a></li>
+						<li><a href="https://hoaquafuji.com/huong-dan-mua-hang">Chính sách bảo mật</a></li>
 					</ul>
-					<a href='http://online.gov.vn/Home/WebDetails/69210'
+					{{-- <a href='http://online.gov.vn/Home/WebDetails/69210'
 						title="Hoa quả Fuji đã đăng ký với Bộ công thương"><img width='170px' alt='Bộ công thương'
 							title='Bộ công thương'
-							src="https://hoaquafuji.com/themes/hoaquafuji/assets/images/logoSaleNoti.png" /></a>
+							src="https://hoaquafuji.com/themes/hoaquafuji/assets/images/logoSaleNoti.png" /></a> --}}
 				</div>
 				<div class="col-md-4">
-					<div class="title">CÔNG TY CP XUẤT NHẬP KHẨU FUJI</div>
-					<p>Trụ sở: Số nhà 24 D7, KĐT Đại Kim - Định Công, P.Đại Kim, Q.Hoàng Mai, TP.HN</p>
-					<p>Hotline: 1900 2268 - 0988 444 123</p>
-					<p>Website: www.hoaquafuji.com</p>
-					<p>Giấy CNĐKKD: 0107875928 do Sở Kế hoạch và Đầu tư TP Hà Nội cấp ngày 09/06/2017</p>
+					<div class="title">CÔNG TY CHUỐI VIỆT NAM</div>
+					<p>Trụ sở:  Số 180 Trung Hành, Đằng Lâm, Hải An, Hải Phòng</p>
+					<p>Hotline: 0373.163.163</p>
+					<p>Email: giangvmu@gmail.com</p>
+					<p>Tổng đài hỗ trợ miễn phí di động 18008168</p>
 				</div>
 			</div>
 		</div>
@@ -48,7 +47,7 @@
 
 			<div class="row align-items-center">
 
-				<div class="col-md-6">© 2018 Hệ thống hoa quả sạch Fuji Fruit</div>
+				<div class="col-md-6">© Nhóm đồ án VNU</div>
 
 				<div class="col-md-6 text-right">
 
@@ -68,7 +67,7 @@
 
 	</div>
 
-	<a href="tel:19002268">
+	<a href="tel:0329294747">
 		<div class="animation">
 			<span class="icon ring"></span>
 			<div class="cercle one"></div>
@@ -99,7 +98,7 @@
 			position: absolute;
 			width: 100%;
 			height: 100%;
-			background: url('/themes/hoaquafuji/assets/img/circle-01-1.png') no-repeat center center;
+			background: url('{{asset('public/public_site/image/circle-01-1.png')}}') no-repeat center center;
 			-webkit-animation: ring 0.6s infinite;
 			-o-animation: ring 0.6s infinite;
 			animation: ring 0.6s infinite;

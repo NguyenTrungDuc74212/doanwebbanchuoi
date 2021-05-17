@@ -61,6 +61,7 @@
         </ul>
 
         <section class="viewed mb-5">
+            @if($product_watched!=null)
             <div class="title-section">Sản phẩm vừa xem</div>
             <div class="row mb-5 mt-3">
                 <div class="col-md-3">
@@ -108,6 +109,7 @@
                     <!-- Card -->
                 </div>
             </div>
+            @endif
         </section>
     </div>
 </section>

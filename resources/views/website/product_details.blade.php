@@ -254,7 +254,6 @@
                                     </div>
                                 </li>
                             @endforeach
-
                         </ul>
                     </section>
                 </div>

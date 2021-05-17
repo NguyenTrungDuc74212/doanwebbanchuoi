@@ -113,7 +113,7 @@
 						</div>
 						<div class="col-md-5 col-lg-4">
 							<div class="cart bg-light w-75 ml-auto text-dark text-center py-2 rounded">
-								<a href="https://hoaquafuji.com/danh-sach-cua-hang-fuji-fruit" class="text-second"><i
+								<a href="{{route('get_address')}}" class="text-second"><i
 										class="fas fa-map-marked-alt align-middle fa-17 mr-3"></i>Hệ thống cửa hàng</a>
 							</div>
 						</div>
@@ -131,8 +131,8 @@
 									src="{{asset('public/upload/slide/logo_chuoi.png')}}"
 									alt="Fresh Banana"></a></li>
 						<li role="presentation" class="active py-lg-2">
-							<a href="#">
-								Home
+							<a href="{{route('get_home_page')}}">
+								Trang chủ
 							</a>
 						</li>
 						<li role="presentation" class="py-lg-2">
@@ -155,13 +155,20 @@
 							<a href="#">Dịch vụ</a>
                         </li>
                         <li role="presentation" class="py-lg-2">
-							<a href="#">Bán hàng online</a>
+							<a href="#">Mua hàng online</a>
+							<ul class="sub-menu">
+								@foreach ($productCategoryHeader as $item)
+                                <li role="presentation" class="py-lg-2">
+                                    <a href="{{route('get_product_by_category',$item->slug)}}">{{$item->name}}</a>
+                                </li>
+								@endforeach
+                            </ul>
                         </li>
                         <li role="presentation" class="py-lg-2">
 							<a href="#">Góc chia sẻ</a>
                         </li>
                         <li role="presentation" class="py-lg-2">
-							<a href="#">Liên hệ</a>
+							<a href="{{route('get_address')}}">Liên hệ</a>
                         </li>
 						<li class="btn-cart" id="btn-cart-navbar">
 							<a href="https://hoaquafuji.com/cart/list">

@@ -182,10 +182,10 @@ Route::get('add_user', function() {
 /*website*/
 
 Route::get('/','homePageController@getHomePage')->name('get_home_page');
-Route::get('sanpham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
-Route::get('baiviet','PostSiteController@getViewBlog')->name('get_view_blog');
-Route::get('baiviet/{slug}','PostSiteController@getBlogDetail')->name('get_view_blog_details');
-Route::get('danhmucsanpham/{slug}','productSiteController@getProductByCategory')->name('get_product_by_category');
-Route::get('danhmuvbaiviet/{slug}','PostSiteController@getPostByCategory')->name('get_post_by_category');
-
+Route::get('san-pham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
+Route::get('bai-viet','PostSiteController@getViewBlog')->name('get_view_blog');
+Route::get('bai-viet/{slug}','PostSiteController@getBlogDetail')->name('get_view_blog_details');
+Route::get('danh-muc-sanp-ham/{slug}','productSiteController@getProductByCategory')->name('get_product_by_category');
+Route::get('danh-muc-bai-viet/{slug}','PostSiteController@getPostByCategory')->name('get_post_by_category');
+Route::get('dia-chi-lien-he','addressController@getViewAddress')->name('get_address');
 /* end website*/
