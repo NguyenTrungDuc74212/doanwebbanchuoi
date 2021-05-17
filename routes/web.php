@@ -188,4 +188,5 @@ Route::get('bai-viet/{slug}','PostSiteController@getBlogDetail')->name('get_view
 Route::get('danh-muc-sanp-ham/{slug}','productSiteController@getProductByCategory')->name('get_product_by_category');
 Route::get('danh-muc-bai-viet/{slug}','PostSiteController@getPostByCategory')->name('get_post_by_category');
 Route::get('dia-chi-lien-he','addressController@getViewAddress')->name('get_address');
+Route::get('gioi-thieu','addressController@getViewAddress')->name('get_address');
 /* end website*/

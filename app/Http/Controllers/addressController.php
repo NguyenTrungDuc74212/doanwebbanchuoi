@@ -10,4 +10,8 @@ class addressController extends Controller
     {
         return view('website.address_store');
     }
+    public function getViewIntroduce()
+    {
+        return view('website.introduce');
+    }
 }
