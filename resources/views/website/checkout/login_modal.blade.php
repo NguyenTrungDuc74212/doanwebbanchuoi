@@ -42,11 +42,7 @@
       </div>
     </div>
       <div class="modal-footer d-flex justify-content-center">
-<<<<<<< HEAD
-        <div class="signup-section">Bạn đã có tài khoản? <a href="#a" class="text-info"> Đăng nhập</a>.</div>
-=======
         <div class="signup-section">Bạn chưa có tài khoản? <a data-href="" class="text-info dangky_customer" style="cursor: pointer;"> Đăng ký</a>.</div>
->>>>>>> f939b79f87db43a21b7ae5ae80ee4b0c6c8f8a8f
       </div>
   </div>
 </div>

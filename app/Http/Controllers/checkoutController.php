@@ -7,20 +7,25 @@ use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\Tinhthanhpho;
 use App\Models\Customer;
-use Session;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\addCustomerRequest;
 use App\Models\Shipping;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Order_detail;
 use Carbon\carbon;
+use Session;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\addCustomerRequest;
+use App\Http\Requests\shippingRequest;
 
 class checkoutController extends Controller
 {
 	public function get_checkout()
 	{
 		$city = Tinhthanhpho::orderby('matp','DESC')->get();
+		if (Session::get('id_customer')) {
+			$customer = Customer::find(Session::get('id_customer'));
+			return view("website.checkout.checkout",compact('city','customer'));
+		}
 		return view("website.checkout.checkout",compact('city'));
 	}
 	public function login_customer(Request $req)
