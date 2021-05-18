@@ -240,7 +240,7 @@
 			});
 		});
 	</script>
-	@if (session('errors')||session('thongbao'))
+	@if (session('errors')||session('thongbao_login'))
 
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -251,7 +251,7 @@
 			});
 		</script>
 	@endif
-	@if (session('thongbao_thatbai'))
+	@if (session('thongbao_login_thatbai'))
 	<script type="text/javascript">
 			$(document).ready(function() {
 					$('#loginModal').modal('show');

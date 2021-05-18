@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $table = "tbl_order";
-    public function category_post()
+    protected $table="tbl_order";
+     public function customer()
     {
-    	return $this->belongsTo(CategoryPost::class,'category_id','id');
+    	return $this->belongsTo(Customer::class,'customer_id','id');
+    }
+    public function shipping()
+    {
+    	return $this->belongsTo(Shipping::class,'shipping_id','id');
     }
 }

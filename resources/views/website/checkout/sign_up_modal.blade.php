@@ -55,7 +55,6 @@
             <br>
             <button type="submit" class="btn btn-block btn-round check_sign_up" style="background-color:#269300!important;color: white;">Đăng ký</button>
           </form>
-          
           <div class="text-center text-muted delimiter">Đăng nhập bằng ứng dụng khác</div>
           <div class="social-buttons">
             <a href="">
@@ -67,9 +66,11 @@
         </div>
       </div>
     </div>
+    @if (!Session::get('id_customer'))
       <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Bạn đã có tài khoản? <a href="#a" class="text-info"> Đăng nhập</a>.</div>
+        <div class="signup-section">Bạn đã có tài khoản? <a data-href="" class="text-info dangnhap_customer"> Đăng nhập</a>.</div>
       </div>
+    @endif
   </div>
 </div>
 </div>

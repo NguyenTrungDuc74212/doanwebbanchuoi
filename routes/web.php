@@ -212,6 +212,8 @@ Route::get('checkout','checkoutController@get_checkout')->name('view_checkout');
 Route::post('login_customer','checkoutController@login_customer')->name('login_customer');
 Route::post('add-customer','checkoutController@add_customer')->name('add_customer');
 Route::post('logout-customer','checkoutController@logout_customer')->name('logout_customer');
+Route::post('save-shipping','checkoutController@save_shipping')->name('save_shipping');
+Route::get('Success_payment','checkoutController@checkout_success_atm')->name('thanh_cong_atm');
 
 
 /* end website*/

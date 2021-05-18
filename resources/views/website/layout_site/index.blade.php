@@ -16,6 +16,17 @@
 			$('#signupModal').modal('hide');
 			
 		});
+		$('#nutthanhtoan').click(function(){
+			$('#loginModal').modal('show');
+		});
+		$('.dangky_customer').click(function(event) {
+			$('#signupModal').modal('show');
+			$('#loginModal').modal('hide');
+		});
+		$('.dangnhap_customer').click(function(event) {
+			$('#signupModal').modal('hide');
+			$('#loginModal').modal('show');
+		});
 	});
 </script>
 <script type="text/javascript">
@@ -77,7 +88,7 @@
 				});
 			}
 		});
-		$(document).on('blur','.update_cart',function(e){
+		$(document).on('change','.update_cart',function(e){
 			e.preventDefault();
 			var session_id = $(this).data('id');
 			var token = $('input[name="_token"]').val();
@@ -98,7 +109,7 @@
 					}
 					else{
 						swal({
-							text: 'cập nhật giỏ hàng thành công!!!',
+							text: 'Cập nhật giỏ hàng thành công!!!',
 							icon: "success",
 							button: "Trở lại giỏ hàng"
 						}).then((ok)=>{
