@@ -162,14 +162,16 @@
 										</tr>
 										@endif
 									</tbody>
-									{{-- @php
+									@php
 									Session::put('total',$total_offical);
-									@endphp --}}
+									@endphp
 								</table>
-								@if ($cart)
+								@if ($cart&&Session::get('id_customer'))
 									<a href="{{ route('view_checkout') }}" class="btn btn-lg btn-style pull-xs-right btn-checkout width100" title="Tiến hành thanh toán">Thanh toán</a>
-								@else
+								@elseif(!$cart)
 								<button disabled class="btn btn-lg btn-style pull-xs-right btn-checkout width100" title="Tiến hành thanh toán">Thanh toán</button>
+								@else
+								<a style="color: white;" data-href="" class="btn btn-lg btn-style pull-xs-right btn-checkout width100" id="nutthanhtoan" title="Tiến hành thanh toán">Thanh toán</a>
 								@endif
 							</div>
 						</div>

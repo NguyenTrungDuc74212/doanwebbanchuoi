@@ -15,9 +15,9 @@
       <div class="modal-body">
         <div class="form-title text-center">
           <h4 class="text-uppercase">Đăng nhập</h4>
-          <p class="desc">Cùng nhau hợp tác và phát triển ❤️</p>
-          @if (session('thongbao_thatbai'))
-            <p class="text-danger">{{ session('thongbao_thatbai') }}</p>
+          <p class="desc">Hãy đăng nhập để mua hàng❤️</p>
+          @if (session('thongbao_login_thatbai'))
+            <p class="text-danger">{{ session('thongbao_login_thatbai') }}</p>
           @endif
         </div>
         <div class="d-flex flex-column text-center">
@@ -42,7 +42,7 @@
       </div>
     </div>
       <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Bạn đã có tài khoản? <a href="#a" class="text-info"> Đăng nhập</a>.</div>
+        <div class="signup-section">Bạn chưa có tài khoản? <a data-href="" class="text-info dangky_customer" style="cursor: pointer;"> Đăng ký</a>.</div>
       </div>
   </div>
 </div>

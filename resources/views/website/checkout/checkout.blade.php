@@ -5,41 +5,41 @@
 	<div class="container mb-5">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+				<li class="breadcrumb-item"><a href="{{ route('get_home_page') }}">Trang chủ</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Đặt hàng và Thanh toán</li>
 			</ol>
 		</nav>
 		<section class="checkout-page">
 			<div class="title-section clearfix"><span>Đặt hàng và thanh toán</span></div>
 			<div class="body-section">
-				<form action="" method="post">
+				<form action="{{ route('save_shipping') }}" method="post">
 					@csrf
-					<div class="head">THÔNG TIN THANH TOÁN</div>
+					<div class="head">THÔNG TIN NGƯỜI ĐẶT HÀNG</div>
 					<div class="row mb-4">
 						<div class="col-md-6">
 							<div class="form-gruop row mb-4">
 								<label class="col-sm-3 col-form-label">Họ tên(<span class="text-danger">*</span>)</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="name" value="" required="required">
+									<input type="text" class="form-control" name="name" value="{{ $customer->name }}" required="" readonly="true">
 								</div>
 							</div>
 							<div class="form-gruop row mb-4">
 								<label class="col-sm-3 col-form-label">Email</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="email" value="">
+									<input type="text" class="form-control" name="email" value="{{ $customer->email }}" readonly="true">
 								</div>
 							</div>
 							<div class="form-gruop row mb-4">
 								<label class="col-sm-3 col-form-label">Phone(<span class="text-danger">*</span>)</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="phone" value="" required="required">
+									<input type="text" class="form-control" name="phone" value="{{ $customer->phone }}" required="" readonly="true">
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-gruop mb-4">
 								<div>
-									<textarea name="address" rows="5" class="w-100 p-3" placeholder="Địa chỉ của bạn (*)"></textarea>
+									<textarea name="address" rows="5" class="w-100 p-3" placeholder="Địa chỉ của bạn (*)" readonly="true">{{ $customer->address }}</textarea>
 								</div>
 							</div>
 						</div>
@@ -54,7 +54,7 @@
 											<input class="form-check-input" type="radio" name="samecheck" value="1" checked="checked" onclick="$('.adress2').hide()"> Giống người nhận
 										</label>
 										<label class="form-check-label d-block">
-											<input class="form-check-input" type="radio" name="samecheck" value="0" onclick="$('.adress2').show()"> Khác
+											<input class="form-check-input" type="radio" name="samecheck" value="2" onclick="$('.adress2').show()"> Khác
 										</label>
 									</div>
 								</div>
@@ -62,32 +62,47 @@
 						</div>
 					</section>
 					<div class="adress2">
+						@php
+							// dd(session('errors'))
+						@endphp
 						<div class="head">THÔNG TIN NHẬN HÀNG</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-gruop row mb-4">
 									<label class="col-sm-3 col-form-label">Họ tên</label>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" name="name" value="" required="">
+										<input type="text" class="form-control" name="name_2" value="">
+										@error('name_2')
+										<p class="text-danger">{{ $message }}</p>
+										@enderror
 									</div>
 								</div>
 								<div class="form-gruop row mb-4">
 									<label class="col-sm-3 col-form-label">Phone</label>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" name="rmobile" value="" required="">
+										<input type="text" class="form-control" name="phone_2" value="">
+										@error('phone_2')
+										<p class="text-danger">{{ $message }}</p>
+										@enderror
 									</div>
 								</div>
 								<div class="form-gruop row mb-4">
 									<label class="col-sm-3 col-form-label">Email</label>
 									<div class="col-sm-9">
-										<input type="text" class="form-control" name="email" value="">
+										<input type="text" class="form-control" name="email_2" value="">
+										@error('email_2')
+										<p class="text-danger">{{ $message }}</p>
+										@enderror
 									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-gruop mb-4">
 									<div class="">
-										<textarea name="address" rows="5" class="w-100 p-3" placeholder="Địa chỉ nhận hàng"></textarea>
+										<textarea name="address_2" rows="5" class="w-100 p-3" placeholder="Địa chỉ nhận hàng"></textarea>
+										@error('address_2')
+										<p class="text-danger">{{ $message }}</p>
+										@enderror
 									</div>
 								</div>
 							</div>
@@ -97,6 +112,32 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<textarea name="notes" rows="3" style="width: 100%;padding: 0.5rem" placeholder="Nhập ghi chú đơn hàng"></textarea>
+								@error('notes')
+								<p class="text-danger">{{ $message }}</p>
+								@enderror
+								<select class="form-control" name="city" style="margin: 10px 0px;">
+									<option value="">----Chọn thành phố---</option>
+									@foreach ($city as $value)
+									<option value="{{ $value->matp }}">{{ $value->name }}</option>
+									@endforeach
+									@error('city')
+									<p class="text-danger">{{ $message }}</p>
+									@enderror
+								</select>
+								@if (count(Session::get('cart'))>0)
+								<span>
+									<label><input class="type" name="method" value="1" type="radio">
+									Chuyển khoản</label>
+								</span>
+								<span>
+									<label><input class="type" name="method" value="2" type="radio">
+									Nhận tiền mặt</label>
+								</span>
+								@error('method')
+								<p class="text-danger">{{ $message }}</p>
+								@enderror
+								@endif
+
 							</div>
 							<div class="col-sm-6">
 								<p><strong>Quý khách có thể thanh toán tiền mặt khi nhận hàng hoặc chuyển khoản theo thông tin sau</strong></p>
