@@ -91,7 +91,7 @@ Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
 		Route::get('hien_slide/{id}','SliderController@hienSlide')->name('hien_slide');
 		Route::get('delete_slide/{id}','SliderController@delete_slide')->name('delete_slide');
 	});
-
+ 
 	
 	Route::group(['middleware'=>'roleAdmin'], function() {
 		/*delivery*/
@@ -111,6 +111,11 @@ Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
 		Route::get('/list-coupon','CouponController@list_coupon')->name('list_coupon');
 		Route::get('/xoa-coupon/{id}','CouponController@delete_coupon')->name('delete_coupon');
 	});
+	// order
+	Route::group(['middleware'=>'roleAdmin'], function() {
+		Route::get('list-order','orderController@listOrder')->name('list_order');
+	});
+
 
 // users
 	Route::group(['middleware'=>'roleAdmin'], function() {
@@ -136,7 +141,7 @@ Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
        Route::get('/sua-warehouse/{id}','WarehouseController@edit_warehouse')->name('edit_warehouse');
     Route::post('/update-warehouse/{id}','WarehouseController@update_warehouse')->name('update_warehouse');
 
-    //inputSheet
+    //inward slip
     Route::get('/insert_input','inputSheetController@insert_input')->name('view_insert_input');
     Route::post('/save_input','inputSheetController@save_input')->name('save_input');
     Route::post('/load-more','inputSheetController@load_input_sheet')->name('load_input_sheet');
@@ -185,10 +190,10 @@ Route::get('/','homePageController@getHomePage')->name('get_home_page');
 Route::get('san-pham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
 Route::get('bai-viet','PostSiteController@getViewBlog')->name('get_view_blog');
 Route::get('bai-viet/{slug}','PostSiteController@getBlogDetail')->name('get_view_blog_details');
-Route::get('danh-muc-sanp-ham/{slug}','productSiteController@getProductByCategory')->name('get_product_by_category');
+Route::get('danh-muc-san-pham/{slug}','productSiteController@getProductByCategory')->name('get_product_by_category');
 Route::get('danh-muc-bai-viet/{slug}','PostSiteController@getPostByCategory')->name('get_post_by_category');
 Route::get('dia-chi-lien-he','addressController@getViewAddress')->name('get_address');
-Route::get('gioi-thieu','addressController@getViewAddress')->name('get_address');
+Route::get('ve-chung-toi','addressController@getViewIntroduce')->name('get_intro');
 // /* end website*/
 // Route::get('sanpham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
 // Route::get('baiviet','PostSiteController@getViewBlog')->name('get_view_blog');
@@ -204,6 +209,9 @@ Route::post('check-coupon','cartController@check_coupon')->name('check_coupon');
 
 //checkout
 Route::get('checkout','checkoutController@get_checkout')->name('view_checkout');
+Route::post('login_customer','checkoutController@login_customer')->name('login_customer');
+Route::post('add-customer','checkoutController@add_customer')->name('add_customer');
+Route::post('logout-customer','checkoutController@logout_customer')->name('logout_customer');
 
 
 /* end website*/

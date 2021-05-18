@@ -44,10 +44,10 @@
                         <h2><a href="{{route('get_product_detail',$item->slug)}}">{{$item->name}}</a></h2>
                         <div class="box-price">
                             @if($item->persent_discount>0)
-                                    <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}</div>
-                                    <div class="old-price">{{currency_format($item->price)}}</div>
+                                    <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}/{{$item->unit}}</div>
+                                    <div class="old-price">{{currency_format($item->price)}}/{{$item->unit}}</div>
                                     @else
-                                    <div class="price">{{currency_format($item->price)}}</div>
+                                    <div class="price">{{currency_format($item->price)}}/{{$item->unit}}</div>
                                     @endif
                         </div>
                     </div>
@@ -98,10 +98,10 @@
                             <h2><a href="{{route('get_product_detail',$product_watched->slug)}}">{{$product_watched->name}}</a></h2>
                             <div class="box-price">
                                 @if($product_watched->persent_discount>0)
-                                <div class="price">{{currency_format($product_watched->price*((100-$product_watched->persent_discount)/100))}}<sup>đ</sup></div>
-                                <div class="old-price">{{currency_format($product_watched->price)}}</div>
+                                <div class="price">{{currency_format($product_watched->price*((100-$product_watched->persent_discount)/100))}}/{{$product_watched->unit}}</div>
+                                <div class="old-price">{{currency_format($product_watched->price)}}/{{$product_watched->unit}}</div>
                                 @else
-                                <div class="price">{{currency_format($product_watched->price)}}</div>
+                                <div class="price">{{currency_format($product_watched->price)}}/{{$product_watched->unit}}</div>
                                 @endif
                             </div>
                         </div>

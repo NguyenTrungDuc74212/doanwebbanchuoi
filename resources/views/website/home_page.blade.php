@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="d-md-none banner-mobile">
-        <img src="https://hoaquafuji.com/themes/hoaquafuji/assets/img/banner-mobile.jpg">
+        <img src="{{asset('public/upload/slide/'.$slides->first()->image)}}">
     </div>
     <!--.service-->
     <section class="service mb-5">
@@ -179,11 +179,11 @@
                                             <h2><a href="{{route('get_product_detail',$item->slug)}}">{{$item->name}}</a></h2>
                                             <div class="box-price">
                                                 @if($item->persent_discount>0)
-                                                <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}<sup>đ</sup></div>
-                                                <div class="old-price">{{currency_format($item->price)}}<sup>đ</sup></div>
+                                                <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}/{{$item->unit}}</div>
+                                                <div class="old-price">{{currency_format($item->price)}}/{{$item->unit}}</div>
                                                 <input type="hidden" value="{{ $item->price*((100-$item->persent_discount)/100)}}" class="cart_product_price_{{$item->id}}">
                                                 @else
-                                                <div class="price">{{currency_format($item->price)}}<sup>đ</sup></div>
+                                                <div class="price">{{currency_format($item->price)}}/{{$item->unit}}</div>
                                                 @endif
                                             </div>
                                         </div>
@@ -243,11 +243,11 @@
                                             <h2><a href="{{route('get_product_detail',$item->slug)}}">{{$item->name}}</a></h2>
                                             <div class="box-price">
                                                 @if($item->persent_discount>0)
-                                                <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}<sup>đ</sup></div>
-                                                <div class="old-price">{{currency_format($item->price)}}<sup>đ</sup></div>
+                                                <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}/{{$item->unit}}</div>
+                                                <div class="old-price">{{currency_format($item->price)}}/{{$item->unit}}</div>
                                                 <input type="hidden" value="{{ $item->price*((100-$item->persent_discount)/100)}}" class="cart_product_price_{{$item->id}}">
                                                 @else
-                                                <div class="price">{{currency_format($item->price)}}<sup>đ</sup></div>
+                                                <div class="price">{{currency_format($item->price)}}/{{$item->unit}}</div>
                                                 <input type="hidden" value="{{ $item->price}}" class="cart_product_price_{{$item->id}}">
                                                 @endif
                                             </div>
@@ -271,7 +271,7 @@
                         @foreach ($productCategory as $item)
                         <div class="col-md-4 mb-5">
                             <div class="box-category" style="background-image:url('https://hoaquafuji.com/storage/app/uploads/public/463/6a0/ad7/thumb__525_420_0_0_auto.jpg') ">
-                                <h3 class="title"><a href=" /products/gio-trai-cay">{{$item->name}}</a></h3>
+                                <h3 class="title"><a href="{{route('get_product_by_category',$item->slug)}}">{{$item->name}}</a></h3>
                                 <p><br></p> <p><br></p> <p><br></p>
                             </div>
                         </div>
@@ -364,12 +364,12 @@
                                         <div class="col-md-6">
                                             <div class="hvr-outline-out p-3">
                                                 <div class="media align-items-center">
-                                                    <a href="/post/sinh-nhat-lon-sale-cuc-lon"><img class="mr-3 hvr-grow"
+                                                    <a href="{{route('get_view_blog_details',$item->slug)}}"><img class="mr-3 hvr-grow"
                                                         src="{{asset('public/upload/post/'.$item->image)}}"
                                                         alt="SINH NHẬT LỚN-SALE CỰC LỚN"
                                                         style="width: 150px;height: 150px;object-fit: cover"></a>
                                                         <div class="media-body">
-                                                            <h5 class="mt-0"><a href="/post/sinh-nhat-lon-sale-cuc-lon">{{$item->title}}</a></h5>
+                                                            <h5 class="mt-0"><a href="{{route('get_view_blog_details',$item->slug)}}">{{$item->title}}</a></h5>
                                                             {!!$item->desc!!}
                                                         </div>
                                                     </div>

@@ -61,8 +61,6 @@ class CategoryController extends Controller
 
     }
     /*end category_product*/
-
-
     /*category_post*/
     public function view_add_category_post()
     {

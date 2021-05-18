@@ -152,7 +152,7 @@
 									{{ $value['product_unit'] }}
 								</td>
 								<td>
-									<span class="product-price">{{ currency_format($value['product_price']) }}</span>
+									<span class="product-price">{{ currency_format($value['product_price']*$value['product_qty']) }}</span>
 								</td>
 								<td>
 									<a class="delete_cart" title="Xóa" data-id="{{ $value['session_id'] }}" href="">
@@ -172,37 +172,40 @@
 						</tbody>
 					</table>   
 					@php
-					foreach (Session::get('coupon_ss') as $value){
-					if ($value['coupon_tinhnang']==2) {
-						$coupon_total = ($total*$value['coupon_value'])/100;
+					$coupon_total = 0;
+					if (Session::get('coupon_ss')) {
+						foreach (Session::get('coupon_ss') as $value){
+							if ($value['coupon_tinhnang']==2) {
+								$coupon_total = ($total*$value['coupon_value'])/100;
+							}
+							elseif($value['coupon_tinhnang']==1){
+								$coupon_total=$value['coupon_value'];
+							}
+						}
 					}
-					elseif($value['coupon_tinhnang']==1){
-						$coupon_total=$value['coupon_value'];
-					}
-				}
-				$total_offical = $total-$coupon_total;
+					$total_offical = $total-$coupon_total;
 					@endphp             
 					<div class="row justify-content-end">
 						<div class="col-3 text-right">
 							@if (Session::get('coupon_ss'))
 							<div class="box-total">Tổng cộng:
 								{{ $total_offical<0?'0đ': currency_format($total_offical)}}</div>
-							@else
-							<div class="box-total">Tổng cộng: 
-							{{ currency_format($total_offical = $total) }}</div>
-							@endif
+								@else
+								<div class="box-total">Tổng cộng: 
+								{{ currency_format($total_offical = $total) }}</div>
+								@endif
+							</div>
+							<div class="col-2"></div>
 						</div>
-						<div class="col-2"></div>
-					</div>
-					<div class="row justify-content-between">
-						<div class="col-3"><a href="{{ route('get_cart') }}" class="btn btn-success">Kiểm tra giỏ hàng</a></div>
-						<div class="col-7 text-right">
-							<button name="btnOrder" class="btn btn-primary">Xác nhận và thanh toán</button>
+						<div class="row justify-content-between">
+							<div class="col-3"><a href="{{ route('get_cart') }}" class="btn btn-success">Kiểm tra giỏ hàng</a></div>
+							<div class="col-7 text-right">
+								<button name="btnOrder" class="btn btn-primary">Xác nhận và thanh toán</button>
+							</div>
 						</div>
-					</div>
-				</form>
-			</div>
-		</section>
-	</div>
-</section>
-@stop
+					</form>
+				</div>
+			</section>
+		</div>
+	</section>
+	@stop

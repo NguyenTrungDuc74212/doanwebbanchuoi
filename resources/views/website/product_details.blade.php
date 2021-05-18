@@ -65,14 +65,14 @@
                                     </p> --}}
                                     <p>
                                         @if ($product->persent_discount > 0)
-                                            <strong>Giá</strong>:{{ currency_format($product->price * ((100 - $product->persent_discount) / 100)) }}
-                                            <span class="old-price">{{ currency_format($product->price) }}</span>
+                                            <strong>Giá</strong>:{{ currency_format($product->price * ((100 - $product->persent_discount) / 100)) }}/{{$product->unit}}
+                                            <span class="old-price">{{ currency_format($product->price) }}/{{$product->unit}}</span>
                                         @else
-                                            <strong>Giá</strong>:{{ currency_format($product->price) }}
+                                            <strong>Giá</strong>:{{ currency_format($product->price) }}/{{$product->unit}}
                                         @endif
                                     </p>
                                     <p><strong>Mã sản phẩm</strong>: SP{{ $product->id }}</p>
-                                    <p><strong>Đơn vị tính</strong>: Kg</p>
+                                    <p><strong>Đơn vị tính</strong>: {{$product->unit}}</p>
                                     @if ($product->quantity > 0)
                                         <p><strong>Tình trạng</strong>: <span class="text-primary">Còn hàng</span></p>
                                     @else
@@ -95,7 +95,7 @@
                                                     value="1">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        {{-- <div class="form-group row">
                                             <label for="inputProperties" class="col-sm-4 col-form-label">Kích cỡ</label>
                                             <div class="col-sm-8">
                                                 <select class="custom-select" id="inputProperties" name="property">
@@ -103,7 +103,7 @@
                                                     <option value="339000">Nho ngón tay Oliver Úc - Giá: 339,000/Kg</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="control">
                                             <button type="submit" class="btn btn-secondary"><i
                                                     class="fas fa-cart-plus mr-2"></i>Thêm giỏ hàng</button>
@@ -301,11 +301,11 @@
                                 <div class="box-price">
                                     @if ($product_watched->persent_discount > 0)
                                         <div class="price">
-                                            {{ currency_format($product_watched->price * ((100 - $product_watched->persent_discount) / 100)) }}<sup>đ</sup>
+                                            {{ currency_format($product_watched->price * ((100 - $product_watched->persent_discount) / 100)) }}/{{$product_watched->unit}}
                                         </div>
-                                        <div class="old-price">{{ currency_format($product_watched->price) }}</div>
+                                        <div class="old-price">{{ currency_format($product_watched->price) }}/{{$product_watched->unit}}</div>
                                     @else
-                                        <div class="price">{{ currency_format($product_watched->price) }}</div>
+                                        <div class="price">{{ currency_format($product_watched->price) }}/{{$product_watched->unit}}</div>
                                     @endif
                                 </div>
                             </div>
