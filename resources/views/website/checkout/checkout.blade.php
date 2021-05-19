@@ -187,6 +187,7 @@
 								</td>
 								<td>
 									<input type="hidden" name="" class="product_name_{{ $value['session_id'] }}" value="{{ $value['product_name'] }}">
+									<input type="hidden" name="" class="cart_product_price_{{ $value['session_id'] }}" value="{{ $value['product_price'] }}">
 									<input type="number" size="1" value="{{ $value['product_qty'] }}" maxlength="3" min="0" class="update_cart" data-id="{{ $value['session_id'] }}" style="max-width: 60px;text-align:center">
 								</td>
 								<td>
@@ -194,6 +195,7 @@
 								</td>
 								<td>
 									<span class="product-price">{{ currency_format($value['product_price']*$value['product_qty']) }}</span>
+									{{-- <input type="hidden" value="{{ $value['product_price']*$value['product_qty'] }}" class="price_old_{{ $value['session_id'] }}"> --}}
 								</td>
 								<td>
 									<a class="delete_cart" title="Xóa" data-id="{{ $value['session_id'] }}" href="">
@@ -227,12 +229,14 @@
 					$total_offical = $total-$coupon_total;
 					@endphp             
 					<div class="row justify-content-end">
-						<div class="col-3 text-right">
+						<div class="col-3 text-right d-flex">
 							@if (Session::get('coupon_ss'))
-							<div class="box-total">Tổng cộng:
+							<span class="text-danger">Tổng cộng:</span>
+							<div class="box-total tongtien" style="margin: 0px 5px;">
 								{{ $total_offical<0?'0đ': currency_format($total_offical)}}</div>
 								@else
-								<div class="box-total">Tổng cộng: 
+								<span class="text-danger">Tổng cộng:</span>
+								<div class="box-total tongtien" style="margin: 0px 5px;"> 
 								{{ currency_format($total_offical = $total) }}</div>
 								@endif
 							</div>
