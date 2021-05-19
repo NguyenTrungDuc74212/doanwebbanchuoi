@@ -194,7 +194,7 @@ Route::get('danh-muc-san-pham/{slug}','productSiteController@getProductByCategor
 Route::get('danh-muc-bai-viet/{slug}','PostSiteController@getPostByCategory')->name('get_post_by_category');
 Route::get('dia-chi-lien-he','addressController@getViewAddress')->name('get_address');
 Route::get('ve-chung-toi','addressController@getViewIntroduce')->name('get_intro');
-// /* end website*/
+
 // Route::get('sanpham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
 // Route::get('baiviet','PostSiteController@getViewBlog')->name('get_view_blog');
 // Route::get('baiviet/{slug}','PostSiteController@getBlogDetail')->name('get_view_blog_details');

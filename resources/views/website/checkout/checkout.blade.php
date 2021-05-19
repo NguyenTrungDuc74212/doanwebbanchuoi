@@ -236,15 +236,15 @@
 								{{ $total_offical<0?'0đ': currency_format($total_offical)}}
 							</div>
 							<div class="tongtien_am" hidden>
-									{{ ($total_offical)}} 
-								</div>
+								{{ ($total_offical)}} 
+							</div>
 							@else
 							<span class="text-danger">Tổng cộng:</span>
 							<div class="box-total tongtien" style="margin: 0px 5px;">
 							{{ currency_format($total_offical = $total) }}</div>
 							<div class="tongtien_am" hidden>
-									{{ ($total_offical)}} 
-								</div>
+								{{ ($total_offical)}} 
+							</div>
 							@endif
 						</div>
 						<div class="col-2"></div>
@@ -252,7 +252,12 @@
 					<div class="row justify-content-between">
 						<div class="col-3"><a href="{{ route('get_cart') }}" class="btn btn-success">Kiểm tra giỏ hàng</a></div>
 						<div class="col-7 text-right">
+							@if (Session::get('cart'))
 							<button name="btnOrder" class="btn btn-primary">Xác nhận và thanh toán</button>
+							@else
+							<button name="btnOrder" disabled class="btn btn-primary">Xác nhận và thanh toán</button>
+							@endif
+							
 						</div>
 					</div>
 				</form>

@@ -159,6 +159,20 @@
 				$('.total_area').remove();
 			}
 			var session_id = $(this).data('id');
+			var price_product = parseInt($(this).parent().prev().children().text().replace(/[^a-zA-Z0-9 ]/g, ""));
+			var total_am = parseInt($('.tongtien_am').text());
+			var total = parseInt($('.tongtien').text().replace(/[^a-zA-Z0-9 ]/g, ""));
+
+			if (total_am<0) {
+                 $('.tongtien').text('0đ');
+			}
+			else if((total-price_product)<0){
+				$('.tongtien').text('0đ');
+			}
+			else{
+				$('.tongtien').text((total-price_product).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'đ');
+			}
+
 			$.ajax({
 				url: '{{ route('delete_cart_ajax') }}',
 				type: 'GET',
@@ -171,7 +185,7 @@
 						buttons: ["Không","Trở lại giỏ hàng"]
 					}).then((ok)=>{
 						if (ok) {
-							window.location.href = "{{ route('get_cart') }}";
+							window.location.href = "{{ Request()->url() }}";
 						}
 						else{
 

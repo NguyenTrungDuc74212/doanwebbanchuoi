@@ -34,8 +34,8 @@ class PostController extends Controller
 		$post->desc = $req->input('desc');
 		$post->meta_keywords = $req->input('meta_keywords');
 		$post->meta_title = $req->input('meta_title');
-		$post->save();
 		event(new \App\Events\CategoryproductCreated($post));
+		$post->save();
 		return redirect()->route('list_post')->with('thongbao','Thêm bài viết thành công');
 	}
 	public function list_post()

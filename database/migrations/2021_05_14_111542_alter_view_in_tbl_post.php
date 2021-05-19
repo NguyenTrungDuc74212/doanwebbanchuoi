@@ -14,7 +14,7 @@ class AlterViewInTblPost extends Migration
     public function up()
     {
         Schema::table('tbl_post', function (Blueprint $table) {
-            $table->integer('view');
+            $table->integer('view')->nullable();
         });
     }
 

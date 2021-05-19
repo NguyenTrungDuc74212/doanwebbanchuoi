@@ -41,8 +41,8 @@ class ProductController extends Controller
 		$product->meta_title = $req->input('meta_title');
 		$product->product_sold=0;
 		$product->persent_discount=0;
-		$product->save();
 		event(new \App\Events\CategoryProductCreated($product));
+		$product->save();
 		return redirect()->route('list_product')->with('thongbao','Thêm sản phẩm thành công');
 
 	}
