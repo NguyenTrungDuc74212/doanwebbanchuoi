@@ -32,6 +32,7 @@ class PostController extends Controller
 		$post->category_id = $req->input('category_id');
 		$post->content = $req->input('content');
 		$post->desc = $req->input('desc');
+		$post->slug=convert_vi_to_en($req->input('title'));
 		$post->meta_keywords = $req->input('meta_keywords');
 		$post->meta_title = $req->input('meta_title');
 		$post->save();
