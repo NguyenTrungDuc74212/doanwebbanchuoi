@@ -1,5 +1,4 @@
 	<!-- footer -->
-
 	<footer>
 		<div class="container">
 			<div class="row">
@@ -240,7 +239,7 @@
 			});
 		});
 	</script>
-	@if (session('errors')||session('thongbao_login'))
+	@if (session('errors_login')||session('thongbao_login'))
 
 		<script type="text/javascript">
 			$(document).ready(function() {

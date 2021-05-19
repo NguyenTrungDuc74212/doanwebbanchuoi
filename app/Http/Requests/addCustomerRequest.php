@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Session;
 class addCustomerRequest extends FormRequest
 {
     /**
@@ -35,6 +35,7 @@ class addCustomerRequest extends FormRequest
     }
     public function messages()
     {
+          Session::flash('errors_login','erros');
         return [
             "name.required"=>"Bạn phải nhập tên",
             "email.required"=>"Bạn phải nhập email",

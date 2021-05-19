@@ -150,6 +150,9 @@
 											@if (Session::get('coupon_ss'))
 											<td class="text-right">
 												<div class="product-price tongtien">{{ $total_offical<0?'0đ': currency_format($total_offical)}}</div>
+												<div class="tongtien_am" hidden>
+													{{ ($total_offical)}} }}
+												</div>
 											</td>
 											@else
 											<td class="text-right">
