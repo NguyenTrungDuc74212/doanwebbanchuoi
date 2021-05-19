@@ -57,6 +57,8 @@
 											</td>
 											<td>
 												<input type="hidden" name="" class="product_name_{{ $value['session_id'] }}" value="{{ $value['product_name'] }}">
+												<input type="hidden" name="" class="cart_product_price_{{ $value['session_id'] }}" value="{{ $value['product_price'] }}">
+
 												<input type="number" size="1" value="{{ $value['product_qty'] }}" maxlength="3" min="0" class="update_cart" data-id="{{ $value['session_id'] }}" style="max-width: 60px;text-align:center">
 											</td>
 											<td>
@@ -64,6 +66,7 @@
 											</td>
 											<td>
 												<span class="product-price">{{ currency_format($value['product_price']*$value['product_qty']) }}</span>
+												  {{-- <input type="hidden" value="{{ $value['product_price']*$value['product_qty'] }}" class="price_old_{{ $value['session_id'] }}"> --}}
 											</td>
 											<td>
 												<a class="delete_cart" title="Xóa" data-id="{{ $value['session_id'] }}" href="">
@@ -128,11 +131,13 @@
 										<tr>
 											<td class="text-left">Tổng giảm</td>
 											@if ($value['coupon_tinhnang']==2)
+											<input type="hidden" name="" class="coupon_phantram" value={{ $value['coupon_value'] }}>
 											<td class="text-right">
 												<div class="product-price">{{ currency_format($coupon_total = ($total*$value['coupon_value'])/100) }}</div>
 											</td>
 											@elseif($value['coupon_tinhnang']==1)
 											<td class="text-right">
+												<input type="hidden" name="" class="coupon" value={{ $value['coupon_value'] }}>
 												<div class="product-price">{{ currency_format($coupon_total=$value['coupon_value']) }}</div>
 											</td>
 											@endif
@@ -144,11 +149,14 @@
 											<td class="text-left">Tổng giá trị đơn hàng</td>
 											@if (Session::get('coupon_ss'))
 											<td class="text-right">
-												<div class="product-price">{{ $total_offical<0?'0đ': currency_format($total_offical)}}</div>
+												<div class="product-price tongtien">{{ $total_offical<0?'0đ': currency_format($total_offical)}}</div>
+												<div class="tongtien_am" hidden>
+													{{ ($total_offical)}} }}
+												</div>
 											</td>
 											@else
 											<td class="text-right">
-												<div class="product-price">{{ currency_format($total_offical = $total) }}</div>
+												<div class="product-price tongtien">{{ currency_format($total_offical = $total) }}</div>
 											</td>
 											@endif
 										</tr>
@@ -157,17 +165,18 @@
 										<tr>
 											<td class="text-left">Tổng giá trị đơn hàng</td>
 											<td class="text-right">
-												<div class="product-price">{{ currency_format($total_offical=$total) }}</div>
+												<div class="product-price tongtien">{{ currency_format($total_offical=$total) }}</div>
 											</td>
 										</tr>
 										@endif
 									</tbody>
+									<input type="hidden" name="" class="total_offical" value={{ $total_offical }}>
 									@php
 									Session::put('total',$total_offical);
 									@endphp
 								</table>
 								@if ($cart&&Session::get('id_customer'))
-									<a href="{{ route('view_checkout') }}" class="btn btn-lg btn-style pull-xs-right btn-checkout width100" title="Tiến hành thanh toán">Thanh toán</a>
+								<a href="{{ route('view_checkout') }}" class="btn btn-lg btn-style pull-xs-right btn-checkout width100" title="Tiến hành thanh toán">Thanh toán</a>
 								@elseif(!$cart)
 								<button disabled class="btn btn-lg btn-style pull-xs-right btn-checkout width100" title="Tiến hành thanh toán">Thanh toán</button>
 								@else

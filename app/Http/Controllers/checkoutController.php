@@ -207,7 +207,7 @@ class checkoutController extends Controller
 					$order_detail->save();
 				}
 				if ($req->input('method')==1) {
-					echo 'Thanh toán bằng thẻ ATM';
+					return redirect()->route('thanh_cong_atm');
 				}
 				elseif($req->input('method')==2) {
 					echo 'thanh toán bằng tiền mặt';

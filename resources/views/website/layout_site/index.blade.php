@@ -90,10 +90,34 @@
 		});
 		$(document).on('change','.update_cart',function(e){
 			e.preventDefault();
+
 			var session_id = $(this).data('id');
 			var token = $('input[name="_token"]').val();
 			var soluong = $(this).val();
 			var cart_product_name = $('.product_name_'+session_id).val();
+			var cart_product_price = $('.cart_product_price_'+session_id).val();
+			var price_old = $(this).parent().next().next().children().text().replace(/[^a-zA-Z0-9 ]/g, "");
+			// alert(price_old);
+
+			var thanhtien = $(this).parent().next().next().children().text((cart_product_price*soluong).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'đ');
+			var total_am = parseInt($('.tongtien_am').text());
+			if (total_am<0) {
+                var total_offical = parseInt((cart_product_price*soluong)-parseInt(price_old))+total_am;
+			}
+			else{
+				var total_old = $('.tongtien').text().replace(/[^a-zA-Z0-9 ]/g, "");
+				var total_offical = parseInt((cart_product_price*soluong)-parseInt(price_old))+parseInt(total_old);
+			}
+            $('.tongtien_am').text(total_offical);
+            
+			if (total_offical<0) {
+				$('.tongtien').text('0đ');
+			}
+			else{
+				$('.tongtien').text(total_offical.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'đ');
+			}
+
+
 			$.ajax({
 				url: '{{ route('update_cart_ajax') }}',
 				type: 'POST',
