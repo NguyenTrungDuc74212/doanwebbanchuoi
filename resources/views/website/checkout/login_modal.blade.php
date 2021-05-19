@@ -15,7 +15,7 @@
       <div class="modal-body">
         <div class="form-title text-center">
           <h4 class="text-uppercase">Đăng nhập</h4>
-          <p class="desc">Hãy đăng nhập để mua hàng❤️</p>
+          <p class="desc">Hãy đăng nhập để mua hàng</p>
           @if (session('thongbao_login_thatbai'))
             <p class="text-danger">{{ session('thongbao_login_thatbai') }}</p>
           @endif

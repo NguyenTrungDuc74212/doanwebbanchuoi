@@ -113,7 +113,8 @@ Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
 	});
 	// order
 	Route::group(['middleware'=>'roleAdmin'], function() {
-		Route::get('list-order','orderController@listOrder')->name('list_order');
+		Route::get('order/list-order','orderController@getListOrder')->name('list_order');
+		Route::get('order/get-detail/{id}','orderController@getOrderDetail')->name('order_get_detail');
 	});
 
 
@@ -214,6 +215,4 @@ Route::post('add-customer','checkoutController@add_customer')->name('add_custome
 Route::post('logout-customer','checkoutController@logout_customer')->name('logout_customer');
 Route::post('save-shipping','checkoutController@save_shipping')->name('save_shipping');
 Route::get('Success_payment','checkoutController@checkout_success_atm')->name('thanh_cong_atm');
-
-
 /* end website*/

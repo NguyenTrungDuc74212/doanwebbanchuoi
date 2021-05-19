@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class InputSheet extends Model
 {
     use HasFactory;
-    protected $table = "Tbl_inward_slip";
+    protected $table = "tbl_inward_slip";
     public function vendor()
     {
     	return $this->belongsTo(Vendors::class,'vendor_id','id');

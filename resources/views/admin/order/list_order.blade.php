@@ -1,12 +1,12 @@
 @extends('layout.admin_layout')
 @push('title')
-<title>Liệt kê bài viết</title>
+<title>Danh sách đơn hàng</title>
 @endpush
 @section('content')
 <div class="col-12">
 	<div class="card" style="padding: 20px">
 		<div class="card-header text-center">
-			<h3 class="card-title">Liệt kê bài viết</h3>
+			<h3 class="card-title">Danh sách đơn hàng</h3>
 			@if (session('thongbao'))
 				<p class="text-success">{{ session('thongbao') }}</p>
 			@endif
@@ -26,27 +26,36 @@
 			<table class="table table-hover text-center" id="table_post">
 				<thead  class="text-nowrap">
 					<tr>
-						<th>ảnh minh họa</th>
-						<th>Tên bài viết</th>
-						<th>danh mục bài viết</th>
-						<th>Nội dung bài viết</th>
+						<th>Đơn hàng</th>
+						<th>Khách hàng</th>
+						<th>Ngày</th>
+						<th>Tình trạng</th>
+						<th>Tổng tiền</th>
 						<th>Thao tác</th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($post as $value)
+					@foreach ($orders as $value)
 					<tr>
-						<td>
-							<img src="{{asset('public/upload/post/'.$value->image)}}" height="100" width="100">
-						</td>
-						<td>{{ $value->title }}</td>
-						<td>{{ $value->category_post->name }}</td>
-						<td>{!!substr ($value->content,0,400) !!}...</td>
+						<td>{{$value->order_code}}</td>
+						<td>{{ $value->customer->name}}</td>
+						<td>{{ $value->order_date }}</td>
+						@if($value->status==1)
+						<td>Chờ xác nhận</td>
+						@elseif($value->status==2)
+						<td>Chờ lấy hàng</td>
+						@elseif($value->status==3)
+						<td>Đang giao</td>
+						@elseif($value->status==4)
+						<td>Đã giao</td>
+						@elseif($value->status==5)
+						<td>Đã hủy</td>
+						@elseif($value->status==6)
+						<td>Trả hàng</td>
+						@endif
+						<td>{{currency_format($value->total)}}</td>
 						<td  class="text-nowrap">
-							@can('admin')
-							<a onclick="return confirm('Bạn có chắc xóa bài viết này không?')" href="{{ route('delete_post',$value->id) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-							@endcan
-							<a href="{{ route('edit_post',$value->id) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+							<a href="{{ route('order_get_detail',$value->id) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
 						</td>
 					</tr>
 					@endforeach
@@ -59,6 +68,6 @@
 	<!-- /.card -->
 </div>
 <div class="card-footer">
-	{{ $post->appends(Request()->all())}}
+	{{ $orders->appends(Request()->all())}}
 </div>
 @stop
