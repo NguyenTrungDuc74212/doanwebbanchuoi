@@ -86,8 +86,8 @@ class ProductController extends Controller
 		$product->desc = $req->input('desc');
 		$product->meta_keywords = $req->input('meta_keywords');
 		$product->meta_title = $req->input('meta_title');
-		$product->save();
 		event(new \App\Events\CategoryProductCreated($product));
+		$product->save();
 		return redirect()->route('search-product')->with('thongbao','lưu sản phẩm thành công');
 	}
 	public function delete_product($id)
