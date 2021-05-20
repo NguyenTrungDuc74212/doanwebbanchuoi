@@ -13,6 +13,7 @@
 				Bạn đã đặt hàng thành công. <span class="font-weight-bold">Mã đơn hàng: {{ $order->order_code }}</span>
 			</h4>
 			<div class="row">
+				@if ($customer)
 				<div class="col-md-6">
 					<h5 class="text-danger">Thông tin người đặt hàng</h5>
 					<p>Tên người đặt hàng: <span class="text-primary">{{ $customer->name }}</span></p>
@@ -20,6 +21,8 @@
 					<p>Email: <span class="text-primary">{{ $customer->email }}</span></p>
 					<p>Địa chỉ: <span class="text-primary">{{ $customer->address }}</span></p>
 				</div>
+				@endif
+				@if ($customer)
 				<div class="col-md-6">
 					<h5 class="text-danger">Thông tin người nhận hàng</h5>
 					<p>Tên người nhận hàng: <span class="text-primary">{{ $shipping->name }}</span></p>
@@ -27,6 +30,15 @@
 					<p>Email: <span class="text-primary">{{ $shipping->email }}</span></p>
 					<p>Địa chỉ: <span class="text-primary">{{ $shipping->address }}</span></p>
 				</div>
+				@else
+                  <div class="col-md-12">
+					<h5 class="text-danger">Thông tin người nhận hàng</h5>
+					<p>Tên người nhận hàng: <span class="text-primary">{{ $shipping->name }}</span></p>
+					<p>Số điện thoại: <span class="text-primary">{{ $shipping->phone }}</span></p>
+					<p>Email: <span class="text-primary">{{ $shipping->email }}</span></p>
+					<p>Địa chỉ: <span class="text-primary">{{ $shipping->address }}</span></p>
+				</div>
+				@endif
 			</div>
 			<h5 class="text-success">Danh sách sản phẩm:</h5>
 

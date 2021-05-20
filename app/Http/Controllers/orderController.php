@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Coupon;
+use Session;
 
 
 class orderController extends Controller
@@ -76,5 +77,53 @@ class orderController extends Controller
         }
         $order->status_pay=$req->status;
         $order->save();
+    }
+
+    //lịch sử đơn hàng
+    public function history()
+    {
+        if (!Session::get('id_customer')) {
+            return redirect()->route('login_customer')->with('thongbao_login_thatbai','Hãy đăng nhập để em lịch sử đơn hàng');
+        }else{
+            $orders = Order::where('customer_id',Session::get('id_customer'))->orderBy('id','DESC')->paginate(10);
+            if($orders){
+               return view('website.history.history',compact('orders')); 
+            }
+            
+        }
+    }
+    public function view_history_order($id)
+    {
+        if (!Session::get('id_customer')) {
+            return redirect()->route('login_customer')->with('thongbao_login_thatbai','Hãy đăng nhập để em lịch sử đơn hàng');
+        }else{
+            /*xem lịch sử đơn hàng*/
+            $order=Order::find($id);
+        $coupon=Coupon::where('code',$order->coupon)->first();
+        
+        $amountArray= array();
+        $tongTienHang=0;
+        $tongSanPham=0;
+        foreach($order->orderDetails as $item)
+        {
+            $tongSanPham+=$item->soluong;
+            $tongTienHang+=($item->product->price)*($item->soluong)*((100-$item->coupon)/100);
+        }
+        $amountArray['tongTienHang']=$tongTienHang;
+        $amountArray['tongSanPham']=$tongSanPham;
+        $amountArray['tienTruGiamGia']=0;
+        if($coupon!=null)
+        {
+            if($coupon->value_sale<=100)
+            {
+                $amountArray['tienTruGiamGia']=$tongTienHang*($coupon->value_sale);
+            }else
+            {
+                $amountArray['tienTruGiamGia']=$tongTienHang-$coupon->value_sale;
+            }
+        }
+        $amountArray['tongTienThanhToan']=$tongTienHang-$amountArray['tienTruGiamGia'];
+           return view('website.history.view_history_order',compact('order','coupon','amountArray')); 
+        }
     }
 }

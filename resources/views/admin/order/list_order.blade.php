@@ -62,7 +62,11 @@
 					@foreach ($orders as $value)
 					<tr>
 						<td>{{$value->order_code}}</td>
-						<td>{{ $value->customer->name}}</td>
+						@if ($value->customer)
+							<td>{{ $value->customer->name}}</td>
+						@else
+							<td>User</td>				
+						@endif
 						<td>{{ $value->order_date }}</td>
 						@if($value->status==1)
 						<td>Chờ xác nhận</td>
