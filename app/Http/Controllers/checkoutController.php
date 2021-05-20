@@ -117,8 +117,8 @@ class checkoutController extends Controller
 				$order->quantity = $soluong;
 				$order->order_date = $mytime->toDateString();
 				if ($coupon) {
-						$order->coupon = $coupon[0]['coupon_code'];
-					}
+					$order->coupon = $coupon[0]['coupon_code'];
+				}
 				$order->save();
 				$order_id = $order->id;
 
@@ -188,8 +188,8 @@ class checkoutController extends Controller
 				$order->quantity = $soluong;
 				$order->order_date = $mytime->toDateString();
 				if ($coupon) {
-						$order->coupon = $coupon[0]['coupon_code'];
-					}
+					$order->coupon = $coupon[0]['coupon_code'];
+				}
 				$order->save();
 				$order_id = $order->id;
 
@@ -210,7 +210,7 @@ class checkoutController extends Controller
 					return redirect()->route('thanh_cong_atm');
 				}
 				elseif($req->input('method')==2) {
-					echo 'thanh toán bằng tiền mặt';
+					return redirect()->route('thanh_cong_cash');
 				}
 			}
 		}
@@ -221,6 +221,15 @@ class checkoutController extends Controller
 	}
 	public function checkout_success_atm(Request $req)
 	{
+		$cart = Session::get('cart');
+		if ($cart) {
+			foreach ($cart as $key => $value) {
+			$product = Product::find($value['product_id']);
+			$product->quantity = $product->quantity-$value['product_qty'];
+			$product->save();
+		}
+		}
+
 		$req->session()->forget('cart');
 		$req->session()->forget('total');
 		$req->session()->forget('fee');
@@ -243,5 +252,37 @@ class checkoutController extends Controller
 		return redirect()->route('get_home_page');
 
 		
+	}
+	public function checkout_success_cash(Request $req)
+	{
+		$cart = Session::get('cart');
+		if ($cart) {
+			foreach ($cart as $key => $value) {
+			$product = Product::find($value['product_id']);
+			$product->quantity = $product->quantity-$value['product_qty'];
+			$product->save();
+		}
+		}
+
+		$req->session()->forget('cart');
+		$req->session()->forget('total');
+		$req->session()->forget('fee');
+		if (Session::get('coupon_ss')) {
+			foreach (Session::get('coupon_ss') as $value) {
+				$coupon = Coupon::where('code',$value['coupon_code'])->first();
+				$coupon->quanlity = $coupon->quanlity-1;
+				$coupon->save();
+			}
+		}
+		$req->session()->forget('coupon_ss');
+		if (Session::get('id_shipping')) {
+			$customer = Customer::find(Session::get('id_customer'));
+			$shipping = Shipping::find(Session::get('id_shipping'));
+			$order = Order::where('shipping_id',$shipping->id)->first();
+			$order_detail = Order_detail::where('order_id',$order->id)->get();
+			$req->session()->forget('id_shipping');
+			return view('website.checkout.checkout_success_cash',compact('customer','shipping','order','order_detail'));
+		}
+		return redirect()->route('get_home_page');
 	}
 }
