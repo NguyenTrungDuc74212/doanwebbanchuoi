@@ -1,6 +1,6 @@
 		<table class="table table-bordered">
 			<thead>
-				<tr>
+				<tr class="tr-admin">
 					<th>Tên tỉnh, thành phố</th>
 					<th>Tên quận huyện</th>
 					<th>Tên xã phường</th>

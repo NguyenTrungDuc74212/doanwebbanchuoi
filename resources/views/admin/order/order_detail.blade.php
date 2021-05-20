@@ -28,9 +28,9 @@
             <div class="row">
                 <div class="col-md-4">
                     <h5><b>Thông tin đơn hàng</b></h5>
-					<p style="display:blog"><b>Ngày tạo</b> {{$order->order_date}}</p>
+					<p style="display:blog"><b>Ngày tạo:</b> {{$order->order_date}}</p>
 					<p><b>Trạng thái:</b></p>
-					<select class="form-control" id="status" @if($order->status==4||$order->status==5||$order->status==6) disabled @endif>
+					<select class="form-control" id="status-order" @if($order->status==4||$order->status==5||$order->status==6) disabled @endif>
 						<option value="">---Chọn---</option>
 						<option value="1" {{ $order->status==1?'selected':'' }}>Chờ xác nhận</option>
 						<option value="2" {{ $order->status==2?'selected':'' }}>Chờ lấy hàng</option>
@@ -48,11 +48,13 @@
 						@else
 						({{currency_format($coupon->value_sale)}})
 						@endif
+						@else
+						Không có
 						@endif
 					</p>
 					<p><b>Phương thức thanh toán:</b> @if($order->shipping->method==1) Chuyển khoản @else Thanh toán khi nhận hàng @endif</p>
 					<p><b>Trạng thái thanh toán:</b></p>
-					<select class="form-control" id="status" @if($order->status_pay==1) disabled @endif>
+					<select class="form-control" id="status-pay-order" @if($order->status_pay==1) disabled @endif>
 						<option value="">---Chọn---</option>
 						<option value="0" {{ $order->status_pay==0?'selected':'' }}>Chưa thanh toán</option>
 						<option value="1" {{ $order->status_pay==1?'selected':'' }}>Đã thanh toán</option>
@@ -136,4 +138,77 @@
 	  color: white;
 	}
 	</style>
+	{{-- thay đổi trạng thái của đơn hàng --}}
+<script>
+	$(document).ready(function() {
+	  $(document).on('change','#status-order',function(){
+	   var status = $(this).val();
+	   var order_id = if(){{$order->id}};
+	   var token =$('input[name="_token"]').val();
+	   if (status) {
+		 swal({
+		   title: 'Bạn có muốn thay đổi trạng thái không?!!!',
+		   icon: "warning",
+		   buttons:['không','ok'],
+		 }).then((ok)=>{
+		   if (ok) {
+			 $.ajax({
+			   url: '{{ route('change_status_order') }}',
+			   type: 'POST',
+			   data:{_token:token,order_id:order_id,status:status},
+			   success:function(data) /*dữ liệu(data) trả về bên function*/
+			   {   
+				 swal({
+				   title: 'Thay đổi trạng thái thành công!!!',
+				   icon: "success",
+				   button:"quay lại",
+				 }).then((ok)=>{
+				   window.location.reload();
+				 });
+			   }
+			 }); 
+		   }
+		   else {
+			 window.location.reload();
+		   }
+		 }); 
+	   } 
+	 });
+   });
+   $(document).ready(function() {
+	  $(document).on('change','#status-pay-order',function(){
+	   var status = $(this).val();
+	   var order_id = {{$order->id}};
+	   var token =$('input[name="_token"]').val();
+	   if (status) {
+		 swal({
+		   title: 'Bạn có muốn thay đổi trạng thái không?!!!',
+		   icon: "warning",
+		   buttons:['không','ok'],
+		 }).then((ok)=>{
+		   if (ok) {
+			 $.ajax({
+			   url: '{{ route('change_status_pay_order') }}',
+			   type: 'POST',
+			   data:{_token:token,order_id:order_id,status:status},
+			   success:function(data) /*dữ liệu(data) trả về bên function*/
+			   {   
+				 swal({
+				   title: 'Thay đổi trạng thái thành công!!!',
+				   icon: "success",
+				   button:"quay lại",
+				 }).then((ok)=>{
+				   window.location.reload();
+				 });
+			   }
+			 }); 
+		   }
+		   else {
+			 window.location.reload();
+		   }
+		 }); 
+	   } 
+	 });
+   });
+   </script>
 @stop

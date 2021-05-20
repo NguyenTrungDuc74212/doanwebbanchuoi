@@ -15,7 +15,7 @@
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover text-nowrap text-center" id="table_product">
 				<thead>
-					<tr>
+					<tr class="tr-admin">
 						<th>ảnh minh họa</th>
 						<th>Thư viện ảnh</th>
 						<th>Tên sản phẩm</th>

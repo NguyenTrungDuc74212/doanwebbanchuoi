@@ -25,7 +25,7 @@
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover text-center" id="table_post">
 				<thead  class="text-nowrap">
-					<tr>
+					<tr class="tr-admin">
 						<th>Đơn hàng</th>
 						<th>Khách hàng</th>
 						<th>Ngày</th>

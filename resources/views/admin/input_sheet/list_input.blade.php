@@ -16,7 +16,7 @@
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover text-nowrap text-center" id="table_input">
 				<thead>
-					<tr>
+					<tr class="tr-admin">
 						<th>Người nhập</th>
 						<th>Nhà cung cấp</th>
 						<th>Tên kho</th>

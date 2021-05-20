@@ -43,4 +43,26 @@ class orderController extends Controller
         $amountArray['tongTienThanhToan']=$tongTienHang-$amountArray['tienTruGiamGia'];
         return view('admin.order.order_detail',compact('order','coupon','amountArray'));
     }
+    public function changeStatus(Request $req)
+    {
+   
+        $order=Order::find($req->order_id);
+        if($order->status==4||$order->status==5||$order->status==6)
+        {
+            return redirect()->back()->with('error','Đơn hàng đã kết thúc không thể thay đổi trạng thái!!!');
+        }
+        $order->status=$req->status;
+        $order->save();
+    }
+    public function changeStatusPay(Request $req)
+    {
+    
+        $order=Order::find($req->order_id);
+        if($order->status_pay==1)
+        {
+            return redirect()->back()->with('error','Đơn hàng đã thanh toán không thể thay đổi!!!');
+        }
+        $order->status_pay=$req->status;
+        $order->save();
+    }
 }

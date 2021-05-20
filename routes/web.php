@@ -115,6 +115,9 @@ Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
 	Route::group(['middleware'=>'roleAdmin'], function() {
 		Route::get('order/list-order','orderController@getListOrder')->name('list_order');
 		Route::get('order/get-detail/{id}','orderController@getOrderDetail')->name('order_get_detail');
+		Route::post('order/change-status','orderController@changeStatus')->name('change_status_order');
+		Route::post('order/change-status-pay','orderController@changeStatusPay')->name('change_status_pay_order');
+		
 	});
 
 

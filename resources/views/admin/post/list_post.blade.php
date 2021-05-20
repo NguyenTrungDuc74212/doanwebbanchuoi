@@ -24,7 +24,7 @@
 		<!-- /.card-header -->
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover text-center" id="table_post">
-				<thead  class="text-nowrap">
+				<thead  class="text-nowrap tr-admin" >
 					<tr>
 						<th>ảnh minh họa</th>
 						<th>Tên bài viết</th>

@@ -39,7 +39,7 @@
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover text-nowrap text-center" id="table_warehouse">
 				<thead>
-					<tr>
+					<tr class="tr-admin">
 						<th>Tên kho</th>
 						<th>Sức chứa</th>
 						<th>Số lượng hiện tại</th>

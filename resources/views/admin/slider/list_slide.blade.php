@@ -25,7 +25,7 @@
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover text-center">
 				<thead>
-					<tr class="text-nowrap">
+					<tr class="text-nowrap tr-admin">
 						<th>Hình ảnh</th>
 						<th>Tên slide</th>
 						<th>Trạng thái</th>

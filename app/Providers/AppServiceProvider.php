@@ -3,6 +3,7 @@
 namespace App\Providers;
 use App\Models\CategoryPost;
 use App\Models\CategoryProduct;
+use App\Models\Order;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
          Paginator::useBootstrap();
          $postCategoryHeader=CategoryPost::all();
          $productCategoryHeader=CategoryProduct::all();
-         View::share(compact('postCategoryHeader','productCategoryHeader'));
+         $countOrderNew=Order::where('status',1)->get()->count();
+         View::share(compact('postCategoryHeader','productCategoryHeader','countOrderNew'));
     }
 }

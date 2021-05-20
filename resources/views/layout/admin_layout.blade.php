@@ -35,6 +35,12 @@
     .select2-container--default .select2-selection--single .select2-selection__rendered{
       line-height: 17px !important;
     }
+    .btn-head {
+    padding: 4px 20px;
+}
+.tr-admin{
+  background-color: #56bc1659;
+}
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -53,11 +59,15 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{ route('trangchu_admin') }}" class="nav-link">Trang chủ</a>
+          <a href="{{ route('trangchu_admin') }}" class="nav-link"><button type="button" class="btn btn-primary btn-head">Trang chủ</button></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{ route('admin_logout') }}" class="nav-link">Đăng xuất</a>
+          <a href="{{ route('list_order') }}" class="nav-link"><button type="button" class="btn btn-success btn-head">Đơn hàng ({{$countOrderNew}})</button></a>
         </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('admin_logout') }}" class="nav-link"><button type="button" class="btn btn-danger btn-head">Đăng xuất</button></a>
+        </li>
+
       </ul>
 
       <!-- Right navbar links -->
@@ -1226,6 +1236,7 @@
     });
   });
 </script>
+
 {{-- end feeship --}}
 </body>
 </html>

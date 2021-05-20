@@ -53,7 +53,7 @@
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover text-nowrap text-center" id="table_category_post">
 				<thead>
-					<tr>
+					<tr class="tr-admin">
 						<th>Tên danh mục</th>
 						<th>Mô tả danh mục</th>
 						<th>Thao tác</th>
