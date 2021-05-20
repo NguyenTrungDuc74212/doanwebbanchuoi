@@ -215,4 +215,5 @@ Route::post('add-customer','checkoutController@add_customer')->name('add_custome
 Route::post('logout-customer','checkoutController@logout_customer')->name('logout_customer');
 Route::post('save-shipping','checkoutController@save_shipping')->name('save_shipping');
 Route::get('Success_payment','checkoutController@checkout_success_atm')->name('thanh_cong_atm');
+Route::get('Success_payment_cash','checkoutController@checkout_success_cash')->name('thanh_cong_cash');
 /* end website*/

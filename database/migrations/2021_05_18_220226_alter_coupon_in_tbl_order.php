@@ -14,7 +14,7 @@ class AlterCouponInTblOrder extends Migration
     public function up()
     {
         Schema::table('tbl_order', function (Blueprint $table) {
-            $table->string('coupon');
+            $table->string('coupon')->nullable();
         });
     }
 
