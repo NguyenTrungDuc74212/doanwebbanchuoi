@@ -201,6 +201,11 @@
 														Đăng ký</a>
 
 													</li>
+													<li role="presentation" class="py-lg-2">
+														<a href="{{ route('order_history') }}"><i class="fas fa-history"></i>
+														Lịch sử đơn hàng</a>
+
+													</li>
 													<form action="{{ route('logout_customer') }}" method="POST">
 														@csrf
 														<li role="presentation" class="py-lg-2">

@@ -219,4 +219,8 @@ Route::post('logout-customer','checkoutController@logout_customer')->name('logou
 Route::post('save-shipping','checkoutController@save_shipping')->name('save_shipping');
 Route::get('Success_payment','checkoutController@checkout_success_atm')->name('thanh_cong_atm');
 Route::get('Success_payment_cash','checkoutController@checkout_success_cash')->name('thanh_cong_cash');
+
+//lịch sử đơn hàng
+Route::get('history','orderController@history')->name('order_history');
+Route::get('view-history-order/{id}','orderController@view_history_order')->name('view_history_order');
 /* end website*/

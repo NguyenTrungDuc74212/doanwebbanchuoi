@@ -26,7 +26,7 @@ class checkoutController extends Controller
 			$customer = Customer::find(Session::get('id_customer'));
 			return view("website.checkout.checkout",compact('city','customer'));
 		}
-		return view("website.checkout.checkout",compact('city'));
+		return view("website.checkout.checkout_no_customer",compact('city'));
 	}
 	public function login_customer(Request $req)
 	{
@@ -215,7 +215,76 @@ class checkoutController extends Controller
 			}
 		}
 		else{
-			return redirect()->route('get_home_page')->with('thongbao_login_thatbai','Bạn phải đăng nhập để thanh toán!!!');
+					$validatedData = $req->validate([
+					"email_2"=>"required|Email",
+					"name_2"=>"required",
+					"phone_2"=>"required|numeric",
+					"address_2"=>"required",
+					"method"=>"required",
+					"notes"=>"required",
+					"city"=>"required",
+				],
+				["email_2.required"=>"email không được để trống",
+				"notes.required"=>"ghi chú không được bỏ trống",
+				"email_2.Email"=>"email không hợp lệ",
+				"name_2.required"=>"tên không được để trống",
+				"phone_2.required"=>"số điện thoại không được để trống",
+				"phone_2.numeric"=>"số điện thoại phải là số",
+				"address_2.required"=>"địa chỉ không được để trống",
+				"method.required"=>"hình thức thanh toán không được bỏ trống",
+				"city.required"=>"Bạn phải nhập thành phố của mình hiện đang sống"]
+			);
+				$shipping = new Shipping;
+				$shipping->name = $req->input('name_2');
+				$shipping->email = $req->input('email_2');
+				$shipping->city = $req->input('city');
+				// $shipping->customer_id = Session::get('id_customer');
+				$shipping->address = $req->input('address_2');
+				$shipping->phone = $req->input('phone_2');
+				$shipping->notes = $req->input('notes');
+				$shipping->method = $req->input('method');
+				$shipping->status = 1; /*mặc định là đang xử lý*/
+				$shipping->save();
+				$shipping_id = $shipping->id;
+				Session::put('id_shipping',$shipping_id);
+				$cart = Session::get('cart');
+				foreach ($cart as $value) {
+					$soluong += $value['product_qty'];
+				}
+				$order = new Order;
+				// $order->customer_id = Session::get('id_customer');
+				$order->shipping_id = $shipping_id;
+				$order->total = Session::get('total');
+				$order->status =1 ;/*mặc định là đang xử lý*/
+				$order->order_code = $code_random;
+				$order->quantity = $soluong;
+				$order->order_date = $mytime->toDateString();
+				if ($coupon) {
+					$order->coupon = $coupon[0]['coupon_code'];
+				}
+				$order->save();
+				$order_id = $order->id;
+
+				foreach ($cart as $value) {
+					$product = Product::find($value['product_id']);
+					$order_detail = new Order_detail;
+					$order_detail->order_id = $order_id;
+					$order_detail->order_code = $code_random;
+					$order_detail->product_id = $value['product_id'];
+					$order_detail->unit = $value['product_unit'];
+					if ($product->persent_discount) {
+						$order_detail->coupon = $product->persent_discount;
+					}
+					$order_detail->soluong = $value['product_qty'];
+					$order_detail->save();
+				}
+				if ($req->input('method')==1) {
+					return redirect()->route('thanh_cong_atm');
+				}
+				elseif($req->input('method')==2) {
+					return redirect()->route('thanh_cong_cash');
+				}
+			
 		}
 		
 	}

@@ -16,9 +16,9 @@
 			$('#signupModal').modal('hide');
 			
 		});
-		$('#nutthanhtoan').click(function(){
-			$('#loginModal').modal('show');
-		});
+		// $('#nutthanhtoan').click(function(){
+		// 	$('#loginModal').modal('show');
+		// });
 		$('.dangky_customer').click(function(event) {
 			$('#signupModal').modal('show');
 			$('#loginModal').modal('hide');
