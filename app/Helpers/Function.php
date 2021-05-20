@@ -6,6 +6,10 @@ function currency_format($number, $suffix = 'đ') {
   if (!empty($number)) {
     return number_format($number, 0, ',', '.') . "{$suffix}";
   }
+  if($number==0)
+  {
+    return number_format($number, 0, ',', '.') . "{$suffix}";
+  }
 }
  function format_date($date)
 {

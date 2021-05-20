@@ -29,15 +29,17 @@
                 <div class="col-md-4">
                     <h5><b>Thông tin đơn hàng</b></h5>
 					<p style="display:blog"><b>Ngày tạo</b> {{$order->order_date}}</p>
-					<select class="form-control" id="status">
+					<p><b>Trạng thái:</b></p>
+					<select class="form-control" id="status" @if($order->status==4||$order->status==5||$order->status==6) disabled @endif>
 						<option value="">---Chọn---</option>
-						<option value="0" {{ $order->status==1?'selected':'hidden' }}>Chờ xác nhận</option>
-						<option value="1" {{ $order->status==2?'selected':'' }}>Chờ lấy hàng</option>
-						<option value="1" {{ $order->status==3?'selected':'' }}>Đang giao</option>
-						<option value="1" {{ $order->status==4?'selected':'' }}>Đã giao</option>
-						<option value="1" {{ $order->status==5?'selected':'' }}>Đã hủy</option>
-						<option value="1" {{ $order->status==6?'selected':'' }}>Trả hàng</option>
+						<option value="1" {{ $order->status==1?'selected':'' }}>Chờ xác nhận</option>
+						<option value="2" {{ $order->status==2?'selected':'' }}>Chờ lấy hàng</option>
+						<option value="3" {{ $order->status==3?'selected':'' }}>Đang giao</option>
+						<option value="4" {{ $order->status==4?'selected':'' }}>Đã giao</option>
+						<option value="5" {{ $order->status==5?'selected':'' }}>Đã hủy</option>
+						<option value="6" {{ $order->status==6?'selected':'' }}>Trả hàng</option>
 					</select>
+					<br>
 					<p style="display:blog"><b>Mã giảm giá :</b>
 						@if($coupon!=null)
 						{{$coupon->code}}
@@ -48,7 +50,15 @@
 						@endif
 						@endif
 					</p>
-                </div>
+					<p><b>Phương thức thanh toán:</b> @if($order->shipping->method==1) Chuyển khoản @else Thanh toán khi nhận hàng @endif</p>
+					<p><b>Trạng thái thanh toán:</b></p>
+					<select class="form-control" id="status" @if($order->status_pay==1) disabled @endif>
+						<option value="">---Chọn---</option>
+						<option value="0" {{ $order->status_pay==0?'selected':'' }}>Chưa thanh toán</option>
+						<option value="1" {{ $order->status_pay==1?'selected':'' }}>Đã thanh toán</option>
+					</select>
+					<br>
+				</div>
                 <div class="col-md-4">
                 <h5><b>Thông tin khách hàng</b></h5>
 				<p style="display:blog"><b>Khách hàng</b> : {{$order->customer->name}}</p>
@@ -91,10 +101,12 @@
 		<form>
 			@csrf
 			<div class="card-footer">
-				<p class="text-primary"><b>Tổng tiền hàng: {{currency_format($amountArray['tongTienHang'])}}</b></p>
-				<p class="text-primary"><b>Tổng số lượng sản phẩm: {{$amountArray['tongSanPham']}}</b></p>
-				<p class="text-danger"><b>Tiền trừ giảm giá: {{currency_format($amountArray['tienTruGiamGia'])}}</b></p>
-				<p class="text-danger"><b>Tổng tiền thanh toán: {{currency_format($amountArray['tongTienThanhToan'])}}</b></p>
+				<div class="float-right">
+				<p><b class="text-primary">Tổng số lượng sản phẩm: </b>{{$amountArray['tongSanPham']}}</p>
+				<p><b class="text-primary">Tổng tiền hàng: </b>{{currency_format($amountArray['tongTienHang'])}}</p>
+				<p><b class="text-primary">Tiền trừ giảm giá: </b>{{currency_format($amountArray['tienTruGiamGia'])}}</p>
+				<p><b class="text-danger">Tổng tiền thanh toán: </b>{{currency_format($amountArray['tongTienThanhToan'])}}</p>
+			</div>
 			</div>
 		</form>
 	</div>

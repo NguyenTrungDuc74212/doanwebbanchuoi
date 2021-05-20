@@ -29,6 +29,7 @@ class orderController extends Controller
         }
         $amountArray['tongTienHang']=$tongTienHang;
         $amountArray['tongSanPham']=$tongSanPham;
+        $amountArray['tienTruGiamGia']=0;
         if($coupon!=null)
         {
             if($coupon->value_sale<=100)
