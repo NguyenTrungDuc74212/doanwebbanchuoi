@@ -14,6 +14,18 @@ class orderController extends Controller
         $orders=Order::paginate(10);
         return view('admin.order.list_order',compact('orders'));
     }
+    public function getByStatus($status,$status_pay)
+    {
+        if($status!=-1&&$status_pay!=-1)
+        {
+            $order=Order::where('status',$status)->andWhere('status_pay',$status_pay)->paginate(10);
+        }
+        if($status!=-1&&$status_pay==-1)
+      {
+        $order=Order::where('status',$status)->paginate(10);
+      }
+        return view
+    }
     public function getOrderDetail($id)
     {
         $order=Order::find($id);

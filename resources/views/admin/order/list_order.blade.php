@@ -7,6 +7,30 @@
 	<div class="card" style="padding: 20px">
 		<div class="card-header text-center">
 			<h3 class="card-title">Danh sách đơn hàng</h3>
+			<br>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+			<select class="form-control" id="status-order">
+				<option value="">---Lọc theo trạng thái đơn hàng---</option>
+				<option value="1" >Chờ xác nhận</option>
+				<option value="2" >Chờ lấy hàng</option>
+				<option value="3">Đang giao</option>
+				<option value="4" >Đã giao</option>
+				<option value="5" >Đã hủy</option>
+				<option value="6" >Trả hàng</option>
+			</select>
+		</div>
+		<div class="col-md-6">
+			<select class="form-control" id="status-order">
+				<option value="">---Lọc theo trạng thái thanh toán---</option>
+				<option value="0" >Chưa thanh toán</option>
+				<option value="1" >Đã thanh toán</option>
+	
+			</select>
+		</div>
+		</div>
+		</div>
 			@if (session('thongbao'))
 				<p class="text-success">{{ session('thongbao') }}</p>
 			@endif
