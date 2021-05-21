@@ -44,7 +44,9 @@
 					<td>{{currency_format($value->total)}}</td>
 					<td  class="text-nowrap">
 						<a href="{{ route('view_history_order',$value->id) }}" class="btn btn-success">Xem đơn hàng</a>
-						<a href="{{ route('view_history_order',$value->id) }}" class="btn btn-danger">Hủy</a>
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+							Hủy
+						  </button>
 					</td>
 				</tr>
 				@endforeach
@@ -56,6 +58,7 @@
 </div>
 <!-- /.card -->
 </div>
+@include('website.history.modan_cancel_order')
 <style type="text/css">
 	a.page-link {
 		border: 0;

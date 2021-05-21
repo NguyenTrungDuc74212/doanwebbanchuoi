@@ -16,9 +16,9 @@ class CustomCKFinderAuth
      */
     public function handle($request, Closure $next)
     {
-        // config(['ckfinder.authentication' => function() {
-        //     return true;
-        // }]);
+        config(['ckfinder.authentication' => function() {
+            return true;
+        }]);
         return $next($request);
     }
 }

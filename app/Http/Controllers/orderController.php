@@ -133,4 +133,16 @@ class orderController extends Controller
            return view('website.history.view_history_order',compact('order','coupon','amountArray')); 
         }
     }
+    public function cancelOrder(Request $req)
+    {
+        $order=Order::find($id);
+        if($order->status!=1)
+        {
+            return redirect()->route('order_history')->with('thongbao_loi','Đơn hàng đã xử lý không thể hủy!');
+        }
+        if($order->status_pay!=0)
+        {
+            return redirect()->route('order_history')->with('thongbao_loi','Đơn hàng đã thanh toán!');
+        }
+    }
 }
