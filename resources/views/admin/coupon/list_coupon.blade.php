@@ -31,19 +31,37 @@
 						<th>Số lượng mã</th>
 						<th>Tính năng mã</th>
 						<th>Số % hoặc số tiền giảm</th>
-						<th>Ngày thêm</th>
+						<th>Ngày bắt đầu</th>
+						<th>Ngày kết thúc</th>
+						<th>Tình trạng</th>
 						<th>Thao tác</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach ($coupon as $value)
 					<tr>
-						<td>{{ $value->name }}</td>
+						<td>{{ $value->name }} 
+							@php
+							@endphp
+							@if ($value->coupon_date_end>=$today)
+							<span class="text-success bg-success text-nowrap">Còn hạn</span>
+							@else
+							<span class="text-danger bg-danger text-nowrap">Hết hạn</span>
+							@endif
+						</td>
 						<td>{{ $value->code }}</td>
 						<td>{{ $value->quanlity }}</td>
 						<td>{{ $value->method==1?'giảm theo tiền':'giảm theo phần trăm' }}</td>
 						<td>{{ $value->method==1?currency_format($value->value_sale):$value->value_sale."%"}}</td>
-						<td>{{ $value->created_at }}</td>
+						<td>{{ $value->coupon_date_start }}</td>
+						<td>{{ $value->coupon_date_end }}</td>
+						<td>
+							@if ($value->coupon_status==1)
+							<span class="text-success">Đang kích hoạt</span>
+							@else
+							<span class="text-danger">Đã khóa</span>
+							@endif
+						</td>
 						<td>
 							@can('admin')
 							<a onclick="return confirm('Bạn có chắc xóa danh mục này không?')" href="{{ route('delete_coupon',$value->id) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
