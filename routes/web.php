@@ -172,8 +172,8 @@ Route::get('test', function() {
 });
 
 Route::get('test2', function() {
-	$count = App\Models\Feeship::orderBy('id','DESC')->where('matp_id',96)->get();
-	echo count($count);
+	$order = App\Models\Order::orderBy('id','DESC')->paginate(10);
+	dd($order);
 });
 Route::get('add_user', function() {
 	$user = new App\Models\User;
