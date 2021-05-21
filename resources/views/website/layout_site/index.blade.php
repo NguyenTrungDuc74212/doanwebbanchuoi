@@ -1,6 +1,41 @@
 @include("website.layout_site.header")
 @yield("content")
 @include("website.layout_site.footer")
+{{-- xử lý search --}}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#keywords').keyup(function(event) {
+			event.preventDefault();
+			var query = $(this).val();
+			var token = $('input[name="_token"]').val();
+			if (query!='') {
+				$.ajax({
+                url: '{{ route('auto_search') }}',
+                type: 'POST',
+                data:{
+                    key:query,
+                    _token:token,
+                }, /*name:biến var*/
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                {
+                   $('#search_ajax').fadeIn(); 
+                   $('#search_ajax').html(data);
+               }
+           });
+			}
+			else {
+				$('#search_ajax').fadeOut(); 
+			}
+		});
+	});
+	$(document).on('click','li.value_search',function(e){
+            e.preventDefault();
+            $('#keywords').val($(this).text());
+            $('#search_ajax').fadeOut();
+
+        });
+</script>
+{{-- end xử lý search --}}
 <script type="text/javascript">
 	$(document).ready(function() 
 	{             

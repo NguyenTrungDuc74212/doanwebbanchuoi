@@ -106,7 +106,7 @@ class orderController extends Controller
         }else{
             /*xem lịch sử đơn hàng*/
             $order=Order::find($id);
-        $coupon=Coupon::where('code',$order->coupon)->first();
+            $coupon=Coupon::where('code',$order->coupon)->first();
         
         $amountArray= array();
         $tongTienHang=0;

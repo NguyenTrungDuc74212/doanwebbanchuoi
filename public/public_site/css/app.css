@@ -7,17 +7,17 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-dl,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-ol,
-p,
-pre,
-ul {
+ dl,
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6,
+ ol,
+ p,
+ pre,
+ ul {
     margin-top: 0
 }
 
@@ -150,8 +150,8 @@ input {
 }
 
 *,
- ::after,
- ::before {
+::after,
+::before {
     box-sizing: border-box
 }
 
@@ -8190,8 +8190,8 @@ a.text-dark:hover {
         page-break-inside: avoid
     }
     *,
-     ::after,
-     ::before {
+    ::after,
+    ::before {
         text-shadow: none!important;
         box-shadow: none!important
     }
@@ -8831,7 +8831,7 @@ section.service img {
  * Copyright (c) 2018 Daniel Eden
  */
 
-@keyframes bounce {
+ @keyframes bounce {
     20%,
     53%,
     80%,
@@ -11781,4 +11781,23 @@ body>p.flash-message.success {
         width: 253px;
         height: 253px;
     }
+}
+.dropdown-menu li a:hover
+{
+    background-color: #269300;
+    color: #FFFFFF !important;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+.dropdown-menu li:hover{
+    background-color: #269300;
+}
+li.value_search a{
+    display: block;
+padding: 3px 20px;
+clear: both;
+font-weight: normal;
+line-height: 1.428571429;
+color: #333;
+white-space: nowrap;
 }

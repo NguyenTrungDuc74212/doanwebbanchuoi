@@ -107,131 +107,97 @@
 					<div class="container">
 						<div class="row align-content-center">
 							<div class="col-md-5 col-lg-4">
-								<form action="https://hoaquafuji.com/search" method="get" class="form-inline w-75">
+								<form action="{{ route('timkiem') }}" method="get" class="form-inline w-75" autocomplete="off">
+									@csrf
 									<div class="input-group">
-										<input name="q" type="text" class="form-control" placeholder="Tìm kiếm"
-										aria-label="Tìm kiếm" aria-describedby="search-box">
-										<div class="input-group-prepend">
-											<button class="input-group-text bg-light" id="search-box" type="submit"><i
-												class="fas fa-search text-dark"></i></button>
-											</div>
-										</div>
-									</form>
-								</div>
-								<div class="col-md-2 col-lg-4 text-center">
-									<a href="/"><img class="bg-light logo"
-										src="{{asset('public/upload/slide/logo_chuoi.png')}}"
-										alt="Hoa quả fuji"></a>
+										<input name="key" type="text" class="form-control" placeholder="Tìm kiếm" id="keywords">
+										<div id="search_ajax" style="position: absolute;right: 0;">
+										</ul>
 									</div>
-									<div class="col-md-5 col-lg-4">
-										<div class="cart bg-light w-75 ml-auto text-dark text-center py-2 rounded">
-											<a href="{{route('get_address')}}" class="text-second"><i
-												class="fas fa-map-marked-alt align-middle fa-17 mr-3"></i>Hệ thống cửa hàng</a>
-											</div>
+									<div class="input-group-prepend">
+										<button class="input-group-text bg-light" id="search-box" type="submit"><i
+											class="fas fa-search text-dark"></i></button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-md-2 col-lg-4 text-center">
+								<a href="/"><img class="bg-light logo"
+									src="{{asset('public/upload/slide/logo_chuoi.png')}}"
+									alt="Hoa quả fuji"></a>
+								</div>
+								<div class="col-md-5 col-lg-4">
+									<div class="cart bg-light w-75 ml-auto text-dark text-center py-2 rounded">
+										<a href="{{route('get_address')}}" class="text-second"><i
+											class="fas fa-map-marked-alt align-middle fa-17 mr-3"></i>Hệ thống cửa hàng</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="menu-mobile"></div>
-						<div class="clearfix"></div>
-						<div class="nav-desktop">
-							<nav class="bg-light">
-								<div class="container">
-									<ul class="d-lg-flex flex-row justify-content-center align-items-center">
-										<li class="sub-logo mr-auto"><a href="https://hoaquafuji.com"><img
-											src="{{asset('public/upload/slide/logo_chuoi.png')}}"
-											alt="Fresh Banana"></a></li>
-											<li role="presentation" class="active py-lg-2">
-												<a href="{{route('get_home_page')}}">
-													Trang chủ
-												</a>
-											</li>
-											<li role="presentation" class="py-lg-2">
-												<a href="{{route('get_intro')}}">Giới thiệu</a>
-											</li>
-											<li role="presentation" class="py-lg-2">
-												<a href="#">Tin tức</a>
-												<ul class="sub-menu">
-													@foreach ($postCategoryHeader as $item)
-													<li role="presentation" class="py-lg-2">
-														<a href="{{route('get_post_by_category',$item->slug)}}">{{$item->name}}</a>
-													</li>
-													@endforeach
-												</ul>
-											</li>
-											<li role="presentation" class="py-lg-2">
-												<a href="#">Sản xuất</a>
-											</li>
-											<li role="presentation" class="py-lg-2">
-												<a href="#">Dịch vụ</a>
-											</li>
-											<li role="presentation" class="py-lg-2">
-												<a href="#">Mua hàng online</a>
-												<ul class="sub-menu">
-													@foreach ($productCategoryHeader as $item)
-													<li role="presentation" class="py-lg-2">
-														<a href="{{route('get_product_by_category',$item->slug)}}">{{$item->name}}</a>
-													</li>
-													@endforeach
-												</ul>
-											</li>
-											<li role="presentation" class="py-lg-2">
-												<a href="#">Góc chia sẻ</a>
-											</li>
-											<li role="presentation" class="py-lg-2">
-												<a href="{{route('get_address')}}">Liên hệ</a>
-											</li>
-											<li class="btn-cart" id="btn-cart-navbar">
-												<a href="" class="giohang_show_2">
-													<i class="fas fa-shopping-cart align-middle text-primary fa-2x"></i>
-													@if ($cart)
-													<span>{{ $quantity }}</span>
-													@else
-													<span>0</span>
-													@endif
-												</a>
-											</li>
-											<li role="presentation" class="py-lg-2">
-												@if (Session::get('id_customer'))
-												<a href="">Xin chào {{ Session::get('name_customer') }}</a>
-												<ul class="sub-menu">
-													<li role="presentation" class="py-lg-2">
-														<a href="#" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus dangky"></i>
-														Đăng ký</a>
-
-													</li>
-													<li role="presentation" class="py-lg-2">
-														<a href="{{ route('order_history') }}"><i class="fas fa-history"></i>
-														Lịch sử đơn hàng</a>
-
-													</li>
-													<form action="{{ route('logout_customer') }}" method="POST">
-														@csrf
-														<li role="presentation" class="py-lg-2">
-															<button class="btn-custom" type="submit" style="padding: .5rem 1rem;
-															font-weight: 700;
-															transition: all .2s ease-in;
-															display: block;border: 0;background: #269300;color: white;cursor: pointer;"><i class="fas fa-sign-out-alt"></i>
-														Đăng xuất</button>
-														<style type="text/css">
-																.btn-custom:hover{
-																	background: #ff9600 !important; 
-																}
-																.btn-custom:focus{
-																	background: #ff9600 !important;
-																	border: 0  !important; 
-																	outline:none;
-																}
-																.btn-custom:active{
-																	outline:none;
-																}
-															</style>
-													</li>
-												</form>
+					</div>
+					<div class="menu-mobile"></div>
+					<div class="clearfix"></div>
+					<div class="nav-desktop">
+						<nav class="bg-light">
+							<div class="container">
+								<ul class="d-lg-flex flex-row justify-content-center align-items-center">
+									<li class="sub-logo mr-auto"><a href="https://hoaquafuji.com"><img
+										src="{{asset('public/upload/slide/logo_chuoi.png')}}"
+										alt="Fresh Banana"></a></li>
+										<li role="presentation" class="active py-lg-2">
+											<a href="{{route('get_home_page')}}">
+												Trang chủ
+											</a>
+										</li>
+										<li role="presentation" class="py-lg-2">
+											<a href="{{route('get_intro')}}">Giới thiệu</a>
+										</li>
+										<li role="presentation" class="py-lg-2">
+											<a href="#">Tin tức</a>
+											<ul class="sub-menu">
+												@foreach ($postCategoryHeader as $item)
+												<li role="presentation" class="py-lg-2">
+													<a href="{{route('get_post_by_category',$item->slug)}}">{{$item->name}}</a>
+												</li>
+												@endforeach
 											</ul>
-											@else
-											<a href="">Tài khoản</a>
+										</li>
+										<li role="presentation" class="py-lg-2">
+											<a href="#">Sản xuất</a>
+										</li>
+										<li role="presentation" class="py-lg-2">
+											<a href="#">Dịch vụ</a>
+										</li>
+										<li role="presentation" class="py-lg-2">
+											<a href="#">Mua hàng online</a>
+											<ul class="sub-menu">
+												@foreach ($productCategoryHeader as $item)
+												<li role="presentation" class="py-lg-2">
+													<a href="{{route('get_product_by_category',$item->slug)}}">{{$item->name}}</a>
+												</li>
+												@endforeach
+											</ul>
+										</li>
+										<li role="presentation" class="py-lg-2">
+											<a href="#">Góc chia sẻ</a>
+										</li>
+										<li role="presentation" class="py-lg-2">
+											<a href="{{route('get_address')}}">Liên hệ</a>
+										</li>
+										<li class="btn-cart" id="btn-cart-navbar">
+											<a href="" class="giohang_show_2">
+												<i class="fas fa-shopping-cart align-middle text-primary fa-2x"></i>
+												@if ($cart)
+												<span>{{ $quantity }}</span>
+												@else
+												<span>0</span>
+												@endif
+											</a>
+										</li>
+										<li role="presentation" class="py-lg-2">
+											@if (Session::get('id_customer'))
+											<a href="">Xin chào {{ Session::get('name_customer') }}</a>
 											<ul class="sub-menu">
 												<li role="presentation" class="py-lg-2">
 													<a href="#" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus dangky"></i>
@@ -239,14 +205,51 @@
 
 												</li>
 												<li role="presentation" class="py-lg-2">
-													<a href="#" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt dangnhap"></i>
-													Đăng nhập</a>
+													<a href="{{ route('order_history') }}"><i class="fas fa-history"></i>
+													Lịch sử đơn hàng</a>
+
 												</li>
-											</ul>
-											@endif
-										</li>
-									</ul>
-								</div>
-							</nav>
-						</div>
-					</header>
+												<form action="{{ route('logout_customer') }}" method="POST">
+													@csrf
+													<li role="presentation" class="py-lg-2">
+														<button class="btn-custom" type="submit" style="padding: .5rem 1rem;
+														font-weight: 700;
+														transition: all .2s ease-in;
+														display: block;border: 0;background: #269300;color: white;cursor: pointer;"><i class="fas fa-sign-out-alt"></i>
+													Đăng xuất</button>
+													<style type="text/css">
+														.btn-custom:hover{
+															background: #ff9600 !important; 
+														}
+														.btn-custom:focus{
+															background: #ff9600 !important;
+															border: 0  !important; 
+															outline:none;
+														}
+														.btn-custom:active{
+															outline:none;
+														}
+													</style>
+												</li>
+											</form>
+										</ul>
+										@else
+										<a href="">Tài khoản</a>
+										<ul class="sub-menu">
+											<li role="presentation" class="py-lg-2">
+												<a href="#" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus dangky"></i>
+												Đăng ký</a>
+
+											</li>
+											<li role="presentation" class="py-lg-2">
+												<a href="#" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt dangnhap"></i>
+												Đăng nhập</a>
+											</li>
+										</ul>
+										@endif
+									</li>
+								</ul>
+							</div>
+						</nav>
+					</div>
+				</header>
