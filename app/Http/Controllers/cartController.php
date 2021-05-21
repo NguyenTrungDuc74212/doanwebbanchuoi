@@ -87,7 +87,7 @@ class cartController extends Controller
 		Session::put('cart',$cart);
 	}
 	public function cancel_cart(Request $req){
-		$req->session()->flush();
+		$req->session()->forget('cart');
 		return redirect()->back();
 	}
 	public function update_cart_ajax(Request $req)

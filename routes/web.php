@@ -191,6 +191,9 @@ Route::get('add_user', function() {
 /*website*/
 
 Route::get('/','homePageController@getHomePage')->name('get_home_page');
+Route::get('/timkiem','homePageController@getHomePage')->name('timkiem');
+Route::post('/auto-search','homePageController@auto_search')->name('auto_search');
+
 Route::get('san-pham/{slug}','productSiteController@getProductDetail')->name('get_product_detail');
 Route::get('bai-viet','PostSiteController@getViewBlog')->name('get_view_blog');
 Route::get('bai-viet/{slug}','PostSiteController@getBlogDetail')->name('get_view_blog_details');
