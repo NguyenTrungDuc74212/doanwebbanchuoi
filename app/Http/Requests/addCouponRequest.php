@@ -25,6 +25,8 @@ class addCouponRequest extends FormRequest
     {
         return [
             "name"=>"required|max:50",
+            "coupon_date_start"=>"required",
+            "coupon_date_end"=>"required",
             "code"=>"required|max:50|unique:tbl_coupon,code",
             "quanlity"=>"required|numeric",
             "method"=>"required|numeric|in:1,2",
@@ -44,7 +46,9 @@ class addCouponRequest extends FormRequest
            "quanlity.numeric"=>"phải là số",
            "method.required"=>"Bạn chưa chọn tính năng",
            "value_sale.required"=>"Bạn chưa nhập số giảm giá",
-           "value_sale.numeric"=>"phải là số"
+           "value_sale.numeric"=>"phải là số",
+           "coupon_date_end.required"=>"Bạn phải nhập ngày hết hạn",
+           "coupon_date_start.required"=>"Bạn phải nhập ngày bắt đầu"
            
        ];
    }

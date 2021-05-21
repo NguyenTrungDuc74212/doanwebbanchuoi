@@ -565,9 +565,19 @@
  $( function() {
   $("#datepicker").datepicker({
     dateFormat: "yy-mm-dd",
+    duration: "slow"
   });
   $("#datepicker2").datepicker({
     dateFormat: "yy-mm-dd",
+    duration: "slow"
+  });
+  $("#coupon_date_start").datepicker({
+    dateFormat: "dd/mm/yy",
+    duration: "slow"
+  });
+  $("#coupon_date_end").datepicker({
+    dateFormat: "dd/mm/yy",
+    duration: "slow"
   });
 
 });
@@ -592,6 +602,7 @@
     $('#table_warehouse').DataTable();
     $('#table_input').DataTable();
     $('#table_product').DataTable();
+    $('#table_order').DataTable();
   } );
 </script>
 <script type="text/javascript">

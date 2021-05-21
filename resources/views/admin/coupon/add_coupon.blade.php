@@ -28,13 +28,11 @@
 			@error('name')
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
-			<br>
 			<label for="">Mã giảm giá</label>
 			<input class="form-control" type="text" placeholder="nhập code" name="code" value="{{ old('code') }}">
 			@error('code')
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
-			<br>
 			<label for="">Số lượng mã</label>
 			<input class="form-control" type="number" placeholder="nhập số lượng" name="quanlity" value="{{ old('quanlity') }}" min=0>
 			@error('quanlity')
@@ -47,6 +45,16 @@
 				<option value="2">giảm theo phần trăm</option>
 			</select>
 			@error('method')
+			<p class="text-danger">{{ $message }}</p>
+			@enderror
+			<label for="">Ngày bắt đầu giảm giá</label>
+			<input class="form-control" id="coupon_date_start" type="text" placeholder="nhập ngày bắt đầu" name="coupon_date_start" value="{{ old('coupon_date_start') }}">
+			@error('coupon_date_start')
+			<p class="text-danger">{{ $message }}</p>
+			@enderror
+			<label for="">Ngày hết hạn giảm giá</label>
+			<input class="form-control" id="coupon_date_end" type="text" placeholder="nhập ngày kết thúc" name="coupon_date_end" value="{{ old('coupon_date_end') }}">
+			@error('coupon_date_end')
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
 			<label for="">Nhập số % hoặc số tiền giảm</label>
