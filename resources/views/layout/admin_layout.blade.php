@@ -1365,6 +1365,7 @@
         });
     </script>
     {{-- end feeship --}}
+    @yield('script')
 </body>
 
 </html>
