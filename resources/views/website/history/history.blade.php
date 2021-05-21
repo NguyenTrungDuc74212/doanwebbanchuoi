@@ -44,6 +44,7 @@
 					<td>{{currency_format($value->total)}}</td>
 					<td  class="text-nowrap">
 						<a href="{{ route('view_history_order',$value->id) }}" class="btn btn-success">Xem đơn hàng</a>
+						<a href="{{ route('view_history_order',$value->id) }}" class="btn btn-danger">Hủy</a>
 					</td>
 				</tr>
 				@endforeach
