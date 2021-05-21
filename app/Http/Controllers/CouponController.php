@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Coupon;
+use Carbon\Carbon;
 use App\Http\Requests\addCouponRequest;
 
 class CouponController extends Controller
@@ -17,6 +18,8 @@ class CouponController extends Controller
 		$coupon = new Coupon;
 		$coupon->name = $req->input('name');
 		$coupon->code = $req->input('code');
+		$coupon->coupon_date_start = $req->input('coupon_date_start');
+		$coupon->coupon_date_end = $req->input('coupon_date_end');
 		$coupon->quanlity = $req->input('quanlity');
 		$coupon->method = $req->input('method');
 		$coupon->value_sale = $req->input('value_sale');
@@ -25,9 +28,11 @@ class CouponController extends Controller
 	}
 	public function list_coupon()
 	{
+		$today = Carbon::now()->format('d/m/Y');
+		
 		$coupon_query =Coupon::query();
         $coupon_query->latest();
         $coupon=$coupon_query->paginate(5);
-		return view('admin.coupon.list_coupon',compact('coupon'));
+		return view('admin.coupon.list_coupon',compact('coupon','today'));
 	}
 }
