@@ -77,6 +77,7 @@
 					<p style="display:blog"><b>Phone</b>      : {{$order->shipping->phone}}</p>
 					<p style="display:blog"><b>Email</b>      : {{$order->shipping->email}}</p>
 					<p style="display:blog"><b>Địa chỉ</b>    : {{$order->shipping->address}}</p>
+					<p style="display:blog"><b>Ghi chú</b>    : {{$order->shipping->notes}}</p>
                 </div>
             </div>
 			<div class="row">
@@ -90,6 +91,7 @@
 	  <th>Giảm giá</th>
 	  <th>Thành tiền</th>
 	</tr>
+
 	@foreach ($order->orderDetails as $item)
 	<tr>
 		<td>SP{{$item->product->id}}</td>

@@ -49,7 +49,7 @@
 		</div>
 		<!-- /.card-header -->
 		<div class="card-body table-responsive p-0">
-			<table class="table table-hover text-center" id="table_post">
+			<table class="table table-hover text-center">
 				<thead  class="text-nowrap">
 					<tr class="tr-admin">
 						<th>Đơn hàng</th>

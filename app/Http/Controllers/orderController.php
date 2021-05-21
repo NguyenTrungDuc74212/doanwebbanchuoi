@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Coupon;
 use Session;
-
+use DB;
 
 class orderController extends Controller
 {
@@ -14,7 +14,7 @@ class orderController extends Controller
     {
         $status=-1;
         $status_pay=-1;
-        $orders=Order::paginate(10);
+        $orders=Order::orderBy('order_date', 'DESC')->paginate(10);
         return view('admin.order.list_order',compact('orders','status','status_pay'));
     }
     public function getByStatus($status,$status_pay)
@@ -22,15 +22,15 @@ class orderController extends Controller
         $orders=null;
         if($status!=-1&&$status_pay!=-1)
         {
-            $orders=Order::where('status',$status)->where('status_pay',$status_pay)->paginate(10);
+            $orders=Order::where('status',$status)->where('status_pay',$status_pay)->orderBy('order_date', 'DESC')->paginate(10);
         }
         if($status!=-1&&$status_pay==-1)
       {
-        $orders=Order::where('status',$status)->paginate(10);
+        $orders=Order::where('status',$status)->orderBy('order_date', 'DESC')->paginate(10);
       }
       if($status==-1&&$status_pay!=-1)
       {
-        $orders=Order::where('status_pay',$status_pay)->paginate(10);
+        $orders=Order::where('status_pay',$status_pay)->orderBy('order_date', 'DESC')->paginate(10);
       }
       return view('admin.order.list_order',compact('orders','status','status_pay'));
     }
