@@ -63,10 +63,14 @@
 				</div>
                 <div class="col-md-4">
                 <h5><b>Thông tin khách hàng</b></h5>
+				@if($order->customer!=null)
 				<p style="display:blog"><b>Khách hàng</b> : {{$order->customer->name}}</p>
 				<p style="display:blog"><b>Email</b>      : {{$order->customer->email}}</p>
 				<p style="display:blog"><b>Phone</b>      : {{$order->customer->phone}}</p>
-                </div>
+				@else
+				<p> Khách hàng không có tài khoản.</p>
+				@endif
+			</div>
                 <div class="col-md-4">
                     <h5><b>Thông tin giao hàng</b></h5>
 					<p style="display:blog"><b>Người nhận</b> : {{$order->shipping->name}}</p>

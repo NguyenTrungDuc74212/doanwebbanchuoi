@@ -48,6 +48,12 @@
         .tr-admin {
             background-color: #56bc1659
         }
+        .card-header.text-center {
+    background-color: #11700b59;
+}
+    .card-body.table-responsive.p-0 {
+        padding-top: 5px !important;
+    }
 
     </style>
 </head>
@@ -1272,6 +1278,7 @@
 
     </script>
     <script>
+        @if(isset($order))
         $(document).ready(function() {
             $(document).on('change', '#status-order', function() {
                 var status = $(this).val();
@@ -1348,7 +1355,14 @@
                 }
             });
         });
-
+        @endif
+        // lọc theo trạng thái đơn hàng
+        $(document).ready(function() {
+            $(document).on('change', '.get-by-product', function() {
+            var url= '{{asset('')}}'+'admin/order/get-by-status/'+$('#filter-status').val()+'/'+$('#filter-status-pay').val();
+            window.location.href=url;
+            });
+        });
     </script>
     {{-- end feeship --}}
 </body>

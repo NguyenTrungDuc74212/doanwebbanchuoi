@@ -12,20 +12,27 @@ class orderController extends Controller
 {
     public function getListOrder()
     {
+        $status=-1;
+        $status_pay=-1;
         $orders=Order::paginate(10);
-        return view('admin.order.list_order',compact('orders'));
+        return view('admin.order.list_order',compact('orders','status','status_pay'));
     }
     public function getByStatus($status,$status_pay)
     {
+        $orders=null;
         if($status!=-1&&$status_pay!=-1)
         {
-            $order=Order::where('status',$status)->andWhere('status_pay',$status_pay)->paginate(10);
+            $orders=Order::where('status',$status)->where('status_pay',$status_pay)->paginate(10);
         }
         if($status!=-1&&$status_pay==-1)
       {
-        $order=Order::where('status',$status)->paginate(10);
+        $orders=Order::where('status',$status)->paginate(10);
       }
-        return view
+      if($status==-1&&$status_pay!=-1)
+      {
+        $orders=Order::where('status_pay',$status_pay)->paginate(10);
+      }
+      return view('admin.order.list_order',compact('orders','status','status_pay'));
     }
     public function getOrderDetail($id)
     {

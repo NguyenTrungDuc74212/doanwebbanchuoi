@@ -6,26 +6,28 @@
 <div class="col-12">
 	<div class="card" style="padding: 20px">
 		<div class="card-header text-center">
-			<h3 class="card-title">Danh sách đơn hàng</h3>
+			<h3 class="card-title"><b>Danh sách đơn hàng</b></h3>
 			<br>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-			<select class="form-control" id="status-order">
-				<option value="">---Lọc theo trạng thái đơn hàng---</option>
-				<option value="1" >Chờ xác nhận</option>
-				<option value="2" >Chờ lấy hàng</option>
-				<option value="3">Đang giao</option>
-				<option value="4" >Đã giao</option>
-				<option value="5" >Đã hủy</option>
-				<option value="6" >Trả hàng</option>
+			<p>Trạng thái đơn hàng</p>
+			<select class="form-control get-by-product" id="filter-status">
+				<option value="-1" {{ $status==-1?'selected':'' }}>---Tất cả---</option>
+				<option value="1" {{ $status==1?'selected':'' }}>Chờ xác nhận</option>
+				<option value="2" {{ $status==2?'selected':'' }}>Chờ lấy hàng</option>
+				<option value="3" {{ $status==3?'selected':'' }}>Đang giao</option>
+				<option value="4" {{ $status==4?'selected':'' }}>Đã giao</option>
+				<option value="5" {{ $status==5?'selected':'' }}>Đã hủy</option>
+				<option value="6" {{ $status==6?'selected':'' }}>Trả hàng</option>
 			</select>
 		</div>
 		<div class="col-md-6">
-			<select class="form-control" id="status-order">
-				<option value="">---Lọc theo trạng thái thanh toán---</option>
-				<option value="0" >Chưa thanh toán</option>
-				<option value="1" >Đã thanh toán</option>
+			<p>Trạng thái thanh toán</p>
+			<select class="form-control get-by-product" id="filter-status-pay">
+				<option value="-1" {{ $status_pay==-1?'selected':'' }}>---Tất cả---</option>
+				<option value="0" {{ $status_pay==0?'selected':'' }}>Chưa thanh toán</option>
+				<option value="1" {{ $status_pay==1?'selected':'' }}>Đã thanh toán</option>
 	
 			</select>
 		</div>
