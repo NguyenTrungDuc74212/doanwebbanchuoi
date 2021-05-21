@@ -1365,6 +1365,27 @@
         });
     </script>
     {{-- end feeship --}}
+    <script type="text/javascript">
+        $( function() {
+         $("#datepicker").datepicker({
+           dateFormat: "yy-mm-dd",
+           duration: "slow"
+         });
+         $("#datepicker2").datepicker({
+           dateFormat: "yy-mm-dd",
+           duration: "slow"
+         });
+         $("#coupon_date_start").datepicker({
+           dateFormat: "yy-mm-dd",
+           duration: "slow"
+         });
+         $("#coupon_date_end").datepicker({
+           dateFormat: "yy-mm-dd",
+           duration: "slow"
+         });
+       
+       });
+       </script>
     @yield('script')
 </body>
 
