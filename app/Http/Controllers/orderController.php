@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Coupon;
+use App\Models\WarehouseOrder;
 use Session;
 use DB;
 
@@ -135,6 +136,8 @@ class orderController extends Controller
     }
     public function cancelOrder(Request $req)
     {
+        DB::beginTransaction();
+        try{
         $order=Order::find($req->id_order);
         if($order->status!=1)
         {
@@ -151,6 +154,23 @@ class orderController extends Controller
         {
             $orderDetail->product->quantity=$orderDetail->soluong+$orderDetail->product->quantity;
             $orderDetail->product->save();
+            $warehouseOrder=WarehouseOrder::where('order_detail_id',$orderDetail->id)->get();
+            foreach($warehouseOrder as $item)
+            {
+                $item->warehouse_product->quantity= $item->warehouse_product->quantity+$item->quantity;
+                $item->warehouse_product->save();
+                $item->warehouse_product->warehouse->quantity_now=$item->warehouse_product->warehouse->quantity_now+$item->quantity;
+                $item->warehouse_product->warehouse->save();
+                $item->delete();
+               
+            }
         }
+        DB::commit();
+        return redirect()->route('order_history')->with('thanhcong','Hủy đơn hàng thành công!');
+    }catch(Exception $ex)
+    {
+        DB::rollBack();
+        throw new Exception($ex->getMessage());
+    }
     }
 }

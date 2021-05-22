@@ -11,7 +11,7 @@ class WarehouseOrder extends Model
     protected $table = "tbl_warehouse_order";
     public function warehouse_product()
     {
-    	return $this->hasMany(WarehouseProduct::class,'warehouse_product_id','id');
+    	return $this->belongsTo(WarehouseProduct::class,'warehouse_product_id','id');
     }
     public function order_detail()
     {

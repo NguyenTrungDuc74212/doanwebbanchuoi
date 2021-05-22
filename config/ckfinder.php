@@ -29,10 +29,10 @@ $config['authentication'] =  $config['authentication'] = '\App\Http\Middleware\C
 /*============================ License Key ============================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
-// $config['licenseName'] = 'localhost';
-// $config['licenseKey']  = 'CDPDSVKQYF43SZN2FPBQ41MJXWSMA';
-$config['licenseName'] = 'muachuoi.xyz'; 
-$config['licenseKey']  = 'RPUPTAJ2BW6BSCHRJHHN35Q7JRXAE';
+$config['licenseName'] = 'localhost';
+$config['licenseKey']  = 'CDPDSVKQYF43SZN2FPBQ41MJXWSMA';
+// $config['licenseName'] = 'muachuoi.xyz'; 
+// $config['licenseKey']  = 'RPUPTAJ2BW6BSCHRJHHN35Q7JRXAE';
 
 /*============================ CKFinder Internal Directory ============================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_privateDir
