@@ -546,361 +546,6 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="{{ asset('public/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('public/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('public/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- ChartJS -->
-    <script src="{{ asset('public/plugins/chart.js/Chart.min.js') }}"></script>
-    <!-- Sparkline -->
-    <script src="{{ asset('public/plugins/sparklines/sparkline.js') }}"></script>
-    <!-- JQVMap -->
-    <script src="{{ asset('public/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('public/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="{{ asset('public/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-    <!-- daterangepicker -->
-    <script src="{{ asset('public/plugins/moment/moment.min.js') }}"></script>
-    <script src="{{ asset('public/plugins/daterangepicker/daterangepicker.js') }}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{{ asset('public/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
-    </script>
-    <!-- Summernote -->
-    <script src="{{ asset('public/plugins/summernote/summernote-bs4.min.js') }}"></script>
-    <!-- overlayScrollbars -->
-    <script src="{{ asset('public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('public/dist/js/adminlte.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('public/dist/js/demo.js') }}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('public/dist/js/pages/dashboard.js') }}"></script>
-    <script type="text/javascript"></script>
-    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tail.select@0.5.15/js/tail.select-full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $("#datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-           with font-awesome or any other icon font library -->
-           <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('trangchu_admin') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          @can('author')
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-list-ul"></i>
-              <p>
-                Danh mục bài viết
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('view_add_category_post')}}" class="nav-link">
-                  <i class="nav-icon far fa-plus-square"></i>
-                  <p>Thêm danh mục bài viết</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('list_category_post') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Liệt kê danh mục bài viết</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-book"></i>
-              <p>
-                Quản lý bài viết
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('view_add_post')}}" class="nav-link">
-                  <i class="nav-icon far fa-plus-square"></i>
-                  <p>Thêm bài viết</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('list_post') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Liệt kê bài viết</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-book"></i>
-              <p>
-                Quản lý slider
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('add_slide') }}" class="nav-link">
-                  <i class="nav-icon far fa-plus-square"></i>
-                  <p>Thêm Slide</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('manage_banner') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Liệt kê Slide</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          @endcan
-          @can('user')
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-list-ul"></i>
-              <p>
-                Danh mục sản phẩm
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('view_add_category_product')}}" class="nav-link">
-                  <i class="nav-icon far fa-plus-square"></i>
-                  <p>Thêm danh mục sản phẩm</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('list_category_product') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Liệt kê danh mục sản phẩm</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-             <i class="fab fa-product-hunt"></i>
-             <p>
-              Quản lý sản phẩm
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{ route('view_add_product')}}" class="nav-link">
-                <i class="nav-icon far fa-plus-square"></i>
-                <p>Thêm sản phẩm</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('list_product') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Liệt kê sản phẩm</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fas fa-book"></i>
-            <p>
-              Quản lý phiếu nhập
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{ route('view_insert_input') }}" class="nav-link">
-                <i class="nav-icon far fa-plus-square"></i>
-                <p>Lập phiếu nhập</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('list_input') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Danh sách phiếu nhập</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        @endcan
-        @can('admin')
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fas fa-truck"></i>
-            <p>
-              Vận chuyển
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{ route('add_delivery')}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Quản lý vận chuyển</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fas fa-scroll"></i>
-            <p>
-              Mã giảm giá
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{ route('view_insert_coupon') }}" class="nav-link">
-                <i class="nav-icon far fa-plus-square"></i>
-                <p>Thêm mã giảm giá</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('list_coupon') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Liệt kê mã giảm giá</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        @endcan
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-           <i class="fab fa-product-hunt"></i>
-           <p>
-            Quản lý nhà cung cấp
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="{{ route('view_insert_vendor') }}" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>Thêm nhà cung cấp</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('list_vendor') }}" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Liệt kê nhà cung cấp</p>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-         <i class="fab fa-product-hunt"></i>
-         <p>
-          Quản lý kho
-          <i class="right fas fa-angle-left"></i>
-        </p>
-      </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="{{ route('view_insert_warehouse') }}" class="nav-link">
-            <i class="nav-icon far fa-plus-square"></i>
-            <p>Thêm kho</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('list_warehouse') }}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Liệt kê các kho</p>
-          </a>
-        </li>
-      </ul>
-    </li>
-    @can('admin')
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="fas fa-users"></i>
-        <p>
-          Users
-          <i class="right fas fa-angle-left"></i>
-        </p>
-      </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="{{ route('register-user') }}" class="nav-link">
-            <i class="fas fa-user-plus"></i>
-            <p>Đăng ký user</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('list_user')}}" class="nav-link">
-            <i class="fas fa-list"></i>
-            <p>Liệt kê user</p>
-          </a>
-        </li>
-      </ul>
-    </li>
-    @endcan
-  </ul>
-</nav>
-<!-- /.sidebar-menu -->
-</div>
-<!-- /.sidebar -->
-</aside>
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  @yield('content')
-</div>
-<!-- /.content-wrapper -->
-<footer class="main-footer">
-  <strong>Địa chỉ: 180 Trung Hành, Đằng Lâm, Hải An, Hải Phòng, 
-   <a href="">Công ty cổ phần VTS Việt Nam</a>.</strong>
-   All rights reserved.
-   <div class="float-right d-none d-sm-inline-block">
-    <b>Version</b> 3.1.0-rc
-  </div>
-</footer>
-
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-  <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery -->
 <script src="{{ asset('public/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('public/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -943,26 +588,26 @@
 <script src="https://cdn.jsdelivr.net/npm/tail.select@0.5.15/js/tail.select-full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
- $( function() {
-  $("#datepicker").datepicker({
-    dateFormat: "yy-mm-dd",
-    duration: "slow"
-  });
-  $("#datepicker2").datepicker({
-    dateFormat: "yy-mm-dd",
-    duration: "slow"
-  });
-  $("#coupon_date_start").datepicker({
-    dateFormat: "dd/mm/yy",
-    duration: "slow"
-  });
-  $("#coupon_date_end").datepicker({
-    dateFormat: "dd/mm/yy",
-    duration: "slow"
-  });
+//  $( function() {
+//   $("#datepicker").datepicker({
+//     dateFormat: "yy-mm-dd",
+//     duration: "slow"
+//   });
+//   $("#datepicker2").datepicker({
+//     dateFormat: "yy-mm-dd",
+//     duration: "slow"
+//   });
+//   $("#coupon_date_start").datepicker({
+//     dateFormat: "dd/mm/yy",
+//     duration: "slow"
+//   });
+//   $("#coupon_date_end").datepicker({
+//     dateFormat: "dd/mm/yy",
+//     duration: "slow"
+//   });
 
-});
-</script>
+// });
+// </script>
 <script type="text/javascript">
   $(document).ready(function() {
 
@@ -1013,11 +658,8 @@
                      $('#load_image').html(data);
                 }
             });
-            $("#datepicker2").datepicker({
-                dateFormat: "yy-mm-dd",
-            });
-
-        });
+    }
+});
 
     </script>
     <script type="text/javascript">
@@ -1053,9 +695,8 @@
     </script>
     {{-- xử lý chọn nhiều ảnh --}}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function(){
             load_image();
-
             function load_image() {
                 var product_id = $('.product_id').val();
                 var token = $('input[name="_token"]').val();

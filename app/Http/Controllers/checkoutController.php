@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\Tinhthanhpho;
+<<<<<<< HEAD
 use App\Models\Warehouse;
 use App\Models\WarehouseOrder;
 use App\Models\WarehouseProduct;
+=======
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 use App\Models\Customer;
 use App\Models\Shipping;
 use App\Models\Order;
@@ -16,6 +19,11 @@ use App\Models\Coupon;
 use App\Models\Order_detail;
 use Carbon\carbon;
 use Session;
+<<<<<<< HEAD
+=======
+use Mail;
+use Str;
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\addCustomerRequest;
 use App\Http\Requests\shippingRequest;
@@ -137,6 +145,7 @@ class checkoutController extends Controller
 						$order_detail->coupon = $product->persent_discount;
 					}
 					$order_detail->save();
+<<<<<<< HEAD
 						$product =$order_detail->product;
 						$product->quantity = $product->quantity-$value['product_qty'];
 						$product->save();
@@ -162,6 +171,8 @@ class checkoutController extends Controller
 						$warehouseProduct->save();
 						$warehouse->save();
 						}while($value['product_qty']>0);
+=======
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 				}
 				if ($req->input('method')==1) {
 					return redirect()->route('thanh_cong_atm');
@@ -243,6 +254,7 @@ class checkoutController extends Controller
 			}
 		}
 		else{
+<<<<<<< HEAD
 					$validatedData = $req->validate([
 					"email_2"=>"required|Email",
 					"name_2"=>"required",
@@ -312,6 +324,77 @@ class checkoutController extends Controller
 				elseif($req->input('method')==2) {
 					return redirect()->route('thanh_cong_cash');
 				}
+=======
+			$validatedData = $req->validate([
+				"email_2"=>"required|Email",
+				"name_2"=>"required",
+				"phone_2"=>"required|numeric",
+				"address_2"=>"required",
+				"method"=>"required",
+				"notes"=>"required",
+				"city"=>"required",
+			],
+			["email_2.required"=>"email không được để trống",
+			"notes.required"=>"ghi chú không được bỏ trống",
+			"email_2.Email"=>"email không hợp lệ",
+			"name_2.required"=>"tên không được để trống",
+			"phone_2.required"=>"số điện thoại không được để trống",
+			"phone_2.numeric"=>"số điện thoại phải là số",
+			"address_2.required"=>"địa chỉ không được để trống",
+			"method.required"=>"hình thức thanh toán không được bỏ trống",
+			"city.required"=>"Bạn phải nhập thành phố của mình hiện đang sống"]
+		);
+			$shipping = new Shipping;
+			$shipping->name = $req->input('name_2');
+			$shipping->email = $req->input('email_2');
+			$shipping->city = $req->input('city');
+				// $shipping->customer_id = Session::get('id_customer');
+			$shipping->address = $req->input('address_2');
+			$shipping->phone = $req->input('phone_2');
+			$shipping->notes = $req->input('notes');
+			$shipping->method = $req->input('method');
+			$shipping->status = 1; /*mặc định là đang xử lý*/
+			$shipping->save();
+			$shipping_id = $shipping->id;
+			Session::put('id_shipping',$shipping_id);
+			$cart = Session::get('cart');
+			foreach ($cart as $value) {
+				$soluong += $value['product_qty'];
+			}
+			$order = new Order;
+				// $order->customer_id = Session::get('id_customer');
+			$order->shipping_id = $shipping_id;
+			$order->total = Session::get('total');
+			$order->status =1 ;/*mặc định là đang xử lý*/
+			$order->order_code = $code_random;
+			$order->quantity = $soluong;
+			$order->order_date = $mytime->toDateString();
+			if ($coupon) {
+				$order->coupon = $coupon[0]['coupon_code'];
+			}
+			$order->save();
+			$order_id = $order->id;
+
+			foreach ($cart as $value) {
+				$product = Product::find($value['product_id']);
+				$order_detail = new Order_detail;
+				$order_detail->order_id = $order_id;
+				$order_detail->order_code = $code_random;
+				$order_detail->product_id = $value['product_id'];
+				$order_detail->unit = $value['product_unit'];
+				if ($product->persent_discount) {
+					$order_detail->coupon = $product->persent_discount;
+				}
+				$order_detail->soluong = $value['product_qty'];
+				$order_detail->save();
+			}
+			if ($req->input('method')==1) {
+				return redirect()->route('thanh_cong_atm');
+			}
+			elseif($req->input('method')==2) {
+				return redirect()->route('thanh_cong_cash');
+			}
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 			
 		}
 		
@@ -319,6 +402,7 @@ class checkoutController extends Controller
 	public function checkout_success_atm(Request $req)
 	{
 		$cart = Session::get('cart');
+<<<<<<< HEAD
 		// if ($cart) {
 		// 	foreach ($cart as $key => $value) {
 		// 	$product = Product::find($value['product_id']);
@@ -333,6 +417,15 @@ class checkoutController extends Controller
 		// 	}while($value['product_qty']>0)
 		// }
 		// }
+=======
+		if ($cart) {
+			foreach ($cart as $key => $value) {
+				$product = Product::find($value['product_id']);
+				$product->quantity = $product->quantity-$value['product_qty'];
+				$product->save();
+			}
+		}
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 
 		$req->session()->forget('cart');
 		$req->session()->forget('total');
@@ -360,6 +453,7 @@ class checkoutController extends Controller
 	public function checkout_success_cash(Request $req)
 	{
 		$cart = Session::get('cart');
+<<<<<<< HEAD
 		// if ($cart) {
 		// 	foreach ($cart as $key => $value) {
 		// 	$product = Product::find($value['product_id']);
@@ -368,6 +462,15 @@ class checkoutController extends Controller
 
 		// }
 		// }
+=======
+		if ($cart) {
+			foreach ($cart as $key => $value) {
+				$product = Product::find($value['product_id']);
+				$product->quantity = $product->quantity-$value['product_qty'];
+				$product->save();
+			}
+		}
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 
 		$req->session()->forget('cart');
 		$req->session()->forget('total');
@@ -390,4 +493,57 @@ class checkoutController extends Controller
 		}
 		return redirect()->route('get_home_page');
 	}
+<<<<<<< HEAD
+=======
+	public function recover_password(Request $req){
+		$now = Carbon::now()->format('Y-m-d');
+		$title_mail = "Lấy lại mật khẩu".''.$now;
+		$customer = Customer::where('email',$req->input('email'))->first();
+		if ($customer) {
+			$token_random = Str::random(20);
+			$customer = Customer::find($customer->id);
+			$customer->customer_token = $token_random;
+			$customer->save();
+
+			$to_email = $req->input('email');
+			$link_reset_pass = asset('/update-new-pass?token='.$token_random);
+			$data = array("name"=>$title_mail,'body'=>$link_reset_pass,'email'=>$to_email);
+			Mail::send('website.checkout.forget_pass_notify',['data'=>$data],function($message) use ($title_mail,$data){
+                 $message->to($data['email'])->subject($title_mail);
+                 $message->from($data['email'],$title_mail);
+			});
+			return redirect()->back()->with('thongbao_quenmatkhau','Gửi mail thành công, vui lòng check mail để thay đổi password!!!');
+		}
+		else{
+			return redirect()->back()->with('thongbao_quenmatkhau','Email chưa được đăng ký để khôi phục mật khẩu');
+		}
+
+
+	}
+	public function update_new_pass(Request $req)
+	{
+		if ($req->token) {
+			return view('website.checkout.new_pass');
+		}
+		else {
+			return redirect()->route('get_home_page')->with('thongbao_quenmatkhau','Vui lòng nhập lại email vì link quá hạn');
+		}
+		
+	}
+	public function update_pass(Request $req){
+		$token_random = Str::random(20);
+		$customer = Customer::where('email',$req->email)->where('customer_token',$req->token_2)->first();
+		if ($customer) {
+			$reset = Customer::find($customer->id);
+			$reset->password = bcrypt($req->password);
+			$reset->customer_token = $token_random;
+			$reset->save();
+			return redirect()->route('get_home_page')->with('thongbao_login_thatbai','Mật khẩu đã cập nhật thành công!!!');
+		}
+		else{
+			return redirect()->route('get_home_page')->with('thongbao_quenmatkhau','Vui lòng nhập lại email vì link quá hạn');
+		}
+
+	}
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 }

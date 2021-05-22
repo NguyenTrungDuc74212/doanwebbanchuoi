@@ -62,6 +62,10 @@
 			$('#signupModal').modal('hide');
 			$('#loginModal').modal('show');
 		});
+		$('.quenmk_customer').click(function(event) {
+			$('#loginModal').modal('hide');
+			$('#quenModal').modal('show');
+		});
 	});
 </script>
 <script type="text/javascript">

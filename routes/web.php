@@ -110,6 +110,8 @@ Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
 
 		Route::get('/list-coupon','CouponController@list_coupon')->name('list_coupon');
 		Route::get('/xoa-coupon/{id}','CouponController@delete_coupon')->name('delete_coupon');
+		Route::get('/khoa-coupon/{id}','CouponController@khoa_coupon')->name('khoa_coupon');
+		Route::get('/kichhoat-coupon/{id}','CouponController@kichhoat_coupon')->name('kichhoat_coupon');
 	});
 	// order
 	Route::group(['middleware'=>'roleAdmin'], function() {
@@ -222,6 +224,9 @@ Route::post('logout-customer','checkoutController@logout_customer')->name('logou
 Route::post('save-shipping','checkoutController@save_shipping')->name('save_shipping');
 Route::get('Success_payment','checkoutController@checkout_success_atm')->name('thanh_cong_atm');
 Route::get('Success_payment_cash','checkoutController@checkout_success_cash')->name('thanh_cong_cash');
+Route::post('lay-lai-mat-khau','checkoutController@recover_password')->name('recover_password');	
+Route::get('update-new-pass','checkoutController@update_new_pass')->name('update_new_pass');
+Route::post('update-pass','checkoutController@update_pass')->name('update_pass');
 
 //lịch sử đơn hàng
 Route::get('history','orderController@history')->name('order_history');

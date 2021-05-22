@@ -257,8 +257,16 @@
 			});
 		</script>
 	@endif
+	@if (session('thongbao_quenmatkhau'))
+		<script type="text/javascript">
+			$(document).ready(function() {
+					$('#quenModal').modal('show');
+			});
+		</script>
+	@endif
 	@include('website.checkout.sign_up_modal')
 	@include('website.checkout.login_modal')
+	@include('website.checkout.quenmk_modal')
 	@yield('script')
 </body>
 

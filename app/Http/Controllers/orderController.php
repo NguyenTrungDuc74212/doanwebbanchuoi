@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Coupon;
+<<<<<<< HEAD
 use App\Models\WarehouseOrder;
+=======
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 use Session;
 use DB;
 
@@ -134,6 +137,7 @@ class orderController extends Controller
            return view('website.history.view_history_order',compact('order','coupon','amountArray')); 
         }
     }
+<<<<<<< HEAD
     public function cancelOrder(Request $req)
     {
         DB::beginTransaction();
@@ -173,4 +177,6 @@ class orderController extends Controller
         throw new Exception($ex->getMessage());
     }
     }
+=======
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 }

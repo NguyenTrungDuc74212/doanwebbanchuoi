@@ -57,9 +57,15 @@
 						<td>{{ $value->coupon_date_end }}</td>
 						<td>
 							@if ($value->coupon_status==1)
+<<<<<<< HEAD
 							<span class="text-success">Đang kích hoạt</span>
 							@else
 							<span class="text-danger">Đã khóa</span>
+=======
+							<a href="{{ route('khoa_coupon',$value->id) }}"><span class="text-success">Đang kích hoạt</span></a>
+							@else
+							<a href="{{ route('kichhoat_coupon',$value->id) }}"><span class="text-danger">Đã khóa</span></a>
+>>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 							@endif
 						</td>
 						<td>

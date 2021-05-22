@@ -68,7 +68,7 @@
     </div>
     @if (!Session::get('id_customer'))
       <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Bạn đã có tài khoản? <a data-href="" class="text-info dangnhap_customer"> Đăng nhập</a>.</div>
+        <div class="signup-section">Bạn đã có tài khoản? <a data-href="" class="text-info dangnhap_customer" style="cursor: pointer;"> Đăng nhập</a>.</div>
       </div>
     @endif
   </div>

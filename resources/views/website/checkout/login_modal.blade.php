@@ -44,6 +44,7 @@
       <div class="modal-footer d-flex justify-content-center">
         <div class="signup-section">Bạn chưa có tài khoản? <a data-href="" class="text-info dangky_customer" style="cursor: pointer;"> Đăng ký</a>.</div>
       </div>
+      <div class="signup-section text-center" style="margin:-15px 0px 17px 0px;">Bạn quên mật khẩu? <a data-href="" class="text-info quenmk_customer" style="cursor: pointer;">Lấy lại mật khẩu</a>.</div>
   </div>
 </div>
 </div>
