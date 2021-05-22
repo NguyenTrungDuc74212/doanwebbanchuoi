@@ -76,4 +76,13 @@
 	</div>
 	<!-- /.card-body -->
 </div>
+@section('script')
+<script>
+	CKEDITOR.replace( 'ck', {
+		filebrowserBrowseUrl: '{{ route('ckfinder_browser') }}',
+
+	} );
+	</script>	
+@endsection
+@include('ckfinder::setup')
 @stop

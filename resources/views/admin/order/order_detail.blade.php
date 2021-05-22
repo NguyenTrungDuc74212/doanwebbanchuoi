@@ -90,24 +90,44 @@
 	  <th>Số lượng</th>
 	  <th>Giảm giá</th>
 	  <th>Thành tiền</th>
+	  <th colspan="2">Lấy hàng (Kho|Sản phẩm)</th>
 	</tr>
 
 	@foreach ($order->orderDetails as $item)
 	<tr>
-		<td>SP{{$item->product->id}}</td>
-		<td>{{$item->product->name}}</td>
-		<td>{{currency_format($item->product->price)}}</td>
-		<td>{{$item->soluong}}</td>
-		<td>{{$item->coupon}}%</td>
-		<td>{{currency_format(($item->product->price)*($item->soluong)*((100-$item->coupon)/100))}}</td>
-	  </tr>
+		<td rowspan="{{count($item->warehouse_order)+1}}">SP{{$item->product->id}}</td>
+		<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->product->name}}</td>
+		<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format($item->product->price)}}</td>
+		<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->soluong}}</td>
+		<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->coupon}}%</td>
+		<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format(($item->product->price)*($item->soluong)*((100-$item->coupon)/100))}}</td>
+
+		@foreach ($item->warehouse_order as $value)
+		<tr>
+				<td>{{$value->warehouse_product->warehouse->warehouse_name}}</td>
+				<td>{{$value->quantity}}</td>
+			</tr>
+		@endforeach
+
+		@if(count($item->warehouse_order)==0)
+			<td>Đã hủy đơn</td>
+		@endif
+	</tr>
 	@endforeach
 
   </table>
 			</div>
         </div>
-		<form>
-			@csrf
+		@if($order->cancel_order!='')
+		<div class="">
+			<div class="float-left mt-3 ml-2">
+			<h4 class="text-danger">Đơn hàng đã bị hủy do khách hàng</h4>
+			<p>Lý do:</p>
+			<p>{{$order->cancel_order}}</p>
+		</div>
+	</div>
+		@endif
+	
 			<div class="card-footer">
 				<div class="float-right">
 				<p><b class="text-primary">Tổng số lượng sản phẩm: </b>{{$amountArray['tongSanPham']}}</p>
@@ -116,7 +136,6 @@
 				<p><b class="text-danger">Tổng tiền thanh toán: </b>{{currency_format($amountArray['tongTienThanhToan'])}}</p>
 			</div>
 			</div>
-		</form>
 	</div>
 	<!-- /.card-body -->
 </div>
@@ -143,6 +162,10 @@
 	  background-color: #bf8e34;
 	  color: white;
 	}
+	table, th, td {
+  border: 1px solid black !important;
+  border-collapse: collapse !important;
+}
 	</style>
 	{{-- thay đổi trạng thái của đơn hàng --}}
 @stop

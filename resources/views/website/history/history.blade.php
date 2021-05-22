@@ -10,6 +10,16 @@
 		<p class="text-success">{{ session('thongbao') }}</p>
 		@endif
 	</div>
+	@if(session('thongbao_loi'))
+	<div class="alert alert-danger">
+		<h3 class="text-center">{{session('thongbao_loi')}}</h3>
+	</div>
+	@endif
+	@if(session('thongbao'))
+	<div class="alert alert-danger">
+		<h3 class="text-center">{{session('thanhcong')}}</h3>
+	</div>
+	@endif
 	<div class="card-body table-responsive p-0">
 		<table class="table table-hover text-center" id="">
 			<thead  class="text-nowrap">

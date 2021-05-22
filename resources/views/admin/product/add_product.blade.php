@@ -62,12 +62,12 @@
 			@error('price')
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
-			<br>
+			{{-- <br>
 			<label for="">Số lượng</label>
 			<input type="number" name="quantity" class="form-control" value="{{ old('quantity') }}" min="0">
 			@error('quantity')
 			<p class="text-danger">{{ $message }}</p>
-			@enderror
+			@enderror --}}
 			<br>
 			<label for="">Nội dung</label>
 			<textarea class="form-control" id="ck_1" name="content">{{ old('content') }}</textarea>
@@ -98,4 +98,13 @@
 	</div>
 	<!-- /.card-body -->
 </div>
+@section('script')
+<script>
+	CKEDITOR.replace( 'ck', {
+		filebrowserBrowseUrl: '{{ route('ckfinder_browser') }}',
+
+	} );
+	</script>	
+@endsection
+@include('ckfinder::setup')
 @stop

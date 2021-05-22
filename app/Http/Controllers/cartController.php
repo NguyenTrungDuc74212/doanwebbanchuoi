@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\CategoryProduct;
 use App\Models\Coupon;
-<<<<<<< HEAD
-=======
 use Carbon\Carbon;
->>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 use Session;
 
 class cartController extends Controller
@@ -124,12 +121,8 @@ class cartController extends Controller
 	}
 	public function check_coupon(Request $req)
 	{
-<<<<<<< HEAD
-		$coupon = Coupon::where('code',$req->code)->first();
-=======
 		$today = Carbon::now()->format('Y-m-d');
 		$coupon = Coupon::where('code',$req->code)->where('coupon_status',1)->where('coupon_date_end','>=',$today)->first();
->>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 		if ($coupon) {
 			if ($coupon->quanlity>0) {
 				$coupon_ss = Session::get('coupon_ss');
@@ -160,11 +153,7 @@ class cartController extends Controller
 		}
 		else {
 			$req->session()->forget('coupon_ss');
-<<<<<<< HEAD
-			return redirect()->back()->with('error','Mã giảm giá không tồn tại');
-=======
 			return redirect()->back()->with('error','Mã giảm giá không tồn tại hoặc đã hết hạn');
->>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
 		}
 	}
 }

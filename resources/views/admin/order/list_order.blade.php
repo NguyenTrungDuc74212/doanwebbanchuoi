@@ -71,17 +71,17 @@
 						@endif
 						<td>{{ $value->order_date }}</td>
 						@if($value->status==1)
-						<td>Chờ xác nhận</td>
+						<td class="text-warning">Chờ xác nhận</td>
 						@elseif($value->status==2)
 						<td>Chờ lấy hàng</td>
 						@elseif($value->status==3)
 						<td>Đang giao</td>
 						@elseif($value->status==4)
-						<td>Đã giao</td>
+						<td class="text-success">Đã giao</td>
 						@elseif($value->status==5)
-						<td>Đã hủy</td>
+						<td class="text-danger">Đã hủy</td>
 						@elseif($value->status==6)
-						<td>Trả hàng</td>
+						<td class="text-danger">Trả hàng</td>
 						@endif
 						<td>{{currency_format($value->total)}}</td>
 						<td  class="text-nowrap">
