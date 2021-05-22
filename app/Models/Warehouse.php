@@ -12,4 +12,7 @@ class Warehouse extends Model
     public function product(){
     	return $this->belongsToMany(Product::class,'tbl_warehouse_product','warehouse_id','product_id');
     }
+    public function warehouseProduct(){
+    	return $this->hasMany(WarehouseProduct::class,'warehouse_id','id');
+    }
 }

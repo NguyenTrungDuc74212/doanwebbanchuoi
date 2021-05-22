@@ -135,7 +135,7 @@ class orderController extends Controller
     }
     public function cancelOrder(Request $req)
     {
-        $order=Order::find($id);
+        $order=Order::find($req->id_order);
         if($order->status!=1)
         {
             return redirect()->route('order_history')->with('thongbao_loi','Đơn hàng đã xử lý không thể hủy!');
@@ -143,6 +143,14 @@ class orderController extends Controller
         if($order->status_pay!=0)
         {
             return redirect()->route('order_history')->with('thongbao_loi','Đơn hàng đã thanh toán!');
+        }
+        $order->status=5;
+        $order->cancel_order=$req->cancle_notes;
+        $order->save();
+        foreach($order->orderDetails as $orderDetail)
+        {
+            $orderDetail->product->quantity=$orderDetail->soluong+$orderDetail->product->quantity;
+            $orderDetail->product->save();
         }
     }
 }

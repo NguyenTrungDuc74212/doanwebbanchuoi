@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\Tinhthanhpho;
+use App\Models\Warehouse;
+use App\Models\WarehouseOrder;
+use App\Models\WarehouseProduct;
 use App\Models\Customer;
 use App\Models\Shipping;
 use App\Models\Order;
@@ -134,6 +137,31 @@ class checkoutController extends Controller
 						$order_detail->coupon = $product->persent_discount;
 					}
 					$order_detail->save();
+						$product =$order_detail->product;
+						$product->quantity = $product->quantity-$value['product_qty'];
+						$product->save();
+						// lấy sản phẩm ra từ trong kho
+						do{
+						$warehouseProduct=WarehouseProduct::where('product_id',$product->id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
+						$warehouse=$warehouseProduct->warehouse;
+						$warehouseOrder=new WarehouseOrder();
+						$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
+						$warehouseOrder->order_detail_id=$order_detail->id;
+						if($warehouseProduct->quantity>=$value['product_qty']){
+							$warehouseOrder->quantity=$value['product_qty'];
+							$warehouseProduct->quantity=$warehouseProduct->quantity-$value['product_qty'];
+							$warehouse->quantity_now=$warehouse->quantity_now-$value['product_qty'];
+							$value['product_qty']=0;
+						}else{
+							$warehouseOrder->quantity=$warehouseProduct->quantity;
+							$warehouse->quantity_now=$warehouse->quantity_now-$warehouseProduct->quantity;
+							$value['product_qty']=$value['product_qty']-$warehouseProduct->quantity;
+							$warehouseProduct->quantity=0;
+						}
+						$warehouseOrder->save();
+						$warehouseProduct->save();
+						$warehouse->save();
+						}while($value['product_qty']>0);
 				}
 				if ($req->input('method')==1) {
 					return redirect()->route('thanh_cong_atm');
@@ -291,13 +319,20 @@ class checkoutController extends Controller
 	public function checkout_success_atm(Request $req)
 	{
 		$cart = Session::get('cart');
-		if ($cart) {
-			foreach ($cart as $key => $value) {
-			$product = Product::find($value['product_id']);
-			$product->quantity = $product->quantity-$value['product_qty'];
-			$product->save();
-		}
-		}
+		// if ($cart) {
+		// 	foreach ($cart as $key => $value) {
+		// 	$product = Product::find($value['product_id']);
+		// 	$product->quantity = $product->quantity-$value['product_qty'];
+		// 	$product->save();
+		// 	do{
+		// 	$warehouseProduct=WarehouseProduct::orderByAsc('created_at')->first();
+		// 	$product->quantity = $product->quantity-$value['product_qty'];
+		// 	$warehouseOrder=new WarehouseOrder();
+		// 	$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
+		// 	$warehouseOrder->order
+		// 	}while($value['product_qty']>0)
+		// }
+		// }
 
 		$req->session()->forget('cart');
 		$req->session()->forget('total');
@@ -325,13 +360,14 @@ class checkoutController extends Controller
 	public function checkout_success_cash(Request $req)
 	{
 		$cart = Session::get('cart');
-		if ($cart) {
-			foreach ($cart as $key => $value) {
-			$product = Product::find($value['product_id']);
-			$product->quantity = $product->quantity-$value['product_qty'];
-			$product->save();
-		}
-		}
+		// if ($cart) {
+		// 	foreach ($cart as $key => $value) {
+		// 	$product = Product::find($value['product_id']);
+		// 	$product->quantity = $product->quantity-$value['product_qty'];
+		// 	$product->save();
+
+		// }
+		// }
 
 		$req->session()->forget('cart');
 		$req->session()->forget('total');

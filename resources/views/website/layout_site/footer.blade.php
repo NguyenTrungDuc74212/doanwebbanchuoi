@@ -259,6 +259,7 @@
 	@endif
 	@include('website.checkout.sign_up_modal')
 	@include('website.checkout.login_modal')
+	@yield('script')
 </body>
 
 </html>

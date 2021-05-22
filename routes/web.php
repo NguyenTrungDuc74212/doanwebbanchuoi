@@ -226,5 +226,5 @@ Route::get('Success_payment_cash','checkoutController@checkout_success_cash')->n
 //lịch sử đơn hàng
 Route::get('history','orderController@history')->name('order_history');
 Route::get('view-history-order/{id}','orderController@view_history_order')->name('view_history_order');
-Route::get('cancel-order','orderController@cancelOrder')->name('cancel_order');
+Route::post('cancel-order','orderController@cancelOrder')->name('cancel_order');
 /* end website*/

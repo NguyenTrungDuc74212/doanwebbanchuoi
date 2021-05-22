@@ -17,4 +17,8 @@ class Order_detail extends Model
     {
         return $this->belongsTo(Order::class,'order_id','id');
     }
+    public function warehouse_order()
+    {
+        return $this->belongsTo(WarehouseOrder::class,'order_detail_id','id');
+    }
 }

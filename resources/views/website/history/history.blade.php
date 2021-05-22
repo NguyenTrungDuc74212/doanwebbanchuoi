@@ -44,7 +44,7 @@
 					<td>{{currency_format($value->total)}}</td>
 					<td  class="text-nowrap">
 						<a href="{{ route('view_history_order',$value->id) }}" class="btn btn-success">Xem đơn hàng</a>
-						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+						<button value="{{$value->id}}" onclick=click_cancel_order($(this).val()) type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" @if($value->status!=1&&$value->status!=2||$value->status_pay!=0) disabled @endif>
 							Hủy
 						  </button>
 					</td>
