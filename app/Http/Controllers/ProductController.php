@@ -9,6 +9,7 @@ use App\Http\Requests\addProductRequest;
 use App\Http\Requests\editProductRequest;
 use Str;
 use Gate;
+use DB;
 
 class ProductController extends Controller
 {
@@ -42,7 +43,8 @@ class ProductController extends Controller
 		$product->meta_title = $req->input('meta_title');
 		$product->product_sold=0;
 		$product->slug=convert_vi_to_en($product->name);
-		$product->persent_discount=0;
+		$product->persent_discount=$req->persent_discount;
+		$product->unit=$req->unit;
 		event(new \App\Events\CategoryProductCreated($product));
 		$product->save();
 		DB::commit();
@@ -50,8 +52,7 @@ class ProductController extends Controller
 		}catch(Exception $ex)
 		{
 			DB::rollback();
-			throw new Exception("Lỗi", $ex);
-			
+			throw new Exception($ex->getMessage());
 		}
 
 	}
@@ -96,9 +97,11 @@ class ProductController extends Controller
 		$product->meta_keywords = $req->input('meta_keywords');
 		$product->meta_title = $req->input('meta_title');
 		$product->slug=convert_vi_to_en($product->name);
+		$product->persent_discount=$req->persent_discount;
+		$product->unit=$req->unit;
 		event(new \App\Events\CategoryProductCreated($product));
 		$product->save();
-		return redirect()->route('search-product')->with('thongbao','lưu sản phẩm thành công');
+		return redirect()->route('list_product')->with('thongbao','lưu sản phẩm thành công');
 	}
 	public function delete_product($id)
 	{
