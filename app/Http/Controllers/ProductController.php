@@ -9,6 +9,7 @@ use App\Http\Requests\addProductRequest;
 use App\Http\Requests\editProductRequest;
 use Str;
 use Gate;
+use DB;
 
 class ProductController extends Controller
 {
