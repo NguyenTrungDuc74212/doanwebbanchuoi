@@ -32,7 +32,7 @@
           
           <div class="text-center text-muted delimiter">Đăng nhập bằng ứng dụng khác</div>
           <div class="social-buttons">
-            <a href="">
+            <a href="{{ route('login_customer_google') }}">
               <img width="10%" alt="Đăng nhập tài khoản google" src="{{ asset('public/public_site/image/gg.png') }}">
             </a>
             <a href="">
