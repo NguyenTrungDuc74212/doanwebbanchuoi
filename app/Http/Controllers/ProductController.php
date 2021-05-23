@@ -19,7 +19,7 @@ class ProductController extends Controller
 		$vendor = Vendors::all();
 		return view('admin.product.add_product',compact('category_product','vendor'));
 	}
-	public function add_product(Request $req)
+	public function add_product(addProductRequest $req)
 	{
 		DB::beginTransaction();
 		try{
@@ -43,16 +43,16 @@ class ProductController extends Controller
 		$product->meta_title = $req->input('meta_title');
 		$product->product_sold=0;
 		$product->slug=convert_vi_to_en($product->name);
-		$product->persent_discount=0;
-		//event(new \App\Events\CategoryProductCreated($product));
+		$product->persent_discount=$req->persent_discount;
+		$product->unit=$req->unit;
+		event(new \App\Events\CategoryProductCreated($product));
 		$product->save();
 		DB::commit();
 		return redirect()->route('list_product')->with('thongbao','Thêm sản phẩm thành công');
 		}catch(Exception $ex)
 		{
 			DB::rollback();
-			throw new Exception("Lỗi", $ex);
-			
+			throw new Exception($ex->getMessage());
 		}
 
 	}
@@ -97,9 +97,11 @@ class ProductController extends Controller
 		$product->meta_keywords = $req->input('meta_keywords');
 		$product->meta_title = $req->input('meta_title');
 		$product->slug=convert_vi_to_en($product->name);
-		//event(new \App\Events\CategoryProductCreated($product));
+		$product->persent_discount=$req->persent_discount;
+		$product->unit=$req->unit;
+		event(new \App\Events\CategoryProductCreated($product));
 		$product->save();
-		return redirect()->route('search-product')->with('thongbao','lưu sản phẩm thành công');
+		return redirect()->route('list_product')->with('thongbao','lưu sản phẩm thành công');
 	}
 	public function delete_product($id)
 	{

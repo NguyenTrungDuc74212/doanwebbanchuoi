@@ -15,7 +15,7 @@ class orderController extends Controller
     {
         $status=-1;
         $status_pay=-1;
-        $orders=Order::orderBy('order_date', 'DESC')->paginate(10);
+        $orders=Order::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.order.list_order',compact('orders','status','status_pay'));
     }
     public function getByStatus($status,$status_pay)
@@ -148,7 +148,9 @@ class orderController extends Controller
             return redirect()->route('order_history')->with('thongbao_loi','Đơn hàng đã thanh toán!');
         }
         $order->status=5;
+        if($order->cancel_order){
         $order->cancel_order=$req->cancle_notes;
+        }
         $order->save();
         foreach($order->orderDetails as $orderDetail)
         {

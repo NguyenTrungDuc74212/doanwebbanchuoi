@@ -58,12 +58,19 @@
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
 			<br>
-			<label for="">Giá phản phẩm</label>
+			<label for="">Giá sản phẩm</label>
 			<input type="text" name="price" placeholder="Nhập giá sản phẩm" class="form-control" value="{{ old('price',$product->price) }}">
 			@error('price')
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
 			<br>
+			<label for="">Đơn vị tính</label>
+			<input type="text" name="unit" placeholder="Nhập đơn vị tính" value="{{ $product->unit }}" class="form-control">
+			@error('unit')
+			<p class="text-danger">{{ $message }}</p>
+			@enderror
+			<label for="">Giảm giá (%)</label>
+			<input type="number" min="0" max="100" name="persent_discount" value="{{ $product->persent_discount }}" placeholder="Nhập phần trăm giảm giá" class="form-control">
 			<label for="">Mô tả sản phẩm</label>
 			<textarea class="form-control" id="ck" name="desc">{{ old('desc',$product->desc) }}</textarea>
 			@error('desc')

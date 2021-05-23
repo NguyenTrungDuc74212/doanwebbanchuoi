@@ -1350,7 +1350,29 @@
                         buttons: ['không', 'ok'],
                     }).then((ok) => {
                         if (ok) {
+                            if(status==5)
+                            {
                             $.ajax({
+                                url: '{{ route('cancel_order') }}',
+                                type: 'POST',
+                                data: {
+                                    _token: token,
+                                    id_order: order_id,
+                                    cancle_notes:''
+                                },
+                                success: function(
+                                    data) /*dữ liệu(data) trả về bên function*/ {
+                                        swal({
+                                            title: 'Thay đổi trạng thái thành công!!!',
+                                            icon: "success",
+                                            button: "quay lại",
+                                        }).then((ok) => {
+                                            window.location.reload();
+                                        });
+                                    }
+                            });
+                            }else{
+                                $.ajax({
                                 url: '{{ route('change_status_order') }}',
                                 type: 'POST',
                                 data: {
@@ -1369,9 +1391,11 @@
                                         });
                                     }
                             });
-                        } else {
-                            window.location.reload();
-                        }
+                            }
+                        } 
+                        // else {
+                        //    // window.location.reload();
+                        // }
                     });
                 }
             });
@@ -1407,9 +1431,10 @@
                                         });
                                     }
                             });
-                        } else {
-                            window.location.reload();
                         }
+                        //  else {
+                        //     window.location.reload();
+                        // }
                     });
                 }
             });

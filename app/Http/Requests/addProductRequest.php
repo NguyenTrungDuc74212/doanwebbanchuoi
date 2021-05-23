@@ -26,7 +26,6 @@ class addProductRequest extends FormRequest
         return [
             'image' => 'required|mimes:pdf,xlx,csv|max:2048',
             'name'=>'required',
-            'quantity'=>'required',
             'content'=>'required',
             'category_product_id'=>'required',
             'vendor_id'=>'required',
@@ -35,6 +34,7 @@ class addProductRequest extends FormRequest
             'image'=>'required',
             "meta_title"=>"required",
             "meta_keywords"=>"required",
+            'unit'=>'required',
         ];
     }
     public function messages()
@@ -42,14 +42,14 @@ class addProductRequest extends FormRequest
         return[
            'name.required'=>'Tên sản phẩm không được bỏ trống',
            'desc.required'=>'Mô tả không được bỏ trống',
-           'quantity.required'=>'số lượng không được bỏ trống',
            'content.required'=>'Nội dung không được bỏ trống',
            'category_product_id.required'=>'danh mục không được bỏ trống',
            'vendor_id.required'=>'nhà cung cấp không được bỏ trống',
            'price.required'=>'Giá sản phẩm không được bỏ trống',
            'image.required'=>'hình ảnh không được bỏ trống',
             "meta_title.required"=>"thẻ meta sản phẩm không được bỏ trống",
-            "meta_keywords.required"=>"thẻ meta sản phẩm không được bỏ trống",     
+            "meta_keywords.required"=>"thẻ meta sản phẩm không được bỏ trống", 
+           'unit.required'=>'Đơn vị tính không được bỏ trống' , 
        ];
    }
 }

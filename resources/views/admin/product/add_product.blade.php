@@ -57,11 +57,18 @@
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
 			<br>
-			<label for="">Giá phản phẩm</label>
+			<label for="">Giá sản phẩm</label>
 			<input type="text" name="price" placeholder="Nhập giá sản phẩm" class="form-control" value="{{ old('price') }}">
 			@error('price')
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
+			<label for="">Đơn vị tính</label>
+			<input type="text" name="unit" placeholder="Nhập đơn vị tính" class="form-control">
+			@error('unit')
+			<p class="text-danger">{{ $message }}</p>
+			@enderror
+			<label for="">Giảm giá (%)</label>
+			<input type="number" min="0" max="100" name="persent_discount" value="0" placeholder="Nhập phần trăm giảm giá" class="form-control">
 			{{-- <br>
 			<label for="">Số lượng</label>
 			<input type="number" name="quantity" class="form-control" value="{{ old('quantity') }}" min="0">

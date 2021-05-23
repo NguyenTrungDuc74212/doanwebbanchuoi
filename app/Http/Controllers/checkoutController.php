@@ -72,7 +72,7 @@ class checkoutController extends Controller
 	{
 		$req->session()->forget('name_customer');
 		$req->session()->forget('id_customer');
-		Session::flush();
+		//Session::flush();
 		return redirect()->route('get_home_page');
 	}
 	public function save_shipping(Request $req)
