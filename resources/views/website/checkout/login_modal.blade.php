@@ -23,9 +23,9 @@
         <div class="d-flex flex-column text-center">
           <form action="{{ route('login_customer') }}" method="POST">
            @csrf
-            <input type="email" class="form-control" placeholder="Email" name="email" />
+            <input type="email" class="form-control" placeholder="Email" name="email" required/>
             <br>
-            <input type="password" class="form-control" placeholder="password" name="password" />
+            <input type="password" required class="form-control" placeholder="password" name="password" />
             <br>
             <button type="submit" class="btn btn-block btn-round check_sign_up" style="background-color:#269300!important;color: white;">Đăng nhập</button>
           </form>

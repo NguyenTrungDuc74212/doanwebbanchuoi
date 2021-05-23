@@ -39,6 +39,11 @@ class checkoutController extends Controller
 		// 	"g-recaptcha-response" => new captcha_rule()
 
 		// ]);
+		$validatedData = $req->validate([
+			"password"=>"required"
+		],
+		["password.required"=>"password không được để trống"]
+	);
 		$customer = new Customer;
 		$email = $req->input('email');
 		$password = $req->input('password');
@@ -75,7 +80,7 @@ class checkoutController extends Controller
 		//Session::flush();
 		return redirect()->route('get_home_page');
 	}
-	public function save_shipping(Request $req)
+	public function save_shipping(shippingRequest $req)
 	{
 		$validatedData = $req->validate([
 			"method"=>"required",
@@ -139,11 +144,11 @@ class checkoutController extends Controller
 						$order_detail->coupon = $product->persent_discount;
 					}
 					$order_detail->save();
-						$product =$order_detail->product;
-						$product->quantity = $product->quantity-$value['product_qty'];
-						$product->save();
+					$product =$order_detail->product;
+					$product->quantity = $product->quantity-$value['product_qty'];
+					$product->save();
 						// lấy sản phẩm ra từ trong kho
-						do{
+					do{
 						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
 						$warehouse=$warehouseProduct->warehouse;
 						$warehouseOrder=new WarehouseOrder();
@@ -163,7 +168,7 @@ class checkoutController extends Controller
 						$warehouseOrder->save();
 						$warehouseProduct->save();
 						$warehouse->save();
-						}while($value['product_qty']>0);
+					}while($value['product_qty']>0);
 				}
 				if ($req->input('method')==1) {
 					return redirect()->route('thanh_cong_atm');
@@ -243,75 +248,75 @@ class checkoutController extends Controller
 			}
 		}
 		else{
-					$validatedData = $req->validate([
-					"email_2"=>"required|Email",
-					"name_2"=>"required",
-					"phone_2"=>"required|numeric",
-					"address_2"=>"required",
-					"method"=>"required",
-					"notes"=>"required",
-					"city"=>"required",
-				],
-				["email_2.required"=>"email không được để trống",
-				"notes.required"=>"ghi chú không được bỏ trống",
-				"email_2.Email"=>"email không hợp lệ",
-				"name_2.required"=>"tên không được để trống",
-				"phone_2.required"=>"số điện thoại không được để trống",
-				"phone_2.numeric"=>"số điện thoại phải là số",
-				"address_2.required"=>"địa chỉ không được để trống",
-				"method.required"=>"hình thức thanh toán không được bỏ trống",
-				"city.required"=>"Bạn phải nhập thành phố của mình hiện đang sống"]
-			);
-				$shipping = new Shipping;
-				$shipping->name = $req->input('name_2');
-				$shipping->email = $req->input('email_2');
-				$shipping->city = $req->input('city');
+			$validatedData = $req->validate([
+				"email_2"=>"required|Email",
+				"name_2"=>"required",
+				"phone_2"=>"required|numeric",
+				"address_2"=>"required",
+				"method"=>"required",
+				"notes"=>"required",
+				"city"=>"required",
+			],
+			["email_2.required"=>"email không được để trống",
+			"notes.required"=>"ghi chú không được bỏ trống",
+			"email_2.Email"=>"email không hợp lệ",
+			"name_2.required"=>"tên không được để trống",
+			"phone_2.required"=>"số điện thoại không được để trống",
+			"phone_2.numeric"=>"số điện thoại phải là số",
+			"address_2.required"=>"địa chỉ không được để trống",
+			"method.required"=>"hình thức thanh toán không được bỏ trống",
+			"city.required"=>"Bạn phải nhập thành phố của mình hiện đang sống"]
+		);
+			$shipping = new Shipping;
+			$shipping->name = $req->input('name_2');
+			$shipping->email = $req->input('email_2');
+			$shipping->city = $req->input('city');
 				// $shipping->customer_id = Session::get('id_customer');
-				$shipping->address = $req->input('address_2');
-				$shipping->phone = $req->input('phone_2');
-				$shipping->notes = $req->input('notes');
-				$shipping->method = $req->input('method');
-				$shipping->status = 1; /*mặc định là đang xử lý*/
-				$shipping->save();
-				$shipping_id = $shipping->id;
-				Session::put('id_shipping',$shipping_id);
-				$cart = Session::get('cart');
-				foreach ($cart as $value) {
-					$soluong += $value['product_qty'];
-				}
-				$order = new Order;
+			$shipping->address = $req->input('address_2');
+			$shipping->phone = $req->input('phone_2');
+			$shipping->notes = $req->input('notes');
+			$shipping->method = $req->input('method');
+			$shipping->status = 1; /*mặc định là đang xử lý*/
+			$shipping->save();
+			$shipping_id = $shipping->id;
+			Session::put('id_shipping',$shipping_id);
+			$cart = Session::get('cart');
+			foreach ($cart as $value) {
+				$soluong += $value['product_qty'];
+			}
+			$order = new Order;
 				// $order->customer_id = Session::get('id_customer');
-				$order->shipping_id = $shipping_id;
-				$order->total = Session::get('total');
-				$order->status =1 ;/*mặc định là đang xử lý*/
-				$order->order_code = $code_random;
-				$order->quantity = $soluong;
-				$order->order_date = $mytime->toDateString();
-				if ($coupon) {
-					$order->coupon = $coupon[0]['coupon_code'];
-				}
-				$order->save();
-				$order_id = $order->id;
+			$order->shipping_id = $shipping_id;
+			$order->total = Session::get('total');
+			$order->status =1 ;/*mặc định là đang xử lý*/
+			$order->order_code = $code_random;
+			$order->quantity = $soluong;
+			$order->order_date = $mytime->toDateString();
+			if ($coupon) {
+				$order->coupon = $coupon[0]['coupon_code'];
+			}
+			$order->save();
+			$order_id = $order->id;
 
-				foreach ($cart as $value) {
-					$product = Product::find($value['product_id']);
-					$order_detail = new Order_detail;
-					$order_detail->order_id = $order_id;
-					$order_detail->order_code = $code_random;
-					$order_detail->product_id = $value['product_id'];
-					$order_detail->unit = $value['product_unit'];
-					if ($product->persent_discount) {
-						$order_detail->coupon = $product->persent_discount;
-					}
-					$order_detail->soluong = $value['product_qty'];
-					$order_detail->save();
+			foreach ($cart as $value) {
+				$product = Product::find($value['product_id']);
+				$order_detail = new Order_detail;
+				$order_detail->order_id = $order_id;
+				$order_detail->order_code = $code_random;
+				$order_detail->product_id = $value['product_id'];
+				$order_detail->unit = $value['product_unit'];
+				if ($product->persent_discount) {
+					$order_detail->coupon = $product->persent_discount;
 				}
-				if ($req->input('method')==1) {
-					return redirect()->route('thanh_cong_atm');
-				}
-				elseif($req->input('method')==2) {
-					return redirect()->route('thanh_cong_cash');
-				}
+				$order_detail->soluong = $value['product_qty'];
+				$order_detail->save();
+			}
+			if ($req->input('method')==1) {
+				return redirect()->route('thanh_cong_atm');
+			}
+			elseif($req->input('method')==2) {
+				return redirect()->route('thanh_cong_cash');
+			}
 			
 		}
 		
@@ -404,8 +409,8 @@ class checkoutController extends Controller
 			$link_reset_pass = asset('/update-new-pass?token='.$token_random);
 			$data = array("name"=>$title_mail,'body'=>$link_reset_pass,'email'=>$to_email);
 			Mail::send('website.checkout.forget_pass_notify',['data'=>$data],function($message) use ($title_mail,$data){
-                 $message->to($data['email'])->subject($title_mail);
-                 $message->from($data['email'],$title_mail);
+				$message->to($data['email'])->subject($title_mail);
+				$message->from($data['email'],$title_mail);
 			});
 			return redirect()->back()->with('thongbao_quenmatkhau','Gửi mail thành công, vui lòng check mail để thay đổi password!!!');
 		}
@@ -442,16 +447,13 @@ class checkoutController extends Controller
 	}
 	public function login_customer_google()
 	{
-        config(['services.google.redirect'=>env('GOOGLE_CLIENT_URL')]);
+		config(['services.google.redirect'=>env('GOOGLE_CLIENT_URL')]);
 		return Socialite::driver('google')->redirect();
 	}
 	public function callback_customer_google(){	
 		config(['services.google.redirect'=>env('GOOGLE_CLIENT_URL')]); 
 		$users = Socialite::driver('google')->stateless()->user();
 		$customer =  Customer::where('email',$users->email)->first();
-		if (!$customer) {
-			return redirect()->route('get_home_page')->with('thongbao_login','Gmail chưa được đăng ký!!!');
-		}
 		$authUser = $this->findOrCreateCustomer($users,'google');
 		if ($authUser) {
 			$account_name = Customer::where('id',$authUser->user)->first();
@@ -466,22 +468,22 @@ class checkoutController extends Controller
 		if (Session::get('cart')) {
 			return redirect()->route('get_cart')->with('thongbao_login_thatbai', 'Đăng nhập thành công');
 		}
-		return redirect()->route('get_home_page');
+		return redirect()->route('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập thành công');
 	}
 	public function login_facebook(){
-        return Socialite::driver('facebook')->redirect();
-    }
+		return Socialite::driver('facebook')->redirect();
+	}
 
-    public function callback_facebook(){
-        $provider = Socialite::driver('facebook')->stateless()->user();
-        $account = Soical::where('provider','facebook')->where('provider_user_id',$provider->getId())->first();
-        if($account){ 
-            $account_name = Customer::where('id',$account->user)->first();
-            Session::put('name_customer',$account_name->name);
-            Session::put('id_customer',$account_name->id);
-            return redirect('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập Admin thành công');
-        }else{
-        	$customer_new = new Soical([
+	public function callback_facebook(){
+		$provider = Socialite::driver('facebook')->stateless()->user();
+		$account = Soical::where('provider','facebook')->where('provider_user_id',$provider->getId())->first();
+		if($account){ 
+			$account_name = Customer::where('id',$account->user)->first();
+			Session::put('name_customer',$account_name->name);
+			Session::put('id_customer',$account_name->id);
+			return redirect('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập Admin thành công');
+		}else{
+			$customer_new = new Soical([
 				'provider_user_id'=>$provider->getId(),
 				'provider_user_email'=>$provider->getEmail(),
 				'provider'=>'facebook',
@@ -489,13 +491,23 @@ class checkoutController extends Controller
 
 			$customer = Customer::where('email',$provider->getEmail())->first();
 			if (!$customer) {
-				 return redirect()->route('get_home_page')->with('thongbao_login','Gmail chưa được đăng ký!!!');
+				$customer = Customer::create([
+					'name' => $provider->getName(),
+					'email' => $provider->getEmail(),
+					'password' => '',
+					'address' => '',
+					'phone'=>'',
+				]);
 			}
-			Session::put('name_customer',$customer->name);
-            Session::put('id_customer',$customer->id);
-            return redirect('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập Admin thành công');
-        } 
-    }
+			$customer_new->customer()->associate($customer);
+			$customer_new->save();
+
+			$account_new = Customer::where('id',$customer_new->user)->first();
+			Session::put('name_customer',$account_new->name);
+			Session::put('id_customer',$account_new->id);
+			return redirect()->route('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập Admin thành công');
+		} 
+	}
 	public function findOrCreateCustomer($users,$provider)
 	{
 		$authUser = Soical::where('provider_user_id', $users->id)->where('provider_user_email',$users->email)->first();

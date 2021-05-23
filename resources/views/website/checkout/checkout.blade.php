@@ -21,25 +21,37 @@
 								<label class="col-sm-3 col-form-label">Họ tên(<span class="text-danger">*</span>)</label>
 								<div class="col-sm-9">
 									<input type="text" class="form-control" name="name" value="{{ $customer->name }}" required="" readonly="true">
+									@error('name')
+									<p class="text-danger">{{ $message }}</p>
+									@enderror
 								</div>
 							</div>
 							<div class="form-gruop row mb-4">
 								<label class="col-sm-3 col-form-label">Email</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="email" value="{{ $customer->email }}" readonly="true">
+									<input type="text" class="form-control" name="email" value="{{ $customer->email }}" readonly="">
 								</div>
+								@error('email')
+								<p class="text-danger">{{ $message }}</p>
+								@enderror
 							</div>
 							<div class="form-gruop row mb-4">
 								<label class="col-sm-3 col-form-label">Phone(<span class="text-danger">*</span>)</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="phone" value="{{ $customer->phone }}" required="" readonly="true">
+									<input type="text" class="form-control" name="phone" value="{{ $customer->phone }}" {{ $customer->phone?'readonly="true"':'' }}>
+									@error('phone')
+									<p class="text-danger">{{ $message }}</p>
+									@enderror
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-gruop mb-4">
 								<div>
-									<textarea name="address" rows="5" class="w-100 p-3" placeholder="Địa chỉ của bạn (*)" readonly="true">{{ $customer->address }}</textarea>
+									<textarea name="address" rows="5" class="w-100 p-3" placeholder="Địa chỉ của bạn (*)" {{ $customer->address?'readonly="true"':'' }}>{{ $customer->address }}</textarea>
+									@error('address')
+									<p class="text-danger">{{ $message }}</p>
+									@enderror
 								</div>
 							</div>
 						</div>
