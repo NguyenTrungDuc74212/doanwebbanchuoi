@@ -28,6 +28,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <h5><b>Thông tin đơn hàng</b></h5>
+					<form action="">
+						@csrf
 					<p style="display:blog"><b>Ngày tạo:</b> {{$order->order_date}}</p>
 					<p><b>Trạng thái:</b></p>
 					<select class="form-control" id="status-order" @if($order->status==4||$order->status==5||$order->status==6) disabled @endif>
@@ -61,6 +63,7 @@
 					</select>
 					<br>
 				</div>
+			</form>
                 <div class="col-md-4">
                 <h5><b>Thông tin khách hàng</b></h5>
 				@if($order->customer!=null)
