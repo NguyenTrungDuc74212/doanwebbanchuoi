@@ -16,8 +16,8 @@
         <div class="form-title text-center">
           <h4 class="text-uppercase">Đăng ký</h4>
           <p class="desc">Cùng nhau hợp tác và phát triển</p>
-          @if (session('thongbao'))
-            <p class="text-success">{{ session('thongbao') }}</p>
+          @if (session('thongbao_login'))
+            <p class="text-success">{{ session('thongbao_login') }}</p>
           @endif
         </div>
         <div class="d-flex flex-column text-center">

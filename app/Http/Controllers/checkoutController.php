@@ -14,6 +14,8 @@ use App\Models\Shipping;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Order_detail;
+use App\Models\Soical;
+use Socialite; 
 use Carbon\carbon;
 use Session;
 use Illuminate\Support\Facades\Hash;
@@ -437,5 +439,60 @@ class checkoutController extends Controller
 			return redirect()->route('get_home_page')->with('thongbao_quenmatkhau','Vui lòng nhập lại email vì link quá hạn');
 		}
 
+	}
+	public function login_customer_google()
+	{
+        config(['services.google.redirect'=>env('GOOGLE_CLIENT_URL')]);
+		return Socialite::driver('google')->redirect();
+	}
+	public function callback_customer_google(){	
+		config(['services.google.redirect'=>env('GOOGLE_CLIENT_URL')]); 
+		$users = Socialite::driver('google')->stateless()->user();
+		$customer =  Customer::where('email',$users->email)->first();
+		if (!$customer) {
+			return redirect()->route('get_home_page')->with('thongbao_login','Gmail chưa được đăng ký!!!');
+		}
+		$authUser = $this->findOrCreateCustomer($users,'google');
+		if ($authUser) {
+			$account_name = Customer::where('id',$authUser->user)->first();
+			Session::put('name_customer',$account_name->name);
+			Session::put('id_customer',$account_name->id);
+		}elseif($customer_new)
+		{
+			$account_name = Customer::where('id',$authUser->user)->first();
+			Session::put('name_customer',$account_name->name);
+			Session::put('id_customer',$account_name->id);
+		}
+		if (Session::get('cart')) {
+			return redirect()->route('get_cart')->with('thongbao', 'Đăng nhập thành công');
+		}
+		return redirect()->route('get_home_page');
+	}
+	public function findOrCreateCustomer($users,$provider)
+	{
+		$authUser = Soical::where('provider_user_id', $users->id)->where('provider_user_email',$users->email)->first();
+		if($authUser){
+			return $authUser;
+		}else{
+			$customer_new = new Soical([
+				'provider_user_id'=>$users->id,
+				'provider_user_email'=>$users->email,
+				'provider'=>strtoupper($provider),
+			]);
+		}
+		$customer = Customer::where('email',$users->email)->first();
+
+		if(!$customer){
+			$customer = Customer::create([
+				'name' => $users->name,
+				'email' => $users->email,
+				'password' => '',
+				'phone' => '',
+				'address' => ''
+			]);
+		}
+		$customer_new->customer()->associate($customer); /*lấy 2 id mới thêm vào*/
+		$customer_new->save();
+		return $customer_new;	
 	}
 }
