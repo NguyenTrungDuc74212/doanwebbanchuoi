@@ -145,15 +145,15 @@
 									<li class="sub-logo mr-auto"><a href="https://hoaquafuji.com"><img
 										src="{{asset('public/upload/slide/logo_chuoi.png')}}"
 										alt="Fresh Banana"></a></li>
-										<li role="presentation" class="active py-lg-2" id='trangchu'>
+										<li role="presentation" class="active py-lg-2" id='trangchu' onclick="click_navbar($(this).attr('id'))">
 											<a href="{{route('get_home_page')}}">
 												Trang chủ
 											</a>
 										</li>
-										<li role="presentation" class="py-lg-2" id='gioithieu'>
+										<li role="presentation" class="py-lg-2" id='gioithieu' onclick="click_navbar($(this).attr('id'))">
 											<a href="{{route('get_intro')}}">Giới thiệu</a>
 										</li>
-										<li role="presentation" class="py-lg-2">
+										<li role="presentation" class="py-lg-2" id="tintuc" onclick="click_navbar($(this).attr('id'))">
 											<a href="#">Tin tức</a>
 											<ul class="sub-menu">
 												@foreach ($postCategoryHeader as $item)
@@ -163,13 +163,13 @@
 												@endforeach
 											</ul>
 										</li>
-										<li role="presentation" class="py-lg-2" id="sanxuat">
+										<li role="presentation" class="py-lg-2" id="sanxuat" onclick="click_navbar($(this).attr('id'))">
 											<a href="#">Sản xuất</a>
 										</li>
-										<li role="presentation" class="py-lg-2" id="dichvu">
+										<li role="presentation" class="py-lg-2" id="dichvu" onclick="click_navbar($(this).attr('id'))">
 											<a href="#">Dịch vụ</a>
 										</li>
-										<li role="presentation" class="py-lg-2" id="muahang">
+										<li role="presentation" class="py-lg-2" id="muahang" onclick="click_navbar($(this).attr('id'))">
 											<a href="#">Mua hàng online</a>
 											<ul class="sub-menu">
 												@foreach ($productCategoryHeader as $item)
@@ -179,10 +179,10 @@
 												@endforeach
 											</ul>
 										</li>
-										<li role="presentation" class="py-lg-2" id="gocchiase">
+										<li role="presentation" class="py-lg-2" id="gocchiase" onclick="click_navbar($(this).attr('id'))">
 											<a href="#">Góc chia sẻ</a>
 										</li>
-										<li role="presentation" class="py-lg-2" id="lienhe">
+										<li role="presentation" class="py-lg-2" id="lienhe" onclick="click_navbar($(this).attr('id'))">
 											<a href="{{route('get_address')}}">Liên hệ</a>
 										</li>
 										<li class="btn-cart" id="btn-cart-navbar">
