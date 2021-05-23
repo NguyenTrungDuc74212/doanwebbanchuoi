@@ -289,7 +289,7 @@
                         <div class="col-md-6 pr-md-5">
                             <div class="title">VIDEO</div>
                             <div class="embed-responsive embed-responsive-4by3">
-                                <iframe width="814" height="458" src="https://www.youtube.com/embed/enov0y9lvwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="754" height="424" src="https://www.youtube.com/embed/HQD0WbRUz3A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                         <div class="col-md-6">

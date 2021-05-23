@@ -7,7 +7,7 @@ use App\Http\Requests\addPostRequest;
 use App\Http\Requests\editPostRequest;
 use App\Models\CategoryPost;
 use App\Models\Post;
-use App\Events\CategorypostCreated;
+use App\Events\CategoryProductCreated;
 use Str;
 
 class PostController extends Controller
@@ -35,7 +35,7 @@ class PostController extends Controller
 		$post->slug=convert_vi_to_en($req->input('title'));
 		$post->meta_keywords = $req->input('meta_keywords');
 		$post->meta_title = $req->input('meta_title');
-		event(new \App\Events\CategoryproductCreated($post));
+		event(new \app\Events\CategoryProductCreated($post));
 		$post->save();
 		return redirect()->route('list_post')->with('thongbao','Thêm bài viết thành công');
 	}
@@ -80,7 +80,7 @@ class PostController extends Controller
 		$post->desc = $req->input('desc');
 		$post->meta_keywords = $req->input('meta_keywords');
 		$post->meta_title = $req->input('meta_title');
-		event(new \App\Events\CategoryproductCreated($post));
+		event(new \App\Events\CategoryProductCreated($post));
 		$post->save();
 		return redirect()->route('list_post')->with('thongbao','Sửa bài viết thành công');
 	}

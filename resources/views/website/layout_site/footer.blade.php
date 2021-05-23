@@ -268,6 +268,20 @@
 	@include('website.checkout.sign_up_modal')
 	@include('website.checkout.login_modal')
 	@include('website.checkout.quenmk_modal')
+	<script type="text/javascript">
+		function click_navbar(id){
+		$(document).ready(function () {
+			localStorage.setItem("nav-active", id);
+		});
+		}
+	</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$(".nav-head").removeClass("active");
+		var id="#"+localStorage.getItem("nav-active");
+		$(id).addClass( "active" );
+	});
+</script>
 
 </body>
 
