@@ -10,7 +10,7 @@ use App\Http\Requests\editProductRequest;
 use Str;
 use Gate;
 use DB;
-
+use App\Events\CategoryProductCreated;
 class ProductController extends Controller
 {
 	public function view_add_product()
