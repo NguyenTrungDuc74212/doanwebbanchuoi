@@ -268,6 +268,13 @@
 	@include('website.checkout.sign_up_modal')
 	@include('website.checkout.login_modal')
 	@include('website.checkout.quenmk_modal')
+	<script>
+		function click_navbar($id){
+		$(document).ready(function () {
+			localStorage.setItem("nav-active", $id);
+		});
+		}
+	</script>
 
 </body>
 

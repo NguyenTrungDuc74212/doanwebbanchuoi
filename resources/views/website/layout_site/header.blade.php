@@ -145,12 +145,12 @@
 									<li class="sub-logo mr-auto"><a href="https://hoaquafuji.com"><img
 										src="{{asset('public/upload/slide/logo_chuoi.png')}}"
 										alt="Fresh Banana"></a></li>
-										<li role="presentation" class="active py-lg-2">
+										<li role="presentation" class="active py-lg-2" id='trangchu'>
 											<a href="{{route('get_home_page')}}">
 												Trang chủ
 											</a>
 										</li>
-										<li role="presentation" class="py-lg-2">
+										<li role="presentation" class="py-lg-2" id='gioithieu'>
 											<a href="{{route('get_intro')}}">Giới thiệu</a>
 										</li>
 										<li role="presentation" class="py-lg-2">
@@ -163,13 +163,13 @@
 												@endforeach
 											</ul>
 										</li>
-										<li role="presentation" class="py-lg-2">
+										<li role="presentation" class="py-lg-2" id="sanxuat">
 											<a href="#">Sản xuất</a>
 										</li>
-										<li role="presentation" class="py-lg-2">
+										<li role="presentation" class="py-lg-2" id="dichvu">
 											<a href="#">Dịch vụ</a>
 										</li>
-										<li role="presentation" class="py-lg-2">
+										<li role="presentation" class="py-lg-2" id="muahang">
 											<a href="#">Mua hàng online</a>
 											<ul class="sub-menu">
 												@foreach ($productCategoryHeader as $item)
@@ -179,10 +179,10 @@
 												@endforeach
 											</ul>
 										</li>
-										<li role="presentation" class="py-lg-2">
+										<li role="presentation" class="py-lg-2" id="gocchiase">
 											<a href="#">Góc chia sẻ</a>
 										</li>
-										<li role="presentation" class="py-lg-2">
+										<li role="presentation" class="py-lg-2" id="lienhe">
 											<a href="{{route('get_address')}}">Liên hệ</a>
 										</li>
 										<li class="btn-cart" id="btn-cart-navbar">
