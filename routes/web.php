@@ -220,6 +220,9 @@ Route::post('check-coupon','cartController@check_coupon')->name('check_coupon');
 Route::get('login-google-customer','checkoutController@login_customer_google')->name('login_customer_google');
 Route::get('/customer/google/callback','checkoutController@callback_customer_google');
 
+Route::get('login-facebook','checkoutController@login_facebook')->name('facebook');
+Route::get('facebook/callback','checkoutController@callback_facebook');
+
 Route::get('checkout','checkoutController@get_checkout')->name('view_checkout');
 Route::post('login_customer','checkoutController@login_customer')->name('login_customer');
 Route::post('add-customer','checkoutController@add_customer')->name('add_customer');

@@ -34,5 +34,10 @@ return [
         'client_secret' => 'BR2epH-V-6GFQ_A3bxUzld3C',
         'redirect' => 'http://myweb.local.com/banchuoi/callback'
     ],
+    'facebook' => [
+        'client_id' => '511180879841868',  //client face của bạn
+        'client_secret' => '6df4c7f4aee415589e08aa12e85b2ade',  //client app service face của bạn
+        'redirect' => 'http://myweb.local.com/banchuoi/facebook/callback' //callback trả về
+    ],
 
 ];

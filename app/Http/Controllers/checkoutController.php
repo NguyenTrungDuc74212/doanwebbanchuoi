@@ -464,10 +464,38 @@ class checkoutController extends Controller
 			Session::put('id_customer',$account_name->id);
 		}
 		if (Session::get('cart')) {
-			return redirect()->route('get_cart')->with('thongbao', 'Đăng nhập thành công');
+			return redirect()->route('get_cart')->with('thongbao_login_thatbai', 'Đăng nhập thành công');
 		}
 		return redirect()->route('get_home_page');
 	}
+	public function login_facebook(){
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function callback_facebook(){
+        $provider = Socialite::driver('facebook')->stateless()->user();
+        $account = Soical::where('provider','facebook')->where('provider_user_id',$provider->getId())->first();
+        if($account){ 
+            $account_name = Customer::where('id',$account->user)->first();
+            Session::put('name_customer',$account_name->name);
+            Session::put('id_customer',$account_name->id);
+            return redirect('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập Admin thành công');
+        }else{
+        	$customer_new = new Soical([
+				'provider_user_id'=>$provider->getId(),
+				'provider_user_email'=>$provider->getEmail(),
+				'provider'=>'facebook',
+			]);
+
+			$customer = Customer::where('email',$provider->getEmail())->first();
+			if (!$customer) {
+				 return redirect()->route('get_home_page')->with('thongbao_login','Gmail chưa được đăng ký!!!');
+			}
+			Session::put('name_customer',$customer->name);
+            Session::put('id_customer',$customer->id);
+            return redirect('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập Admin thành công');
+        } 
+    }
 	public function findOrCreateCustomer($users,$provider)
 	{
 		$authUser = Soical::where('provider_user_id', $users->id)->where('provider_user_email',$users->email)->first();

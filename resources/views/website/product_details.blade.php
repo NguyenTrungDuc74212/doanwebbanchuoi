@@ -67,8 +67,10 @@
                                         @if ($product->persent_discount > 0)
                                             <strong>Giá</strong>:{{ currency_format($product->price * ((100 - $product->persent_discount) / 100)) }}/{{$product->unit}}
                                             <span class="old-price">{{ currency_format($product->price) }}/{{$product->unit}}</span>
+                                            <input type="hidden" value="{{ $product->price*((100-$product->persent_discount)/100)}}" class="cart_product_price_{{$product->id}}">
                                         @else
                                             <strong>Giá</strong>:{{ currency_format($product->price) }}/{{$product->unit}}
+                                            <input type="hidden" value="{{ $product->price}}" class="cart_product_price_{{$product->id}}">
                                         @endif
                                     </p>
                                     <p><strong>Mã sản phẩm</strong>: SP{{ $product->id }}</p>
@@ -84,31 +86,25 @@
                                     các sản phẩm của chúng tôi.
                                 </div>
                                 <section class="order">
-                                    <form data-request="onAddCart"
-                                        data-request-update="'orderProduct::cartInfo' : '#cart-info','orderProduct::cart-in-navbar' : '#btn-cart-navbar'"
-                                        data-request-flash>
+                                    <form>
+                                        @csrf
+                                        <input type="hidden" value="{{ $product->id }}" class="cart_product_id_{{$product->id}}">
+                                        <input type="hidden" value="{{ $product->name }}" class="cart_product_name_{{$product->id}}">
+                                        <input type="hidden" value="{{ $product->image}}" class="cart_product_image_{{$product->id}}">
+                                        <input type="hidden" value="{{$product->quantity}}" class="cart_product_storage_{{$product->id}}">
+                                        <input type="hidden" value="{{$product->unit}}" class="cart_product_unit_{{$product->id}}">
+
                                         <div class="form-group row">
                                             <label for="inputNumber" class="col-sm-4 col-form-label">Số lượng</label>
                                             <div class="col-sm-3">
                                                 <input type="hidden" name="temp_id" value="22">
-                                                <input type="number" class="form-control" id="inputNumber" name="quantity"
+                                                <input type="number" class="form-control cart_product_qty_{{$product->id}}" id="inputNumber" name="quantity"
                                                     value="1">
                                             </div>
                                         </div>
-                                        {{-- <div class="form-group row">
-                                            <label for="inputProperties" class="col-sm-4 col-form-label">Kích cỡ</label>
-                                            <div class="col-sm-8">
-                                                <select class="custom-select" id="inputProperties" name="property">
-                                                    <option value="289000">Nho ngón tay Hello Úc - Giá: 289,000/Kg</option>
-                                                    <option value="339000">Nho ngón tay Oliver Úc - Giá: 339,000/Kg</option>
-                                                </select>
-                                            </div>
-                                        </div> --}}
                                         <div class="control">
-                                            <button type="submit" class="btn btn-secondary"><i
-                                                    class="fas fa-cart-plus mr-2"></i>Thêm giỏ hàng</button>
-                                            <button type="submit" class="btn btn-second"><i
-                                                    class="fas fa-share-square mr-2"></i>Đặt hàng</button>
+                                            <button type="submit" class="btn btn-second cart_thanhtoan" data-id="{{ $product->id }}" style="width: 140px;">
+                                                <i class="fas fa-share-square mr-2"></i>Đặt hàng</button>
                                         </div>
                                     </form>
                                 </section>
