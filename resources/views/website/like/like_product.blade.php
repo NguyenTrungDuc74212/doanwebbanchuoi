@@ -27,6 +27,16 @@
 							<a href="{{route('get_product_detail',$item->slug)}}"><img class="card-img-top"
 								src="{{asset('public/upload/product/'.$item->image)}}" alt="{{ $item->name }}" style="width:100% !important;"></a>
 								<div class="box-control">
+									<div class="item">
+										<button class="cart_thanhtoan" data-id="{{ $item->id }}" type="button" style="display: block;
+										margin: 119px auto;
+										background: 0 0;
+										border: 0;
+										cursor: pointer;
+										color: #269300">
+										<i class="fas fa-shopping-cart"></i></button>
+										<span class="text">Thêm giỏ hàng</span>
+									</div>
 									<div class="item" style="margin: 120px 0px;">
 										<a data-href="" class="delete_product_like_{{ $item->id }}" id="{{ $item->id }}" onclick="delete_withlist(this.id)"> <i class="fas fa-thumbs-down"></i></a>
 										<span class="text">Bỏ thích</span>
@@ -36,6 +46,13 @@
 										<span class="text">Xem chi tiết</span>
 									</div>
 								</div>
+								<input type="hidden" value="{{ $item->id }}" class="cart_product_id_{{$item->id}}">
+								<input type="hidden" value="{{ $item->name }}" class="cart_product_name_{{$item->id}}">
+								<input type="hidden" value="{{ $item->image}}" class="cart_product_image_{{$item->id}}">
+								<input type="hidden" value="1" class="cart_product_qty_{{$item->id}}">
+								<input type="hidden" value="{{$item->quantity}}" class="cart_product_storage_{{$item->id}}">
+								<input type="hidden" value="{{$item->unit}}" class="cart_product_unit_{{$item->id}}">
+								<input type="hidden" value="{{$item->persent_discount}}" class="cart_product_discount_{{$item->id}}">
 								<div class="card-body">
 									<h2><a href="{{route('get_product_detail',$item->slug)}}">{{$item->name}}</a></h2>
 									<div class="box-price">
