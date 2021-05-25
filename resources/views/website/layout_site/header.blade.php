@@ -70,8 +70,8 @@
 						<div class="col-md-6"><i class="fas fa-phone-square mr-2"></i>Chuối Việt Nam: <a
 							href="tel:0329294747">0329294747</a></div>
 							<div class="col-md-6 text-right">
-								<a href="{{ route('get_cart') }}" class="text-dark giohang_show">
-									<i class="fas fa-shopping-cart align-middle text-primar"></i>
+								<a href="{{ route('get_cart') }}" class="text-dark giohang_show" style="margin: 0px 8px;">
+									<i class="fas fa-shopping-cart align-middle text-primary"></i>
 									@php
 									$cart = Session::get('cart');
 									@endphp
@@ -86,6 +86,10 @@
 									@else
 									<span id="cart-info"> Giỏ hàng trống</span>
 									@endif
+								</a>
+								<a href="{{ route('view_like_product') }}" class="text-dark">
+									<i class="fas fa-heart"></i>
+									<span id="cart-info">Sản phẩm yêu thích</span>
 								</a>
 							</div>
 						</div>
@@ -185,8 +189,18 @@
 										<li role="presentation" class="py-lg-2 nav-head" id="lienhe" onclick="click_navbar($(this).attr('id'))">
 											<a href="{{route('get_address')}}">Liên hệ</a>
 										</li>
-										<li class="btn-cart" id="btn-cart-navbar">
+									{{-- 	<li class="btn-cart" id="btn-cart-navbar">
 											<a href="" class="giohang_show_2">
+												<i class="fas fa-thumbs-up align-middle text-primary fa-2x"></i>
+												@if ($cart)
+												<span>{{ $quantity }}</span>
+												@else
+												<span>0</span>
+												@endif
+											</a>
+										</li> --}}
+										<li class="btn-cart" id="btn-cart-navbar">
+											<a href="{{ route('get_cart') }}" class="giohang_show_2">
 												<i class="fas fa-shopping-cart align-middle text-primary fa-2x"></i>
 												@if ($cart)
 												<span>{{ $quantity }}</span>
@@ -202,6 +216,11 @@
 												<li role="presentation" class="py-lg-2">
 													<a href="#" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus dangky"></i>
 													Đăng ký</a>
+
+												</li>
+												<li role="presentation" class="py-lg-2">
+													<a href="{{ route('view_like_product') }}"><i class="fas fa-heart"></i>
+													Sản phẩm yêu thích</a>
 
 												</li>
 												<li role="presentation" class="py-lg-2">
@@ -253,3 +272,8 @@
 						</nav>
 					</div>
 				</header>
+				@if (Session::get('id_customer'))
+				<script type="text/javascript">
+					localStorage.removeItem('data');
+				</script>
+				@endif

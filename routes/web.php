@@ -238,4 +238,10 @@ Route::post('update-pass','checkoutController@update_pass')->name('update_pass')
 Route::get('history','orderController@history')->name('order_history');
 Route::get('view-history-order/{id}','orderController@view_history_order')->name('view_history_order');
 Route::post('cancel-order','orderController@cancelOrder')->name('cancel_order');
+
+//sản phẩm yêu thích
+Route::get('like-product','likeProductController@view_like_product')->name('view_like_product');
+Route::get('delete-like-product','likeProductController@delete_product_like')->name('delete_product_like');
+Route::post('like-product-ajax','likeProductController@like_product_ajax')->name('like_product_ajax');
+
 /* end website*/
