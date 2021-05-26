@@ -241,6 +241,31 @@ class checkoutController extends Controller
 					$order_detail->coupon = $product->persent_discount;
 					$order_detail->soluong = $value['product_qty'];
 					$order_detail->save();
+					$product =$order_detail->product;
+					$product->quantity = $product->quantity-$value['product_qty'];
+					$product->save();
+						// lấy sản phẩm ra từ trong kho
+					do{
+						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
+						$warehouse = $warehouseProduct->warehouse;
+						$warehouseOrder=new WarehouseOrder();
+						$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
+						$warehouseOrder->order_detail_id=$order_detail->id;
+						if($warehouseProduct->quantity>=$value['product_qty']){
+							$warehouseOrder->quantity=$value['product_qty'];
+							$warehouseProduct->quantity=$warehouseProduct->quantity-$value['product_qty'];
+							$warehouse->quantity_now=$warehouse->quantity_now-$value['product_qty'];
+							$value['product_qty']=0;
+						}else{
+							$warehouseOrder->quantity=$warehouseProduct->quantity;
+							$warehouse->quantity_now=$warehouse->quantity_now-$warehouseProduct->quantity;
+							$value['product_qty']=$value['product_qty']-$warehouseProduct->quantity;
+							$warehouseProduct->quantity=0;
+						}
+						$warehouseOrder->save();
+						$warehouseProduct->save();
+						$warehouse->save();
+					}while($value['product_qty']>0);
 				}
 				if ($req->input('method')==1) {
 					return redirect()->route('thanh_cong_atm');
@@ -314,6 +339,31 @@ class checkoutController extends Controller
 				}
 				$order_detail->soluong = $value['product_qty'];
 				$order_detail->save();
+				$product =$order_detail->product;
+				$product->quantity = $product->quantity-$value['product_qty'];
+				$product->save();
+					// lấy sản phẩm ra từ trong kho
+				do{
+					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
+					$warehouse = $warehouseProduct->warehouse;
+					$warehouseOrder=new WarehouseOrder();
+					$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
+					$warehouseOrder->order_detail_id=$order_detail->id;
+					if($warehouseProduct->quantity>=$value['product_qty']){
+						$warehouseOrder->quantity=$value['product_qty'];
+						$warehouseProduct->quantity=$warehouseProduct->quantity-$value['product_qty'];
+						$warehouse->quantity_now=$warehouse->quantity_now-$value['product_qty'];
+						$value['product_qty']=0;
+					}else{
+						$warehouseOrder->quantity=$warehouseProduct->quantity;
+						$warehouse->quantity_now=$warehouse->quantity_now-$warehouseProduct->quantity;
+						$value['product_qty']=$value['product_qty']-$warehouseProduct->quantity;
+						$warehouseProduct->quantity=0;
+					}
+					$warehouseOrder->save();
+					$warehouseProduct->save();
+					$warehouse->save();
+				}while($value['product_qty']>0);
 			}
 			if ($req->input('method')==1) {
 				return redirect()->route('thanh_cong_atm');
