@@ -58,8 +58,6 @@ class addWebsiteProduct extends Command
             $client = new Client();
             $crawler = $client->request('GET',$url);
             $desc = $crawler->filter('.editor-content p')->first()->text();
-
-
             $product = new Product;
             $product->name = $title;
             $product->price = $price;
@@ -73,10 +71,6 @@ class addWebsiteProduct extends Command
             $product->slug = Str::slug($title);
             $product->save();
             $this->info('crawl tin thành công: '.$title);
-
-            
-            
-            
         } 
         catch (Exception $e) {
 

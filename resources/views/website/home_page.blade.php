@@ -79,10 +79,10 @@
                         <ul class="list-unstyled">
                             @foreach ($postIntro as $item)
                             <li class="media mb-4">
-                                <a href=" /gioi-thieu-chung/van-hoa-fuji"><img class="d-flex mr-3 hvr-grow"
+                                <a href="{{route('get_view_blog_details',$item->slug)}}"><img class="d-flex mr-3 hvr-grow"
                                     src="{{asset('public/upload/post/'.$item->image)}}" alt="{{$item->title}}"></a>
                                     <div class="media-body">
-                                        <h5 class="mt-0 mb-1 font-weight-bold text-truncate"><a href="#">{{$item->title}}</a></h5>
+                                        <h5 class="mt-0 mb-1 font-weight-bold text-truncate"><a href="{{route('get_view_blog_details',$item->slug)}}">{{$item->title}}</a></h5>
                                         {!!$item->desc!!}
                                     </div>
                                 </li>
@@ -140,13 +140,13 @@
                                     @if($item->persent_discount>0)
                                     <div class="discount">{{$item->persent_discount}}%</div>
                                     @endif
-                                    <div class="rate">
+                                    {{-- <div class="rate">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
-                                    </div>
+                                    </div> --}}
                                     <div class="card-img hvr-grow">
 
                                         <a href="{{route('get_product_detail',$item->slug)}}"><img class="card-img-top"
