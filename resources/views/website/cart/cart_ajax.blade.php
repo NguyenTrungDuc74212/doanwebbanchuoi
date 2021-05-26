@@ -95,7 +95,7 @@
 								background-color: #ff9600!important;
 								color:white;
 								border: 2px solid #ff9600;
-								width: 9%;">Chấp nhận</button>
+								width: 9%;cursor: pointer;">Chấp nhận</button>
 								@if (session('thongbao'))
 								<p class="text-success">{{ session('thongbao') }}</p>
 								@elseif(session('error'))

@@ -18,6 +18,7 @@ use App\Models\Soical;
 use Socialite; 
 use Carbon\carbon;
 use Session;
+use Mail;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\addCustomerRequest;
 use App\Http\Requests\shippingRequest;
@@ -80,27 +81,29 @@ class checkoutController extends Controller
 		//Session::flush();
 		return redirect()->route('get_home_page');
 	}
-	public function save_shipping(shippingRequest $req)
+	public function save_shipping(Request $req)
 	{
-		$validatedData = $req->validate([
-			"method"=>"required",
-			"notes"=>"required",
-			"city"=>"required",
-		],
-		[
-			"notes.required"=>"ghi chú không được bỏ trống",
-			"method.required"=>"hình thức thanh toán không được bỏ trống",
-			"city.required"=>"Bạn phải nhập thành phố của mình hiện đang sống"]
-		);
+		
 		$code_random = substr(md5(microtime()),rand(0,20),6);
 		$coupon = Session::get('coupon_ss');
 		$mytime = Carbon::now();
 		$soluong =0;
 
 
-		if (Session::get('id_customer')) {
+		if (Session::get('id_customer'))
+		{
 			$customer = Customer::find(Session::get('id_customer'));
 			if ($req->samecheck==1) {
+				$validatedData = $req->validate([
+					"method"=>"required",
+					"notes"=>"required",
+					"city"=>"required",
+				],
+				[
+					"notes.required"=>"ghi chú không được bỏ trống",
+					"method.required"=>"hình thức thanh toán không được bỏ trống",
+					"city.required"=>"Bạn phải nhập thành phố của mình hiện đang sống"]
+				);
 				$shipping = new Shipping;
 				$shipping->name = $req->input('name');
 				$shipping->email = $req->input('email');
@@ -150,7 +153,7 @@ class checkoutController extends Controller
 						// lấy sản phẩm ra từ trong kho
 					do{
 						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
-						$warehouse=$warehouseProduct->warehouse;
+						$warehouse = $warehouseProduct->warehouse;
 						$warehouseOrder=new WarehouseOrder();
 						$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
 						$warehouseOrder->order_detail_id=$order_detail->id;
@@ -247,6 +250,7 @@ class checkoutController extends Controller
 				}
 			}
 		}
+		
 		else{
 			$validatedData = $req->validate([
 				"email_2"=>"required|Email",
@@ -339,6 +343,53 @@ class checkoutController extends Controller
 		// }
 		// }
 
+		/*send mail*/
+		$now = Carbon::now()->format('Y-m-d');
+		$title_mail = "Đơn xác nhận ngày".' '.$now;
+		$shipping =Shipping::find(Session::get('id_shipping'));
+		if ($shipping) {
+			$data['email'][] = $shipping->email;
+			if ($cart) {
+				foreach ($cart as $key=> $cart_email) {
+					$cart_array[] = array(
+						'product_name'=>$cart_email['product_name'],
+						'product_price'=>$cart_email['product_price'],
+						'product_qty'=>$cart_email['product_qty'],
+						'product_unit'=>$cart_email['product_unit']
+					);
+				}
+			}
+
+			$shipping_array = array(
+				'shipping_name'=>$shipping->name,
+				'shipping_email'=>$shipping->email,
+				'shipping_phone'=>$shipping->phone,
+				'shipping_address'=>$shipping->address,
+				'shipping_notes'=>$shipping->notes,
+				'shipping_method'=>$shipping->method
+			);
+			$order = Order::where('shipping_id',Session::get('id_shipping'))->first();
+			if (Session::get('coupon_ss')) {
+				$coupon_email = $order->coupon;
+			}
+			else{
+				$coupon_email='không có mã giảm giá';
+			}
+			$ordercode_email = array(
+				'coupon_code' =>$coupon_email,
+				'order_code' =>$order->order_code,
+				'order_total' =>$order->total
+			);
+			Mail::send('website.mail.mail_order',['cart_array'=>$cart_array,'shipping_array'=>$shipping_array,'code'=>$ordercode_email],function($message) use ($title_mail,$data){
+				$message->to($data['email'])->subject($title_mail);
+				$message->from($data['email'],$title_mail);
+			});
+
+			
+		}
+		/*end send mail*/
+
+
 		$req->session()->forget('cart');
 		$req->session()->forget('total');
 		$req->session()->forget('fee');
@@ -373,6 +424,52 @@ class checkoutController extends Controller
 
 		// }
 		// }
+
+			/*send mail*/
+		$now = Carbon::now()->format('Y-m-d');
+		$title_mail = "Đơn xác nhận ngày".' '.$now;
+		$shipping =Shipping::find(Session::get('id_shipping'));
+		if ($shipping) {
+			$data['email'][] = $shipping->email;
+			if ($cart) {
+				foreach ($cart as $key=> $cart_email) {
+					$cart_array[] = array(
+						'product_name'=>$cart_email['product_name'],
+						'product_price'=>$cart_email['product_price'],
+						'product_qty'=>$cart_email['product_qty'],
+						'product_unit'=>$cart_email['product_unit']
+					);
+				}
+			}
+
+			$shipping_array = array(
+				'shipping_name'=>$shipping->name,
+				'shipping_email'=>$shipping->email,
+				'shipping_phone'=>$shipping->phone,
+				'shipping_address'=>$shipping->address,
+				'shipping_notes'=>$shipping->notes,
+				'shipping_method'=>$shipping->method
+			);
+			$order = Order::where('shipping_id',Session::get('id_shipping'))->first();
+			if (Session::get('coupon_ss')) {
+				$coupon_email = $order->coupon;
+			}
+			else{
+				$coupon_email='không có mã giảm giá';
+			}
+			$ordercode_email = array(
+				'coupon_code' =>$coupon_email,
+				'order_code' =>$order->order_code,
+				'order_total' =>$order->total
+			);
+			Mail::send('website.mail.mail_order',['cart_array'=>$cart_array,'shipping_array'=>$shipping_array,'code'=>$ordercode_email],function($message) use ($title_mail,$data){
+				$message->to($data['email'])->subject($title_mail);
+				$message->from($data['email'],$title_mail);
+			});
+
+			
+		}
+		/*end send mail*/
 
 		$req->session()->forget('cart');
 		$req->session()->forget('total');
