@@ -24,6 +24,14 @@ class CategoryController extends Controller
         $category_product->desc = $req->input('desc');
         $category_product->meta_keywords = $req->input('meta_keywords');
         $category_product->meta_title = $req->input('meta_title');
+        /*xử lý image*/
+        $file = $req->file('image');
+        $name_offical = $file->getClientOriginalName();
+        $name_jpg = explode(".", $name_offical);
+        $file_name =$name_jpg[0].rand(0,99).".".$file->getClientOriginalExtension();
+        $url = $file->move('public/upload/category_product',$file_name);
+        $category_product->image = $file_name;
+        /*end*/
         $category_product->save();
         event(new \App\Events\CategoryProductCreated($category_product));
         return redirect()->route('list_category_product')->with('thongbao','Thêm danh mục thành công');
@@ -48,6 +56,21 @@ class CategoryController extends Controller
         $category_product->desc = $req->input('desc');
         $category_product->meta_keywords = $req->input('meta_keywords');
         $category_product->meta_title = $req->input('meta_title');
+        /*xử lý image*/
+
+        $file = $req->file('image');
+        if ($file) {
+            $name_offical = $file->getClientOriginalName();
+            $name_jpg = explode(".", $name_offical);
+            $file_name =$name_jpg[0].rand(0,99).".".$file->getClientOriginalExtension();
+            $url = $file->move('public/upload/category_product',$file_name);
+            $category_product->image = $file_name;
+        }
+        else{
+            $category_product->image = $req->input('img_old');
+        }
+        
+        /*end*/
         $category_product->save();
         event(new \App\Events\CategoryProductCreated($category_product));
         return redirect()->route('list_category_product')->with('thongbao','Sửa danh mục thành công');

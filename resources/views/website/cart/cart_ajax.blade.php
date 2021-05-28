@@ -66,7 +66,7 @@
 											</td>
 											<td>
 												<span class="product-price">{{ currency_format($value['product_price']*$value['product_qty']) }}</span>
-												  {{-- <input type="hidden" value="{{ $value['product_price']*$value['product_qty'] }}" class="price_old_{{ $value['session_id'] }}"> --}}
+												{{-- <input type="hidden" value="{{ $value['product_price']*$value['product_qty'] }}" class="price_old_{{ $value['session_id'] }}"> --}}
 											</td>
 											<td>
 												<a class="delete_cart" title="Xóa" data-id="{{ $value['session_id'] }}" href="">
@@ -204,7 +204,7 @@
 								<i class="fas fa-star"></i>
 							</div>
 							<div class="card-img hvr-grow">
-								<a href="/product/tao-envy-new-zealand"><img class="card-img-top" src="{{asset('public/upload/product/'.$item->image)}}" alt="{{ $item->name }}"></a>
+								<a href="/product/tao-envy-new-zealand"><img class="card-img-top" src="{{asset('public/upload/product/'.$item->image)}}" alt="{{ $item->name }}" id="withlist_product_img_{{ $item->id }}"></a>
 								<div class="box-control">
 									<div class="item">
 										<button class="cart_thanhtoan" data-id="{{ $item->id }}" type="button" style="display: block;
@@ -217,7 +217,17 @@
 										<span class="text">Thêm giỏ hàng</span>
 									</div>
 									<div class="item">
-										<a href="/product/tao-envy-new-zealand"><i class="fas fa-search fa-2x"></i></a>
+										<button class="button_withlist_1" onclick="add_withlist(this.id)" id="{{ $item->id }}" type="button" style="display: block;
+										margin: 0 auto;
+										background: 0 0;
+										border: 0;
+										cursor: pointer;
+										color: #269300;">
+										<i class="fas fa-heart"></i></button>
+										<span class="text">Like sản phẩm</span>
+									</div>
+									<div class="item">
+										<a href="{{route('get_product_detail',$item->slug)}}" class="cart_product_url_{{ $item->id }}"><i class="fas fa-plus"></i></a>
 										<span class="text">Xem chi tiết</span>
 									</div>
 								</div>
@@ -227,6 +237,12 @@
 							<input type="hidden" value="{{ $item->image}}" class="cart_product_image_{{$item->id}}">
 							<input type="hidden" value="1" class="cart_product_qty_{{$item->id}}">
 							<input type="hidden" value="{{$item->quantity}}" class="cart_product_storage_{{$item->id}}">
+							<input type="hidden" value="{{$item->unit}}" class="cart_product_unit_{{$item->id}}">
+							<input type="hidden" value="{{$item->persent_discount}}" class="cart_product_discount_{{$item->id}}">
+							@if (Session::get('id_customer'))
+							<input type="hidden" value="{{ Session::get('id_customer') }}" id="customer_id">
+							@endif
+
 							<div class="card-body">
 								<h2><a href="/product/tao-envy-new-zealand">{{$item->name}}</a></h2>
 								<div class="box-price">
@@ -234,8 +250,10 @@
 									<div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}<sup>đ</sup></div>
 									<div class="old-price">{{currency_format($item->price)}}<sup>đ</sup></div>
 									<input type="hidden" value="{{ $item->price*((100-$item->persent_discount)/100)}}" class="cart_product_price_{{$item->id}}">
+									<input type="hidden" value="{{ $item->price}}" class="cart_product_price_off_{{$item->id}}">
 									@else
 									<div class="price">{{currency_format($item->price)}}<sup>đ</sup></div>
+									<input type="hidden" value="{{ $item->price}}" class="cart_product_price_off_{{$item->id}}">
 									@endif
 								</div>
 							</div>
