@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\WarehouseOrder;
+use App\Models\Repost;
+use App\Models\Notification;
 use Session;
 use DB;
+use Carbon\carbon;
 
 class orderController extends Controller
 {
@@ -35,11 +38,15 @@ class orderController extends Controller
       }
       return view('admin.order.list_order',compact('orders','status','status_pay'));
     }
-    public function getOrderDetail($id)
+    public function getOrderDetail($id,$notification_id=null)
     {
+        if($notification_id!=null)
+        {
+            $notification=Notification::find($notification_id);
+            $notification->delete();
+        }
         $order=Order::find($id);
         $coupon=Coupon::where('code',$order->coupon)->first();
-        
         $amountArray= array();
         $tongTienHang=0;
         $tongSanPham=0;
@@ -66,7 +73,8 @@ class orderController extends Controller
     }
     public function changeStatus(Request $req)
     {
-   
+        DB::beginTransaction();
+        try{
         $order=Order::find($req->order_id);
         if($order->status==4||$order->status==5||$order->status==6)
         {
@@ -74,7 +82,57 @@ class orderController extends Controller
         }
         $order->status=$req->status;
         $order->save();
-    }
+        
+        if($req->status==4)
+        {
+            $repost=Repost::where('date_repost',$order->order_date)->first();
+            $coupon=Coupon::where('code',$order->coupon)->first();
+            $old_total_revenue=0;
+            $old_total_quantity=0;
+            if($repost==null)
+            {
+                $repost=new Repost();
+                $repost->date_repost=$order->order_date;
+                $repost->total_order=0;
+                $repost->mouth_repost=Carbon::parse($order->order_date)->format('m-Y');
+            }else{
+                $old_total_revenue=  $repost->total_revenue;
+                $old_total_quantity= $repost->total_quantity;
+            }
+                $tongTienHang=0;
+                $tongSanPham=0;
+                foreach($order->orderDetails as $item)
+                {
+                    $item->product->product_sold+=$item->soluong;
+                    $item->product->save();
+                    $tongSanPham+=$item->soluong;
+                    $tongTienHang+=($item->product->price)*($item->soluong)*((100-$item->coupon)/100);
+                }
+                $repost->total_quantity=$tongSanPham+$old_total_quantity;
+                $tienGiamGia=0;
+                if($coupon!=null)
+                {
+                    if($coupon->value_sale<=100)
+                    {
+                        $tienGiamGia=$tongTienHang*($coupon->value_sale);
+                    }else
+                    {
+                        $tienGiamGia=$tongTienHang-$coupon->value_sale;
+                    }
+                }
+                $repost->total_revenue=($tongTienHang-$tienGiamGia)+$old_total_revenue;
+              
+                $repost->save();
+                 DB::commit();
+            }
+            }catch(Exception $ex)
+            {
+                DB::rollback();
+                throw new Exception("Lỗi:", $ex->getMessage());
+                
+            }
+        }
+    
     public function changeStatusPay(Request $req)
     {
     
@@ -97,7 +155,6 @@ class orderController extends Controller
             if($orders){
                return view('website.history.history',compact('orders')); 
             }
-            
         }
     }
     public function view_history_order($id)

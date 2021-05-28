@@ -15,6 +15,8 @@ use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Order_detail;
 use App\Models\Soical;
+use App\Models\Repost;
+use App\Models\User;
 use Socialite; 
 use Carbon\carbon;
 use Session;
@@ -22,6 +24,10 @@ use Mail;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\addCustomerRequest;
 use App\Http\Requests\shippingRequest;
+use DB;
+use Pusher\Pusher;
+use App\Notifications\NotificationAdmin;
+
 
 class checkoutController extends Controller
 {
@@ -177,7 +183,7 @@ class checkoutController extends Controller
 					return redirect()->route('thanh_cong_atm');
 				}
 				elseif($req->input('method')==2) {
-					echo 'thanh toán bằng tiền mặt';
+					return redirect()->route('thanh_cong_cash');
 				}
 			}
 			else{
@@ -267,6 +273,7 @@ class checkoutController extends Controller
 						$warehouse->save();
 					}while($value['product_qty']>0);
 				}
+
 				if ($req->input('method')==1) {
 					return redirect()->route('thanh_cong_atm');
 				}
@@ -343,7 +350,7 @@ class checkoutController extends Controller
 				$product->quantity = $product->quantity-$value['product_qty'];
 				$product->save();
 					// lấy sản phẩm ra từ trong kho
-				do{
+				do{ 
 					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
 					$warehouse = $warehouseProduct->warehouse;
 					$warehouseOrder=new WarehouseOrder();
@@ -365,6 +372,7 @@ class checkoutController extends Controller
 					$warehouse->save();
 				}while($value['product_qty']>0);
 			}
+
 			if ($req->input('method')==1) {
 				return redirect()->route('thanh_cong_atm');
 			}
@@ -373,10 +381,13 @@ class checkoutController extends Controller
 			}
 			
 		}
+	
 		
 	}
 	public function checkout_success_atm(Request $req)
 	{
+		DB::beginTransaction();
+		try{
 		$cart = Session::get('cart');
 		// if ($cart) {
 		// 	foreach ($cart as $key => $value) {
@@ -419,6 +430,43 @@ class checkoutController extends Controller
 				'shipping_method'=>$shipping->method
 			);
 			$order = Order::where('shipping_id',Session::get('id_shipping'))->first();
+			$options = array(
+				'cluster' => 'ap1',
+				'encrypted' => true
+			);
+	
+			$pusher = new Pusher(
+				env('PUSHER_APP_KEY'),
+				env('PUSHER_APP_SECRET'),
+				env('PUSHER_APP_ID'),
+				$options
+			);
+			if($order->customer!=null)
+			{
+				$customerName=$order->customer->name;
+			}else{
+				$customerName=$order->shipping->name;
+			}
+		
+			$data['custommerName']= $customerName;
+			$data['order_id']=$order->id;
+			$pusher->trigger('my-channel', 'my-event', $data);
+			$users = User::join('users_roles', 'users.id', '=', 'users_roles.user_id')->where("users_roles.role_id",1)->get(['users.*']);
+			foreach($users as $user)
+			{
+				$user->notify(new NotificationAdmin($order));
+			}
+			$repost=Repost::where('date_repost',$order->order_date)->first();
+			if($repost==null)
+			{
+				$repost=new Repost();
+				$repost->total_order=1;
+				$repost->date_repost=$order->order_date;
+			}else
+			{
+				$repost->total_order++;
+			}
+			$repost->save();
 			if (Session::get('coupon_ss')) {
 				$coupon_email = $order->coupon;
 			}
@@ -457,14 +505,23 @@ class checkoutController extends Controller
 			$order = Order::where('shipping_id',$shipping->id)->first();
 			$order_detail = Order_detail::where('order_id',$order->id)->get();
 			$req->session()->forget('id_shipping');
+			DB::commit();
 			return view('website.checkout.checkout_success_atm',compact('customer','shipping','order','order_detail'));
 		}
+		DB::commit();
 		return redirect()->route('get_home_page');
 
+	}catch(Exception $ex)
+	{
+		DB::rollback();
+		throw new Exception($ex->getMessage());
 		
+	}
 	}
 	public function checkout_success_cash(Request $req)
 	{
+		DB::beginTransaction();
+		try{
 		$cart = Session::get('cart');
 		// if ($cart) {
 		// 	foreach ($cart as $key => $value) {
@@ -479,6 +536,7 @@ class checkoutController extends Controller
 		$now = Carbon::now()->format('Y-m-d');
 		$title_mail = "Đơn xác nhận ngày".' '.$now;
 		$shipping =Shipping::find(Session::get('id_shipping'));
+		
 		if ($shipping) {
 			$data['email'][] = $shipping->email;
 			if ($cart) {
@@ -501,6 +559,44 @@ class checkoutController extends Controller
 				'shipping_method'=>$shipping->method
 			);
 			$order = Order::where('shipping_id',Session::get('id_shipping'))->first();
+			$users = User::join('users_roles', 'users.id', '=', 'users_roles.user_id')->where("users_roles.role_id",1)->get(['users.*']);
+			foreach($users as $user)
+			{
+				$user->notify(new NotificationAdmin($order));
+			}
+			$repost=Repost::where('date_repost',$order->order_date)->first();
+			$options = array(
+				'cluster' => 'ap1',
+				'encrypted' => true
+			);
+	
+			$pusher = new Pusher(
+				env('PUSHER_APP_KEY'),
+				env('PUSHER_APP_SECRET'),
+				env('PUSHER_APP_ID'),
+				$options
+			);
+			if($order->customer!=null)
+			{
+				$customerName=$order->customer->name;
+			}else{
+				$customerName=$order->shipping->name;
+			}
+		
+			$data['custommerName']= $customerName;
+			$data['order_id']=$order->id;
+			$pusher->trigger('my-channel', 'my-event', $data);
+			// báo cáo
+			if($repost==null)
+			{
+				$repost=new Repost();
+				$repost->total_order=1;
+				$repost->date_repost=$order->order_date;
+			}else
+			{
+				$repost->total_order++;
+			}
+			$repost->save();
 			if (Session::get('coupon_ss')) {
 				$coupon_email = $order->coupon;
 			}
@@ -516,7 +612,6 @@ class checkoutController extends Controller
 				$message->to($data['email'])->subject($title_mail);
 				$message->from($data['email'],$title_mail);
 			});
-
 			
 		}
 		/*end send mail*/
@@ -538,9 +633,17 @@ class checkoutController extends Controller
 			$order = Order::where('shipping_id',$shipping->id)->first();
 			$order_detail = Order_detail::where('order_id',$order->id)->get();
 			$req->session()->forget('id_shipping');
+			DB::commit();
 			return view('website.checkout.checkout_success_cash',compact('customer','shipping','order','order_detail'));
 		}
+		DB::commit();
 		return redirect()->route('get_home_page');
+	}catch(Exception $ex)
+	{
+		DB::rollback();
+		throw new Exception($ex->getMessage());
+		
+	}
 	}
 	public function recover_password(Request $req){
 		$now = Carbon::now()->format('Y-m-d');

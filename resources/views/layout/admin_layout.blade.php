@@ -36,6 +36,7 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <base href="{{asset('')}}">
     <style type="text/css">
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 17px !important;
@@ -54,6 +55,22 @@
     .card-body.table-responsive.p-0 {
         padding-top: 5px !important;
     }
+    .toast{
+        opacity: 1 !important;
+    }
+    .
+element.style {
+}
+.dropdown-menu-lg .dropdown-item {
+    padding: .5rem 1rem;
+}
+.dropdown-item{
+    white-space: normal !important;
+}
+.my-drop {
+    overflow-y: scroll;
+    height: 300px;
+}
 
     </style>
 </head>
@@ -99,7 +116,7 @@
                 </li>
 
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
                         <span class="badge badge-danger navbar-badge">3</span>
@@ -159,32 +176,38 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
-                </li>
+                </li> --}}
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
+                        <span class="badge badge-warning navbar-badge count-notification">{{count(Auth::user()->unreadNotifications)}}</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right my-drop">
+                        <span class="dropdown-item dropdown-header"> <span class="count-notification">{{count(Auth::user()->unreadNotifications)}}</span> Thông báo</span>
+                   <div id="drop-notification">
+                        @foreach(Auth::user()->unreadNotifications as $notification)
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
+                        <a href="order/get-detail/{{$notification->data['order_id']}}/{{$notification->id}}" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i>Khách hàng {{$notification->data['custommerName']}} vừa đặt hàng !
+                            {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                        @endforeach
+                    </div>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="my-toast">
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <i class="fa fa-globe-americas"></i>
+                              <strong class="mr-auto">Thông báo</strong>
+                              <button type="button" class="ml-2 mb-1 close" id="close-toast" data-dismiss="toast" aria-label="Close" >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="toast-body">
+                             Bạn có thông báo mới !
+                            </div>
+                          </div>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -192,12 +215,14 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
             </ul>
+            
         </nav>
         <!-- /.navbar -->
 
@@ -545,6 +570,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    
 
 <script src="{{ asset('public/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -587,6 +613,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tail.select@0.5.15/js/tail.select-full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script type="text/javascript">
 //  $( function() {
 //   $("#datepicker").datepicker({
@@ -1470,6 +1497,39 @@
        
        });
        </script>
+
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('8d5cf5e9296597b8a373', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        $("#my-toast").addClass('show');
+        $(".count-notification").text(parseInt($(".count-notification").first().text())+1);
+        var newNotificationHtml = `
+        <div class="dropdown-divider"></div>
+                        <a href="admin/order/get-detail/${data.order_id}" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i>Khách hàng ${data.custommerName} vừa đặt hàng !
+                            {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
+                        </a>
+        `;
+        $('#drop-notification').prepend(newNotificationHtml);
+    });
+  </script>
+<script>
+    $(document).ready(function () {
+        $('#close-toast').click(function(){
+            $("#my-toast").removeClass('show');
+        });
+ 
+    });
+</script>
     @yield('script')
 </body>
 

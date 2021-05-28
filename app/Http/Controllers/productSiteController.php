@@ -30,6 +30,7 @@ class productSiteController extends Controller
     }
     public function getProductByCategory($slug)
     {
+        $category=CategoryProduct::where('slug',$slug)->first();
         $product= DB::table('tbl_product')
         ->join('tbl_category_product', 'tbl_category_product.id', '=', 'tbl_product.category_product_id')
         ->where('tbl_category_product.slug',$slug)->select('tbl_product.*','tbl_category_product.name as category_name')->paginate(8);
@@ -38,6 +39,6 @@ class productSiteController extends Controller
         {
             $product_watched=Session::get('product_watched');
         }
-        return view("website.list_product_category",compact('product','product_watched'));
+        return view("website.list_product_category",compact('product','product_watched','category'));
     }
 }

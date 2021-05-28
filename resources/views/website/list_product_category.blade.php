@@ -6,10 +6,10 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{$product->first()->category_name}}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{$category->category_name}}</li>
             </ol>
         </nav>
-        <h1 class="title-page text-center text-primary">{{$product->first()->category_name}}</h1>
+        <h1 class="title-page text-center text-primary">{{$category->category_name}}</h1>
         <div class="description text-justify mb-5">
         </div>
         <div class="row mb-5">
@@ -161,11 +161,11 @@
                                     <div class="price">{{currency_format($product_watched->price*((100-$product_watched->persent_discount)/100))}}/{{$product_watched->unit}}</div>
                                     <div class="old-price">{{currency_format($product_watched->price)}}/{{$product_watched->unit}}</div>
                                     <input type="hidden" value="{{ $product_watched->price*((100-$product_watched->persent_discount)/100)}}" class="cart_product_price_{{$product_watched->id}}">
-                                    <input type="hidden" value="{{ $item->price}}" class="cart_product_price_off_{{$item->id}}">
+                                    <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_off_{{$product_watched->id}}">
                                     @else
                                     <div class="price">{{currency_format($product_watched->price)}}/{{$product_watched->unit}}</div>
                                     <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_{{$product_watched->id}}">
-                                    <input type="hidden" value="{{ $item->price}}" class="cart_product_price_off_{{$item->id}}">
+                                    <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_off_{{$product_watched->id}}">
                                     @endif
                                 </div>
                             </div>

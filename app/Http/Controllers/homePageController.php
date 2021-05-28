@@ -14,6 +14,7 @@ class homePageController extends Controller
 {
     public function getHomePage(Request $req)
     {
+       
         $key = $req->input('key');
 
         $productCategory=CategoryProduct::all();

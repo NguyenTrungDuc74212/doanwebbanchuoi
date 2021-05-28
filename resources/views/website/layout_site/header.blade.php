@@ -56,6 +56,13 @@
 		fjs.parentNode.insertBefore(js, fjs);
 
 	}(document, 'script', 'facebook-jssdk'));</script>
+	<style>
+		div#search_ajax {
+			width: 0%;
+			left: 82px;
+			top: 3px;
+		}
+	</style>
 </head>
 <body>
 	<div class="clearfix"></div>
