@@ -132,7 +132,7 @@ class checkoutController extends Controller
 				$order->shipping_id = $shipping_id;
 				$order->total = Session::get('total');
 				$order->status =1 ;/*mặc định là đang xử lý*/
-				$order->order_code = $code_random;
+				//$order->order_code = $code_random;
 				$order->quantity = $soluong;
 				$order->order_date = $mytime->toDateString();
 				if ($coupon) {
@@ -140,7 +140,8 @@ class checkoutController extends Controller
 				}
 				$order->save();
 				$order_id = $order->id;
-
+				$order->order_code=get_code($order_id,"DH");
+				$order->save();
 				foreach ($cart as $value) {
 					$product = Product::find($value['product_id']);
 					$order_detail = new Order_detail;
@@ -228,7 +229,7 @@ class checkoutController extends Controller
 				$order->shipping_id = $shipping_id;
 				$order->total = Session::get('total');
 				$order->status =1 ;/*mặc định là đang xử lý*/
-				$order->order_code = $code_random;
+			//	$order->order_code = $code_random;
 				$order->quantity = $soluong;
 				$order->order_date = $mytime->toDateString();
 				if ($coupon) {
@@ -236,6 +237,8 @@ class checkoutController extends Controller
 				}
 				$order->save();
 				$order_id = $order->id;
+				$order->order_code=get_code($order_id,"DH");
+				$order->save();
 
 				foreach ($cart as $value) {
 					$product = Product::find($value['product_id']);
@@ -325,7 +328,7 @@ class checkoutController extends Controller
 			$order->shipping_id = $shipping_id;
 			$order->total = Session::get('total');
 			$order->status =1 ;/*mặc định là đang xử lý*/
-			$order->order_code = $code_random;
+			//$order->order_code = $code_random;
 			$order->quantity = $soluong;
 			$order->order_date = $mytime->toDateString();
 			if ($coupon) {
@@ -333,6 +336,8 @@ class checkoutController extends Controller
 			}
 			$order->save();
 			$order_id = $order->id;
+			$order->order_code=get_code($order_id,"DH");
+			$order->save();
 
 			foreach ($cart as $value) {
 				$product = Product::find($value['product_id']);

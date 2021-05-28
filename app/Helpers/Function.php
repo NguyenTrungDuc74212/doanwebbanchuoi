@@ -33,5 +33,15 @@ function convert_vi_to_en($str) {
   $str = str_replace(" ", "-", str_replace("&*#39;","",$str));
   return $str;
 }
+function get_code($id,$prefix)
+{
+  $numRule=7;
+  $str="";
+  for($i=0;$i<($numRule-strlen($id));$i++)
+  {
+    $str=$str."0";
+  }
+  return $prefix."".$str."".$id;
+}
 
     ?>

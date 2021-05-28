@@ -44,6 +44,10 @@ class orderController extends Controller
         if($notification_id!=null)
         {
             $notification=Notification::find($notification_id);
+            if($notification==null)
+            {
+                 return redirect()->route('order_get_detail',$id);
+            }
             $notification->delete();
         }
         $order=Order::find($id);
