@@ -10,6 +10,7 @@ use App\Models\Repost;
 use App\Models\Notification;
 use Session;
 use DB;
+use Auth;
 use Carbon\carbon;
 
 class orderController extends Controller
@@ -231,5 +232,19 @@ class orderController extends Controller
         DB::rollBack();
         throw new Exception($ex->getMessage());
     }
+    }
+    public function deleteNotifications()
+    {
+        DB::beginTransaction();
+        try{
+            Auth::user()->notifications()->delete();
+            DB::commit();
+            return redirect()->back();
+        }catch(Exception $ex)
+        {
+            DB::rollback();
+            throw new Exception($ex->getMessage());
+        
+        }
     }
 }
