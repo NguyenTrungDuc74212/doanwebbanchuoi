@@ -194,7 +194,7 @@ element.style {
                         </a>
                         @endforeach
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                        <a href="{{route('delete_all_notifications')}}" class="dropdown-item dropdown-footer">Xóa tất cả thông báo</a>
                     </div>
                     </div>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="my-toast">

@@ -246,4 +246,5 @@ Route::post('like-product-ajax','likeProductController@like_product_ajax')->name
 
 // notification
 Route::get('order/get-detail/{id}/{notification_id}','orderController@getOrderDetail')->name('order_get_detail_by_notification');
+Route::get('notification/delete-all','orderController@deleteNotifications')->name('delete_all_notifications');
 /* end website*/
