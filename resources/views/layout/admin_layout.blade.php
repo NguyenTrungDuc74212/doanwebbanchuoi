@@ -193,6 +193,8 @@ element.style {
                             {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
                         </a>
                         @endforeach
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                     </div>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="my-toast">
