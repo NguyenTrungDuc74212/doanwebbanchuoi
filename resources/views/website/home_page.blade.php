@@ -35,8 +35,8 @@
                 <div class="col-4 text-center">
                     <img class="hvr-grow" src="https://hoaquafuji.com/storage/app/media/t1_4.png"
                     alt="ĐỔI TRẢ MIỄN PHÍ">
-                    <h3 class="text-primary">CHƯA NGHĨ RA</h3>
-                    <p class="d-none d-lg-block">Bổ sung sau
+                    <h3 class="text-primary">HỢP TÁC VÀ PHÁT TRIỂN</h3>
+                    <p class="d-none d-lg-block">Hợp tác cùng người nông dân đưa chuối Việt Nam vươn tầm thế giới.
                     </p>
                 </div>
                 <div class="col-4 text-center">
