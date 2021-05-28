@@ -21,11 +21,17 @@
 		<h3 class="card-title">Thêm danh mục sản phẩm</h3>
 	</div>
 	<div class="card-body">
-		<form action="{{ route('insert_category_product') }}" method="POST">
+		<form action="{{ route('insert_category_product') }}" method="POST" enctype="multipart/form-data">
 			@csrf
 			<label for="">Tên danh mục</label>
 			<input class="form-control" type="text" placeholder="tên danh mục" name="name" value="{{ old('name') }}">
 			@error('name')
+			<p class="text-danger">{{ $message }}</p>
+			@enderror
+			<br>
+			<label for="">Ảnh minh họa</label>
+			<input type="file" name="image" class="form-control" value="{{ old('image') }}">
+			@error('image')
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
 			<br>

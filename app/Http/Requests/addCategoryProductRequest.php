@@ -24,6 +24,7 @@ class addCategoryProductRequest extends FormRequest
     public function rules()
     {
         return [
+            'image' => 'required|mimes:pdf,xlx,csv|max:2048',
             "name"=>"required|unique:tbl_category_product,name",
             "desc"=>"required",
             "meta_title"=>"required",
@@ -34,6 +35,7 @@ class addCategoryProductRequest extends FormRequest
     public function messages()
     {
         return [
+            'image.required'=>'hình ảnh không được bỏ trống',
             "name.required"=>"tên danh mục không được bỏ trống",
             "name.unique"=>"danh mục đã tồn tại",
             "desc.required"=>"mô tả danh mục không được bỏ trống",

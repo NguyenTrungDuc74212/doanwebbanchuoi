@@ -21,7 +21,7 @@
 		<h3 class="card-title">Thêm danh mục sản phẩm</h3>
 	</div>
 	<div class="card-body">
-		<form action="{{ route('update_category_product',$category_product->id) }}" method="POST">
+		<form action="{{ route('update_category_product',$category_product->id) }}" method="POST" enctype="multipart/form-data">
 			@csrf
 			<label for="">Tên danh mục</label>
 			<input class="form-control" type="text" placeholder="tên danh mục" name="name" value="{{ old('name',$category_product->name) }}">
@@ -32,6 +32,13 @@
 			<label for="">Mô tả danh mục</label>
 			<textarea class="form-control" id="ck" name="desc">{{ old('desc',$category_product->desc) }}</textarea>
 			@error('desc')
+			<p class="text-danger">{{ $message }}</p>
+			@enderror
+			<br>
+			<label for="">Ảnh minh họa</label>
+			<input type="file" name="image" class="form-control">
+			<input type="hidden" name="img_old" class="form-control" value="{{ $category_product->image }}">
+			@error('image')
 			<p class="text-danger">{{ $message }}</p>
 			@enderror
 			<br>
