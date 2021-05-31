@@ -25,23 +25,12 @@
 	</div>
 	<div class="card-body">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5><b>Thông tin đơn hàng</b></h5>
+            <div class="row my-row">
+				<div class="col-md-6">
+					<h5><b>Thông tin đơn hàng</b></h5>
 					<form action="">
 						@csrf
 					<p style="display:blog"><b>Ngày tạo:</b> {{$order->order_date}}</p>
-					<p><b>Trạng thái:</b></p>
-					<select class="form-control" id="status-order" @if($order->status==4||$order->status==5||$order->status==6) disabled @endif>
-						<option value="">---Chọn---</option>
-						<option value="1" {{ $order->status==1?'selected':'' }}>Chờ xác nhận</option>
-						<option value="2" {{ $order->status==2?'selected':'' }}>Chờ lấy hàng</option>
-						<option value="3" {{ $order->status==3?'selected':'' }}>Đang giao</option>
-						<option value="4" {{ $order->status==4?'selected':'' }}>Đã giao</option>
-						<option value="5" {{ $order->status==5?'selected':'' }}>Đã hủy</option>
-						<option value="6" {{ $order->status==6?'selected':'' }}>Trả hàng</option>
-					</select>
-					<br>
 					<p style="display:blog"><b>Mã giảm giá :</b>
 						@if($coupon!=null)
 						{{$coupon->code}}
@@ -55,35 +44,58 @@
 						@endif
 					</p>
 					<p><b>Phương thức thanh toán:</b> @if($order->shipping->method==1) Chuyển khoản @else Thanh toán khi nhận hàng @endif</p>
-					<p><b>Trạng thái thanh toán:</b></p>
+					</form>
+				</div>
+				<div class="col-md-6">
+					<p><b>Trạng thái:</b></p>
+					<select class="form-control" id="status-order" @if($order->status==4||$order->status==5||$order->status==6) disabled @endif>
+						<option value="">---Chọn---</option>
+						<option value="1" {{ $order->status==1?'selected':'' }}>Chờ xác nhận</option>
+						<option value="2" {{ $order->status==2?'selected':'' }}>Chờ lấy hàng</option>
+						<option value="3" {{ $order->status==3?'selected':'' }}>Đang giao</option>
+						<option value="4" {{ $order->status==4?'selected':'' }}>Đã giao</option>
+						<option value="5" {{ $order->status==5?'selected':'' }}>Đã hủy</option>
+						<option value="6" {{ $order->status==6?'selected':'' }}>Trả hàng</option>
+					</select>
+						<p><b>Trạng thái thanh toán:</b></p>
 					<select class="form-control" id="status-pay-order" @if($order->status_pay==1) disabled @endif>
 						<option value="">---Chọn---</option>
 						<option value="0" {{ $order->status_pay==0?'selected':'' }}>Chưa thanh toán</option>
 						<option value="1" {{ $order->status_pay==1?'selected':'' }}>Đã thanh toán</option>
 					</select>
-					<br>
 				</div>
-			</form>
-                <div class="col-md-4">
-                <h5><b>Thông tin khách hàng</b></h5>
-				@if($order->customer!=null)
-				<p style="display:blog"><b>Khách hàng</b> : {{$order->customer->name}}</p>
-				<p style="display:blog"><b>Email</b>      : {{$order->customer->email}}</p>
-				<p style="display:blog"><b>Phone</b>      : {{$order->customer->phone}}</p>
-				@else
-				<p> Khách hàng không có tài khoản.</p>
-				@endif
 			</div>
-                <div class="col-md-4">
-                    <h5><b>Thông tin giao hàng</b></h5>
+			<div class="row my-row">
+				<div class="col-md-12">
+					<h5><b>Thông tin khách hàng</b></h5>
+					<div class="infor-order">
+					@if($order->customer!=null)
+					<p style="display:blog"><b>Khách hàng</b> : {{$order->customer->name}}</p>
+					<p style="display:blog"><b>Email</b>      : {{$order->customer->email}}</p>
+					<p style="display:blog"><b>Phone</b>      : {{$order->customer->phone}}</p>
+					@else
+					<p> Khách hàng không có tài khoản.</p>
+					@endif
+					</div>
+				</div>
+			</div>
+			<div class="row my-row">
+				<div class="col-md-6">
+					<h5><b>Thông tin giao hàng</b></h5>
+					<div class="infor-order">
 					<p style="display:blog"><b>Người nhận</b> : {{$order->shipping->name}}</p>
 					<p style="display:blog"><b>Phone</b>      : {{$order->shipping->phone}}</p>
 					<p style="display:blog"><b>Email</b>      : {{$order->shipping->email}}</p>
+					</div>
+				</div>
+				<div class="col-md-6">
 					<p style="display:blog"><b>Địa chỉ</b>    : {{$order->shipping->address}}</p>
 					<p style="display:blog"><b>Ghi chú</b>    : {{$order->shipping->notes}}</p>
-                </div>
+				</div>
+			</div>
             </div>
-			<div class="row">
+			<br>
+		<div class="row">
 				
 <table id="customers">
 	<tr>
@@ -132,17 +144,23 @@
 		@endif
 	
 			<div class="card-footer">
-				<div class="float-right">
-				<p><b class="text-primary">Tổng số lượng sản phẩm: </b>{{$amountArray['tongSanPham']}}</p>
-				<p><b class="text-primary">Tổng tiền hàng: </b>{{currency_format($amountArray['tongTienHang'])}}</p>
-				<p><b class="text-primary">Tiền trừ giảm giá: </b>{{currency_format($amountArray['tienTruGiamGia'])}}</p>
-				<p><b class="text-danger">Tổng tiền thanh toán: </b>{{currency_format($amountArray['tongTienThanhToan'])}}</p>
+				<div class="float-left">
+				<p class="money"><b class="text-primary ">Tổng số lượng sản phẩm: </b>{{$amountArray['tongSanPham']}}</p>
+				<p class="money"><b class="text-primary">Tổng tiền hàng: </b>{{currency_format($amountArray['tongTienHang'])}}</p>
+				</div>
+				<div class="float-right">	
+				<p  class="money"><b class="text-primary">Tiền trừ giảm giá: </b>{{currency_format($amountArray['tienTruGiamGia'])}}</p>
+				<p class="money"><b class="text-danger">Tổng tiền thanh toán: </b>{{currency_format($amountArray['tongTienThanhToan'])}}</p>
 			</div>
 			</div>
 	</div>
 	<!-- /.card-body -->
 </div>
 <style>
+	select.form-control {
+    width: 54%;
+    height: 35px;
+}
 	#customers {
 	  font-family: Arial, Helvetica, sans-serif;
 	  border-collapse: collapse;
@@ -165,9 +183,41 @@
 	  background-color: #bf8e34;
 	  color: white;
 	}
-	table, th, td {
-  border: 1px solid black !important;
-  border-collapse: collapse !important;
+
+	element.style {
+}
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+table, th, td {
+    border: 1px solid #00000045 !important;
+    border-collapse: collapse !important;
+}
+.my-row {
+	border: 0.1px solid #80808075;
+    position: relative;
+    margin-top: 3%;
+    padding: 10px;
+}
+h5 {
+    position: absolute;
+    top: -27px;
+    background-color: white;
+}
+
+p.money {
+    border: 1px solid;
+    padding: 16px;
+    text-align: center;
+}
+
+.float-left {
+    width: 50%;
+}
+
+.float-right {
+    width: 49%;
 }
 	</style>
 	{{-- thay đổi trạng thái của đơn hàng --}}
