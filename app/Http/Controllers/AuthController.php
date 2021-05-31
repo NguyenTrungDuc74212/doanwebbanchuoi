@@ -8,6 +8,7 @@ use App\Models\Roles;
 use Mail;
 use Session;
 use App\Models\Repost;
+use App\Models\Visitors;
 use Carbon\Carbon;
 use App\Http\Requests\changeRequest;
 use App\Http\Requests\UserRegisterRequest;
@@ -15,9 +16,39 @@ use Gate;
 
 class AuthController extends Controller
 {
-	public function dashboard()
+	public function dashboard(Request $req)
 	{
-		return view('admin.dashboard.dashboard_view');
+		$user_ip_add = $req->ip(); /*lấy ra ip hiện tại*/
+		$today = Carbon::now()->toDateString();
+		$startofMonth_ago = Carbon::now()->subMonth()->startOfMonth()->toDateString();
+		$endofMonth_ago = Carbon::now()->subMonth()->endOfMonth()->toDateString();
+		$thismonth = Carbon::now()->startOfMonth()->toDateString();
+		$sub365days = Carbon::now()->subdays(365)->toDateString();
+
+		$visitor_lastmonth = Visitors::whereBetween('date',[$startofMonth_ago,$endofMonth_ago])->get();
+		$visitor_lastmonth_count =$visitor_lastmonth->count();
+
+		$visitor_thismonth = Visitors::whereBetween('date',[$thismonth,$today])->get();
+		$visitor_thismonth_count =$visitor_thismonth->count();
+		
+		$visitor_oneyear = Visitors::whereBetween('date',[$sub365days,$today])->get();
+		$visitor_oneyear_count =$visitor_oneyear->count();
+
+    //online
+		$visitor_online =Visitors::where('ip_add',$user_ip_add)->get();
+		$visitor_count_online = $visitor_online->count();
+
+		if ($visitor_count_online<1) {
+			$visitor = new Visitors();
+			$visitor->ip_add = $user_ip_add;
+			$visitor->date = Carbon::now()->toDateString();
+			$visitor->save();
+		}
+    //total visitor
+		$visitors = Visitors::all();
+		$visitors_total = $visitors->count();
+
+		return view('admin.dashboard.dashboard_view',compact('visitors_total','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_count_online'));
 	}
 	public function filter_date(Request $req)
 	{
@@ -40,7 +71,6 @@ class AuthController extends Controller
 	{
 		$today = Carbon::now()->toDateString();
 		$tomorow = Carbon::now()->addDay()->toDateString();
-
 		$startofMonth = Carbon::now()->startOfMonth()->toDateString();
 		$startofMonth_ago = Carbon::now()->subMonth()->startOfMonth()->toDateString();
 		$endofMonth_ago = Carbon::now()->subMonth()->endOfMonth()->toDateString();

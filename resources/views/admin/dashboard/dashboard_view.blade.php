@@ -60,6 +60,27 @@
   <div class="col-lg-12">
     <div id="chart" style="height: 250px;"></div>
   </div>
+  <h3 class="text-center" style="color: #d46709;padding: 20px;">Thống kê truy cập</h3>
+    <table class="table table-bordered table-dark" style="background: #292424">
+      <thead>
+        <tr>
+          <th scope="col">Đang online</th>
+          <th scope="col">Tổng tháng trước</th>
+          <th scope="col">Tổng tháng này</th>
+          <th scope="col">Tổng 1 năm</th>
+          <th scope="col">Tổng truy cập</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ $visitor_count_online }}</td>
+          <td>{{ $visitor_lastmonth_count }}</td>
+          <td>{{ $visitor_thismonth_count }}</td>
+          <td>{{ $visitor_oneyear_count }}</td>
+          <td>{{ $visitors_total }}</td>
+        </tr>
+      </tbody>
+    </table>
 </div>
 <!-- /.content -->
 @stop
