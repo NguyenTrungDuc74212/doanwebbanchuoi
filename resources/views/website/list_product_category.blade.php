@@ -1,7 +1,7 @@
 @extends('website.layout_site.index')
 @section('content')
 <section id="layout-content">
-    <div class="fixed-container mb-5"><img class="banner" src="https://hoaquafuji.com/themes/hoaquafuji/assets/img/banner-hoa-qua-sach-fuji.jpg" alt="Hoa quả sạch Fuji"></div>
+    <div class="fixed-container mb-5"><img class="banner" src="public/public_site/image/img_banner_cate.png" alt="Hoa quả sạch Fuji"></div>
     <div class="container" id="list-product-page">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">

@@ -7,17 +7,17 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
- dl,
- h1,
- h2,
- h3,
- h4,
- h5,
- h6,
- ol,
- p,
- pre,
- ul {
+dl,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+p,
+pre,
+ul {
     margin-top: 0
 }
 
@@ -8190,8 +8190,8 @@ a.text-dark:hover {
         page-break-inside: avoid
     }
     *,
-    ::after,
-    ::before {
+     ::after,
+     ::before {
         text-shadow: none!important;
         box-shadow: none!important
     }
@@ -8831,7 +8831,7 @@ section.service img {
  * Copyright (c) 2018 Daniel Eden
  */
 
- @keyframes bounce {
+@keyframes bounce {
     20%,
     53%,
     80%,
@@ -10824,7 +10824,7 @@ section.about .right .media .media-body p {
 }
 
 section.camket {
-    background: url(../image/t3_bg.png) bottom center no-repeat;
+    background: url(../image/banner2.jpg) bottom center no-repeat;
     padding: 1.5rem 0 4.5rem;
     height: 230px
 }
@@ -11181,7 +11181,7 @@ section.category-product .box-category ul li a:hover {
 }
 
 section.customer {
-    background-image: url(../image/bg-customer.jpg);
+    background-image: url(../image/banner1.jpg);
     background-repeat: no-repeat;
     padding: 2rem 0;
     position: relative;
@@ -11194,7 +11194,7 @@ section.customer .overlay {
     height: 100%;
     width: 100%;
     background: #269300;
-    opacity: .7
+    opacity: -0.3;
 }
 
 section.customer .title {
@@ -11782,22 +11782,24 @@ body>p.flash-message.success {
         height: 253px;
     }
 }
-.dropdown-menu li a:hover
-{
+
+.dropdown-menu li a:hover {
     background-color: #269300;
     color: #FFFFFF !important;
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
 }
-.dropdown-menu li:hover{
+
+.dropdown-menu li:hover {
     background-color: #269300;
 }
-li.value_search a{
+
+li.value_search a {
     display: block;
-padding: 3px 20px;
-clear: both;
-font-weight: normal;
-line-height: 1.428571429;
-color: #333;
-white-space: nowrap;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333;
+    white-space: nowrap;
 }
