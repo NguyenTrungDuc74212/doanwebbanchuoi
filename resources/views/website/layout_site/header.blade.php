@@ -154,7 +154,7 @@
 						<nav class="bg-light">
 							<div class="container">
 								<ul class="d-lg-flex flex-row justify-content-center align-items-center">
-									<li class="sub-logo mr-auto"><a href="https://hoaquafuji.com"><img
+									<li class="sub-logo mr-auto"><a href="https://muachuoi.xyz"><img
 										src="{{asset('public/upload/slide/logo_chuoi.png')}}"
 										alt="Fresh Banana"></a></li>
 										<li role="presentation" class="py-lg-2 nav-head" id='trangchu' onclick="click_navbar($(this).attr('id'))">

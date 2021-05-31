@@ -327,24 +327,24 @@
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <div class="item">
-                                            <p>Bà Hậu Phương </p>
+                                            <p>Ông Hiếu Trung </p>
                                             <p> Giám đốc công ty TNHH Phát triển công nghệ 2MG</p>
-                                            <p><img src="https://hoaquafuji.com/storage/app/uploads/public/cad/0f0/2c2/thumb__150_150_0_0_auto.jpg"
-                                                alt="Khách hàng fuij"></p>
+                                            <p><img src="https://scontent-hkg4-1.xx.fbcdn.net/v/t1.15752-9/75369159_461027014766925_532254732689866752_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=ae9488&_nc_ohc=2cxKWuMTxAIAX-vOBBH&_nc_ht=scontent-hkg4-1.xx&oh=011964adb7914f37f97f0a045bb5f053&oe=60DA113D"
+                                                alt="Khách hàng fresh banana"></p>
                                                 <p>“ Là người thường xuyên phải chuẩn bị hậu cần ở công ty, tôi luôn phải tìm
                                                     nguồn trái cây nhập khẩu tươi ngon, an toàn cho cả công ty mỗi dịp liên
-                                                    hoan, hội nghị....Sau khi tìm hiểu rất kỹ, tôi đã lựa chọn Hoa quả sạch Fuji
+                                                    hoan, hội nghị....Sau khi tìm hiểu rất kỹ, tôi đã lựa chọn VTS
                                                     và tôi không còn lo lắng chất lượng hoa quả nữa”
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="item">
-                                                <p>Ông Ngô Quyền </p>
+                                                <p>Ông Đức Trung Nguyễn </p>
                                                 <p> Giám đốc công ty nội thất ADhome</p>
-                                                <p><img src="https://hoaquafuji.com/storage/app/uploads/public/4b4/d0e/ca8/thumb__150_150_0_0_auto.jpg"
-                                                    alt="Khách hàng fuij"></p>
-                                                    <p>“Hoa quả sạch FUJI luôn tươi ngon với đầy đủ giấy tờ chứng minh nguồn gốc rõ
+                                                <p><img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t1.6435-9/173720418_545664379750430_6886817172856789631_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=9wYaQhSbWkUAX99lN8J&_nc_ht=scontent-hkt1-1.xx&oh=cc04db7e0287342cad1925149776a73d&oe=60DB88B2"
+                                                    alt="Khách hàng fresh banana"></p>
+                                                    <p>Những sản phẩm của chuối Việt Nam luôn tươi ngon với đầy đủ giấy tờ chứng minh nguồn gốc rõ
                                                         ràng nên tôi rất yên tâm lựa chọn cho gia đình cũng như tặng người thân, bạn
                                                         bè!”
                                                     </p>
@@ -352,29 +352,17 @@
                                             </div>
                                             <div class="swiper-slide">
                                                 <div class="item">
-                                                    <p>Ông Trần Tuấn </p>
-                                                    <p> CEO &amp; founder Công ty in, thiết kế Tuấn Hoàng</p>
-                                                    <p><img src="https://hoaquafuji.com/storage/app/uploads/public/ac5/83b/43f/thumb__150_150_0_0_auto.jpg"
-                                                        alt="Khách hàng fuij"></p>
-                                                        <p>“Tôi thích nhất chính sách đổi trả của Hoa quả sạch Fuji. Có lần mình mua
-                                                            trái lựu bị khô bên trong, các bạn nhân viên đã tư vấn nhiệt tình và đổi trả
+                                                    <p>Ông Đạt Thành </p>
+                                                    <p> CEO &amp; founder Công Xinhacoi</p>
+                                                    <p><img src="https://scontent-hkt1-2.xx.fbcdn.net/v/t1.15752-9/186540312_495591748452655_2171231043695018312_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=ae9488&_nc_ohc=LmlnglkkDwYAX-My6GB&_nc_ht=scontent-hkt1-2.xx&oh=fd0a07832a2cf33bf041852cf4be828a&oe=60D8BA4A"
+                                                        alt="Khách hàng fresh banana"></p>
+                                                        <p>“Tôi thích nhất chính sách đổi trả của VTS. Có lần mình mua
+                                                            sản phẩm bị dập, các bạn nhân viên đã tư vấn nhiệt tình và đổi trả
                                                             100% Miễn phí. Từ đó, tôi không cần lo lắng về chất lượng sản phẩm mua tại
-                                                            hệ thống hoa quả sạch nhập khẩu Fuji”.
+                                                            VTS”.
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div class="swiper-slide">
-                                                    <div class="item">
-                                                        <p>Ông Minh </p>
-                                                        <p> Giám đốc công ty cổ phần phần mềm POS 365</p>
-                                                        <p><img src="https://hoaquafuji.com/storage/app/uploads/public/9bc/681/458/thumb__150_150_0_0_auto.jpg"
-                                                            alt="Khách hàng fuij"></p>
-                                                            <p>"Có lần, tôi muốn đặt giỏ quà tặng sinh nhật đối tác, nhân viên đã gọi điện
-                                                                tư vấn rất nhiệt tình, trang trí rất đẹp và sáng tạo, tôi rất ưng ý và sẽ
-                                                                thường xuyên ghé mua hàng tại hệ thống HQS Fuji!"
-                                                            </p>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

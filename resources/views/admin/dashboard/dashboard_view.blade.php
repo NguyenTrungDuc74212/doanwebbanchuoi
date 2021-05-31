@@ -135,5 +135,11 @@
   </div>
 </div>
 </div>
+<style>
+  table {
+    background: #c9940e !important;
+    color: black !important;
+  }
+</style>
 <!-- /.content -->
 @stop

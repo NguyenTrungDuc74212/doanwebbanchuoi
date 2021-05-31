@@ -30,8 +30,8 @@ class homePageController extends Controller
         $postTop=DB::table('tbl_post')->orderByDesc("created_at")->limit(4)->get();
         $product_top_sale=Product::orderBy('product_sold','DESC')->limit(10)->get();
         if ($key) {
-         $product_search = Product::where('name','like',"%{$key}%")->paginate(6);
-         return view("website.search_home_page",compact('product_search','productCategory'));
+         $product = Product::where('name','like',"%{$key}%")->paginate(6);
+         return view("website.search_home_page",compact('product','productCategory'));
      }
      return view("website.home_page",compact('productCategory','slides','productLatest','product_all','product_top_sale','postTop','postIntro'));
 

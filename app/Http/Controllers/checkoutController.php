@@ -156,8 +156,24 @@ class checkoutController extends Controller
 					$order_detail->save();
 					$product =$order_detail->product;
 					$product->quantity = $product->quantity-$value['product_qty'];
+					if($product->quantity<10)
+					{
+						$options = array(
+							'cluster' => 'ap1',
+							'encrypted' => true
+						);
+				
+						$pusher = new Pusher(
+							env('PUSHER_APP_KEY'),
+							env('PUSHER_APP_SECRET'),
+							env('PUSHER_APP_ID'),
+							$options
+						);
+						$data['id_product']=$product->id;
+						$pusher->trigger('my-channel', 'event-quantity-product', $data);
+					}
 					$product->save();
-						// lấy sản phẩm ra từ trong kho
+					// lấy sản phẩm ra từ trong kho
 					do{
 						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
 						$warehouse = $warehouseProduct->warehouse;
@@ -253,6 +269,22 @@ class checkoutController extends Controller
 					$product =$order_detail->product;
 					$product->quantity = $product->quantity-$value['product_qty'];
 					$product->save();
+					if($product->quantity<10)
+					{
+						$options = array(
+							'cluster' => 'ap1',
+							'encrypted' => true
+						);
+				
+						$pusher = new Pusher(
+							env('PUSHER_APP_KEY'),
+							env('PUSHER_APP_SECRET'),
+							env('PUSHER_APP_ID'),
+							$options
+						);
+						$data['id_product']=$product->id;
+						$pusher->trigger('my-channel', 'event-quantity-product', $data);
+					}
 						// lấy sản phẩm ra từ trong kho
 					do{
 						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
@@ -354,6 +386,22 @@ class checkoutController extends Controller
 				$product =$order_detail->product;
 				$product->quantity = $product->quantity-$value['product_qty'];
 				$product->save();
+				if($product->quantity<10)
+				{
+					$options = array(
+						'cluster' => 'ap1',
+						'encrypted' => true
+					);
+			
+					$pusher = new Pusher(
+						env('PUSHER_APP_KEY'),
+						env('PUSHER_APP_SECRET'),
+						env('PUSHER_APP_ID'),
+						$options
+					);
+					$data['id_product']=$product->id;
+					$pusher->trigger('my-channel', 'event-quantity-product', $data);
+				}
 					// lấy sản phẩm ra từ trong kho
 				do{ 
 					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
@@ -736,7 +784,7 @@ class checkoutController extends Controller
 			$account_name = Customer::where('id',$account->user)->first();
 			Session::put('name_customer',$account_name->name);
 			Session::put('id_customer',$account_name->id);
-			return redirect('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập Admin thành công');
+			return redirect()->route('get_home_page')->with('thongbao_login_thatbai', 'Đăng nhập Admin thành công');
 		}else{
 			$customer_new = new Soical([
 				'provider_user_id'=>$provider->getId(),

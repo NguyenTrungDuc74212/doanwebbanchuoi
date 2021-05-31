@@ -179,7 +179,7 @@ element.style {
                     </div>
                 </li> --}}
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" id="dropdown-notification">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge count-notification">{{count(Auth::user()->unreadNotifications)}}</span>
@@ -202,7 +202,7 @@ element.style {
                         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-header">
                                 <i class="fa fa-globe-americas"></i>
-                              <strong class="mr-auto">Thông báo</strong>
+                              <strong class="mr-auto"> Thông báo</strong>
                               <button type="button" class="ml-2 mb-1 close" id="close-toast" data-dismiss="toast" aria-label="Close" >
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -1624,34 +1624,29 @@ element.style {
         `;
         $('#drop-notification').prepend(newNotificationHtml);
     });
+    channel.bind('event-quantity-product', function(data) {
+        $("#my-toast").addClass('show');
+        $(".count-notification").text(parseInt($(".count-notification").first().text())+1);
+        var newNotificationHtml = `
+        <div class="dropdown-divider"></div>
+                        <a href="admin/edit-product/${data.id_product}" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i>Sản phẩm sắp hết hàng hãy nhập thêm !
+                            {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
+                        </a>
+        `;
+        $('#drop-notification').prepend(newNotificationHtml);
+    });
   </script>
 <script>
     $(document).ready(function () {
         $('#close-toast').click(function(){
             $("#my-toast").removeClass('show');
         });
- 
+        $('#dropdown-notification').click(function(){
+            $("#my-toast").removeClass('show');
+        });
     });
 </script>
-<script>
-    var chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "105017725128905");
-    chatbox.setAttribute("attribution", "biz_inbox");
-    window.fbAsyncInit = function() {
-      FB.init({
-        xfbml            : true,
-        version          : 'v10.0'
-      });
-    };
-
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
     @yield('script')
 </body>
 

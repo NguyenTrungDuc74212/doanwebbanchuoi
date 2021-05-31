@@ -82,7 +82,7 @@
                                     @endif
                                 </div>
                                 <div class="more-info">
-                                    Liên hệ trực tiếp hotline: <strong>1900 2268</strong> để nhận được sự tư vấn tốt nhất về
+                                    Liên hệ trực tiếp hotline: <strong>18008168</strong> để nhận được sự tư vấn tốt nhất về
                                     các sản phẩm của chúng tôi.
                                 </div>
                                 <section class="order">
@@ -138,12 +138,11 @@
                             <h1 style="text-align: center;"><strong>{{ $product->name }}</strong>
                                 <br>
                             </h1>
-                            {!! $product->desc !!}
+                            {!! $product->desc!!}
 
                         </div>
                         <div class="tab-pane fade p-4" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <p style="text-align: center;"><strong>TÔN CHỈ HOẠT ĐỘNG CỦA HỆ THỐNG HOA QUẢ SẠCH FUJI
-                            FRUIT</strong></p>
+                            <p style="text-align: center;"><strong>TÔN CHỈ HOẠT ĐỘNG CỦA FRESH BANANA</strong></p>
 
                             <p>1. Hoa quả luôn tươi sạch</p>
 
@@ -157,9 +156,6 @@
 
                             <p>6. Giá cả cạnh tranh</p>
 
-                            <p style="text-align: center;"><img
-                                src="https://hoaquafuji.com/news/tin-nong-san/storage/app/media/uploaded-files/7d6822194a09af57f618-min.jpg"
-                                style="width: 900px;" class="fr-fic fr-dib" data-result="success"></p>
 
                                 <p style="text-align: center;">
                                     <br>
@@ -167,25 +163,22 @@
 
                                 <p><strong>Mọi thông tin chi tiết vui lòng liên hệ:</strong></p>
 
-                                <p>CÔNG TY CP XUẤT NHẬP KHẨU FUJI</p>
+                                <p>CÔNG TY CỔ PHẦN VTS</p>
 
-                                <p>Trụ sở: Số nhà 24 D7, KĐT Đại Kim - Định Công, P.Đại Kim, Q.Hoàng Mai, TP.HN</p>
+                                <p>Trụ sở: Số 180 Trung Hành, Đằng Lâm, Hải An, Hải Phòng</p>
 
-                                <p>Điện thoại: 1900 2268 - 0988 444 123</p>
+                                <p>Hotline: 0373.163.163</p>
 
-                                <p>Hệ thống cửa hàng Fuji Fruit: <a
-                                    href="http://hoaquafuji.com/danh-sach-cua-hang-fuji-fruit">http://hoaquafuji.com/danh-sach-cua-hang-fuji-fruit</a>
-                                </p>
-
-                                <p>Website: www.hoaquafuji.com</p>
+                    
+                                <p><a href="https://muachuoi.xyz/">Website: www.muachuoi.xyz</a></p>
                             </div>
                         </div>
                     </div>
                     <!-- End detail -->
-                    <div class="box-comment">
+                    {{-- <div class="box-comment">
                         <div class="fb-comments" data-href="http://hoaquafuji.local/product/nho-ngon-tay-uc"
                         data-numposts="5" data-width="100%"></div>
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- End left-content -->
                 <div class="col-md-3">
