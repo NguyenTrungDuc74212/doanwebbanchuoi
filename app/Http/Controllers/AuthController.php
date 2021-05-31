@@ -47,6 +47,7 @@ class AuthController extends Controller
 
 		$sub7days = Carbon::now()->subdays(7)->toDateString();
 		$sub365days = Carbon::now()->subdays(365)->toDateString();
+		$sub30days = Carbon::now()->subdays(30)->toDateString();
 
 		if ($req->filterValue == "1tuan") {
 			$data = Repost::whereBetween('date_repost',[$sub7days,$today])->orderBy('date_repost','DESC')->get();
@@ -55,7 +56,10 @@ class AuthController extends Controller
 			$data = Repost::whereBetween('date_repost',[$startofMonth_ago,$endofMonth_ago])->orderBy('date_repost','DESC')->get();
 		}elseif($req->filterValue=="thangnay"){
 			$data = Repost::whereBetween('date_repost',[$startofMonth,$today])->orderBy('date_repost','DESC')->get();
-		}else{
+		}elseif($req->filterValue==""){
+			$data = Repost::whereBetween('date_repost',[$sub30days,$tomorow])->orderBy('date_repost','DESC')->get();
+		}
+		else{
 			$data = Repost::whereBetween('date_repost',[$sub365days,$today])->orderBy('date_repost','DESC')->get();
 		}
 		$chart_data =[];
