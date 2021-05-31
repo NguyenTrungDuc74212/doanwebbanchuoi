@@ -9,8 +9,7 @@
 								tin</a></li>
 						<li><a href="#" onclick="return false;">Quy định và hình thức
 								thanh toán</a></li>
-						{{-- <li><a href="https://hoaquafuji.com/chinh-sach-thanh-vien-fuji">Chính sách thành viên Fuji</a>
-						</li> --}}
+		
 						<li><a href="#" onclick="return false;">Chính sách đổi trả</a></li>
 						<li><a href="#" onclick="return false;">Chính sách vận chuyển</a></li>
 						<li><a href="#" onclick="return false;">Câu hỏi thường gặp</a></li>
@@ -42,7 +41,7 @@
 
 			<div class="row align-items-center">
 
-				<div class="col-md-6">© Nhóm đồ án VNU</div>
+				<div class="col-md-6">© Nhóm đồ án VMU</div>
 
 				<div class="col-md-6 text-right">
 

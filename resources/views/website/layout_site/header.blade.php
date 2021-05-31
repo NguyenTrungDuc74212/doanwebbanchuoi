@@ -5,14 +5,14 @@
 	<title>Chuối Việt Nam | Chuối sạch 100%</title>
 	<meta name="description"
 	content="Chuối Việt Nam, Presh Banana cung ứng các sản phẩm từ chuối, cam kết 100% chuối sạch!" />
-	<link rel="canonical" href="https://hoaquafuji.com">
+	<link rel="canonical" href="https://muachuoi.xyz">
 	<meta name="robots" content="index, follow" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Chuối Việt Nam | Chuối sạch 100%" />
 	<meta property="og:description"
 	content="Chuối Việt Nam, Presh Banana cung ứng các sản phẩm từ chuối, cam kết 100% chuối sạch!" />
 	<meta property="og:image"
-	content="https://hoaquafuji.com/storage/app/media/mua-gio-trai-cay-dep-gia-re-o-dau-000.jpg" />
+	content="{{asset('public\public_site\image\img_share.jpg')}}" />
 	<meta property="og:url" content="https://muachuoi.xyz" />
 	<meta property="og:locale" content="vi_VN" />
 	<meta property="fb:app_id" content="3205375276187307" />
@@ -20,15 +20,15 @@
 	<meta name="twitter:description"
 	content="Chuối Việt Nam, Presh Banana cung ứng các sản phẩm từ chuối, cam kết 100% chuối sạch!">
 	<meta name="twitter:image"
-	content="https://hoaquafuji.com/storage/app/media/mua-gio-trai-cay-dep-gia-re-o-dau-000.jpg" />
+	content="{{asset('public\public_site\image\img_share.jpg')}}" />
 	<!-- Additional meta tags -->
 	<meta name="google-site-verification" content="WXsKJfp0gesXTn2YHVyXTDWxlfNM-OyjHWgflGz4PRE" />
 
-	<meta name="author" content="QuangtrongOnline">
+	<meta name="author" content="NhomDoAnVMU">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<meta name="generator" content="QuangtrongOnline">
+	<meta name="generator" content="NhomDoAnVMU">
 
 	<link rel="icon" href="{{asset('public/upload/slide/logo_chuoi.png')}}" sizes="50x50">
 	<link rel="stylesheet" href="{{asset('public/public_site/css/fonts.css')}}">
