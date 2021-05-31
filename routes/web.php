@@ -32,6 +32,10 @@ Route::post('change-password','AuthController@change_password')->name('change_pa
 Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
     //Dashboard
 	Route::get('Dashboard','AuthController@dashboard')->name('trangchu_admin');
+	//thống kê báo cáo
+Route::post('/filter-by-date','AuthController@filter_date')->name('filter_date');
+Route::post('filter-date-selection','AuthController@order_filter')->name('order_filter');
+Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day');
 
 
 // category_product
@@ -248,8 +252,4 @@ Route::post('like-product-ajax','likeProductController@like_product_ajax')->name
 Route::get('order/get-detail/{id}/{notification_id}','orderController@getOrderDetail')->name('order_get_detail_by_notification');
 Route::get('notification/delete-all','orderController@deleteNotifications')->name('delete_all_notifications');
 
-//thống kê báo cáo
-Route::post('/filter-by-date','AuthController@filter_date')->name('filter_date');
-Route::post('filter-date-selection','AuthController@order_filter')->name('order_filter');
-Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day');
 /* end website*/

@@ -13,7 +13,12 @@ class AddTblVisitors extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('tbl_visitors', function (Blueprint $table) {
+            $table->id();
+            $table->string('ip_add');
+            $table->string('date');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class AddTblVisitors extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tbl_visitors');
     }
 }
