@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,6 +36,8 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <base href="{{asset('')}}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style type="text/css">
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 17px !important;
@@ -616,26 +617,37 @@ element.style {
 <script src="https://cdn.jsdelivr.net/npm/tail.select@0.5.15/js/tail.select-full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script type="text/javascript">
-//  $( function() {
-//   $("#datepicker").datepicker({
-//     dateFormat: "yy-mm-dd",
-//     duration: "slow"
-//   });
-//   $("#datepicker2").datepicker({
-//     dateFormat: "yy-mm-dd",
-//     duration: "slow"
-//   });
-//   $("#coupon_date_start").datepicker({
-//     dateFormat: "dd/mm/yy",
-//     duration: "slow"
-//   });
-//   $("#coupon_date_end").datepicker({
-//     dateFormat: "dd/mm/yy",
-//     duration: "slow"
-//   });
 
-// });
+ <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script type="text/javascript">
+ $( function() {
+  $("#datepicker").datepicker({
+    dateFormat: "yy-mm-dd",
+    duration: "slow"
+  });
+  $("#datepicker2").datepicker({
+    dateFormat: "yy-mm-dd",
+    duration: "slow"
+  });
+  $("#coupon_date_start").datepicker({
+    dateFormat: "yy-mm-dd",
+    duration: "slow"
+  });
+  $("#coupon_date_end").datepicker({
+    dateFormat: "yy-mm-dd",
+    duration: "slow"
+  });
+    $("#datepicker3").datepicker({
+    dateFormat: "yy-mm-dd",
+    duration: "slow"
+  });
+    $("#datepicker4").datepicker({
+    dateFormat: "yy-mm-dd",
+    duration: "slow"
+  });
+
+});
 // </script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -666,6 +678,95 @@ element.style {
     CKEDITOR.replace('ck_1');
   });
 </script>
+
+{{-- xử lý thống kê báo cáo --}}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        chart_orders_30days();
+        var chart = new Morris.Area({
+            element: 'chart',
+            lineColors: ['#609e4d','#FF6541','#c9940e'],  /*màu cột*/
+            pointFillColors: ['#269300'],
+            pointStrokeColors: ['black'],
+            parseTime:false,
+            hideHover: 'auto',
+            xkey: 'period',
+            fillOpacity:0.3,
+            gridTextColor:'#269300',
+            ykeys: ['order','profit','quantity'],
+            labels: ['Đơn hàng','lợi nhuận','số lượng'],
+            behaveLikeLine: true
+        });
+        
+        function chart_orders_30days(){
+            $.ajax({
+                url: '{{ route('order_30_day') }}',
+                type: 'POST',
+                dataType:'JSON',
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                {
+                    chart.setData(data);
+                }     
+            });   
+        }
+        $('.admin_filter').change(function(event) {
+            var filterValue = $(this).val();
+            $.ajax({
+                url: '{{ route('order_filter') }}',
+                type: 'POST',
+                dataType:'JSON',
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{
+                    filterValue:filterValue,
+
+                }, /*name:biến var*/
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                {
+                    if (data!=null) {
+                        chart.setData(data);
+                    }
+
+                }     
+            });  
+
+        });
+
+
+        $('#btn-dashboard-filter').click(function(event) {
+            event.preventDefault();
+            var fromDate = $('#datepicker3').val();
+            var toDate = $('#datepicker4').val();
+            $.ajax({
+                url: '{{ route('filter_date') }}',
+                type: 'POST',
+                dataType:'JSON',
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{
+                    fromDate:fromDate,
+                    toDate:toDate,
+
+                }, /*name:biến var*/
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                {
+                    chart.setData(data);
+                }     
+            });   
+
+        });
+    });
+</script>
+
+{{-- end xử lý thống kê báo --}}
+
+
 {{-- xử lý chọn nhiều ảnh --}}
 <script type="text/javascript">
   $(document).ready(function() {
@@ -1532,6 +1633,25 @@ element.style {
  
     });
 </script>
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "105017725128905");
+    chatbox.setAttribute("attribution", "biz_inbox");
+    window.fbAsyncInit = function() {
+      FB.init({
+        xfbml            : true,
+        version          : 'v10.0'
+      });
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
     @yield('script')
 </body>
 

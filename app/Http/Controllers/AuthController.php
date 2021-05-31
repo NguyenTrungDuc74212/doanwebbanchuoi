@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Roles;
 use Mail;
 use Session;
+use App\Models\Repost;
+use Carbon\Carbon;
 use App\Http\Requests\changeRequest;
 use App\Http\Requests\UserRegisterRequest;
 use Gate;
@@ -16,6 +18,73 @@ class AuthController extends Controller
 	public function dashboard()
 	{
 		return view('admin.dashboard.dashboard_view');
+	}
+	public function filter_date(Request $req)
+	{
+		$result = $req->all();
+		$from_date = $result['fromDate'];
+		$to_date = $result['toDate'];
+		$data = Repost::whereBetween('date_repost',[$from_date,$to_date])->orderBy('date_repost','ASC')->get();
+		$chart_data =[];
+		foreach ($data as $value) {
+			$chart_data[] = array(
+				'period' =>$value->date_repost,
+				'order' =>$value->total_order,
+				'profit' =>$value->total_revenue,
+				'quantity' =>$value->total_quantity,
+			);
+		}
+		echo $result = json_encode($chart_data);
+	}
+	public function order_filter(Request $req)
+	{
+		$today = Carbon::now()->toDateString();
+		$tomorow = Carbon::now()->addDay()->toDateString();
+
+		$startofMonth = Carbon::now()->startOfMonth()->toDateString();
+		$startofMonth_ago = Carbon::now()->subMonth()->startOfMonth()->toDateString();
+		$endofMonth_ago = Carbon::now()->subMonth()->endOfMonth()->toDateString();
+
+		$sub7days = Carbon::now()->subdays(7)->toDateString();
+		$sub365days = Carbon::now()->subdays(365)->toDateString();
+
+		if ($req->filterValue == "1tuan") {
+			$data = Repost::whereBetween('date_repost',[$sub7days,$today])->orderBy('date_repost','DESC')->get();
+		}
+		elseif($req->filterValue=="thangtruoc"){
+			$data = Repost::whereBetween('date_repost',[$startofMonth_ago,$endofMonth_ago])->orderBy('date_repost','DESC')->get();
+		}elseif($req->filterValue=="thangnay"){
+			$data = Repost::whereBetween('date_repost',[$startofMonth,$today])->orderBy('date_repost','DESC')->get();
+		}else{
+			$data = Repost::whereBetween('date_repost',[$sub365days,$today])->orderBy('date_repost','DESC')->get();
+		}
+		$chart_data =[];
+		foreach ($data as $value) {
+			$chart_data[] = array(
+				'period' =>$value->date_repost,
+				'order' =>$value->total_order,
+				'profit' =>$value->total_revenue,
+				'quantity' =>$value->total_quantity,
+			);
+		}
+		echo $result = json_encode($chart_data);
+	}
+	public function order_30_day()
+	{
+		$tomorow = Carbon::now()->addDay()->toDateString();
+		$today = Carbon::now()->toDateString();
+		$sub30days = Carbon::now()->subdays(30)->toDateString();
+		$data = Repost::whereBetween('date_repost',[$sub30days,$tomorow])->orderBy('date_repost','DESC')->get();
+		$chart_data =[];
+		foreach ($data as $value) {
+			$chart_data[] = array(
+				'period' =>$value->date_repost,
+				'order' =>$value->total_order,
+				'profit' =>$value->total_revenue,
+				'quantity' =>$value->total_quantity,
+			);
+		}
+		echo $result = json_encode($chart_data);
 	}
 	public function login()
 	{
