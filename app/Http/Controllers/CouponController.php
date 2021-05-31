@@ -13,8 +13,6 @@ class CouponController extends Controller
 	{
 		return view('admin.coupon.add_coupon');
 	}
-<<<<<<< HEAD
-=======
 	public function khoa_coupon($id)
 	{
 		$coupon = Coupon::find($id);
@@ -28,7 +26,7 @@ class CouponController extends Controller
 		$coupon->save();
 		return redirect()->back()->with('thongbao','kích hoạt mã giảm giá sản phẩm thành công');
 	}
->>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
+
 	public function save_coupon(addCouponRequest $req)
 	{
 		$coupon = new Coupon;
@@ -44,12 +42,8 @@ class CouponController extends Controller
 	}
 	public function list_coupon()
 	{
-<<<<<<< HEAD
-		$today = Carbon::now()->format('d/m/Y');
-		
-=======
 		$today = Carbon::now()->format('Y-m-d');
->>>>>>> c540d5bb6168e8ab5d1d711e9f433b0d4b02b399
+
 		$coupon_query =Coupon::query();
         $coupon_query->latest();
         $coupon=$coupon_query->paginate(5);
