@@ -40,7 +40,6 @@ class AuthController extends Controller
 	{
 		$today = Carbon::now()->toDateString();
 		$tomorow = Carbon::now()->addDay()->toDateString();
-
 		$startofMonth = Carbon::now()->startOfMonth()->toDateString();
 		$startofMonth_ago = Carbon::now()->subMonth()->startOfMonth()->toDateString();
 		$endofMonth_ago = Carbon::now()->subMonth()->endOfMonth()->toDateString();
