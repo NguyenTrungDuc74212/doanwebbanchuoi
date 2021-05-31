@@ -9,6 +9,8 @@ use Mail;
 use Session;
 use App\Models\Repost;
 use App\Models\Visitors;
+use App\Models\Product;
+use App\Models\Post;
 use Carbon\Carbon;
 use App\Http\Requests\changeRequest;
 use App\Http\Requests\UserRegisterRequest;
@@ -48,7 +50,14 @@ class AuthController extends Controller
 		$visitors = Visitors::all();
 		$visitors_total = $visitors->count();
 
-		return view('admin.dashboard.dashboard_view',compact('visitors_total','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_count_online'));
+	//sản phẩm bán chạy
+		$product_top = Product::orderBy('product_sold','DESC')->limit(5)->get();
+
+	//bài viết xem nhiều nhất
+		$post_top = Post::orderBy('view','DESC')->limit(5)->get();
+
+
+		return view('admin.dashboard.dashboard_view',compact('visitors_total','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_count_online','product_top','post_top'));
 	}
 	public function filter_date(Request $req)
 	{
