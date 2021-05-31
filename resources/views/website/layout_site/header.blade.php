@@ -165,7 +165,7 @@
 											<a href="{{route('get_intro')}}">Giới thiệu</a>
 										</li>
 										<li role="presentation" class="py-lg-2 nav-head" id="tintuc" onclick="click_navbar($(this).attr('id'))">
-											<a href="#">Tin tức</a>
+											<a onclick="return false;" href="#">Tin tức</a>
 											<ul class="sub-menu">
 												@foreach ($postCategoryHeader as $item)
 												<li role="presentation" class="py-lg-2">
@@ -175,13 +175,13 @@
 											</ul>
 										</li>
 										<li role="presentation" class="py-lg-2 nav-head" id="sanxuat" onclick="click_navbar($(this).attr('id'))">
-											<a href="#">Sản xuất</a>
+											<a href="#" onclick="return false;">Sản xuất</a>
 										</li>
 										<li role="presentation" class="py-lg-2 nav-head" id="dichvu" onclick="click_navbar($(this).attr('id'))">
-											<a href="#">Dịch vụ</a>
+											<a href="#" onclick="return false;">Dịch vụ</a>
 										</li>
 										<li role="presentation" class="py-lg-2 nav-head" id="muahang" onclick="click_navbar($(this).attr('id'))">
-											<a href="#">Mua hàng online</a>
+											<a onclick="return false;" href="#">Mua hàng online</a>
 											<ul class="sub-menu">
 												@foreach ($productCategoryHeader as $item)
 												<li role="presentation" class="py-lg-2">
@@ -191,7 +191,7 @@
 											</ul>
 										</li>
 										<li role="presentation" class="py-lg-2 nav-head" id="gocchiase" onclick="click_navbar($(this).attr('id'))">
-											<a href="#">Góc chia sẻ</a>
+											<a href="#" onclick="return false;">Góc chia sẻ</a>
 										</li>
 										<li role="presentation" class="py-lg-2 nav-head" id="lienhe" onclick="click_navbar($(this).attr('id'))">
 											<a href="{{route('get_address')}}">Liên hệ</a>
@@ -218,10 +218,10 @@
 										</li>
 										<li role="presentation" class="py-lg-2">
 											@if (Session::get('id_customer'))
-											<a href="">Xin chào {{ Session::get('name_customer') }}</a>
+											<a data-href="#">Xin chào {{ Session::get('name_customer') }}</a>
 											<ul class="sub-menu">
 												<li role="presentation" class="py-lg-2">
-													<a href="#" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus dangky"></i>
+													<a data-href="#" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus dangky"></i>
 													Đăng ký</a>
 
 												</li>

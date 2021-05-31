@@ -5,28 +5,25 @@
 				<div class="col-md-4">
 					<div class="title">Chính sách</div>
 					<ul class="list-unstyled">
-						<li><a href="https://hoaquafuji.com/chinh-sach-bao-mat-thong-tin">Chính sách bảo mật thông
+						<li><a href="#" onclick="return false;">Chính sách bảo mật thông
 								tin</a></li>
-						<li><a href="https://hoaquafuji.com/quy-dinh-va-hinh-thuc-thanh-toan">Quy định và hình thức
+						<li><a href="#" onclick="return false;">Quy định và hình thức
 								thanh toán</a></li>
 						{{-- <li><a href="https://hoaquafuji.com/chinh-sach-thanh-vien-fuji">Chính sách thành viên Fuji</a>
 						</li> --}}
-						<li><a href="https://hoaquafuji.com/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
-						<li><a href="https://hoaquafuji.com/chinh-sach-van-chuyen">Chính sách vận chuyển</a></li>
-						<li><a href="https://hoaquafuji.com/cau-hoi-thuong-gap">Câu hỏi thường gặp</a></li>
-						<li><a href="https://hoaquafuji.com/lien-he">Liên hệ</a></li>
+						<li><a href="#" onclick="return false;">Chính sách đổi trả</a></li>
+						<li><a href="#" onclick="return false;">Chính sách vận chuyển</a></li>
+						<li><a href="#" onclick="return false;">Câu hỏi thường gặp</a></li>
+						<li><a href="#" onclick="return false;">Liên hệ</a></li>
 					</ul>
 				</div>
 				<div class="col-md-4">
 					<div class="title">Hỗ trợ mua hàng</div>
 					<ul class="list-unstyled">
-						<li><a href="https://hoaquafuji.com/danh-sach-cua-hang-fuji-fruit">Chính sách vận chuyển</a></li>
-						<li><a href="https://hoaquafuji.com/huong-dan-mua-hang">Chính sách bảo mật</a></li>
+						<li><a href="#" onclick="return false;">Chính sách vận chuyển</a></li>
+						<li><a href="#" onclick="return false;">Chính sách bảo mật</a></li>
 					</ul>
-					{{-- <a href='http://online.gov.vn/Home/WebDetails/69210'
-						title="Hoa quả Fuji đã đăng ký với Bộ công thương"><img width='170px' alt='Bộ công thương'
-							title='Bộ công thương'
-							src="https://hoaquafuji.com/themes/hoaquafuji/assets/images/logoSaleNoti.png" /></a> --}}
+				
 				</div>
 				<div class="col-md-4">
 					<div class="title">CÔNG TY CHUỐI VIỆT NAM</div>
