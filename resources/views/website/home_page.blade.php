@@ -26,21 +26,21 @@
             <h2 class="text-center mb-4 text-uppercase">Đưa chuối Việt Nam vươn tầm thế giới</h2>
             <div class="row">
                 <div class="col-4 text-center">
-                    <img class="hvr-grow" src="https://hoaquafuji.com/storage/app/media/t1_3.png"
+                    <img class="hvr-grow" src="public\public_site\image\t1_3.png"
                     alt="HOA QUẢ TƯƠI SẠCH">
                     <h3 class="text-primary">ĐẢM BẢO TƯƠI VÀ SẠCH</h3>
                     <p class="d-none d-lg-block">Quy trình nhập hàng, vận chuyển, bảo quản chuyên nghiệp.
                     </p>
                 </div>
                 <div class="col-4 text-center">
-                    <img class="hvr-grow" src="https://hoaquafuji.com/storage/app/media/t1_4.png"
+                    <img class="hvr-grow" src="public\public_site\image\t1_4.png"
                     alt="ĐỔI TRẢ MIỄN PHÍ">
                     <h3 class="text-primary">HỢP TÁC VÀ PHÁT TRIỂN</h3>
                     <p class="d-none d-lg-block">Hợp tác cùng người nông dân đưa chuối Việt Nam vươn tầm thế giới.
                     </p>
                 </div>
                 <div class="col-4 text-center">
-                    <img class="hvr-grow" src="https://hoaquafuji.com/storage/app/media/t1_5.png"
+                    <img class="hvr-grow" src="public\public_site\image\t1_5.png"
                     alt="GIÁ CẢ CẠNH TRANH">
                     <h3 class="text-primary">GIÁ CẢ CẠNH TRANH</h3>
                     <p class="d-none d-lg-block">Chúng tôi luôn đặt lợi ích cho người tiêu dùng lên hàng đầu.
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="text-center hoavan"><img
-                src="https://hoaquafuji.com/themes/hoaquafuji/assets/img/border.png" alt=""></div>
+                src="public\public_site\image\border.png" alt=""></div>
             </div>
         </section>
         <!--/.service-->
@@ -57,22 +57,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 left">
-                        <h3 class="title text-primary"><i class="fas fa-comments mr-2"></i>ĐÔI NÉT VỀ FUJI</h3>
+                        <h3 class="title text-primary"><i class="fas fa-comments mr-2"></i>ĐÔI NÉT VỀ FRESH BANANA</h3>
                         <p class="text-justify">Với tôn chỉ “Mang đến cho khách hàng không chỉ là những sản phẩm trái
-                            cây an toàn, chất lượng cao, mà kèm theo đó là những dịch vụ tiện ích thân thiện. ”Công ty
-                            CP xuất nhập khẩu Fuji” - đơn vị chuyên nhập khẩu các loại trái cây cao cấp từ các nước trên
-                            thế giới đang từng bước phát triển và chiếm được lòng tin của người tiêu dùng Việt Nam. Hiện
-                            tại, công ty có hệ thống các cửa hàng mang thương hiệu Hoa quả sạch Fuji được phân bố rộng
-                            khắp trên địa bàn các tỉnh phía Bắc phục vụ đủ nhu cầu cho mọi khách hàng. Bằng những nỗ lực
-                            không ngừng theo thời gian, hệ thống Hoa quả sạch Fuji từng ngày hoàn thiện hơn về tất cả
+                            cây an toàn, chất lượng cao, mà kèm theo đó là những dịch vụ tiện ích thân thiện. ”Công ty cổ phần VTS Việt Nam” - đơn vị chuyên nhập khẩu các loại trái cây cao cấp từ các nước trên
+                            thế giới đang từng bước phát triển và chiếm được lòng tin của người tiêu dùng Việt Nam.Hiện tại công ty đang cung ứng các sản phẩm từ chuối đến tay người tiêu dùng trên khắp đất nước. Bằng những nỗ lực
+                            không ngừng theo thời gian, công ty chúng tôi từng ngày hoàn thiện hơn về tất cả
                         mọi mặt.</p>
                         <div class="text-right">
-                            <a href="https://hoaquafuji.com/doi-net-ve-fuji" class="readmore hvr-forward">Giới thiệu
+                            <a href="{{route('get_intro')}}" class="readmore hvr-forward">Giới thiệu
                             chung</a>
                         </div>
                     </div>
                     <div class="col-md-4 text-center"><span class="hvr-float-shadow"><img
-                        src="https://hoaquafuji.com/themes/hoaquafuji/assets/img/t2_img.png" alt=""></span>
+                        src="public/public_site/image/center_img.jpg" alt=""></span>
                     </div>
                     <div class="col-md-4 right">
                         <h3 class="title text-primary"><i class="far fa-newspaper mr-2"></i>Giới thiệu chung</h3>
@@ -301,7 +298,7 @@
                     <div class="row">
                         @foreach ($productCategory as $item)
                         <div class="col-md-4 mb-5">
-                            <div class="box-category" style="background-image:url('{{asset('public/upload/category_product/'.$item->image)}}') ">
+                            <div class="box-category" style="background-image:url('public/upload/category_product/{{$item->image}}') ">
                                 <h3 class="title"><a href="{{route('get_product_by_category',$item->slug)}}">{{$item->name}}</a></h3>
                                 <p><br></p> <p><br></p> <p><br></p>
                             </div>

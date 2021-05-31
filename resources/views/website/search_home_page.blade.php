@@ -167,7 +167,7 @@
                     <div class="row">
                         @foreach ($productCategory as $item)
                         <div class="col-md-4 mb-5">
-                            <div class="box-category" style="background-image:url('{{asset('public/upload/category_product/'.$item->image)}}') ">
+                            <div class="box-category" style="background-image:url('https://hoaquafuji.com/storage/app/uploads/public/463/6a0/ad7/thumb__525_420_0_0_auto.jpg') ">
                                 <h3 class="title"><a href="{{route('get_product_by_category',$item->slug)}}">{{$item->name}}</a></h3>
                                 <p><br></p> <p><br></p> <p><br></p>
                             </div>

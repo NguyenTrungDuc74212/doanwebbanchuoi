@@ -40,6 +40,7 @@
 	<link href="{{asset('public/public_site/css/meanmenu.min.css')}}" rel="stylesheet" />
 
 	<!-- Load Facebook SDK for JavaScript -->
+	<base href="{{asset('')}}">
 
 	<div id="fb-root"></div>
 
