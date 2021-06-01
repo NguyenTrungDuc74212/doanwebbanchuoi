@@ -221,7 +221,7 @@
 	<script src="{{asset('public/public_site/js/swiper.min.js')}}"></script>
 
 	<script src="{{asset('public/public_site/js/app.js')}}"></script>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src="{{asset('public/public_site/js/framework.combined-min.js')}}"></script>
 	<link rel="stylesheet" property="stylesheet" href=" {{asset('public/public_site/css/framework.extras-min.css')}}">
 

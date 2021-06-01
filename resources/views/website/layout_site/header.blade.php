@@ -32,6 +32,7 @@
 
 	<link rel="icon" href="{{asset('public/upload/slide/logo_chuoi.png')}}" sizes="50x50">
 	<link rel="stylesheet" href="{{asset('public/public_site/css/fonts.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
 
 	<link href="{{asset('public/public_site/css/app.css')}}" rel="stylesheet">
 
