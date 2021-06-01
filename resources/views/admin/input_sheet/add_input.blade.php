@@ -77,6 +77,7 @@
 							<th>Tên sản phẩm</th>
 							<th>Số lượng</th>
 							<th>Đơn vị</th>
+							<th>Ngày hết hạn</th>
 							<th>Giá nhập</th>
 							<th>Tổng tiền</th>
 							<th class="text-center">Thao tác</th>
@@ -94,6 +95,9 @@
 							</td>
 							<td>
 								<input type="text" name="unit[]" class="unit" min="0">
+							</td>
+							<td>
+								<input type="text" name="expiration_date[]"  placeholder="YYYY/DD/MM" class="form-control my-datepicker">
 							</td>
 							<td><input type="number" name="price_import[]" class="price_import" min="0"></td>
 							<td class="total_amount text-center" name="total_amount"></td>

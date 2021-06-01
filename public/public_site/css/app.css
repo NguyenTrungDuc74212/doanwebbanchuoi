@@ -11803,3 +11803,11 @@ li.value_search a {
     color: #333;
     white-space: nowrap;
 }
+
+.status-product {
+    background-color: #035b29;
+    border-radius: 8px;
+    border: 1px solid orange;
+    padding: 2px;
+    color: white;
+}

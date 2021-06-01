@@ -197,12 +197,12 @@
 							<div class="discount">{{$item->persent_discount}}%</div>
 							@endif
 							<div class="rate">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</div>
+								@if($item->quantity>0)
+								   <p class="status-product">Còn hàng</p>
+								@else
+									<p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
+								@endif
+							</div>   
 							<div class="card-img hvr-grow">
 								<a href="/product/tao-envy-new-zealand"><img class="card-img-top" src="{{asset('public/upload/product/'.$item->image)}}" alt="{{ $item->name }}" id="withlist_product_img_{{ $item->id }}"></a>
 								<div class="box-control">

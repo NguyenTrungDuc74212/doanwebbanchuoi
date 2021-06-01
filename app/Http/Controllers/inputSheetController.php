@@ -44,6 +44,7 @@ class inputSheetController extends Controller
 public function save_input(addInputRequest $req){
  $product_id = $req->product_id; 
  $quantity = $req->quantity;
+ $expiration_date=$rep->expiration_date;
  $total_quantity = 0;
  $price_import = $req->price_import;
  $total_amount = 0;
@@ -74,16 +75,25 @@ if ($req->status==1) {
   else {
     $warehouse->quantity_now =  $warehouse->quantity_now + $total_quantity;
     $warehouse->save();
-    foreach ($product_id as $key1 => $product) {
-      foreach ($quantity as $key2 => $soluong) {
-        if ($key1==$key2) {
+    // foreach ($product_id as $key1 => $product) {
+    //   foreach ($quantity as $key2 => $soluong) {
+    //     if ($key1==$key2) {
+    //       $warehouse_product = new WarehouseProduct;
+    //       $warehouse_product->product_id = $product;
+    //       $warehouse_product->quantity = $soluong;
+    //       $warehouse_product->warehouse_id = $warehouse_id;
+    //       $warehouse_product->expiration_date=
+    //       $warehouse_product->save();
+    //     }
+    //   }
+    // }
+        for ($i=0;$i<count($product_id);$i++) {
           $warehouse_product = new WarehouseProduct;
-          $warehouse_product->product_id = $product;
-          $warehouse_product->quantity = $soluong;
+          $warehouse_product->product_id = $product_id[$i];
+          $warehouse_product->quantity = $quantity[$i];
           $warehouse_product->warehouse_id = $warehouse_id;
+          $warehouse_product->expiration_date=$expiration_date[$i];
           $warehouse_product->save();
-        }
-      }
     }
   }
   foreach ($product_id as $value) {

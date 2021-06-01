@@ -28,8 +28,6 @@ class addInputRequest extends FormRequest
             "warehouse_id"=>"required",
             "product_id"=>"required",
             "date_input"=>"required"
-
-
         ];
     }
     public function messages()
