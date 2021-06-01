@@ -1024,6 +1024,9 @@ element.style {
           <td>
           <input type="text" name="unit[]" class="unit" min="0">
           </td>
+          <td>
+			<input type="text" name="expiration_date[]" placeholder="yyyy-mm-dd" class="form-control my-datepicker">
+			</td>
           <td><input type="number" name="price_import[]" class="price_import" min="0"></td>
           <td class="total_amount text-center" name="total_amount"></td>
           <td class="text-center"><a data-href="" class="delete-input" style="cursor:pointer;"><i class="fa fa-times text-danger"></i></a></td>
@@ -1103,6 +1106,9 @@ element.style {
       <td>
       <input type="text" name="unit[]" class="unit" min="0">
       </td>
+      <td>
+      <input type="text" name="expiration_date[]" placeholder="yyyy-mm-dd" class="form-control my-datepicker">
+	</td>
       <td><input type="number" name="price_import[]" class="price_import" min="0"></td>
       <td class="total_amount text-center" name="total_amount"></td>
       <td class="text-center"><a data-href="" class="delete-input" style="cursor:pointer;"><i class="fa fa-times text-danger"></i></a></td>
@@ -1579,7 +1585,10 @@ element.style {
         });
     </script>
     {{-- end feeship --}}
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
+    $(function() {
+        $( ".my-datepicker" ).datepicker({ dateFormat: "yyyy-mm-dd" });
+    }); 
         $( function() {
          $("#datepicker").datepicker({
            dateFormat: "yy-mm-dd",
@@ -1599,7 +1608,7 @@ element.style {
          });
        
        });
-       </script>
+       </script> --}}
 
   <script>
 
@@ -1645,6 +1654,11 @@ element.style {
         $('#dropdown-notification').click(function(){
             $("#my-toast").removeClass('show');
         });
+    });
+</script>
+<script>
+    $('.my-datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
     });
 </script>
     @yield('script')

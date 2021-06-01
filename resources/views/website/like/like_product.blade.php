@@ -23,6 +23,13 @@
 						@if($item->persent_discount>0)
 						<div class="discount">{{$item->persent_discount}}%</div>
 						@endif
+						<div class="rate">
+							@if($item->quantity>0)
+							   <p class="status-product">Còn hàng</p>
+							@else
+								<p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
+							@endif
+						</div>
 						<div class="card-img hvr-grow">
 							<a href="{{route('get_product_detail',$item->slug)}}"><img class="card-img-top"
 								src="{{asset('public/upload/product/'.$item->image)}}" alt="{{ $item->name }}" style="width:100% !important;"></a>

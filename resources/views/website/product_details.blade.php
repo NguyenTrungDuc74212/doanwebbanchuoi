@@ -55,14 +55,13 @@
         <div class="col-md-6 d-flex flex-column justify-content-between">
             <h1 class="title">{{ $product->name }}</h1>
             <div class="box-info">
-                                    {{-- <p class="rate">
-                                        <strong>Đánh giá:</strong>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </p> --}}
+                <div class="rate">
+                    @if($product->quantity>0)
+                       <p class="status-product">Còn hàng</p>
+                    @else
+                        <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
+                    @endif
+                </div>
                                     <p>
                                         @if ($product->persent_discount > 0)
                                         <strong>Giá</strong>:{{ currency_format($product->price * ((100 - $product->persent_discount) / 100)) }}/{{$product->unit}}
@@ -258,13 +257,13 @@
                                                                     @if($product_watched->persent_discount>0)
                                                                     <div class="discount">{{$product_watched->persent_discount}}%</div>
                                                                     @endif
-                        {{-- <div class="rate">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div> --}}
+                                                                    <div class="rate">
+                                                                        @if($product_watched->quantity>0)
+                                                                           <p class="status-product">Còn hàng</p>
+                                                                        @else
+                                                                            <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
+                                                                        @endif
+                                                                    </div>
                         <div class="card-img hvr-grow">
 
                             <a href="{{route('get_product_detail',$product_watched->slug)}}"><img class="card-img-top"
