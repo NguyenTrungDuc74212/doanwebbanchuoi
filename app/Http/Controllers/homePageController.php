@@ -9,7 +9,6 @@ use App\Models\Vendors;
 use App\Models\Slider;
 use App\Models\Post;
 use DB;
-
 class homePageController extends Controller
 {
     public function getHomePage(Request $req)

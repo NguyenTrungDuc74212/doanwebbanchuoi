@@ -72,7 +72,12 @@ element.style {
     overflow-y: scroll;
     height: 300px;
 }
+.toast-header {
+    background-color: #008000db;
+    color: white;
+}
 
+strong.mr-auto {padding-left: 10px;}
     </style>
 </head>
 
@@ -188,11 +193,21 @@ element.style {
                         <span class="dropdown-item dropdown-header"> <span class="count-notification">{{count(Auth::user()->unreadNotifications)}}</span> Thông báo</span>
                    <div id="drop-notification">
                         @foreach(Auth::user()->unreadNotifications as $notification)
+                        @isset($notification->data['order_id'])
                         <div class="dropdown-divider"></div>
                         <a href="order/get-detail/{{$notification->data['order_id']}}/{{$notification->id}}" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i>Khách hàng {{$notification->data['custommerName']}} vừa đặt hàng !
                             {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
                         </a>
+                        @endisset
+                        @isset($notification->data['message'])
+                        <div class="dropdown-divider"></div>
+                        <a href="admin/list-product" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i>Sản phẩm hết hạn trong 10 ngày: {{$notification->data['message']}}
+                            {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
+                        </a>
+                        @endisset
+                   
                         @endforeach
                         <div class="dropdown-divider"></div>
                         <a href="{{route('delete_all_notifications')}}" class="dropdown-item dropdown-footer">Xóa tất cả thông báo</a>
@@ -201,7 +216,7 @@ element.style {
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="my-toast">
                         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-header">
-                                <i class="fa fa-globe-americas"></i>
+                                <i class="fa fa-globe-americas"> </i>
                               <strong class="mr-auto"> Thông báo</strong>
                               <button type="button" class="ml-2 mb-1 close" id="close-toast" data-dismiss="toast" aria-label="Close" >
                                 <span aria-hidden="true">&times;</span>
@@ -1647,6 +1662,18 @@ element.style {
         `;
         $('#drop-notification').prepend(newNotificationHtml);
     });
+    channel.bind('product_expiration', function(data) {
+        $("#my-toast").addClass('show');
+        $(".count-notification").text(parseInt($(".count-notification").first().text())+1);
+        var newNotificationHtml = `
+        <div class="dropdown-divider"></div>
+                        <a href="admin/list-product" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> Sản phẩm hết hạn sau 10 ngày:${data.message}
+                            {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
+                        </a>
+        `;
+        $('#drop-notification').prepend(newNotificationHtml);
+    });
   </script>
 <script>
     $(document).ready(function () {
@@ -1680,6 +1707,11 @@ $(document).on('focus',".my-datepicker", function(){ //bind to all instances of 
     });
 });
 </script>
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
     @yield('script')
 </body>
 

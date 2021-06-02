@@ -86,6 +86,7 @@ class orderController extends Controller
             return redirect()->back()->with('error','Đơn hàng đã kết thúc không thể thay đổi trạng thái!!!');
         }
         $order->status=$req->status;
+        $order->status_pay=1;
         $order->save();
         
         if($req->status==4)

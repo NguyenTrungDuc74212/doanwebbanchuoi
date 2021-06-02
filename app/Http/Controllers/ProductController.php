@@ -61,7 +61,8 @@ class ProductController extends Controller
 		$product_query = Product::query();
 		$product_query->latest();
 		$product = $product_query->get();
-		return view('admin.product.list_product',compact('product'));
+		$category_product=CategoryProduct::all();
+		return view('admin.product.list_product',compact('product','category_product'));
 	}
 	public function edit_product($id)
 	{

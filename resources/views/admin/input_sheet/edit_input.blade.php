@@ -63,6 +63,7 @@
 							<th>Đơn vị</th>
 							<th>Giá nhập</th>
 							<th>Tổng tiền</th>
+							<th>Ngày hết hạn</th>
 							<th class="text-center">Thao tác</th>
 						</tr>
 					</thead>
@@ -81,6 +82,9 @@
 							<td><input type="text" name="unit[]" class="unit" min="0" value="{{ $value->unit }}"></td>
 							<td><input type="number" name="price_import[]" class="price_import" min="0" value="{{ $value->price_import }}"></td>
 							<td class="total_amount text-center" name="total_amount">{{ currency_format($value->quantity*$value->price_import) }}</td>
+							<td>
+								<input type="text" name="expiration_date[]" value="{{ $value->expiration_date}}"  placeholder="YYYY/DD/MM" class="form-control my-datepicker">
+							</td>
 							<td class="text-center"><a data-href="" class="delete-input" style="cursor:pointer;"><i class="fa fa-times text-danger"></i></a></td>
 						</tr>
 						@endforeach
@@ -97,4 +101,12 @@
 	</div>
 	<!-- /.card-body -->
 </div>
+<style>
+	th {
+    background-color: #1ab71485;
+}
+input {
+	width: 100%;
+}
+</style>
 @stop

@@ -123,5 +123,8 @@
 	input {
 		width: 100%;
 	}
+	th {
+    background-color: #1ab71485;
+}
 </style>
 @stop

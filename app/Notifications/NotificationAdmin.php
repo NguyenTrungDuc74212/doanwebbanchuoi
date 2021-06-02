@@ -56,19 +56,26 @@ class NotificationAdmin extends Notification
      */
     public function toDatabase($notifiable)
     {
-
-         $customerName=" ";
-        if($this->order->customer!=null)
+        if(isset($this->order->id))
         {
-            $customerName=$this->order->customer->name;
+            $customerName=" ";
+            if($this->order->customer!=null)
+            {
+                $customerName=$this->order->customer->name;
+            }else{
+                $customerName=$this->order->shipping->name;
+            }
+           
+            return [
+                'order_id' => $this->order->id,
+                'custommerName' => $customerName,
+            ];
         }else{
-            $customerName=$this->order->shipping->name;
+            return [
+                'message'=>$this->order,
+            ];
         }
-       
-        return [
-            'order_id' => $this->order->id,
-            'custommerName' => $customerName,
-        ];;
+         
     }
 
     /**
