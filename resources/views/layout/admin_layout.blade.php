@@ -1007,6 +1007,7 @@ element.style {
                         },
                         success: function(data) /*dữ liệu(data) trả về bên function*/ {
                             var html = '';
+                            var random_id=getRandomString(7);
                             html +=
                                 `<tr>
           <td>
@@ -1024,11 +1025,11 @@ element.style {
           <td>
           <input type="text" name="unit[]" class="unit" min="0">
           </td>
-          <td>
-			<input type="text" name="expiration_date[]" placeholder="yyyy-mm-dd" class="form-control my-datepicker">
-			</td>
           <td><input type="number" name="price_import[]" class="price_import" min="0"></td>
           <td class="total_amount text-center" name="total_amount"></td>
+          <td>
+			<input type="text" name="expiration_date[]" placeholder="yyyy-mm-dd" id="${random_id}" class="form-control my-datepicker">
+			</td>
           <td class="text-center"><a data-href="" class="delete-input" style="cursor:pointer;"><i class="fa fa-times text-danger"></i></a></td>
           </tr>`;
                             $('.load_input_sheet').html(html);
@@ -1089,6 +1090,7 @@ element.style {
                             }).then((ok) => {
                                 if (ok) {
                                     var html = '';
+                                    var random_id=getRandomString(7);
                                     html +=
                                         `<tr>
        <td>
@@ -1106,11 +1108,11 @@ element.style {
       <td>
       <input type="text" name="unit[]" class="unit" min="0">
       </td>
-      <td>
-      <input type="text" name="expiration_date[]" placeholder="yyyy-mm-dd" class="form-control my-datepicker">
-	</td>
       <td><input type="number" name="price_import[]" class="price_import" min="0"></td>
       <td class="total_amount text-center" name="total_amount"></td>
+      <td>
+        <input type="text" name="expiration_date[]" placeholder="yyyy-mm-dd" id="${random_id}" class="form-control my-datepicker">
+	</td>
       <td class="text-center"><a data-href="" class="delete-input" style="cursor:pointer;"><i class="fa fa-times text-danger"></i></a></td>
       </tr>`;
                                     $('.load_input_sheet').append(html);
@@ -1656,10 +1658,27 @@ element.style {
         });
     });
 </script>
-<script>
-    $('.my-datepicker').datepicker({
-        uiLibrary: 'bootstrap4'
+{{-- <script>
+    $(".my-datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        duration: "slow"
     });
+</script> --}}
+<script>
+    function getRandomString(length) {
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var result = '';
+    for ( var i = 0; i < length; i++ ) {
+        result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
+}
+$(document).on('focus',".my-datepicker", function(){ //bind to all instances of class "date". 
+   $(this).datepicker({
+        dateFormat: "yy-mm-dd",
+        duration: "slow"
+    });
+});
 </script>
     @yield('script')
 </body>

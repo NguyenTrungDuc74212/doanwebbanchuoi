@@ -42,9 +42,11 @@ class inputSheetController extends Controller
 }
 
 public function save_input(addInputRequest $req){
- $product_id = $req->product_id; 
+  DB::beginTransaction();
+  try{
+ $product_id = $req->product_id;
  $quantity = $req->quantity;
- $expiration_date=$rep->expiration_date;
+ $expiration_date=$req->expiration_date;
  $total_quantity = 0;
  $price_import = $req->price_import;
  $total_amount = 0;
@@ -87,6 +89,7 @@ if ($req->status==1) {
     //     }
     //   }
     // }
+   
         for ($i=0;$i<count($product_id);$i++) {
           $warehouse_product = new WarehouseProduct;
           $warehouse_product->product_id = $product_id[$i];
@@ -123,28 +126,46 @@ $inputSheet->status = $req->status;
 $inputSheet->save();
 $inputSheet_id = $inputSheet->id;
 
-foreach ($product_id as $key1 => $product) {
- foreach ($quantity as $key2 => $soluong) {
-  if ($key1==$key2) {
-    foreach ($price_import as $key3=> $gianhap) {
-      if ($key2==$key3) {
-        foreach ($req->unit as $key4=> $unit) {
-          if ($key3==$key4) {
+// foreach ($product_id as $key1 => $product) {
+//  foreach ($quantity as $key2 => $soluong) {
+//   if ($key1==$key2) {
+//     foreach ($price_import as $key3=> $gianhap) {
+//       if ($key2==$key3) {
+//         foreach ($req->unit as $key4=> $unit) {
+//           if ($key3==$key4) {
+//             $inputSheet_detail = new inputSheetDetail;
+//             $inputSheet_detail->product_id = $product;
+//             $inputSheet_detail->inward_slip_id = $inputSheet_id;
+//             $inputSheet_detail->quantity = $soluong;
+//             $inputSheet_detail->price_import = $gianhap;
+//             $inputSheet_detail->unit = $unit;
+//             $inputSheet_detail->save();
+//           }
+//         }
+//       }
+//     } 
+//   }
+// }
+// }
+for($i=0;$i<count($product_id);$i++)
+{
             $inputSheet_detail = new inputSheetDetail;
-            $inputSheet_detail->product_id = $product;
+            $inputSheet_detail->product_id = $product_id[$i];
             $inputSheet_detail->inward_slip_id = $inputSheet_id;
-            $inputSheet_detail->quantity = $soluong;
-            $inputSheet_detail->price_import = $gianhap;
-            $inputSheet_detail->unit = $unit;
+            $inputSheet_detail->quantity = $quantity[$i];
+            $inputSheet_detail->price_import = $price_import[$i];
+            $inputSheet_detail->unit = $req->unit[$i];
+            $inputSheet_detail->expiration_date=$expiration_date[$i];
             $inputSheet_detail->save();
-          }
-        }
-      }
-    } 
-  }
 }
-}
+DB::commit();
 return redirect()->route('list_input')->with('thongbao','Lập phiếu nhập thành công!!!');
+  }catch(Exception $ex)
+  {
+    DB::rollback();
+    throw new Exception($ex->getMessage());
+    
+  }
 }
 public function list_input(Request $req)
 {
@@ -317,10 +338,11 @@ public function change_status(Request $req)
  $input_detail = $inputSheet->input_detail;
  $product_id = [];
  $quantity = [];
-
+ $expiration_date=[];
  for ($i = 0; $i <count($input_detail) ; $i++) {
    array_push($product_id, $input_detail[$i]->product_id);
    array_push($quantity, $input_detail[$i]->quantity);
+   array_push($expiration_date, $input_detail[$i]->expiration_date);
  }
 
  if ($status==1) {
@@ -335,17 +357,25 @@ public function change_status(Request $req)
   else {
     $warehouse->quantity_now =  $warehouse->quantity_now + $total_quantity;
     $warehouse->save();
-    foreach ($product_id as $key1 => $product) {
-      foreach ($quantity as $key2 => $soluong) {
-        if ($key1==$key2) {
-          $warehouse_product = new WarehouseProduct;
-          $warehouse_product->product_id = $product;
-          $warehouse_product->quantity = $soluong;
-          $warehouse_product->warehouse_id = $warehouse_id;
-          $warehouse_product->save();
-        }
-      }
-    }
+    // foreach ($product_id as $key1 => $product) {
+    //   foreach ($quantity as $key2 => $soluong) {
+    //     if ($key1==$key2) {
+    //       $warehouse_product = new WarehouseProduct;
+    //       $warehouse_product->product_id = $product;
+    //       $warehouse_product->quantity = $soluong;
+    //       $warehouse_product->warehouse_id = $warehouse_id;
+    //       $warehouse_product->save();
+    //     }
+    //   }
+    // }
+    for ($i=0;$i<count($product_id);$i++) {
+      $warehouse_product = new WarehouseProduct;
+      $warehouse_product->product_id = $product_id[$i];
+      $warehouse_product->quantity = $quantity[$i];
+      $warehouse_product->warehouse_id = $warehouse_id;
+      $warehouse_product->expiration_date=$expiration_date[$i];
+      $warehouse_product->save();
+}
   }
   foreach ($product_id as $value) {
     if ($value=="undefined") {
