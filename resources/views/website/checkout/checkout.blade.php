@@ -127,15 +127,18 @@
 								@error('notes')
 								<p class="text-danger">{{ $message }}</p>
 								@enderror
-								<select class="form-control" name="city" style="margin: 10px 0px;">
-									<option value="">----Chọn thành phố---</option>
-									@foreach ($city as $value)
-									<option value="{{ $value->matp }}">{{ $value->name }}</option>
-									@endforeach
-									@error('city')
-									<p class="text-danger">{{ $message }}</p>
-									@enderror
-								</select>
+								<div class="form-group">
+									<label for="">Chọn thành phố</label>
+									<select class="form-control input-sm m-bot15 choose" name="city" id="thanhpho_id" required="">
+										<option value="" class="reset_op">---chọn thành phố---</option>
+										@foreach ($city as $value)
+										<option value="{{ $value->matp }}">{{ $value->name }}</option>
+										@endforeach
+									</select>
+								</div>
+								@error('city')
+								<p class="text-danger">{{ $message }}</p>
+								@enderror
 								@if (count(Session::get('cart'))>0)
 								<span>
 									<label><input class="type" name="method" value="1" type="radio">
@@ -243,7 +246,7 @@
 					<div class="row justify-content-end">
 						<div class="col-3 text-right d-flex">
 							@if (Session::get('coupon_ss'))
-							<span class="text-danger">Tổng cộng:</span>
+							<span class="text-danger text-nowrap">Tổng cộng:</span>
 							<div class="box-total tongtien" style="margin: 0px 5px;">
 								{{ $total_offical<0?'0đ': currency_format($total_offical)}}
 							</div>
@@ -251,15 +254,18 @@
 								{{ ($total_offical)}} 
 							</div>
 							@else
-							<span class="text-danger">Tổng cộng:</span>
+							<span class="text-danger text-nowrap">Tổng cộng:</span>
 							<div class="box-total tongtien" style="margin: 0px 5px;">
 							{{ currency_format($total_offical = $total) }}</div>
 							<div class="tongtien_am" hidden>
 								{{ ($total_offical)}} 
 							</div>
 							@endif
+							+<i class="text-nowrap" style="color: #269300;">Phí ship: Chúng tôi sẽ liên lạc với bạn để báo phí ship</i>
+							
 						</div>
-						<div class="col-2"></div>
+						<div class="col-2">
+						</div>
 					</div>
 					<div class="row justify-content-between">
 						<div class="col-3"><a href="{{ route('get_cart') }}" class="btn btn-success">Kiểm tra giỏ hàng</a></div>

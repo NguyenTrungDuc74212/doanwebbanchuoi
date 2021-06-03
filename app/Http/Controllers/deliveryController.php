@@ -80,7 +80,6 @@ class deliveryController extends Controller
 			}
 			echo $result;
 		}
-
-
 	}
+
 }

@@ -103,6 +103,7 @@ Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day'
 		Route::post('/xoa_delivery','deliveryController@delete_delivery')->name('delete_delivery');
 
 		Route::post('/select-delivery','deliveryController@select_delivery')->name('select-delivery');
+		Route::post('/select-delivery-page','deliveryController@select_delivery_page')->name('select-delivery-page');
 		Route::post('/add-delivery','deliveryController@insert_delivery')->name('insert_delivery');
 		Route::get('/load-delivery','deliveryController@load_delivery')->name('load_delivery');
 		Route::post('/update-delivery','deliveryController@update_delivery')->name('update_delivery');
@@ -237,6 +238,7 @@ Route::get('Success_payment_cash','checkoutController@checkout_success_cash')->n
 Route::post('lay-lai-mat-khau','checkoutController@recover_password')->name('recover_password');	
 Route::get('update-new-pass','checkoutController@update_new_pass')->name('update_new_pass');
 Route::post('update-pass','checkoutController@update_pass')->name('update_pass');
+Route::post('feeship-order','checkoutController@feeship_order')->name('feeship_order');
 
 //lịch sử đơn hàng
 Route::get('history','orderController@history')->name('order_history');

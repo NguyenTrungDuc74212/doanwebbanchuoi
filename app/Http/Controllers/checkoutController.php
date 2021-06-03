@@ -17,6 +17,7 @@ use App\Models\Order_detail;
 use App\Models\Soical;
 use App\Models\Repost;
 use App\Models\User;
+use App\Models\Feeship;
 use Socialite; 
 use Carbon\carbon;
 use Session;
@@ -31,7 +32,7 @@ use App\Notifications\NotificationAdmin;
 
 class checkoutController extends Controller
 {
-	public function get_checkout()
+	public function get_checkout(Request $req)
 	{
 		$city = Tinhthanhpho::orderby('matp','DESC')->get();
 		if (Session::get('id_customer')) {
@@ -838,4 +839,5 @@ class checkoutController extends Controller
 		$customer_new->save();
 		return $customer_new;	
 	}
+
 }
