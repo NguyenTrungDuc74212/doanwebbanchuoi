@@ -1708,6 +1708,22 @@ $(document).on('focus',".my-datepicker", function(){ //bind to all instances of 
 });
 </script>
 <script>
+        // lọc theo trạng thái đơn hàng
+        $(document).ready(function() {
+            $(document).on('change', '.filter-product', function() {
+                var id_warehouse=$('#filter-warehouse').val();
+            if(id_warehouse==-1)
+            {
+                var url='{{asset('')}}'+'admin/list-product';
+                window.location.href=url;
+            }else{
+                var url= '{{asset('')}}'+'admin/filter-product/'+id_warehouse;
+                window.location.href=url;
+            }
+            });
+        });
+</script>
+<script>
     $(document).ready(function(){
       $('[data-toggle="tooltip"]').tooltip();
     });

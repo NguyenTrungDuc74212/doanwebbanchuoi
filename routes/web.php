@@ -31,7 +31,7 @@ Route::post('change-password','AuthController@change_password')->name('change_pa
 
 Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
     //Dashboard
-	Route::get('Dashboard','AuthController@dashboard')->name('trangchu_admin');
+Route::get('Dashboard','AuthController@dashboard')->name('trangchu_admin');
 	//thống kê báo cáo
 Route::post('/filter-by-date','AuthController@filter_date')->name('filter_date');
 Route::post('filter-date-selection','AuthController@order_filter')->name('order_filter');
@@ -68,6 +68,8 @@ Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day'
 		Route::get('edit-product/{id}','ProductController@edit_product')->name('edit_product');
 		Route::post('update-product/{id}','ProductController@update_product')->name('update_product');
 		Route::get('delete-product/{id}','ProductController@delete_product')->name('delete_product');
+		Route::get('filter-product/{id_warehouse}','ProductController@filter_product')->name('filter_product_admin');
+		Route::post('cancel-product','ProductController@cancel_product')->name('cancel_product');
 		//gallery
 		Route::get('add-gallery/{id}','ProductController@add_gallery')->name('add_gallery');
 	Route::post('select-gallery','ProductController@select_gallery')->name('select_gallery');

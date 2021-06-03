@@ -11,6 +11,20 @@ function currency_format($number, $suffix = 'đ') {
     return number_format($number, 0, ',', '.') . "{$suffix}";
   }
 }
+function getDayExpirationComing($key)
+{
+  if($key==1)
+  {
+    $expiration_coming = Carbon\Carbon::now()->addDays(10)->format("Y-m-d");
+    return strtotime($expiration_coming);
+  }
+  if($key==1){
+    $now = Carbon\Carbon::now()->format("Y-m-d");
+    return strtotime($now);
+  }
+  return "";
+  
+}
  function format_date($date)
 {
     return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');

@@ -10,26 +10,14 @@
 			@if (session('thongbao'))
 			<p class="text-success">{{ session('thongbao') }}</p>
 			@endif
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-				<p>Kho</p>
-			<select class="form-control get-by-product" id="filter-warehouse">
+			<div class="my-filter">
+				Kho
+			<select class="form-control filter-product" id="filter-warehouse">
 				<option value="-1">---Tất cả---</option>
-				<option value="-1">---Tất cả---</option>
-				<option value="-1">---Tất cả---</option>
-			</select>
-		</div>
-		<div class="col-md-6">
-			<p>Danh mục sản phẩm</p>
-			<select class="form-control get-by-product" id="filter-category">
-				<option value="-1">---Tất cả---</option>
-				@foreach($category_product as $item)
-				<option value="{{$item->id}}">{{$item->name}}</option>
+				@foreach($warehouse as $item)
+				<option value="{{$item->id}}">{{$item->warehouse_name}}</option>
 				@endforeach
 			</select>
-		</div>
-		</div>
 		</div>
 		</div>
 
@@ -73,5 +61,17 @@
 	</div>
 	<!-- /.card -->
 </div>      
+<style>
+    .my-filter {
+    width: 30%;
+    text-align: center;
+    float: right;
+    font-size: 21px;
+    font-weight: 500;
+}
 
+select#filter-warehouse {
+    height: 37px;
+}
+</style>
 @stop
