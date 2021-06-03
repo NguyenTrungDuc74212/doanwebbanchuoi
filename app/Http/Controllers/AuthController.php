@@ -6,9 +6,12 @@ use Auth;
 use App\Models\User;
 use App\Models\Roles;
 use Mail;
+use DB;
 use Session;
 use App\Models\Repost;
 use App\Models\Visitors;
+use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Post;
 use Carbon\Carbon;
@@ -257,6 +260,13 @@ class AuthController extends Controller
 		$user->password =bcrypt($req->input('password'));
 		$user->save();
 		return redirect()->route('list_user')->with('thongbao','Đăng ký thành công');
+	}
+	public function list_customer(Request $req)
+	{
+        
+        $customer = DB::table('tbl_customer')->leftJoin('tbl_order','tbl_customer.id','=','tbl_order.customer_id')->selectRaw('tbl_customer.*,count(tbl_order.id) AS SoDonHang')->groupByRaw('id,name,email,phone,address,password,created_at,updated_at,customer_token')->get();
+        
+		return view('admin.auth.list_customer',compact('customer')); 
 	}
 
 }

@@ -68,7 +68,8 @@
 					</tr>
 					@endforeach
 					<tr>
-						<td colspan="5" class="text-right">Tổng giá trị đơn hàng: <span class="font-weight-bold text-danger">{{ currency_format($order->total) }}</td>
+						<td colspan="5" class="text-right">Tổng giá trị đơn hàng: <span class="font-weight-bold text-danger">{{ currency_format($order->total) }}
+						+<i class="text-nowrap" style="color: #269300;">Phí ship: Chúng tôi sẽ liên lạc với bạn để báo phí ship</i></td>
 						<td></td>
 					</tr>
 				</tbody>

@@ -431,33 +431,33 @@
 	}
 	/*end sản phẩm yêu thích*/
 
-/*xử lý lọc sản phẩm theo tiêu chí*/
-$(document).ready(function() {
-  $('#sort').on('change',function(){
-     var url = $(this).val();
-     if (url) {
-     	window.location = url; 
-     }
-     return false;
+	/*xử lý lọc sản phẩm theo tiêu chí*/
+	$(document).ready(function() {
+		$('#sort').on('change',function(){
+			var url = $(this).val();
+			if (url) {
+				window.location = url; 
+			}
+			return false;
 
-  });
-  $( function() {
-    $( "#slider_filter" ).slider({
-      range: true,
-      min: @if(isset($min_price)) {{ $min_price }} @else {{0}} @endif,
-      max: @if(isset($max_price)) {{ $max_price }} @else {{100000}} @endif,
-      values: [ min,max ],
-      steps: 10000,
-      slide: function( event, ui ) {
-        /*cho xem thông số*/
-        $( "#amount" ).val( "VNĐ" + ui.values[ 0 ] + " - VNĐ" + ui.values[ 1 ] );
-        $("#start_price").val(ui.values[ 0 ]);
-        $("#end_price").val(ui.values[ 1 ]);
-      }
-    });
-    $( "#amount" ).val( "VNĐ" + $( "#slider_filter" ).slider( "values", 0 ) +
-      " - VNĐ" + $( "#slider_filter" ).slider( "values", 1 ) );
-  } );
-});    
-/*end lọc*/
+		});
+		$( function() {
+			$( "#slider_filter" ).slider({
+				range: true,
+				min: @if(isset($min_price)) {{ $min_price }} @else {{0}} @endif,
+				max: @if(isset($max_price)) {{ $max_price }} @else {{100000}} @endif,
+				values: [ min,max ],
+				steps: 10000,
+				slide: function( event, ui ) {
+					/*cho xem thông số*/
+					$( "#amount" ).val( "VNĐ" + ui.values[ 0 ] + " - VNĐ" + ui.values[ 1 ] );
+					$("#start_price").val(ui.values[ 0 ]);
+					$("#end_price").val(ui.values[ 1 ]);
+				}
+			});
+			$( "#amount" ).val( "VNĐ" + $( "#slider_filter" ).slider( "values", 0 ) +
+				" - VNĐ" + $( "#slider_filter" ).slider( "values", 1 ) );
+		} );
+	});    
+	/*end lọc*/
 </script>
