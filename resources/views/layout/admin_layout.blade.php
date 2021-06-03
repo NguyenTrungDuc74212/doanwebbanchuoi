@@ -557,6 +557,12 @@ strong.mr-auto {padding-left: 10px;}
                                             <p>Liệt kê user</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('list_customer') }}" class="nav-link">
+                                            <i class="fas fa-list"></i>
+                                            <p>Liệt kê khách hàng</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         @endcan
@@ -685,6 +691,7 @@ strong.mr-auto {padding-left: 10px;}
     $('#table_input').DataTable();
     $('#table_product').DataTable();
     $('#table_order').DataTable();
+    $('#table_customer').DataTable();
   } );
 </script>
 <script type="text/javascript">

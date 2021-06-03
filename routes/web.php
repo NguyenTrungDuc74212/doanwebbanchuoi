@@ -163,7 +163,9 @@ Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day'
     Route::post('change-status','inputSheetController@change_status')->name('change_status');
     Route::post('load-edit','inputSheetController@load_input_sheet_edit')->name('load_input_sheet_edit');
      Route::get('/view-input/{id}','inputSheetController@view_input')->name('view_input');
-
+     
+     //Quản lý khách hàng
+     Route::get('list-customer','AuthController@list_customer')->name('list_customer');
 
 
 });
