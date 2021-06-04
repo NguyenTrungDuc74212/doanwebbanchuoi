@@ -18,7 +18,7 @@ function getDayExpirationComing($key)
     $expiration_coming = Carbon\Carbon::now()->addDays(10)->format("Y-m-d");
     return strtotime($expiration_coming);
   }
-  if($key==1){
+  if($key==2){
     $now = Carbon\Carbon::now()->format("Y-m-d");
     return strtotime($now);
   }

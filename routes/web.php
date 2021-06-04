@@ -68,7 +68,7 @@ Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day'
 		Route::get('edit-product/{id}','ProductController@edit_product')->name('edit_product');
 		Route::post('update-product/{id}','ProductController@update_product')->name('update_product');
 		Route::get('delete-product/{id}','ProductController@delete_product')->name('delete_product');
-		Route::get('filter-product/{id_warehouse}','ProductController@filter_product')->name('filter_product_admin');
+		Route::get('filter-product/{id_warehouse}/{status}','ProductController@filter_product')->name('filter_product_admin');
 		Route::post('cancel-product','ProductController@cancel_product')->name('cancel_product');
 		//gallery
 		Route::get('add-gallery/{id}','ProductController@add_gallery')->name('add_gallery');

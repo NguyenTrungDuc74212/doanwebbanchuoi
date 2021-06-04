@@ -207,26 +207,40 @@ class ProductController extends Controller
 	}
 	/*end thêm nhiều ảnh*/
 
-	public function filter_product($id_warehouse)
+	public function filter_product($id_warehouse,$status)
 	{
+		
 		$warehouse=Warehouse::all();
-		$product=DB::table('tbl_warehouse_product')
-		->join('tbl_product as p', 'p.id', '=', 'tbl_warehouse_product.product_id')
-		->join('tbl_warehouse as tw', 'tw.id', '=', 'tbl_warehouse_product.warehouse_id')
-		->select('p.*','tbl_warehouse_product.expiration_date','tbl_warehouse_product.quantity as soluong','tbl_warehouse_product.id as id_wp','tbl_warehouse_product.status')->where('warehouse_id',$id_warehouse)->get();
-		return view('admin.product.filter_product_by_warehouse',compact('product','id_warehouse','warehouse'));
+		if($status==-1)
+		{
+			$product=DB::table('tbl_warehouse_product')
+			->join('tbl_product as p', 'p.id', '=', 'tbl_warehouse_product.product_id')
+			->join('tbl_warehouse as tw', 'tw.id', '=', 'tbl_warehouse_product.warehouse_id')
+			->select('p.*','tbl_warehouse_product.expiration_date','tbl_warehouse_product.quantity as soluong','tbl_warehouse_product.id as id_wp','tbl_warehouse_product.status')->where('warehouse_id',$id_warehouse)->get();
+		}else{
+			$product=DB::table('tbl_warehouse_product')
+			->join('tbl_product as p', 'p.id', '=', 'tbl_warehouse_product.product_id')
+			->join('tbl_warehouse as tw', 'tw.id', '=', 'tbl_warehouse_product.warehouse_id')
+			->select('p.*','tbl_warehouse_product.expiration_date','tbl_warehouse_product.quantity as soluong','tbl_warehouse_product.id as id_wp','tbl_warehouse_product.status')->where('warehouse_id',$id_warehouse)->where('status',$status)->get();
+		}
+		return view('admin.product.filter_product_by_warehouse',compact('product','id_warehouse','status','warehouse'));
 	}
 	public function cancel_product(Request $req)
 	{
 		foreach($req->id_pw as $id)
 		{
 			$warehouse_product=WarehouseProduct::find($id);
+			if($warehouse_product->status!=2){
 			$warehouse_product->status=2;
 			$warehouse_product->product->quantity-=$warehouse_product->quantity;
 			$warehouse_product->warehouse->quantity_now-=$warehouse_product->quantity;
+			$warehouse_product->product->save();
+			$warehouse_product->warehouse->save();
 			$warehouse_product->save();
-			return return redirect()->back();
+			}
+		
 		}
+		return redirect()->back();
 	}
 	
 }

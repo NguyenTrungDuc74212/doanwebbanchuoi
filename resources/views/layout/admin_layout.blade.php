@@ -203,7 +203,7 @@ strong.mr-auto {padding-left: 10px;}
                         @isset($notification->data['message'])
                         <div class="dropdown-divider"></div>
                         <a href="admin/list-product" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i>Sản phẩm hết hạn trong 10 ngày: {{$notification->data['message']}}
+                            <i class="fas fa-envelope mr-2"></i>{{$notification->data['message']}}
                             {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
                         </a>
                         @endisset
@@ -1675,7 +1675,19 @@ strong.mr-auto {padding-left: 10px;}
         var newNotificationHtml = `
         <div class="dropdown-divider"></div>
                         <a href="admin/list-product" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Sản phẩm hết hạn sau 10 ngày:${data.message}
+                            <i class="fas fa-envelope mr-2"></i> ${data.message}!
+                            {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
+                        </a>
+        `;
+        $('#drop-notification').prepend(newNotificationHtml);
+    });
+    channel.bind('product_expired', function(data) {
+        $("#my-toast").addClass('show');
+        $(".count-notification").text(parseInt($(".count-notification").first().text())+1);
+        var newNotificationHtml = `
+        <div class="dropdown-divider"></div>
+                        <a href="admin/list-product" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> ${data.message}!
                             {{-- <span class="float-right text-muted text-sm">3 mins</span> --}}
                         </a>
         `;
@@ -1719,12 +1731,17 @@ $(document).on('focus',".my-datepicker", function(){ //bind to all instances of 
         $(document).ready(function() {
             $(document).on('change', '.filter-product', function() {
                 var id_warehouse=$('#filter-warehouse').val();
+                var status=$('#filter-status').val();
+               if(status==undefined)
+               {
+                   status=-1;
+               }
             if(id_warehouse==-1)
             {
                 var url='{{asset('')}}'+'admin/list-product';
                 window.location.href=url;
             }else{
-                var url= '{{asset('')}}'+'admin/filter-product/'+id_warehouse;
+                var url= '{{asset('')}}'+'admin/filter-product/'+id_warehouse+"/"+status;
                 window.location.href=url;
             }
             });
