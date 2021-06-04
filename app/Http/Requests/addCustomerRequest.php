@@ -35,7 +35,7 @@ class addCustomerRequest extends FormRequest
     }
     public function messages()
     {
-          Session::flash('errors_login','erros');
+          Session::flash('errors_login','Erros!!!');
         return [
             "name.required"=>"Bạn phải nhập tên",
             "email.required"=>"Bạn phải nhập email",

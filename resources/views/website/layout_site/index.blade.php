@@ -444,9 +444,9 @@
 		$( function() {
 			$( "#slider_filter" ).slider({
 				range: true,
-				min: @if(isset($min_price)) {{ $min_price }} @else {{0}} @endif,
-				max: @if(isset($max_price)) {{ $max_price }} @else {{100000}} @endif,
-				values: [ min,max ],
+				min: 10000,
+				max: 1000000,
+				values: [ 10000,1000000 ],
 				steps: 10000,
 				slide: function( event, ui ) {
 					/*cho xem thông số*/

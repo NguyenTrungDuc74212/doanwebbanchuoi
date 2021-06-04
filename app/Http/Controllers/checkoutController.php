@@ -25,7 +25,9 @@ use Mail;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\addCustomerRequest;
 use App\Http\Requests\shippingRequest;
+use App\Http\Requests\check_login;
 use DB;
+use App\Rules\Captcha;
 use Pusher\Pusher;
 use App\Notifications\NotificationAdmin;
 
@@ -41,17 +43,15 @@ class checkoutController extends Controller
 		}
 		return view("website.checkout.checkout_no_customer",compact('city'));
 	}
-	public function login_customer(Request $req)
+	public function login_customer(check_login $req)
 	{
-		// $req->validate([
-		// 	"g-recaptcha-response" => new captcha_rule()
 
-		// ]);
-		$validatedData = $req->validate([
-			"password"=>"required"
-		],
-		["password.required"=>"password không được để trống"]
-	);
+	// 	$validatedData = $req->validate([
+	// 		"password"=>"required",
+	// 		"g-recaptcha-response" => new Captcha(),
+	// 	],
+	// 	["password.required"=>"password không được để trống"]
+	// );
 		$customer = new Customer;
 		$email = $req->input('email');
 		$password = $req->input('password');
@@ -405,7 +405,7 @@ class checkoutController extends Controller
 				}
 					// lấy sản phẩm ra từ trong kho
 				do{ 
-					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0->where('status',0))->orderBy('created_at','ASC')->first();
+					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('created_at','ASC')->first();
 					$warehouse = $warehouseProduct->warehouse;
 					$warehouseOrder=new WarehouseOrder();
 					$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
