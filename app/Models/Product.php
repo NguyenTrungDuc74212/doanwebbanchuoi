@@ -17,4 +17,8 @@ class Product extends Model
     {
     	return $this->belongsTo(Vendors::class,'vendor_id','id');
     }
+    public function warehouse_product()
+    {
+        return $this->hasMany(WarehouseProduct::class,'product_id','id');
+    }
 }

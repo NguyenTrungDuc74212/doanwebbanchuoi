@@ -23,6 +23,6 @@ class InputSheet extends Model
     }
      public function input_detail()
     {
-        return $this->hasMany(InputSheetDetail::class,'inward_slip_id','id');
+        return $this->hasMany(inputSheetDetail::class,'inward_slip_id','id');
     }
 }

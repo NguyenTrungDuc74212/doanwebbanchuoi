@@ -5,6 +5,8 @@ use App\Models\CategoryPost;
 use App\Models\CategoryProduct;
 use App\Models\Order;
 
+use App\Models\Product;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
@@ -33,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
          $postCategoryHeader=CategoryPost::all();
          $productCategoryHeader=CategoryProduct::all();
          $countOrderNew=Order::where('status',1)->get()->count();
-         View::share(compact('postCategoryHeader','productCategoryHeader','countOrderNew'));
+         $max_price = Product::max('price'); 
+         $min_price = Product::min('price');
+         View::share(compact('postCategoryHeader','productCategoryHeader','countOrderNew','max_price','min_price'));
     }
 }

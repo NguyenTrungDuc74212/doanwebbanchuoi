@@ -33,7 +33,13 @@ class productSiteController extends Controller
         $category=CategoryProduct::where('slug',$slug)->first();
         $product= DB::table('tbl_product')
         ->join('tbl_category_product', 'tbl_category_product.id', '=', 'tbl_product.category_product_id')
+        ->join('tbl_warehouse_product', 'tbl_warehouse_product.product_id', '=', 'tbl_product.id')
         ->where('tbl_category_product.slug',$slug)->select('tbl_product.*','tbl_category_product.name as category_name')->paginate(8);
+        foreach($product as $item)
+        {
+            $total_quantity=DB::table('tbl_warehouse_product')->where('status',0)->where('product_id',$item->id)->sum('quantity');
+            $item->total_quantity=$total_quantity;
+        }
         $product_watched=null;
         if(Session::has('product_watched'))
         {

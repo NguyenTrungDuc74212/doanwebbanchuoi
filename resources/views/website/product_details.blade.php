@@ -55,8 +55,17 @@
         <div class="col-md-6 d-flex flex-column justify-content-between">
             <h1 class="title">{{ $product->name }}</h1>
             <div class="box-info">
+                @php
+                $total_quantity=0;
+                    foreach ($product->warehouse_product as $value) {
+                        if($value->status==0)
+                        {
+                            $total_quantity+=$value->quantity;
+                        }
+                    }
+                @endphp
                 <div class="rate">
-                    @if($product->quantity>0)
+                    @if($value>0)
                        <p class="status-product">Còn hàng</p>
                     @else
                         <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
@@ -74,7 +83,16 @@
                                     </p>
                                     <p><strong>Mã sản phẩm</strong>: SP{{ $product->id }}</p>
                                     <p><strong>Đơn vị tính</strong>: {{$product->unit}}</p>
-                                    @if ($product->quantity > 0)
+                                    @php
+                                    $total_quantity=0;
+                                        foreach ($product->warehouse_product as $value) {
+                                            if($value->status==0)
+                                            {
+                                                $total_quantity+=$value->quantity;
+                                            }
+                                        }
+                                    @endphp
+                                    @if ($total_quantity > 0)
                                     <p><strong>Tình trạng</strong>: <span class="text-primary">Còn hàng</span></p>
                                     @else
                                     <p><strong>Tình trạng</strong>: <span class="text-primary">Hết hàng</span></p>
@@ -257,8 +275,17 @@
                                                                     @if($product_watched->persent_discount>0)
                                                                     <div class="discount">{{$product_watched->persent_discount}}%</div>
                                                                     @endif
+                                                                    @php
+                                                                    $total_quantity=0;
+                                                                        foreach ($product_watched->warehouse_product as $value) {
+                                                                            if($value->status==0)
+                                                                            {
+                                                                                $total_quantity+=$value->quantity;
+                                                                            }
+                                                                        }
+                                                                    @endphp
                                                                     <div class="rate">
-                                                                        @if($product_watched->quantity>0)
+                                                                        @if($total_quantity>0)
                                                                            <p class="status-product">Còn hàng</p>
                                                                         @else
                                                                             <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
