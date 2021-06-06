@@ -115,7 +115,7 @@
 		<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format($item->product->price)}}</td>
 		<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->soluong}}</td>
 		<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->coupon}}%</td>
-		<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format(($item->product->price)*($item->soluong)*((100-$item->coupon)/100))}}</td>
+		<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format(($item->price_current)*($item->soluong)*((100-$item->coupon)/100))}}</td>
 
 		@foreach ($item->warehouse_order as $value)
 		<tr>

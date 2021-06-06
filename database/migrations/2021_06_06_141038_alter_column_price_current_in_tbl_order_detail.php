@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterFeeshipInTblOrder extends Migration
+class AlterColumnPriceCurrentInTblOrderDetail extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterFeeshipInTblOrder extends Migration
      */
     public function up()
     {
-        Schema::table('tbl_order', function (Blueprint $table) {
-            $table->Integer('feeship');
+        Schema::table('tbl_order_detail', function (Blueprint $table) {
+             $table->Integer('price_current');
         });
     }
 
@@ -25,8 +25,8 @@ class AlterFeeshipInTblOrder extends Migration
      */
     public function down()
     {
-        Schema::table('tbl_order', function (Blueprint $table) {
-            $table->dropColumn('feeship');
+        Schema::table('tbl_order_detail', function (Blueprint $table) {
+            $table->dropColumn('price_current');
         });
     }
 }
