@@ -10,7 +10,9 @@
 			@if (session('thongbao'))
 			<p class="text-success">{{ session('thongbao') }}</p>
 			@endif
-
+			<div class="card-tools" id="header-search">
+				<a href="{{ route('view_insert_input') }}" class="btn btn-success btn-sm">Lập phiếu nhập</a>
+			</div>
 		</div>
 		<!-- /.card-header -->
 		<div class="card-body table-responsive p-0">

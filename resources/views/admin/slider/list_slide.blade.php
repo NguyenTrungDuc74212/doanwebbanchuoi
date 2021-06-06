@@ -10,15 +10,8 @@
 			@if (session('thongbao'))
 			<p class="text-success">{{ session('thongbao') }}</p>
 			@endif
-			<div class="card-tools">
-				<div class="input-group input-group-sm" style="width: 150px;">
-					<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-					<div class="input-group-append">
-						<button type="submit" class="btn btn-default">
-							<i class="fas fa-search"></i>
-						</button>
-					</div>
-				</div>
+			<div class="card-tools" id="header-search">
+				<a href="{{ route('add_slide') }}" class="btn btn-success btn-sm">Thêm Slide</a>
 			</div>
 		</div>
 		<!-- /.card-header -->
@@ -30,6 +23,7 @@
 						<th>Tên slide</th>
 						<th>Trạng thái</th>
 						<th>Mô tả</th>
+						<th>Thao tác</th>
 					</tr>
 				</thead>
 				<tbody>
