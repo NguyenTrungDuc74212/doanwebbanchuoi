@@ -32,21 +32,9 @@
 			@if (session('thongbao'))
 			<p class="text-success">{{ session('thongbao') }}</p>
 			@endif
-			{{-- <div class="card-tools" id="header-search">
-				<form method="" action="">
-					<div class="input-group input-group-sm " style="width: 150px;">
-						<input type="text" name="search_category_post" class="form-control float-right s-input" placeholder="Search">
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-default">
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
-					</div>
-				</form>
-				<ul id="search-suggest" class="s-suggest">
-
-				</ul>
-			</div> --}}
+			<div class="card-tools" id="header-search">
+				<a href="{{ route('view_add_category_post') }}" class="btn btn-success btn-sm">Thêm danh mục bài viết</a>
+			</div>
 			
 		</div>
 		<!-- /.card-header -->

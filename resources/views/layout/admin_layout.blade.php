@@ -692,6 +692,7 @@ strong.mr-auto {padding-left: 10px;}
     $('#table_product').DataTable();
     $('#table_order').DataTable();
     $('#table_customer').DataTable();
+    $('#table_coupon').DataTable();
   } );
 </script>
 <script type="text/javascript">
@@ -835,6 +836,7 @@ strong.mr-auto {padding-left: 10px;}
             $('#table_warehouse').DataTable();
             $('#table_input').DataTable();
             $('#table_product').DataTable();
+            $('#table_catgory_product').DataTable();
         });
 
     </script>
@@ -1106,7 +1108,7 @@ strong.mr-auto {padding-left: 10px;}
                         success: function(data) /*dữ liệu(data) trả về bên function*/ {
                             swal({
                                 title: 'Bạn muốn thêm sản phẩm mới không???',
-                                text: "OK hoặc không, chọn mẹ nhanh lên ???",
+                                text: "OK hoặc không, xin mời bạn chọn",
                                 icon: "success",
                                 buttons: ['không', 'ok'],
                             }).then((ok) => {

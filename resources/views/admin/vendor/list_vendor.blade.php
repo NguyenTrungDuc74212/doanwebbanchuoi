@@ -34,7 +34,11 @@
 			@elseif(session('error'))
 			<p class="text-danger">{{ session('error') }}</p>
 			@endif
+			<div class="card-tools" id="header-search">
+				<a href="{{ route('view_insert_vendor') }}" class="btn btn-success btn-sm">Thêm nhà cung cấp</a>
+			</div>
 		</div>
+		
 		<!-- /.card-header -->
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover text-nowrap text-center" id="table_vendors">

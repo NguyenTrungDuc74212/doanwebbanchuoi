@@ -97,7 +97,7 @@
 							title: 'Thêm giỏ hàng thành công!!!',
 							text:"bạn muốn đến giỏ hàng chứ!!",
 							icon: "success",
-							buttons:["không","Okee lunn"]
+							buttons:["không","Có"]
 						}).then((ok)=>{
 							if (ok) {
 								window.location.href = "{{ route('get_cart') }}";

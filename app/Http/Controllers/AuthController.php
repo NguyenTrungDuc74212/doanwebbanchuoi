@@ -12,6 +12,7 @@ use App\Models\Repost;
 use App\Models\Visitors;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Post;
 use Carbon\Carbon;
@@ -58,9 +59,14 @@ class AuthController extends Controller
 
 	//bài viết xem nhiều nhất
 		$post_top = Post::orderBy('view','DESC')->limit(5)->get();
+    
+    //sản phẩm sắp hết hàng
+		$product_stored = Product::where('quantity','<',100)->get();
 
+	//mã giảm giá đã hết hạn
+		$coupon_expired = Coupon::where('coupon_date_end','<',$today)->get();
 
-		return view('admin.dashboard.dashboard_view',compact('visitors_total','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_count_online','product_top','post_top'));
+		return view('admin.dashboard.dashboard_view',compact('visitors_total','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_count_online','product_top','post_top','product_stored','coupon_expired'));
 	}
 	public function filter_date(Request $req)
 	{

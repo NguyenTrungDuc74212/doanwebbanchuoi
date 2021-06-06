@@ -12,13 +12,17 @@
 			@endif
 			<div class="my-filter">
 				Kho
-			<select class="form-control filter-product" id="filter-warehouse">
-				<option value="-1">---Tất cả---</option>
-				@foreach($warehouse as $item)
-				<option value="{{$item->id}}">{{$item->warehouse_name}}</option>
-				@endforeach
-			</select>
+				<select class="form-control filter-product" id="filter-warehouse">
+					<option value="-1">---Tất cả---</option>
+					@foreach($warehouse as $item)
+					<option value="{{$item->id}}">{{$item->warehouse_name}}</option>
+					@endforeach
+				</select>
+			</div>
+
 		</div>
+		<div class="card-tools" id="header-search" style="margin: 10px 0px">
+			<a href="{{ route('view_add_product') }}" class="btn btn-success btn-sm">Thêm sản phẩm</a>
 		</div>
 
 		<!-- /.card-header -->
@@ -62,16 +66,16 @@
 	<!-- /.card -->
 </div>      
 <style>
-    .my-filter {
-    width: 30%;
-    text-align: center;
-    float: right;
-    font-size: 21px;
-    font-weight: 500;
-}
+	.my-filter {
+		width: 30%;
+		text-align: center;
+		float: right;
+		font-size: 21px;
+		font-weight: 500;
+	}
 
-select#filter-warehouse {
-    height: 37px;
-}
+	select#filter-warehouse {
+		height: 37px;
+	}
 </style>
 @stop

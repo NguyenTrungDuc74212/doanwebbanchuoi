@@ -10,20 +10,13 @@
 			@if (session('thongbao'))
 			<p class="text-success">{{ session('thongbao') }}</p>
 			@endif
-			<div class="card-tools">
-				<div class="input-group input-group-sm" style="width: 150px;">
-					<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-					<div class="input-group-append">
-						<button type="submit" class="btn btn-default">
-							<i class="fas fa-search"></i>
-						</button>
-					</div>
-				</div>
+			<div class="card-tools" id="header-search">
+				<a href="{{ route('view_insert_coupon') }}" class="btn btn-success btn-sm">Thêm mã giảm giá</a>
 			</div>
 		</div>
 		<!-- /.card-header -->
 		<div class="card-body table-responsive p-0">
-			<table class="table table-hover text-center">
+			<table class="table table-hover text-center" id="table_coupon">
 				<thead>
 					<tr class="text-nowrap tr-admin">
 						<th>Tên mã giảm giá</th>
