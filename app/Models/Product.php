@@ -21,4 +21,8 @@ class Product extends Model
     {
         return $this->hasMany(WarehouseProduct::class,'product_id','id');
     }
+    public function price_product()
+    {
+    	return $this->hasMany(PriceProduct::class,'id_product','id');
+    }
 }

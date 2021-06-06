@@ -7,6 +7,7 @@ use App\Models\Vendors;
 use App\Models\Gallery;
 use App\Models\Warehouse;
 use App\Models\WarehouseProduct;
+use App\Models\PriceProduct;
 use App\Http\Requests\addProductRequest;
 use App\Http\Requests\editProductRequest;
 use Str;
@@ -49,6 +50,10 @@ class ProductController extends Controller
 		$product->unit=$req->unit;
 		event(new \App\Events\CategoryProductCreated($product));
 		$product->save();
+		$priceProduct=new PriceProduct();
+		$priceProduct->id_product=$product->id;
+		$priceProduct->price=$product->price;
+		$priceProduct->save();
 		DB::commit();
 		return redirect()->route('list_product')->with('thongbao','Thêm sản phẩm thành công');
 		}catch(Exception $ex)
@@ -76,6 +81,8 @@ class ProductController extends Controller
 	}
 	public function update_product(editProductRequest $req,$id)
 	{
+		DB::beginTransaction();
+		try{
 		$product = Product::find($id);
 		/*xử lý image*/
 
@@ -95,7 +102,13 @@ class ProductController extends Controller
 		$product->name = $req->input('name');
 		$product->category_product_id = $req->input('category_product_id');
 		$product->vendor_id = $req->input('vendor_id');
-		$product->price = $req->input('price');
+		if($req->input('price')==0)
+		{
+			$product->price = $req->input('price_old');
+		}else{
+			$product->price = $req->input('price');
+		}
+	
 		$product->name = $req->input('name');
 		$product->desc = $req->input('desc');
 		$product->meta_keywords = $req->input('meta_keywords');
@@ -105,7 +118,23 @@ class ProductController extends Controller
 		$product->unit=$req->unit;
 		event(new \App\Events\CategoryProductCreated($product));
 		$product->save();
+		$check_price=PriceProduct::where('id_product',$product->id)->where('price',$product->price)->get();
+		if(count($check_price)==0)
+		{
+			$price_product=new PriceProduct();
+			$price_product->id_product=$product->id;
+			$price_product->price=$product->price;
+			$price_product->save();
+		}
+
+		DB::commit();
 		return redirect()->route('list_product')->with('thongbao','lưu sản phẩm thành công');
+	}catch(Exception $ex)
+	{
+		DB::rollback();
+		throw new Exception($ex->getMessage());
+		
+	}
 	}
 	public function delete_product($id)
 	{
