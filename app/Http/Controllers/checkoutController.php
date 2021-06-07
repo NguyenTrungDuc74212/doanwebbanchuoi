@@ -176,7 +176,7 @@ class checkoutController extends Controller
 					$product->save();
 					// lấy sản phẩm ra từ trong kho
 					do{
-						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('created_at','ASC')->first();
+						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first();
 						$warehouse = $warehouseProduct->warehouse;
 						$warehouseOrder=new WarehouseOrder();
 						$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
@@ -289,7 +289,7 @@ class checkoutController extends Controller
 					}
 						// lấy sản phẩm ra từ trong kho
 					do{
-						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('created_at','ASC')->first();
+						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first();
 						$warehouse = $warehouseProduct->warehouse;
 						$warehouseOrder=new WarehouseOrder();
 						$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
@@ -407,7 +407,7 @@ class checkoutController extends Controller
 				}
 					// lấy sản phẩm ra từ trong kho
 				do{ 
-					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('created_at','ASC')->first();
+					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first();
 					$warehouse = $warehouseProduct->warehouse;
 					$warehouseOrder=new WarehouseOrder();
 					$warehouseOrder->warehouse_product_id=$warehouseProduct->id;

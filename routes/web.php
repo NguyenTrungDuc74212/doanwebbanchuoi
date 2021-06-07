@@ -127,6 +127,8 @@ Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day'
 		Route::post('order/change-status','orderController@changeStatus')->name('change_status_order');
 		Route::post('order/change-status-pay','orderController@changeStatusPay')->name('change_status_pay_order');
 		Route::get('order/get-by-status/{status}/{status_pay}','orderController@getByStatus')->name('get_by_status');
+		Route::get('view_exchange/{order_code}','orderController@get_view_exchange')->name('get_view_exchange');
+		Route::post('save_exchange/{order_code}','orderController@save_exchange')->name('save_exchange');
 	});
 
 
