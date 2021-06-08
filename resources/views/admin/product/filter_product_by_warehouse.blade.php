@@ -51,12 +51,12 @@
 				<tbody>
 					@foreach ($product as $value)
 					<tr>
-                        <td><input type="checkbox" name="id_pw[]"  value="{{$value->id_wp}}" {{$value->status==2?'disabled':''}}></td>
+                        <td><input type="checkbox" class="my-checkbox"  name="id_pw[]"  value="{{$value->id_wp}}" {{$value->status==2?'disabled':''}}></td>
 						<td>
 							<img src="{{asset('public/upload/product/'.$value->image)}}" height="100" width="100">
 						</td>
 						<td>{{ $value->name }}</td>
-						<td>{{$value->soluong ." ".$value->unit}}</td>
+						<td><input disabled id="input{{$value->id_wp}}" class="form-control my-input-quantity" name="quantity[]" min="1" max="{{$value->soluong}}" type="number" value="{{$value->soluong}}"></td>
 						<td>{{currency_format($value->price) }}</td>
                         <td>
                             @if(strtotime($value->expiration_date)<=getDayExpirationComing(1)&&strtotime($value->expiration_date)>getDayExpirationComing(2))
@@ -91,6 +91,10 @@
 </div>  
 </form>
 <style>
+	input.form-control.my-input-quantity {
+    width: 50px;
+    margin: auto;
+}
     .my-filter {
     width: 30%;
     text-align: center;
@@ -123,3 +127,19 @@ select#filter-status {
 }
 </style>
 @stop
+@section('script')
+	<script>
+		$(".my-checkbox").click(function()
+		{
+			if($(this).is(':checked'))
+			{
+				var id='#input'+$(this).val();
+				$(id).removeAttr("disabled");
+			}else{
+				var id='#input'+$(this).val();
+				$(id).attr("disabled", 'disabled');
+			}
+			
+		})
+	</script>
+@endsection

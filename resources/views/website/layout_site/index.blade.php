@@ -155,8 +155,6 @@
 			else{
 				$('.tongtien').text(total_offical.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'đ');
 			}
-
-
 			$.ajax({
 				url: '{{ route('update_cart_ajax') }}',
 				type: 'POST',

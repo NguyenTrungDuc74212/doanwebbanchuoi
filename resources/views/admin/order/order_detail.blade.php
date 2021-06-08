@@ -105,7 +105,7 @@
 	  <th>Số lượng</th>
 	  <th>Giảm giá</th>
 	  <th>Thành tiền</th>
-	  <th colspan="2">Lấy hàng (Kho|Sản phẩm)</th>
+	  <th colspan="3">Lấy hàng (Kho|Sản phẩm|Lô hết hạn)</th>
 	</tr>
 
 	@foreach ($order->orderDetails as $item)
@@ -121,6 +121,7 @@
 		<tr>
 				<td>{{$value->warehouse_product->warehouse->warehouse_name}}</td>
 				<td>{{$value->quantity}}</td>
+				<td>{{$value->warehouse_product->expiration_date}}</td>
 			</tr>
 		@endforeach
 

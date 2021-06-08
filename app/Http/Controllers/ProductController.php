@@ -256,16 +256,31 @@ class ProductController extends Controller
 	}
 	public function cancel_product(Request $req)
 	{
-		foreach($req->id_pw as $id)
+		$id=$req->id_pw;
+		$quantity=$req->quantity;
+		
+		for($i=0;$i<count($id);$i++)
 		{
-			$warehouse_product=WarehouseProduct::find($id);
+			$warehouse_product=WarehouseProduct::find($id[$i]);
 			if($warehouse_product->status!=2){
-			$warehouse_product->status=2;
-			$warehouse_product->product->quantity-=$warehouse_product->quantity;
-			$warehouse_product->warehouse->quantity_now-=$warehouse_product->quantity;
-			$warehouse_product->product->save();
-			$warehouse_product->warehouse->save();
-			$warehouse_product->save();
+				if($quantity[$i]<$warehouse_product->quantity)
+				{
+					$warehouse_product->product->quantity-=$quantity[$i];
+					$warehouse_product->warehouse->quantity_now-=$quantity[$i];
+					$warehouse_product->quantity_cancel=$quantity[$i];
+					$warehouse_product->quantity-=$quantity[$i];
+					$warehouse_product->product->save();
+					$warehouse_product->warehouse->save();
+					$warehouse_product->save();
+				}
+				if($quantity[$i]==$warehouse_product->quantity){
+					$warehouse_product->status=2;
+					$warehouse_product->product->quantity-=$warehouse_product->quantity;
+					$warehouse_product->warehouse->quantity_now-=$warehouse_product->quantity;
+					$warehouse_product->product->save();
+					$warehouse_product->warehouse->save();
+					$warehouse_product->save();
+				}
 			}
 		
 		}
