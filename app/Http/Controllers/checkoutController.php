@@ -96,7 +96,6 @@ class checkoutController extends Controller
 		$mytime = Carbon::now();
 		$soluong =0;
 
-
 		if (Session::get('id_customer'))
 		{
 			$customer = Customer::find(Session::get('id_customer'));
@@ -147,6 +146,7 @@ class checkoutController extends Controller
 					$product = Product::find($value['product_id']);
 					$order_detail = new Order_detail;
 					$order_detail->order_id = $order_id;
+					$order_detail->price_current = $value['product_price'];
 					$order_detail->order_code = $code_random;
 					$order_detail->product_id = $value['product_id'];
 					$order_detail->unit = $value['product_unit'];
@@ -176,7 +176,7 @@ class checkoutController extends Controller
 					$product->save();
 					// lấy sản phẩm ra từ trong kho
 					do{
-						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('created_at','ASC')->first();
+						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first();
 						$warehouse = $warehouseProduct->warehouse;
 						$warehouseOrder=new WarehouseOrder();
 						$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
@@ -262,6 +262,7 @@ class checkoutController extends Controller
 					$order_detail = new Order_detail;
 					$order_detail->order_id = $order_id;
 					$order_detail->order_code = $code_random;
+					$order_detail->price_current = $value['product_price'];
 					$order_detail->product_id = $value['product_id'];
 					$order_detail->unit = $value['product_unit'];
 					$order_detail->coupon = $product->persent_discount;
@@ -288,7 +289,7 @@ class checkoutController extends Controller
 					}
 						// lấy sản phẩm ra từ trong kho
 					do{
-						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('created_at','ASC')->first();
+						$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first();
 						$warehouse = $warehouseProduct->warehouse;
 						$warehouseOrder=new WarehouseOrder();
 						$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
@@ -378,6 +379,7 @@ class checkoutController extends Controller
 				$order_detail->order_id = $order_id;
 				$order_detail->order_code = $code_random;
 				$order_detail->product_id = $value['product_id'];
+				$order_detail->price_current = $value['product_price'];
 				$order_detail->unit = $value['product_unit'];
 				if ($product->persent_discount) {
 					$order_detail->coupon = $product->persent_discount;
@@ -405,7 +407,7 @@ class checkoutController extends Controller
 				}
 					// lấy sản phẩm ra từ trong kho
 				do{ 
-					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('created_at','ASC')->first();
+					$warehouseProduct=WarehouseProduct::where('product_id',$order_detail->product_id)->where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first();
 					$warehouse = $warehouseProduct->warehouse;
 					$warehouseOrder=new WarehouseOrder();
 					$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
@@ -440,20 +442,6 @@ class checkoutController extends Controller
 		DB::beginTransaction();
 		try{
 		$cart = Session::get('cart');
-		// if ($cart) {
-		// 	foreach ($cart as $key => $value) {
-		// 	$product = Product::find($value['product_id']);
-		// 	$product->quantity = $product->quantity-$value['product_qty'];
-		// 	$product->save();
-		// 	do{
-		// 	$warehouseProduct=WarehouseProduct::orderByAsc('created_at')->first();
-		// 	$product->quantity = $product->quantity-$value['product_qty'];
-		// 	$warehouseOrder=new WarehouseOrder();
-		// 	$warehouseOrder->warehouse_product_id=$warehouseProduct->id;
-		// 	$warehouseOrder->order
-		// 	}while($value['product_qty']>0)
-		// }
-		// }
 
 		/*send mail*/
 		$now = Carbon::now()->format('Y-m-d');

@@ -667,6 +667,10 @@ strong.mr-auto {padding-left: 10px;}
     dateFormat: "yy-mm-dd",
     duration: "slow"
   });
+    $("#datepicker_5").datepicker({
+    dateFormat: "yy-mm-dd",
+    duration: "slow"
+  });
 
 });
 // </script>
@@ -1753,7 +1757,7 @@ $(document).on('focus',".my-datepicker", function(){ //bind to all instances of 
     $(document).ready(function(){
       $('[data-toggle="tooltip"]').tooltip();
     });
-    </script>
+</script>
     @yield('script')
 </body>
 

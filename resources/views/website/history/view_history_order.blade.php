@@ -75,7 +75,7 @@
 					<td>{{currency_format($item->product->price)}}</td>
 					<td>{{$item->soluong}}</td>
 					<td>{{$item->coupon}}%</td>
-					<td>{{currency_format(($item->product->price)*($item->soluong)*((100-$item->coupon)/100))}}</td>
+					<td>{{currency_format(($item->price_current)*($item->soluong)*((100-$item->coupon)/100))}}</td>
 				</tr>
 				@endforeach
 

@@ -40,7 +40,7 @@
 					@enderror
 					<br>
 					<label>Ngày nhập</label>
-					<input type="text" name="date_input" id="datepicker" placeholder="YYYY/DD/MM" class="form-control">
+					<input type="text" name="date_input" id="datepicker" placeholder="YYYY/DD/MM" class="form-control" autocomplete="off">
 					@error('date_input')
 					<p class="text-danger">{{ $message }}</p>
 					@enderror

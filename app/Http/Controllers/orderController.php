@@ -8,6 +8,9 @@ use App\Models\Coupon;
 use App\Models\WarehouseOrder;
 use App\Models\Repost;
 use App\Models\Notification;
+use App\Models\return_voucher;
+use App\Models\return_voucher_detail;
+use App\Models\WarehouseProduct;
 use Session;
 use DB;
 use Auth;
@@ -30,14 +33,14 @@ class orderController extends Controller
             $orders=Order::where('status',$status)->where('status_pay',$status_pay)->orderBy('order_date', 'DESC')->paginate(10);
         }
         if($status!=-1&&$status_pay==-1)
-      {
-        $orders=Order::where('status',$status)->orderBy('order_date', 'DESC')->paginate(10);
-      }
-      if($status==-1&&$status_pay!=-1)
-      {
-        $orders=Order::where('status_pay',$status_pay)->orderBy('order_date', 'DESC')->paginate(10);
-      }
-      return view('admin.order.list_order',compact('orders','status','status_pay'));
+        {
+            $orders=Order::where('status',$status)->orderBy('order_date', 'DESC')->paginate(10);
+        }
+        if($status==-1&&$status_pay!=-1)
+        {
+            $orders=Order::where('status_pay',$status_pay)->orderBy('order_date', 'DESC')->paginate(10);
+        }
+        return view('admin.order.list_order',compact('orders','status','status_pay'));
     }
     public function getOrderDetail($id,$notification_id=null)
     {
@@ -46,40 +49,40 @@ class orderController extends Controller
             $notification=Notification::find($notification_id);
             if($notification==null)
             {
-                 return redirect()->route('order_get_detail',$id);
-            }
-            $notification->delete();
-        }
-        $order=Order::find($id);
-        $coupon=Coupon::where('code',$order->coupon)->first();
-        $amountArray= array();
-        $tongTienHang=0;
-        $tongSanPham=0;
-        foreach($order->orderDetails as $item)
-        {
-            $tongSanPham+=$item->soluong;
-            $tongTienHang+=($item->product->price)*($item->soluong)*((100-$item->coupon)/100);
-        }
-        $amountArray['tongTienHang']=$tongTienHang;
-        $amountArray['tongSanPham']=$tongSanPham;
-        $amountArray['tienTruGiamGia']=0;
-        if($coupon!=null)
-        {
-            if($coupon->value_sale<=100)
-            {
-                $amountArray['tienTruGiamGia']=$tongTienHang*($coupon->value_sale);
-            }else
-            {
-                $amountArray['tienTruGiamGia']=$tongTienHang-$coupon->value_sale;
-            }
-        }
-        $amountArray['tongTienThanhToan']=$tongTienHang-$amountArray['tienTruGiamGia'];
-        return view('admin.order.order_detail',compact('order','coupon','amountArray'));
+               return redirect()->route('order_get_detail',$id);
+           }
+           $notification->delete();
+       }
+       $order=Order::find($id);
+       $coupon=Coupon::where('code',$order->coupon)->first();
+       $amountArray= array();
+       $tongTienHang=0;
+       $tongSanPham=0;
+       foreach($order->orderDetails as $item)
+       {
+        $tongSanPham+=$item->soluong;
+        $tongTienHang+=($item->product->price)*($item->soluong)*((100-$item->coupon)/100);
     }
-    public function changeStatus(Request $req)
+    $amountArray['tongTienHang']=$tongTienHang;
+    $amountArray['tongSanPham']=$tongSanPham;
+    $amountArray['tienTruGiamGia']=0;
+    if($coupon!=null)
     {
-        DB::beginTransaction();
-        try{
+        if($coupon->value_sale<=100)
+        {
+            $amountArray['tienTruGiamGia']=$tongTienHang*($coupon->value_sale);
+        }else
+        {
+            $amountArray['tienTruGiamGia']=$tongTienHang-$coupon->value_sale;
+        }
+    }
+    $amountArray['tongTienThanhToan']=$tongTienHang-$amountArray['tienTruGiamGia'];
+    return view('admin.order.order_detail',compact('order','coupon','amountArray'));
+}
+public function changeStatus(Request $req)
+{
+    DB::beginTransaction();
+    try{
         $order=Order::find($req->order_id);
         if($order->status==4||$order->status==5||$order->status==6)
         {
@@ -105,72 +108,72 @@ class orderController extends Controller
                 $old_total_revenue=  $repost->total_revenue;
                 $old_total_quantity= $repost->total_quantity;
             }
-                $tongTienHang=0;
-                $tongSanPham=0;
-                foreach($order->orderDetails as $item)
-                {
-                    $item->product->product_sold+=$item->soluong;
-                    $item->product->save();
-                    $tongSanPham+=$item->soluong;
-                    $tongTienHang+=($item->product->price)*($item->soluong)*((100-$item->coupon)/100);
-                }
-                $repost->total_quantity=$tongSanPham+$old_total_quantity;
-                $tienGiamGia=0;
-                if($coupon!=null)
-                {
-                    if($coupon->value_sale<=100)
-                    {
-                        $tienGiamGia=$tongTienHang*($coupon->value_sale);
-                    }else
-                    {
-                        $tienGiamGia=$tongTienHang-$coupon->value_sale;
-                    }
-                }
-                $repost->total_revenue=($tongTienHang-$tienGiamGia)+$old_total_revenue;
-              
-                $repost->save();
-                 DB::commit();
-            }
-            }catch(Exception $ex)
+            $tongTienHang=0;
+            $tongSanPham=0;
+            foreach($order->orderDetails as $item)
             {
-                DB::rollback();
-                throw new Exception("Lỗi:", $ex->getMessage());
-                
+                $item->product->product_sold+=$item->soluong;
+                $item->product->save();
+                $tongSanPham+=$item->soluong;
+                $tongTienHang+=($item->product->price)*($item->soluong)*((100-$item->coupon)/100);
             }
+            $repost->total_quantity=$tongSanPham+$old_total_quantity;
+            $tienGiamGia=0;
+            if($coupon!=null)
+            {
+                if($coupon->value_sale<=100)
+                {
+                    $tienGiamGia=$tongTienHang*($coupon->value_sale);
+                }else
+                {
+                    $tienGiamGia=$tongTienHang-$coupon->value_sale;
+                }
+            }
+            $repost->total_revenue=($tongTienHang-$tienGiamGia)+$old_total_revenue;
+
+            $repost->save();
+            DB::commit();
         }
-    
-    public function changeStatusPay(Request $req)
+    }catch(Exception $ex)
     {
-    
-        $order=Order::find($req->order_id);
-        if($order->status_pay==1)
-        {
-            return redirect()->back()->with('error','Đơn hàng đã thanh toán không thể thay đổi!!!');
-        }
-        $order->status_pay=$req->status;
-        $order->save();
+        DB::rollback();
+        throw new Exception("Lỗi:", $ex->getMessage());
+
     }
+}
+
+public function changeStatusPay(Request $req)
+{
+
+    $order=Order::find($req->order_id);
+    if($order->status_pay==1)
+    {
+        return redirect()->back()->with('error','Đơn hàng đã thanh toán không thể thay đổi!!!');
+    }
+    $order->status_pay=$req->status;
+    $order->save();
+}
 
     //lịch sử đơn hàng
-    public function history()
-    {
-        if (!Session::get('id_customer')) {
-            return redirect()->route('login_customer')->with('thongbao_login_thatbai','Hãy đăng nhập để em lịch sử đơn hàng');
-        }else{
-            $orders = Order::where('customer_id',Session::get('id_customer'))->orderBy('id','DESC')->paginate(10);
-            if($orders){
-               return view('website.history.history',compact('orders')); 
-            }
-        }
-    }
-    public function view_history_order($id)
-    {
-        if (!Session::get('id_customer')) {
-            return redirect()->route('login_customer')->with('thongbao_login_thatbai','Hãy đăng nhập để em lịch sử đơn hàng');
-        }else{
-            /*xem lịch sử đơn hàng*/
-            $order=Order::find($id);
-            $coupon=Coupon::where('code',$order->coupon)->first();
+public function history()
+{
+    if (!Session::get('id_customer')) {
+        return redirect()->route('login_customer')->with('thongbao_login_thatbai','Hãy đăng nhập để em lịch sử đơn hàng');
+    }else{
+        $orders = Order::where('customer_id',Session::get('id_customer'))->orderBy('id','DESC')->paginate(10);
+        if($orders){
+         return view('website.history.history',compact('orders')); 
+     }
+ }
+}
+public function view_history_order($id)
+{
+    if (!Session::get('id_customer')) {
+        return redirect()->route('login_customer')->with('thongbao_login_thatbai','Hãy đăng nhập để em lịch sử đơn hàng');
+    }else{
+        /*xem lịch sử đơn hàng*/
+        $order=Order::find($id);
+        $coupon=Coupon::where('code',$order->coupon)->first();
         
         $amountArray= array();
         $tongTienHang=0;
@@ -194,13 +197,13 @@ class orderController extends Controller
             }
         }
         $amountArray['tongTienThanhToan']=$tongTienHang-$amountArray['tienTruGiamGia'];
-           return view('website.history.view_history_order',compact('order','coupon','amountArray')); 
-        }
+        return view('website.history.view_history_order',compact('order','coupon','amountArray')); 
     }
-    public function cancelOrder(Request $req)
-    {
-        DB::beginTransaction();
-        try{
+}
+public function cancelOrder(Request $req)
+{
+    DB::beginTransaction();
+    try{
         $order=Order::find($req->id_order);
         if($order->status!=1&&$order->status!=-1)
         {
@@ -212,7 +215,7 @@ class orderController extends Controller
         }
         $order->status=5;
         if($order->cancel_order){
-        $order->cancel_order=$req->cancle_notes;
+            $order->cancel_order=$req->cancle_notes;
         }
         $order->save();
         foreach($order->orderDetails as $orderDetail)
@@ -227,7 +230,7 @@ class orderController extends Controller
                 $item->warehouse_product->warehouse->quantity_now=$item->warehouse_product->warehouse->quantity_now+$item->quantity;
                 $item->warehouse_product->warehouse->save();
                 $item->delete();
-               
+
             }
         }
         DB::commit();
@@ -237,19 +240,126 @@ class orderController extends Controller
         DB::rollBack();
         throw new Exception($ex->getMessage());
     }
-    }
-    public function deleteNotifications()
+}
+public function deleteNotifications()
+{
+    DB::beginTransaction();
+    try{
+        Auth::user()->notifications()->delete();
+        DB::commit();
+        return redirect()->back();
+    }catch(Exception $ex)
     {
-        DB::beginTransaction();
-        try{
-            Auth::user()->notifications()->delete();
-            DB::commit();
-            return redirect()->back();
-        }catch(Exception $ex)
-        {
-            DB::rollback();
-            throw new Exception($ex->getMessage());
+        DB::rollback();
+        throw new Exception($ex->getMessage());
         
-        }
     }
+}
+public function get_view_exchange($order_code)
+{
+  $order = Order::where('order_code',$order_code)->first();
+  return view('admin.order.view_exchange',compact('order','order_code'));
+}
+public function save_exchange(Request $req,$order_code)
+{
+    DB::beginTransaction();
+    try{
+       $voucher = new return_voucher();
+       $voucher->order_code = $order_code;
+       $voucher->voucher_date = $req->voucher_date;
+       $voucher->voucher_code = 'oidoioi';
+       $voucher->save();
+       $voucher->voucher_code = get_code($voucher->id,'RV');
+       $voucher->save();
+
+
+       $product_id = $req->product_id;
+       $quantity = $req->quantity;
+       $order_detail_id = $req->order_detail;
+       $warehouse_product_id = $req->warehouse_product_id;
+
+       for ($i = 0; $i < count($product_id) ; $i++) {
+        $voucher_detail = new return_voucher_detail();
+        $voucher_detail->product_id = $product_id[$i];
+        $voucher_detail->quantity = $quantity[$i];
+        $voucher_detail->voucher_id = $voucher->id;
+        $voucher_detail->return_quantity = $quantity[$i];
+        $voucher_detail->return_warehouse_id = $warehouse_product_id[$i];
+        $voucher_detail->save();  
+
+
+        do{              
+           /*khi số lượng đổi < số lượng hiện tại trong kho*/
+
+           $warehouseProduct=WarehouseProduct::where('product_id',$product_id[$i])->where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first(); /*kho lấy ra*/
+
+           if ($warehouseProduct) {
+               if ($quantity[$i]<$warehouseProduct->quantity) {
+                   $warehouseProduct->quantity = $warehouseProduct->quantity-$quantity[$i];
+                   $quantity[$i] = $quantity[$i]-$warehouseProduct->quantity;
+                   $warehouseProduct->save();    
+               }
+               else {
+                $warehouseProduct->quantity = $quantity[$i]-$warehouseProduct->quantity;
+                   $quantity[$i] = $warehouseProduct->quantity-$quantity[$i];
+                   $warehouseProduct->save();
+
+
+                 $warehouseOrder_new = new WarehouseOrder();
+                   $warehouseOrder_new->quantity = $quantity[$i]; 
+                   $warehouseOrder_new->warehouse_product_id = $warehouseProduct->id;
+                   $warehouseOrder_new->order_detail_id = $order_detail_id[$i];
+                   $warehouseOrder_new->save();
+
+
+               }
+           }
+           else {
+           $warehouseProduct_new=WarehouseProduct::where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first(); /*kho lấy ra*/
+
+             if ($quantity[$i]<$warehouseProduct_new->quantity) {
+                   $warehouseProduct_new->quantity = $warehouseProduct_new->quantity-$quantity[$i];
+                  
+                   $warehouseProduct_new->save();
+
+                   $warehouseOrder_new = new WarehouseOrder();
+                   $warehouseOrder_new->quantity = $quantity[$i];
+                   $warehouseOrder_new->warehouse_product_id = $warehouseProduct_new->id;
+                   $warehouseOrder_new->order_detail_id = $order_detail_id[$i];
+                   $warehouseOrder_new->save(); 
+
+                   $quantity[$i] = $quantity[$i]-$warehouseProduct_new->quantity; 
+               }
+               else {
+
+                   $warehouseProduct_new->quantity = $quantity[$i]-$warehouseProduct_new->quantity;
+                   $warehouseProduct_new->save();
+
+                   $warehouseOrder_new = new WarehouseOrder();
+                   $warehouseOrder_new->quantity = $quantity[$i];
+                   $warehouseOrder_new->warehouse_product_id = $warehouseProduct_new->id;
+                   $warehouseOrder_new->order_detail_id = $order_detail_id[$i];
+                   $warehouseOrder_new->save();
+
+                   $quantity[$i] = $warehouseProduct_new->quantity-$quantity[$i];
+               }
+           }
+
+
+       }while($quantity[$i]>0);
+
+   }
+
+
+   DB::commit();
+}catch(Exception $ex)
+{
+    DB::rollBack();
+    throw new Exception($ex->getMessage());
+}
+
+
+
+
+}
 }

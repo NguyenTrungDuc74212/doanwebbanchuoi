@@ -86,6 +86,7 @@
 						<td>{{currency_format($value->total)}}</td>
 						<td  class="text-nowrap">
 							<a href="{{ route('order_get_detail',$value->id) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+							<a href="{{ route('get_view_exchange',$value->order_code) }}" class="btn btn-danger"><i class="fas fa-exchange-alt"></i></a>
 						</td>
 					</tr>
 					@endforeach
