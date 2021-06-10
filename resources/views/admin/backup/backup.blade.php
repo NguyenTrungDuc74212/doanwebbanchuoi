@@ -8,7 +8,7 @@
 		<div class="card-header text-center">
 			<h3 class="card-title"><b>Danh sách file backup</b></h3>
 			<br>
-                <form action="">
+                <form action="{{route('backup_search')}}" method="GET">
                     <input class="form-control my-datepicker-2" id="my_search" type="text" placeholder="dd-mm-yyyy" name="date" >
                     <button class="btn btn-warning" type="submit" id="my_btn">Tìm file theo ngày</button>
                 </form>
