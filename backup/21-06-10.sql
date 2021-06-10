@@ -21,11 +21,9 @@ INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_pas
 
 INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('2','Mai Trung Hiếu','hieu@gmail.com',NULL,'$2y$10$jiQX6bDjgfIRAGRuyDHciOLKQu3QIex0TKhrx.RaX7SRS.fBAz5eO',NULL,'1','328896748',NULL,'2021-03-16 20:52:47','2021-03-16 20:52:47');
 
-INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('3','Lê Sỹ Đức mạnh','manhle99@gmail.com',NULL,'$2y$10$0PTQUgWjlLERGSRv1dGQc.16EeQNH9DIjKP4KT4g3oQTpvutWh19S',NULL,'1','328896749',NULL,'2021-03-16 20:53:45','2021-03-16 20:53:45');
-
 INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('4','mạnh lê','manhdzzd@gmail.com',NULL,'$2y$10$Kc3ge2.ecodRgrqOS/npweSqC94UtiOtT1EF3UwLWKNYjjtMC7tka',NULL,'1','329294747',NULL,'2021-05-09 16:19:42','2021-05-09 16:19:42');
 
-INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('5','đạt lol','dat@gmail.com',NULL,'$2y$10$S4AlGtuBELUtydqLJ01/Ye3JTGZ4OYHq8zpSu3VCi18qWrh44ZYT6',NULL,'1','386258039',NULL,'2021-05-18 15:49:38','2021-05-18 15:49:38');
+INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('5','đạt lol','dat@gmail.com','0000-00-00 00:00:00','$2y$10$S4AlGtuBELUtydqLJ01/Ye3JTGZ4OYHq8zpSu3VCi18qWrh44ZYT6',NULL,'1','386258039',NULL,'2021-05-18 15:49:38','2021-05-18 15:49:38');
 
 
 CREATE TABLE `users_roles` (
@@ -58,9 +56,9 @@ CREATE TABLE `tbl_warehouse_product` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `expiration_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
-  `quantity_cancel` int(11) NOT NULL,
+  `quantity_cancel` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('18','17','1','7','2021-06-02 02:01:52','2021-06-04 08:34:00','2021-06-04','2','0');
@@ -88,6 +86,10 @@ INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`
 INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('29','18','1','0','2021-06-04 08:50:08','2021-06-09 15:09:56','2021-06-18','0','0');
 
 INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('30','20','1','0','2021-06-04 08:50:08','2021-06-09 13:03:22','2021-06-24','0','0');
+
+INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('31','1','1','20','2021-06-10 10:06:05','2021-06-10 10:06:05','2021-09-10','0',NULL);
+
+INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('32','3','1','20','2021-06-10 10:06:05','2021-06-10 10:06:05','2021-09-10','0',NULL);
 
 
 CREATE TABLE `tbl_warehouse_order` (
@@ -119,14 +121,6 @@ INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`
 
 INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('297','29','176','1','2021-06-07 11:14:11','2021-06-07 11:14:11');
 
-INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('298','30','177','1','2021-06-09 13:03:22','2021-06-09 13:03:22');
-
-INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('299','24','178','2','2021-06-09 13:34:47','2021-06-09 13:34:47');
-
-INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('300','24','178','-1','2021-06-09 14:00:02','2021-06-09 14:00:02');
-
-INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('301','29','178','1','2021-06-09 15:09:56','2021-06-09 15:09:56');
-
 
 CREATE TABLE `tbl_warehouse` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -139,7 +133,7 @@ CREATE TABLE `tbl_warehouse` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO tbl_warehouse (`id`,`warehouse_name`,`quantity_contain`,`quantity_now`,`created_at`,`updated_at`) VALUES ('1','Kho thực phẩm 1','1000','70','2021-04-28 23:33:17','2021-06-09 13:34:47');
+INSERT INTO tbl_warehouse (`id`,`warehouse_name`,`quantity_contain`,`quantity_now`,`created_at`,`updated_at`) VALUES ('1','Kho thực phẩm 1','1000','110','2021-04-28 23:33:17','2021-06-10 10:06:05');
 
 INSERT INTO tbl_warehouse (`id`,`warehouse_name`,`quantity_contain`,`quantity_now`,`created_at`,`updated_at`) VALUES ('3','kho thực phẩm 2','1000','9','2021-05-18 17:49:52','2021-06-07 02:04:20');
 
@@ -338,7 +332,7 @@ CREATE TABLE `tbl_soical` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`,`user`,`created_at`,`updated_at`) VALUES ('1','103189668869674003612','ductrungthug@gmail.com','GOOGLE','1',NULL,NULL);
@@ -356,6 +350,8 @@ INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`
 INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`,`user`,`created_at`,`updated_at`) VALUES ('7','1953348441490677','dat75849@st.vimaru.edu.vn','facebook','6',NULL,NULL);
 
 INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`,`user`,`created_at`,`updated_at`) VALUES ('8','1948837931952751','thichgaytoi@gmail.com','facebook','8',NULL,NULL);
+
+INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`,`user`,`created_at`,`updated_at`) VALUES ('9','10150004250647759','koowtswenm_1574355019@tfbnw.net','facebook','9',NULL,NULL);
 
 
 CREATE TABLE `tbl_slider` (
@@ -384,7 +380,7 @@ CREATE TABLE `tbl_shipping` (
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notes` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `method` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -528,9 +524,9 @@ CREATE TABLE `tbl_product` (
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('1','Chuối Fohla Nhánh 4 Trái 750g','chuối-dole-300x300636.jpg','2','19','<p>Chuối Fohla Nh&aacute;nh 4 Tr&aacute;i 750g ngon bổ rẻ</p>','<p>Chuối Fohla Nh&aacute;nh 4 Tr&aacute;i 750g ngon bổ rẻ</p>','34000','Chuối Fohla Nhánh 4 Trái 750g ngon bổ rẻ','Chuối Fohla Nhánh 4 Trái 750g ngon bổ rẻ','chuoi-fohla-nhanh-4-trai-750g','2021-03-16 21:17:50','2021-06-08 20:22:43','2','1','12','kg');
+INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('1','Chuối Fohla Nhánh 4 Trái 750g','chuối-dole-300x300636.jpg','2','39','<p>Chuối Fohla Nh&aacute;nh 4 Tr&aacute;i 750g ngon bổ rẻ</p>','<p>Chuối Fohla Nh&aacute;nh 4 Tr&aacute;i 750g ngon bổ rẻ</p>','34000','Chuối Fohla Nhánh 4 Trái 750g ngon bổ rẻ','Chuối Fohla Nhánh 4 Trái 750g ngon bổ rẻ','chuoi-fohla-nhanh-4-trai-750g','2021-03-16 21:17:50','2021-06-10 10:06:05','2','1','12','kg');
 
-INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('3','Chuối sấy năng lượng mặt trời','chuoifohla3399.jpg','2','1','<p>Thay cho phương ph&aacute;p phơi dưới nắng truyền thống, Unifarm sử dụng c&ocirc;ng nghệ sấy bằng nh&agrave; k&iacute;nh c&ocirc;ng nghệ cao Parabola Dome. Sản phẩm sau khi sấy đảm bảo sạch, thơm ngon, dinh dưỡng,&hellip;</p>','Thay cho phương pháp phơi dưới nắng truyền thống, Unifarm sử dụng công nghệ sấy bằng nhà kính công nghệ cao Parabola Dome. Sản phẩm sau khi sấy đảm bảo sạch, thơm ngon, dinh dưỡng,…','350000','Chuối sấy năng lượng mặt trời','Chuối sấy năng lượng mặt trời','chuoi-say-nang-luong-mat-troi','2021-03-16 21:18:13','2021-06-08 20:22:43','2','7','0','kg');
+INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('3','Chuối sấy năng lượng mặt trời','chuoifohla3399.jpg','2','21','<p>Thay cho phương ph&aacute;p phơi dưới nắng truyền thống, Unifarm sử dụng c&ocirc;ng nghệ sấy bằng nh&agrave; k&iacute;nh c&ocirc;ng nghệ cao Parabola Dome. Sản phẩm sau khi sấy đảm bảo sạch, thơm ngon, dinh dưỡng,&hellip;</p>','Thay cho phương pháp phơi dưới nắng truyền thống, Unifarm sử dụng công nghệ sấy bằng nhà kính công nghệ cao Parabola Dome. Sản phẩm sau khi sấy đảm bảo sạch, thơm ngon, dinh dưỡng,…','350000','Chuối sấy năng lượng mặt trời','Chuối sấy năng lượng mặt trời','chuoi-say-nang-luong-mat-troi','2021-03-16 21:18:13','2021-06-10 10:06:05','2','7','0','kg');
 
 INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('7','Dưỡng tóc từ Chuối','matnachuoi_119.jpg','4','10','<p>Chuối l&agrave; loại tr&aacute;i c&acirc;y chứa nhiều silica, một hợp chất gi&uacute;p cơ thể tổng hợp collagen v&agrave; gi&uacute;p t&oacute;c chắc d&agrave;y hơn. Th&ecirc;m v&agrave;o đ&oacute;, khả năng kh&aacute;ng khuẩn của chuối cũng gi&uacute;p phục hồi t&igrave;nh trạng da đầu kh&ocirc; v&agrave; bong tr&oacute;c, đồng thời l&agrave;m giảm c&aacute;c triệu chứng của g&agrave;u.&nbsp;Nhờ những lợi &iacute;ch vượt trội, chuối l&agrave; một th&agrave;nh phần quen thuộc được sử dụng trong c&aacute;c mặt nạ dưỡng t&oacute;c tại nh&agrave;, c&oacute; t&aacute;c dụng l&agrave;m mềm v&agrave; phục hồi t&oacute;c.</p>','<p>&nbsp;</p>
 
@@ -671,6 +667,8 @@ INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`create
 
 INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('150','2','156','37900','4','2021-06-04 08:32:11','2021-06-08 20:22:08','DH0000150','2021-06-04','1',NULL,'1',NULL);
 
+INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('151',NULL,'157','1400000','4','2021-06-05 22:52:01','2021-06-08 20:20:59','DH0000151','2021-06-05','4',NULL,'1',NULL);
+
 INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('152','1','159','350000','1','2021-06-06 14:17:27','2021-06-06 14:17:27','DH0000152','2021-06-06','1',NULL,'0',NULL);
 
 INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('153','1','160','379920','4','2021-06-06 21:29:37','2021-06-08 20:22:43','DH0000153','2021-06-06','2',NULL,'1',NULL);
@@ -679,7 +677,13 @@ INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`create
 
 INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('155','8','162','24000','1','2021-06-09 12:38:33','2021-06-09 12:38:33','DH0000155','2021-06-09','1',NULL,'0',NULL);
 
-INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('156',NULL,'163','24000','1','2021-06-09 12:39:21','2021-06-09 12:39:21','DH0000156','2021-06-09','1',NULL,'0',NULL);
+INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('156','8','163','24000','1','2021-06-09 12:39:21','2021-06-09 12:39:21','DH0000156','2021-06-09','1',NULL,'0',NULL);
+
+INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('157',NULL,'164','24000','4','2021-06-09 13:03:20','2021-06-09 13:16:00','DH0000157','2021-06-09','1',NULL,'1',NULL);
+
+INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('158',NULL,'165','96000','1','2021-06-09 13:25:37','2021-06-09 13:25:37','DH0000158','2021-06-09','4',NULL,'0',NULL);
+
+INSERT INTO tbl_order (`id`,`customer_id`,`shipping_id`,`total`,`status`,`created_at`,`updated_at`,`order_code`,`order_date`,`quantity`,`coupon`,`status_pay`,`cancel_order`) VALUES ('159',NULL,'166','75800','4','2021-06-09 13:34:46','2021-06-09 16:11:44','DH0000159','2021-06-09','2',NULL,'1',NULL);
 
 
 CREATE TABLE `tbl_inward_slip_details` (
@@ -693,7 +697,7 @@ CREATE TABLE `tbl_inward_slip_details` (
   `unit` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantity`,`price_import`,`created_at`,`updated_at`,`unit`,`expiration_date`) VALUES ('52','17','28','10','10000','2021-06-02 02:01:03','2021-06-02 02:01:03','cái','2021-06-16');
@@ -722,6 +726,10 @@ INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantit
 
 INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantity`,`price_import`,`created_at`,`updated_at`,`unit`,`expiration_date`) VALUES ('66','20','34','10','15000','2021-06-04 08:48:03','2021-06-04 08:48:03','cái','2021-06-24');
 
+INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantity`,`price_import`,`created_at`,`updated_at`,`unit`,`expiration_date`) VALUES ('67','1','35','20','20000','2021-06-10 10:06:05','2021-06-10 10:06:05','kg','2021-09-10');
+
+INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantity`,`price_import`,`created_at`,`updated_at`,`unit`,`expiration_date`) VALUES ('68','3','35','20','20000','2021-06-10 10:06:06','2021-06-10 10:06:06','kg','2021-09-10');
+
 
 CREATE TABLE `tbl_inward_slip` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -735,7 +743,7 @@ CREATE TABLE `tbl_inward_slip` (
   `status` tinyint(4) NOT NULL,
   `date_input` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_amount`,`total_quanlity`,`created_at`,`updated_at`,`status`,`date_input`) VALUES ('28','4','4','1','100000','10','2021-06-02 02:01:03','2021-06-02 02:01:52','1','2021-06-17');
@@ -749,6 +757,8 @@ INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_am
 INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_amount`,`total_quanlity`,`created_at`,`updated_at`,`status`,`date_input`) VALUES ('33','4','2','1','450000','30','2021-06-04 08:35:53','2021-06-04 08:35:53','1','2021-06-17');
 
 INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_amount`,`total_quanlity`,`created_at`,`updated_at`,`status`,`date_input`) VALUES ('34','4','4','1','750000','50','2021-06-04 08:48:03','2021-06-04 08:50:08','1','2021-06-08');
+
+INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_amount`,`total_quanlity`,`created_at`,`updated_at`,`status`,`date_input`) VALUES ('35','1','2','1','800000','40','2021-06-10 10:06:05','2021-06-10 10:06:05','1','2021-06-10');
 
 
 CREATE TABLE `tbl_gallery` (
@@ -850,7 +860,7 @@ CREATE TABLE `tbl_customer` (
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `customer_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`updated_at`,`address`,`customer_token`) VALUES ('1','đức nguyễn trung','ductrungthug@gmail.com','$2y$10$pmaiaGVW4lURZXL6oj.oW.SsVBPa2Apm7L.p66A1Y2CP/V2C044.6','0386258039','2021-05-17 21:49:00','2021-05-17 21:49:00','số 4 lố 236 khut3, thành tô, hải an, hải phòng',NULL);
@@ -868,6 +878,8 @@ INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`u
 INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`updated_at`,`address`,`customer_token`) VALUES ('7','lung thị linh','linh@gmail.com','$2y$10$bgXRBuSMcX6gAMvJ2N54w.fOxtH0qwscgT2U51gWXstxfKXRIbhcG','0386258039','2021-06-05 00:13:29','2021-06-05 00:13:29','số 4 lố 236 khut3, thành tô, hải an, hải phòng',NULL);
 
 INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`updated_at`,`address`,`customer_token`) VALUES ('8','Đại Đức','thichgaytoi@gmail.com',NULL,NULL,'2021-06-09 12:36:06','2021-06-09 12:36:06',NULL,NULL);
+
+INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`updated_at`,`address`,`customer_token`) VALUES ('9','Elizabeth Chiquitoez','koowtswenm_1574355019@tfbnw.net',NULL,NULL,'2021-06-10 08:33:26','2021-06-10 08:33:26',NULL,NULL);
 
 
 CREATE TABLE `tbl_coupon` (
@@ -981,49 +993,49 @@ CREATE TABLE `notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('117ab3af-f599-4e85-8cdf-27e31363ab3e','AppNotificationsNotificationAdmin','AppModelsUser','1','{"order_id":152,"custommerName":"u0111u1ee9c nguyu1ec5n trung"}',NULL,'2021-06-06 14:17:30','2021-06-06 14:17:30');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('117ab3af-f599-4e85-8cdf-27e31363ab3e','App\Notifications\NotificationAdmin','App\Models\User','1','{"order_id":152,"custommerName":"\u0111\u1ee9c nguy\u1ec5n trung"}',NULL,'2021-06-06 14:17:30','2021-06-06 14:17:30');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('3e090617-3e39-4e41-a274-c1c90e1b2188','AppNotificationsNotificationAdmin','AppModelsUser','1','{"message":"Su1ea3n phu1ea9m u0111u00e3 hu1ebft hu1ea1n:  Chuu1ed1i Su1ee9 ( Pack 700g ), Chuu1ed1i su1ea5y nu0103ng lu01b0u1ee3ng mu1eb7t tru1eddi,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('3e090617-3e39-4e41-a274-c1c90e1b2188','App\Notifications\NotificationAdmin','App\Models\User','1','{"message":"S\u1ea3n ph\u1ea9m \u0111\u00e3 h\u1ebft h\u1ea1n:  Chu\u1ed1i S\u1ee9 ( Pack 700g ), Chu\u1ed1i s\u1ea5y n\u0103ng l\u01b0\u1ee3ng m\u1eb7t tr\u1eddi,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('5188c2b5-9b9e-4985-bf38-b6f3d7d79a12','AppNotificationsNotificationAdmin','AppModelsUser','5','{"order_id":157,"custommerName":"manh le"}',NULL,'2021-06-09 13:03:27','2021-06-09 13:03:27');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('5188c2b5-9b9e-4985-bf38-b6f3d7d79a12','App\Notifications\NotificationAdmin','App\Models\User','5','{"order_id":157,"custommerName":"manh le"}',NULL,'2021-06-09 13:03:27','2021-06-09 13:03:27');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('5a46eabc-466e-45c9-b3b7-22450774db8c','AppNotificationsNotificationAdmin','AppModelsUser','4','{"message":"Su1ea3n phu1ea9m u0111u00e3 hu1ebft hu1ea1n:  Chuu1ed1i Su1ee9 ( Pack 700g ), Chuu1ed1i su1ea5y nu0103ng lu01b0u1ee3ng mu1eb7t tru1eddi,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('5a46eabc-466e-45c9-b3b7-22450774db8c','App\Notifications\NotificationAdmin','App\Models\User','4','{"message":"S\u1ea3n ph\u1ea9m \u0111\u00e3 h\u1ebft h\u1ea1n:  Chu\u1ed1i S\u1ee9 ( Pack 700g ), Chu\u1ed1i s\u1ea5y n\u0103ng l\u01b0\u1ee3ng m\u1eb7t tr\u1eddi,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('60e6d443-81b7-4e43-8004-ef70debd1e57','AppNotificationsNotificationAdmin','AppModelsUser','1','{"order_id":151,"custommerName":"Dat Thanh"}',NULL,'2021-06-05 22:52:02','2021-06-05 22:52:02');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('60e6d443-81b7-4e43-8004-ef70debd1e57','App\Notifications\NotificationAdmin','App\Models\User','1','{"order_id":151,"custommerName":"Dat Thanh"}',NULL,'2021-06-05 22:52:02','2021-06-05 22:52:02');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('638c7e4f-960b-4b06-a4d6-e7f35d0f496a','AppNotificationsNotificationAdmin','AppModelsUser','5','{"order_id":159,"custommerName":"manh le"}',NULL,'2021-06-09 13:34:49','2021-06-09 13:34:49');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('638c7e4f-960b-4b06-a4d6-e7f35d0f496a','App\Notifications\NotificationAdmin','App\Models\User','5','{"order_id":159,"custommerName":"manh le"}',NULL,'2021-06-09 13:34:49','2021-06-09 13:34:49');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('6f0055e5-6ec7-419d-b1ff-1fe16c4855ec','AppNotificationsNotificationAdmin','AppModelsUser','5','{"message":"Su1ea3n phu1ea9m hu1ebft hu1ea1n sau 10 ngu00e0y: Chuu1ed1i DOLE,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('6f0055e5-6ec7-419d-b1ff-1fe16c4855ec','App\Notifications\NotificationAdmin','App\Models\User','5','{"message":"S\u1ea3n ph\u1ea9m h\u1ebft h\u1ea1n sau 10 ng\u00e0y: Chu\u1ed1i DOLE,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('704d2a13-c8d5-48d7-9135-04200db4dad8','AppNotificationsNotificationAdmin','AppModelsUser','4','{"order_id":157,"custommerName":"manh le"}',NULL,'2021-06-09 13:03:27','2021-06-09 13:03:27');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('704d2a13-c8d5-48d7-9135-04200db4dad8','App\Notifications\NotificationAdmin','App\Models\User','4','{"order_id":157,"custommerName":"manh le"}',NULL,'2021-06-09 13:03:27','2021-06-09 13:03:27');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('93d7896f-6e9f-4a6d-adfa-9734cff2e46f','AppNotificationsNotificationAdmin','AppModelsUser','5','{"order_id":152,"custommerName":"u0111u1ee9c nguyu1ec5n trung"}',NULL,'2021-06-06 14:17:30','2021-06-06 14:17:30');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('93d7896f-6e9f-4a6d-adfa-9734cff2e46f','App\Notifications\NotificationAdmin','App\Models\User','5','{"order_id":152,"custommerName":"\u0111\u1ee9c nguy\u1ec5n trung"}',NULL,'2021-06-06 14:17:30','2021-06-06 14:17:30');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('96900fd2-49d6-4167-adaf-4285a0b4439e','AppNotificationsNotificationAdmin','AppModelsUser','5','{"order_id":151,"custommerName":"Dat Thanh"}',NULL,'2021-06-05 22:52:02','2021-06-05 22:52:02');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('96900fd2-49d6-4167-adaf-4285a0b4439e','App\Notifications\NotificationAdmin','App\Models\User','5','{"order_id":151,"custommerName":"Dat Thanh"}',NULL,'2021-06-05 22:52:02','2021-06-05 22:52:02');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('9f5ec4c3-40bc-4869-bc69-6697ea9071a7','AppNotificationsNotificationAdmin','AppModelsUser','4','{"message":"Su1ea3n phu1ea9m hu1ebft hu1ea1n sau 10 ngu00e0y: Chuu1ed1i DOLE,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('9f5ec4c3-40bc-4869-bc69-6697ea9071a7','App\Notifications\NotificationAdmin','App\Models\User','4','{"message":"S\u1ea3n ph\u1ea9m h\u1ebft h\u1ea1n sau 10 ng\u00e0y: Chu\u1ed1i DOLE,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('a5f035fa-6e5e-4df2-a3ae-28b8c31044ba','AppNotificationsNotificationAdmin','AppModelsUser','5','{"message":"Su1ea3n phu1ea9m u0111u00e3 hu1ebft hu1ea1n:  Chuu1ed1i Su1ee9 ( Pack 700g ), Chuu1ed1i su1ea5y nu0103ng lu01b0u1ee3ng mu1eb7t tru1eddi,"}',NULL,'2021-06-04 02:21:06','2021-06-04 02:21:06');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('a5f035fa-6e5e-4df2-a3ae-28b8c31044ba','App\Notifications\NotificationAdmin','App\Models\User','5','{"message":"S\u1ea3n ph\u1ea9m \u0111\u00e3 h\u1ebft h\u1ea1n:  Chu\u1ed1i S\u1ee9 ( Pack 700g ), Chu\u1ed1i s\u1ea5y n\u0103ng l\u01b0\u1ee3ng m\u1eb7t tr\u1eddi,"}',NULL,'2021-06-04 02:21:06','2021-06-04 02:21:06');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('b7bf952d-a42a-4f70-af9a-f0c27bdc9f2e','AppNotificationsNotificationAdmin','AppModelsUser','4','{"order_id":153,"custommerName":"u0111u1ee9c nguyu1ec5n trung"}',NULL,'2021-06-06 21:29:41','2021-06-06 21:29:41');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('b7bf952d-a42a-4f70-af9a-f0c27bdc9f2e','App\Notifications\NotificationAdmin','App\Models\User','4','{"order_id":153,"custommerName":"\u0111\u1ee9c nguy\u1ec5n trung"}',NULL,'2021-06-06 21:29:41','2021-06-06 21:29:41');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('c3b4f6a7-89f4-48fd-a57a-c5c2051379e9','AppNotificationsNotificationAdmin','AppModelsUser','5','{"order_id":153,"custommerName":"u0111u1ee9c nguyu1ec5n trung"}',NULL,'2021-06-06 21:29:41','2021-06-06 21:29:41');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('c3b4f6a7-89f4-48fd-a57a-c5c2051379e9','App\Notifications\NotificationAdmin','App\Models\User','5','{"order_id":153,"custommerName":"\u0111\u1ee9c nguy\u1ec5n trung"}',NULL,'2021-06-06 21:29:41','2021-06-06 21:29:41');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('c5780a2d-deca-4f92-a113-eef8cc949b34','AppNotificationsNotificationAdmin','AppModelsUser','1','{"order_id":153,"custommerName":"u0111u1ee9c nguyu1ec5n trung"}',NULL,'2021-06-06 21:29:40','2021-06-06 21:29:40');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('c5780a2d-deca-4f92-a113-eef8cc949b34','App\Notifications\NotificationAdmin','App\Models\User','1','{"order_id":153,"custommerName":"\u0111\u1ee9c nguy\u1ec5n trung"}',NULL,'2021-06-06 21:29:40','2021-06-06 21:29:40');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('c6b63cdb-b52c-4084-afa2-3c1c44ea9c9c','AppNotificationsNotificationAdmin','AppModelsUser','1','{"order_id":157,"custommerName":"manh le"}',NULL,'2021-06-09 13:03:27','2021-06-09 13:03:27');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('c6b63cdb-b52c-4084-afa2-3c1c44ea9c9c','App\Notifications\NotificationAdmin','App\Models\User','1','{"order_id":157,"custommerName":"manh le"}',NULL,'2021-06-09 13:03:27','2021-06-09 13:03:27');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('d24e8d00-ba45-4df9-94d5-e0d22de09c13','AppNotificationsNotificationAdmin','AppModelsUser','5','{"order_id":150,"custommerName":"ManhLe"}',NULL,'2021-06-04 08:32:12','2021-06-04 08:32:12');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('d24e8d00-ba45-4df9-94d5-e0d22de09c13','App\Notifications\NotificationAdmin','App\Models\User','5','{"order_id":150,"custommerName":"ManhLe"}',NULL,'2021-06-04 08:32:12','2021-06-04 08:32:12');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('d76602b1-bcf1-4386-9204-35530ad6ad1c','AppNotificationsNotificationAdmin','AppModelsUser','4','{"order_id":159,"custommerName":"manh le"}',NULL,'2021-06-09 13:34:49','2021-06-09 13:34:49');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('d76602b1-bcf1-4386-9204-35530ad6ad1c','App\Notifications\NotificationAdmin','App\Models\User','4','{"order_id":159,"custommerName":"manh le"}',NULL,'2021-06-09 13:34:49','2021-06-09 13:34:49');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('eb4c1bae-6767-415e-b7a6-9b64f72f1cb5','AppNotificationsNotificationAdmin','AppModelsUser','1','{"message":"Su1ea3n phu1ea9m hu1ebft hu1ea1n sau 10 ngu00e0y: Chuu1ed1i DOLE,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('eb4c1bae-6767-415e-b7a6-9b64f72f1cb5','App\Notifications\NotificationAdmin','App\Models\User','1','{"message":"S\u1ea3n ph\u1ea9m h\u1ebft h\u1ea1n sau 10 ng\u00e0y: Chu\u1ed1i DOLE,"}',NULL,'2021-06-04 02:21:05','2021-06-04 02:21:05');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('f899dcb8-54f3-4470-aeda-388101d4e1d5','AppNotificationsNotificationAdmin','AppModelsUser','1','{"order_id":150,"custommerName":"ManhLe"}',NULL,'2021-06-04 08:32:12','2021-06-04 08:32:12');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('f899dcb8-54f3-4470-aeda-388101d4e1d5','App\Notifications\NotificationAdmin','App\Models\User','1','{"order_id":150,"custommerName":"ManhLe"}',NULL,'2021-06-04 08:32:12','2021-06-04 08:32:12');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('fab5058f-c0d9-458b-bd2f-e40af43ad237','AppNotificationsNotificationAdmin','AppModelsUser','1','{"order_id":159,"custommerName":"manh le"}',NULL,'2021-06-09 13:34:49','2021-06-09 13:34:49');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('fab5058f-c0d9-458b-bd2f-e40af43ad237','App\Notifications\NotificationAdmin','App\Models\User','1','{"order_id":159,"custommerName":"manh le"}',NULL,'2021-06-09 13:34:49','2021-06-09 13:34:49');
 
-INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('fb29f976-96da-44e9-9314-a246e086a4fb','AppNotificationsNotificationAdmin','AppModelsUser','4','{"order_id":152,"custommerName":"u0111u1ee9c nguyu1ec5n trung"}',NULL,'2021-06-06 14:17:30','2021-06-06 14:17:30');
+INSERT INTO notifications (`id`,`type`,`notifiable_type`,`notifiable_id`,`data`,`read_at`,`created_at`,`updated_at`) VALUES ('fb29f976-96da-44e9-9314-a246e086a4fb','App\Notifications\NotificationAdmin','App\Models\User','4','{"order_id":152,"custommerName":"\u0111\u1ee9c nguy\u1ec5n trung"}',NULL,'2021-06-06 14:17:30','2021-06-06 14:17:30');
 
 
 CREATE TABLE `migrations` (
@@ -1031,7 +1043,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('117','2014_10_12_000000_create_users_table','1');
@@ -1175,5 +1187,3 @@ INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('189','2021_06_06_1919
 INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('190','2021_06_06_214453_alter_add_column_return_warehouse_in_tbl_return_voucher_detail','44');
 
 INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('191','2021_06_07_012757_alter_tbl_warehouse_product_col_quantiy_cancel','45');
-
-INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('192','2021_06_10_010000_create_tbl_backup_file','46');

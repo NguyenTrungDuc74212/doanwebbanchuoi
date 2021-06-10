@@ -72,14 +72,13 @@
 				@foreach ($order->orderDetails as $item)
 				<tr>
 					<td rowspan="{{count($item->warehouse_order)+1}}">
-					<input type="checkbox" value="{{ $item->product_id }}" class="form-control" name="product_id[]">
+					<input type="checkbox" class="my-checkbox-exchange" value="{{ $item->product_id }}" class="form-control" name="product_id[]">
 					</td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">SP{{$item->product->id}}</td>
-					<input type="hidden" value="{{ $item->product_id }}" name="product_id[]">
-					<input type="hidden" value="{{ $item->id }}" name="order_detail[]">
+					<input type="hidden" value="{{ $item->id }}" disabled name="order_detail[]" class="input{{$item->product_id}}">
 					<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->product->name}}</td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format($item->product->price)}}</td>
-					<td rowspan="{{count($item->warehouse_order)+1}}"><input type="number" value="{{$item->soluong}}" name="quantity[]" class="text-center" min="1" required="" max="{{ $item->soluong }}"></td>
+					<td rowspan="{{count($item->warehouse_order)+1}}"><input type="number" value="{{$item->soluong}}" disabled name="quantity[]" class="text-center input{{$item->product_id}}" min="1" required="" max="{{ $item->soluong }}"></td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->coupon}}%</td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format(($item->price_current)*($item->soluong)*((100-$item->coupon)/100))}}</td>
 
@@ -183,3 +182,21 @@
 </style>
 {{-- thay đổi trạng thái của đơn hàng --}}
 @stop
+@section('script')
+	<script>
+		$(".my-checkbox-exchange").click(function()
+		{
+			if($(this).is(':checked'))
+			{
+				var id='.input'+$(this).val();
+				$(id).removeAttr("disabled");
+				
+			}else{
+				var id='.input'+$(this).val();
+				$(id).attr("disabled", 'disabled');
+				
+			}
+			
+		})
+	</script>
+@endsection
