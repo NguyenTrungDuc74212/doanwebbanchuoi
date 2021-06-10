@@ -65,7 +65,7 @@
                     }
                 @endphp
                 <div class="rate">
-                    @if($value>0)
+                    @if($total_quantity>0)
                        <p class="status-product">Còn hàng</p>
                     @else
                         <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
@@ -359,6 +359,9 @@
     </div>
 
     <style type="text/css">
+    p.status-product {
+    text-align: center;
+}
         .swiper-container {
             width: 100%;
             height: 300px;

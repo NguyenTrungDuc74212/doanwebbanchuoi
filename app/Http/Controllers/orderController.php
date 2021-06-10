@@ -357,9 +357,5 @@ public function save_exchange(Request $req,$order_code)
     DB::rollBack();
     throw new Exception($ex->getMessage());
 }
-
-
-
-
 }
 }

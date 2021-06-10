@@ -30,7 +30,10 @@ Route::post('change-password','AuthController@change_password')->name('change_pa
 
 
 Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
-    //Dashboard
+	Route::get('backup','BackupController@myBackup')->name('back_up');
+	Route::get('restore/{id}','BackupController@restoreDatabase')->name('restore');
+	Route::get('backup/list','BackupController@getListBackup')->name('back_up_list');
+	//Dashboard
 Route::get('Dashboard','AuthController@dashboard')->name('trangchu_admin');
 	//thống kê báo cáo
 Route::post('/filter-by-date','AuthController@filter_date')->name('filter_date');

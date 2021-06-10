@@ -60,6 +60,7 @@
 		<div class="row">
 			<table id="customers">
 				<tr>
+					<th>Chọn</th>
 					<th>Mã sản phẩm</th>
 					<th>Tên sản phẩm</th>
 					<th>Giá</th>
@@ -70,6 +71,9 @@
 				</tr>
 				@foreach ($order->orderDetails as $item)
 				<tr>
+					<td rowspan="{{count($item->warehouse_order)+1}}">
+					<input type="checkbox" value="{{ $item->product_id }}" class="form-control" name="product_id[]">
+					</td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">SP{{$item->product->id}}</td>
 					<input type="hidden" value="{{ $item->product_id }}" name="product_id[]">
 					<input type="hidden" value="{{ $item->id }}" name="order_detail[]">

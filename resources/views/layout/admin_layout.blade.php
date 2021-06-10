@@ -106,6 +106,10 @@ strong.mr-auto {padding-left: 10px;}
                             class="btn btn-success btn-head">Đơn hàng ({{ $countOrderNew }})</button></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('back_up_list') }}" class="nav-link"><button type="button"
+                            class="btn btn-warning btn-head">Khôi phục</button></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ route('admin_logout') }}" class="nav-link"><button type="button"
                             class="btn btn-danger btn-head">Đăng xuất</button></a>
                 </li>
@@ -1728,6 +1732,12 @@ strong.mr-auto {padding-left: 10px;}
 $(document).on('focus',".my-datepicker", function(){ //bind to all instances of class "date". 
    $(this).datepicker({
         dateFormat: "yy-mm-dd",
+        duration: "slow"
+    });
+});
+$(document).on('focus',".my-datepicker-2", function(){ //bind to all instances of class "date". 
+   $(this).datepicker({
+        dateFormat: "dd-mm-yy",
         duration: "slow"
     });
 });
