@@ -33,6 +33,7 @@ Route::group(['middleware'=>'checkLogin','prefix'=>'admin'], function() {
 	Route::get('backup','BackupController@myBackup')->name('back_up');
 	Route::get('restore/{id}','BackupController@restoreDatabase')->name('restore');
 	Route::get('backup/list','BackupController@getListBackup')->name('back_up_list');
+	Route::get('backup/search','BackupController@search')->name('backup_search');
 	//Dashboard
 Route::get('Dashboard','AuthController@dashboard')->name('trangchu_admin');
 	//thống kê báo cáo

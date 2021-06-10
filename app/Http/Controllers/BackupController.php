@@ -102,4 +102,9 @@ public function myBackup()
 
    
 }
+public function search(Request $req)
+{
+    $backupFile=BackupFile::where('day',$req->date)->get();
+    return view("admin.backup.backup",compact('backupFile'));
+}
 }
