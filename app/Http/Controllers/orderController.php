@@ -271,7 +271,7 @@ public function save_exchange(Request $req,$order_code)
        $voucher->save();
        $voucher->voucher_code = get_code($voucher->id,'RV');
        $voucher->save();
-
+    
 
        $product_id = $req->product_id;
        $quantity = $req->quantity;
@@ -286,16 +286,12 @@ public function save_exchange(Request $req,$order_code)
         $voucher_detail->return_quantity = $quantity[$i];
         $voucher_detail->return_warehouse_id = $warehouse_product_id[$i];
         $voucher_detail->save();  
-        
-
-        dd($req->all());
-
         do{              
            /*khi số lượng đổi < số lượng hiện tại trong kho*/
-
            $warehouseProduct=WarehouseProduct::where('product_id',$product_id[$i])->where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first(); /*kho lấy ra*/
 
            if ($warehouseProduct) {
+
                if ($quantity[$i]<$warehouseProduct->quantity) {
                    $warehouseProduct->quantity = $warehouseProduct->quantity-$quantity[$i];
                    $quantity[$i] = $quantity[$i]-$warehouseProduct->quantity;
@@ -303,7 +299,6 @@ public function save_exchange(Request $req,$order_code)
                }
                else {
                 $warehouseProduct->quantity = $quantity[$i]-$warehouseProduct->quantity;
-                   $quantity[$i] = $warehouseProduct->quantity-$quantity[$i];
                    $warehouseProduct->save();
 
 
@@ -313,10 +308,11 @@ public function save_exchange(Request $req,$order_code)
                    $warehouseOrder_new->order_detail_id = $order_detail_id[$i];
                    $warehouseOrder_new->save();
 
-
+               $quantity[$i] = $quantity[$i]-$warehouseProduct->quantity;
                }
            }
            else {
+            
            $warehouseProduct_new=WarehouseProduct::where('quantity','>',0)->where('status',0)->orderBy('expiration_date','ASC')->first(); /*kho lấy ra*/
 
              if ($quantity[$i]<$warehouseProduct_new->quantity) {
@@ -346,7 +342,6 @@ public function save_exchange(Request $req,$order_code)
                    $quantity[$i] = $warehouseProduct_new->quantity-$quantity[$i];
                }
            }
-
 
        }while($quantity[$i]>0);
 
