@@ -29,7 +29,6 @@ class shippingRequest extends FormRequest
             "phone"=>"required|numeric",
             "address"=>"required",
             "method"=>"required",
-            "notes"=>"required",
             "city"=>"required",
         ];
     }
@@ -37,7 +36,6 @@ class shippingRequest extends FormRequest
     {
         return [
             "email.required"=>"email không được để trống",
-            "notes.required"=>"ghi chú không được bỏ trống",
             "email.Email"=>"email không hợp lệ",
             "name.required"=>"tên không được để trống",
             "phone.required"=>"số điện thoại không được để trống",

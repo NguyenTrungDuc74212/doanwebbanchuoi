@@ -86,7 +86,11 @@
 						<td>{{currency_format($value->total)}}</td>
 						<td  class="text-nowrap">
 							<a href="{{ route('order_get_detail',$value->id) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+							@if ($value->status==4||$value->status==5)
+								<a style="pointer-events: none;cursor:not-allowed; background: #7b010d;" href="{{ route('get_view_exchange',$value->order_code) }}" class="btn btn-danger"><i class="fas fa-exchange-alt"></i></a>
+							@else
 							<a href="{{ route('get_view_exchange',$value->order_code) }}" class="btn btn-danger"><i class="fas fa-exchange-alt"></i></a>
+							@endif
 						</td>
 					</tr>
 					@endforeach

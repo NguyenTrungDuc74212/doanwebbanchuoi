@@ -102,11 +102,9 @@ class checkoutController extends Controller
 			if ($req->samecheck==1) {
 				$validatedData = $req->validate([
 					"method"=>"required",
-					"notes"=>"required",
 					"city"=>"required",
 				],
 				[
-					"notes.required"=>"ghi chú không được bỏ trống",
 					"method.required"=>"hình thức thanh toán không được bỏ trống",
 					"city.required"=>"Bạn phải nhập thành phố của mình hiện đang sống"]
 				);
@@ -211,11 +209,9 @@ class checkoutController extends Controller
 					"phone_2"=>"required|numeric",
 					"address_2"=>"required",
 					"method"=>"required",
-					"notes"=>"required",
 					"city"=>"required",
 				],
 				["email_2.required"=>"email không được để trống",
-				"notes.required"=>"ghi chú không được bỏ trống",
 				"email_2.Email"=>"email không hợp lệ",
 				"name_2.required"=>"tên không được để trống",
 				"phone_2.required"=>"số điện thoại không được để trống",
@@ -327,11 +323,9 @@ class checkoutController extends Controller
 				"phone_2"=>"required|numeric",
 				"address_2"=>"required",
 				"method"=>"required",
-				"notes"=>"required",
 				"city"=>"required",
 			],
 			["email_2.required"=>"email không được để trống",
-			"notes.required"=>"ghi chú không được bỏ trống",
 			"email_2.Email"=>"email không hợp lệ",
 			"name_2.required"=>"tên không được để trống",
 			"phone_2.required"=>"số điện thoại không được để trống",
