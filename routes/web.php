@@ -132,6 +132,7 @@ Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day'
 		Route::get('order/get-by-status/{status}/{status_pay}','orderController@getByStatus')->name('get_by_status');
 		Route::get('view_exchange/{order_code}','orderController@get_view_exchange')->name('get_view_exchange');
 		Route::post('save_exchange/{order_code}','orderController@save_exchange')->name('save_exchange');
+
 	});
 
 
@@ -173,6 +174,10 @@ Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day'
      
      //Quản lý khách hàng
      Route::get('list-customer','AuthController@list_customer')->name('list_customer');
+
+     //Quản lý phiếu  đổi trả
+     Route::get('list-return-voucher','returnVoucherController@get_list_return')->name('get_list_return');
+     Route::get('detail-return/{code}','returnVoucherController@view_detail_return')->name('view_detail_return');
 
 
 });

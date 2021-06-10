@@ -24,43 +24,40 @@
 		<h3 class="card-title">Đơn hàng : <b>{{$order->order_code}}</b></h3>
 	</div>
 	<div class="card-body">
-		<form action="{{ route('save_exchange',$order_code) }}" method="POST">
-			@csrf
-			<div class="row my-row">
-				<div class="col-md-12">
-					<h5><b>Thông tin khách hàng</b></h5>
-					<div class="infor-order">
-						@if($order->customer!=null)
-						<p style="display:blog"><b>Khách hàng</b> : {{$order->customer->name}}</p>
-						<p style="display:blog"><b>Email</b>      : {{$order->customer->email}}</p>
-						<p style="display:blog"><b>Phone</b>      : {{$order->customer->phone}}</p>
-						@else
-						<p> Khách hàng không có tài khoản.</p>
-						@endif
-					</div>
+		<div class="row my-row">
+			<div class="col-md-12">
+				<h5><b>Thông tin khách hàng</b></h5>
+				<div class="infor-order">
+					@if($order->customer!=null)
+					<p style="display:blog"><b>Khách hàng</b> : {{$order->customer->name}}</p>
+					<p style="display:blog"><b>Email</b>      : {{$order->customer->email}}</p>
+					<p style="display:blog"><b>Phone</b>      : {{$order->customer->phone}}</p>
+					@else
+					<p> Khách hàng không có tài khoản.</p>
+					@endif
 				</div>
 			</div>
-			<div class="row my-row">
-				<div class="col-md-12">
-					<h5><b>Thông tin phiếu đổi trả</b></h5>
-					<label>Mã đơn hàng</label>
-					<input type="text" name="order_code" class="form-control" value="{{ $order_code }}" readonly>
-					@error('date_input')
-					<p class="text-danger">{{ $message }}</p>
-					@enderror
-					<br>
-					<label>Ngày đổi</label>
-					<input type="text" name="voucher_date" id="datepicker_5" placeholder="Nhập ngày đổi" class="form-control" autocomplete="off" required="">
-					@error('date_input')
-					<p class="text-danger">{{ $message }}</p>
-					@enderror
-				</div>
+		</div>
+		<div class="row my-row">
+			<div class="col-md-12">
+				<h5><b>Thông tin phiếu đổi trả</b></h5>
+				<label>Mã đơn hàng</label>
+				<input type="text" name="order_code" class="form-control" value="{{ $order_code }}" readonly>
+				@error('date_input')
+				<p class="text-danger">{{ $message }}</p>
+				@enderror
+				<br>
+				<label>Ngày đổi</label>
+				<input type="text" name="voucher_date" id="datepicker_5" placeholder="Nhập ngày đổi" class="form-control" autocomplete="off" required="" readonly value="{{ $voucher->voucher_date }}">
+				@error('date_input')
+				<p class="text-danger">{{ $message }}</p>
+				@enderror
 			</div>
+		</div>
 		<br>
 		<div class="row">
 			<table id="customers">
 				<tr>
-					<th>Chọn</th>
 					<th>Mã sản phẩm</th>
 					<th>Tên sản phẩm</th>
 					<th>Giá</th>
@@ -68,12 +65,10 @@
 					<th>Giảm giá</th>
 					<th>Thành tiền</th>
 					<th colspan="2">Lấy hàng (Kho|Sản phẩm)</th>
+					<th colspan="2">Trả hàng (Kho|Sản phẩm)</th>
 				</tr>
 				@foreach ($order->orderDetails as $item)
 				<tr>
-					<td rowspan="{{count($item->warehouse_order)+1}}">
-					<input type="checkbox" class="my-checkbox-exchange" value="{{ $item->product_id }}" class="form-control" name="product_id[]">
-					</td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">SP{{$item->product->id}}</td>
 					<input type="hidden" value="{{ $item->id }}" disabled name="order_detail[]" class="input{{$item->product_id}}">
 					<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->product->name}}</td>
@@ -86,29 +81,22 @@
 					<tr>
 						<td>{{$value->warehouse_product->warehouse->warehouse_name}}</td>
 						<td>{{$value->quantity}}</td>
-			            <input type="hidden" id="input" value="{{ $value->warehouse_product_id }}" name="warehouse_product_id[]">
+						<input type="hidden" value="{{ $value->warehouse_product_id }}" name="warehouse_product_id[]">
 					</tr>
 					@endforeach
-					@if(count($item->warehouse_order)==0)
-					<td>Đã hủy đơn</td>
-					@endif
+					@foreach ($voucher->return_detail as $item)
+					<tr>
+						<td>{{$item->warehouse_product->warehouse->warehouse_name}}</td>
+						<td>{{$item->return_quantity}}</td>
+					</tr>
+					@endforeach
+					
 				</tr>
 				@endforeach
 
 			</table>
 		</div>
-		<input type="submit" name="" class="btn btn-success form-control" style="margin: 10px 0px" value="Lập phiếu">
-	</form>
 	</div>
-	@if($order->cancel_order!='')
-	<div class="">
-		<div class="float-left mt-3 ml-2">
-			<h4 class="text-danger">Đơn hàng đã bị hủy do khách hàng</h4>
-			<p>Lý do:</p>
-			<p>{{$order->cancel_order}}</p>
-		</div>
-	</div>
-	@endif
 	
 	<div class="card-footer">
 		
@@ -182,21 +170,3 @@
 </style>
 {{-- thay đổi trạng thái của đơn hàng --}}
 @stop
-@section('script')
-	<script>
-		$(".my-checkbox-exchange").click(function()
-		{
-			if($(this).is(':checked'))
-			{
-				var id='.input'+$(this).val();
-				$(id).removeAttr("disabled");
-				
-			}else{
-				var id='.input'+$(this).val();
-				$(id).attr("disabled", 'disabled');
-				
-			}
-			
-		})
-	</script>
-@endsection

@@ -21,9 +21,11 @@ INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_pas
 
 INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('2','Mai Trung Hiếu','hieu@gmail.com',NULL,'$2y$10$jiQX6bDjgfIRAGRuyDHciOLKQu3QIex0TKhrx.RaX7SRS.fBAz5eO',NULL,'1','328896748',NULL,'2021-03-16 20:52:47','2021-03-16 20:52:47');
 
+INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('3','Lê Sỹ Đức mạnh','manhle99@gmail.com',NULL,'$2y$10$0PTQUgWjlLERGSRv1dGQc.16EeQNH9DIjKP4KT4g3oQTpvutWh19S',NULL,'1','328896749',NULL,'2021-03-16 20:53:45','2021-03-16 20:53:45');
+
 INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('4','mạnh lê','manhdzzd@gmail.com',NULL,'$2y$10$Kc3ge2.ecodRgrqOS/npweSqC94UtiOtT1EF3UwLWKNYjjtMC7tka',NULL,'1','329294747',NULL,'2021-05-09 16:19:42','2021-05-09 16:19:42');
 
-INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('5','đạt lol','dat@gmail.com','0000-00-00 00:00:00','$2y$10$S4AlGtuBELUtydqLJ01/Ye3JTGZ4OYHq8zpSu3VCi18qWrh44ZYT6',NULL,'1','386258039',NULL,'2021-05-18 15:49:38','2021-05-18 15:49:38');
+INSERT INTO users (`id`,`name`,`email`,`email_verified_at`,`password`,`reset_password_token`,`gender`,`phone`,`remember_token`,`created_at`,`updated_at`) VALUES ('5','đạt lol','dat@gmail.com',NULL,'$2y$10$S4AlGtuBELUtydqLJ01/Ye3JTGZ4OYHq8zpSu3VCi18qWrh44ZYT6',NULL,'1','386258039',NULL,'2021-05-18 15:49:38','2021-05-18 15:49:38');
 
 
 CREATE TABLE `users_roles` (
@@ -58,7 +60,7 @@ CREATE TABLE `tbl_warehouse_product` (
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `quantity_cancel` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('18','17','1','7','2021-06-02 02:01:52','2021-06-04 08:34:00','2021-06-04','2','0');
@@ -86,10 +88,6 @@ INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`
 INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('29','18','1','0','2021-06-04 08:50:08','2021-06-09 15:09:56','2021-06-18','0','0');
 
 INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('30','20','1','0','2021-06-04 08:50:08','2021-06-09 13:03:22','2021-06-24','0','0');
-
-INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('31','1','1','20','2021-06-10 10:06:05','2021-06-10 10:06:05','2021-09-10','0',NULL);
-
-INSERT INTO tbl_warehouse_product (`id`,`product_id`,`warehouse_id`,`quantity`,`created_at`,`updated_at`,`expiration_date`,`status`,`quantity_cancel`) VALUES ('32','3','1','20','2021-06-10 10:06:05','2021-06-10 10:06:05','2021-09-10','0',NULL);
 
 
 CREATE TABLE `tbl_warehouse_order` (
@@ -121,6 +119,14 @@ INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`
 
 INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('297','29','176','1','2021-06-07 11:14:11','2021-06-07 11:14:11');
 
+INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('298','30','177','1','2021-06-09 13:03:22','2021-06-09 13:03:22');
+
+INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('299','24','178','2','2021-06-09 13:34:47','2021-06-09 13:34:47');
+
+INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('300','24','178','-1','2021-06-09 14:00:02','2021-06-09 14:00:02');
+
+INSERT INTO tbl_warehouse_order (`id`,`warehouse_product_id`,`order_detail_id`,`quantity`,`created_at`,`updated_at`) VALUES ('301','29','178','1','2021-06-09 15:09:56','2021-06-09 15:09:56');
+
 
 CREATE TABLE `tbl_warehouse` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -133,7 +139,7 @@ CREATE TABLE `tbl_warehouse` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO tbl_warehouse (`id`,`warehouse_name`,`quantity_contain`,`quantity_now`,`created_at`,`updated_at`) VALUES ('1','Kho thực phẩm 1','1000','110','2021-04-28 23:33:17','2021-06-10 10:06:05');
+INSERT INTO tbl_warehouse (`id`,`warehouse_name`,`quantity_contain`,`quantity_now`,`created_at`,`updated_at`) VALUES ('1','Kho thực phẩm 1','1000','70','2021-04-28 23:33:17','2021-06-09 13:34:47');
 
 INSERT INTO tbl_warehouse (`id`,`warehouse_name`,`quantity_contain`,`quantity_now`,`created_at`,`updated_at`) VALUES ('3','kho thực phẩm 2','1000','9','2021-05-18 17:49:52','2021-06-07 02:04:20');
 
@@ -332,7 +338,7 @@ CREATE TABLE `tbl_soical` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`,`user`,`created_at`,`updated_at`) VALUES ('1','103189668869674003612','ductrungthug@gmail.com','GOOGLE','1',NULL,NULL);
@@ -350,8 +356,6 @@ INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`
 INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`,`user`,`created_at`,`updated_at`) VALUES ('7','1953348441490677','dat75849@st.vimaru.edu.vn','facebook','6',NULL,NULL);
 
 INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`,`user`,`created_at`,`updated_at`) VALUES ('8','1948837931952751','thichgaytoi@gmail.com','facebook','8',NULL,NULL);
-
-INSERT INTO tbl_soical (`id`,`provider_user_id`,`provider_user_email`,`provider`,`user`,`created_at`,`updated_at`) VALUES ('9','10150004250647759','koowtswenm_1574355019@tfbnw.net','facebook','9',NULL,NULL);
 
 
 CREATE TABLE `tbl_slider` (
@@ -380,7 +384,7 @@ CREATE TABLE `tbl_shipping` (
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `notes` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `method` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -524,9 +528,9 @@ CREATE TABLE `tbl_product` (
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('1','Chuối Fohla Nhánh 4 Trái 750g','chuối-dole-300x300636.jpg','2','39','<p>Chuối Fohla Nh&aacute;nh 4 Tr&aacute;i 750g ngon bổ rẻ</p>','<p>Chuối Fohla Nh&aacute;nh 4 Tr&aacute;i 750g ngon bổ rẻ</p>','34000','Chuối Fohla Nhánh 4 Trái 750g ngon bổ rẻ','Chuối Fohla Nhánh 4 Trái 750g ngon bổ rẻ','chuoi-fohla-nhanh-4-trai-750g','2021-03-16 21:17:50','2021-06-10 10:06:05','2','1','12','kg');
+INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('1','Chuối Fohla Nhánh 4 Trái 750g','chuối-dole-300x300636.jpg','2','19','<p>Chuối Fohla Nh&aacute;nh 4 Tr&aacute;i 750g ngon bổ rẻ</p>','<p>Chuối Fohla Nh&aacute;nh 4 Tr&aacute;i 750g ngon bổ rẻ</p>','34000','Chuối Fohla Nhánh 4 Trái 750g ngon bổ rẻ','Chuối Fohla Nhánh 4 Trái 750g ngon bổ rẻ','chuoi-fohla-nhanh-4-trai-750g','2021-03-16 21:17:50','2021-06-08 20:22:43','2','1','12','kg');
 
-INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('3','Chuối sấy năng lượng mặt trời','chuoifohla3399.jpg','2','21','<p>Thay cho phương ph&aacute;p phơi dưới nắng truyền thống, Unifarm sử dụng c&ocirc;ng nghệ sấy bằng nh&agrave; k&iacute;nh c&ocirc;ng nghệ cao Parabola Dome. Sản phẩm sau khi sấy đảm bảo sạch, thơm ngon, dinh dưỡng,&hellip;</p>','Thay cho phương pháp phơi dưới nắng truyền thống, Unifarm sử dụng công nghệ sấy bằng nhà kính công nghệ cao Parabola Dome. Sản phẩm sau khi sấy đảm bảo sạch, thơm ngon, dinh dưỡng,…','350000','Chuối sấy năng lượng mặt trời','Chuối sấy năng lượng mặt trời','chuoi-say-nang-luong-mat-troi','2021-03-16 21:18:13','2021-06-10 10:06:05','2','7','0','kg');
+INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('3','Chuối sấy năng lượng mặt trời','chuoifohla3399.jpg','2','1','<p>Thay cho phương ph&aacute;p phơi dưới nắng truyền thống, Unifarm sử dụng c&ocirc;ng nghệ sấy bằng nh&agrave; k&iacute;nh c&ocirc;ng nghệ cao Parabola Dome. Sản phẩm sau khi sấy đảm bảo sạch, thơm ngon, dinh dưỡng,&hellip;</p>','Thay cho phương pháp phơi dưới nắng truyền thống, Unifarm sử dụng công nghệ sấy bằng nhà kính công nghệ cao Parabola Dome. Sản phẩm sau khi sấy đảm bảo sạch, thơm ngon, dinh dưỡng,…','350000','Chuối sấy năng lượng mặt trời','Chuối sấy năng lượng mặt trời','chuoi-say-nang-luong-mat-troi','2021-03-16 21:18:13','2021-06-08 20:22:43','2','7','0','kg');
 
 INSERT INTO tbl_product (`id`,`name`,`image`,`category_product_id`,`quantity`,`desc`,`content`,`price`,`meta_title`,`meta_keywords`,`slug`,`created_at`,`updated_at`,`vendor_id`,`product_sold`,`persent_discount`,`unit`) VALUES ('7','Dưỡng tóc từ Chuối','matnachuoi_119.jpg','4','10','<p>Chuối l&agrave; loại tr&aacute;i c&acirc;y chứa nhiều silica, một hợp chất gi&uacute;p cơ thể tổng hợp collagen v&agrave; gi&uacute;p t&oacute;c chắc d&agrave;y hơn. Th&ecirc;m v&agrave;o đ&oacute;, khả năng kh&aacute;ng khuẩn của chuối cũng gi&uacute;p phục hồi t&igrave;nh trạng da đầu kh&ocirc; v&agrave; bong tr&oacute;c, đồng thời l&agrave;m giảm c&aacute;c triệu chứng của g&agrave;u.&nbsp;Nhờ những lợi &iacute;ch vượt trội, chuối l&agrave; một th&agrave;nh phần quen thuộc được sử dụng trong c&aacute;c mặt nạ dưỡng t&oacute;c tại nh&agrave;, c&oacute; t&aacute;c dụng l&agrave;m mềm v&agrave; phục hồi t&oacute;c.</p>','<p>&nbsp;</p>
 
@@ -697,7 +701,7 @@ CREATE TABLE `tbl_inward_slip_details` (
   `unit` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantity`,`price_import`,`created_at`,`updated_at`,`unit`,`expiration_date`) VALUES ('52','17','28','10','10000','2021-06-02 02:01:03','2021-06-02 02:01:03','cái','2021-06-16');
@@ -726,10 +730,6 @@ INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantit
 
 INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantity`,`price_import`,`created_at`,`updated_at`,`unit`,`expiration_date`) VALUES ('66','20','34','10','15000','2021-06-04 08:48:03','2021-06-04 08:48:03','cái','2021-06-24');
 
-INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantity`,`price_import`,`created_at`,`updated_at`,`unit`,`expiration_date`) VALUES ('67','1','35','20','20000','2021-06-10 10:06:05','2021-06-10 10:06:05','kg','2021-09-10');
-
-INSERT INTO tbl_inward_slip_details (`id`,`product_id`,`inward_slip_id`,`quantity`,`price_import`,`created_at`,`updated_at`,`unit`,`expiration_date`) VALUES ('68','3','35','20','20000','2021-06-10 10:06:06','2021-06-10 10:06:06','kg','2021-09-10');
-
 
 CREATE TABLE `tbl_inward_slip` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -743,7 +743,7 @@ CREATE TABLE `tbl_inward_slip` (
   `status` tinyint(4) NOT NULL,
   `date_input` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_amount`,`total_quanlity`,`created_at`,`updated_at`,`status`,`date_input`) VALUES ('28','4','4','1','100000','10','2021-06-02 02:01:03','2021-06-02 02:01:52','1','2021-06-17');
@@ -757,8 +757,6 @@ INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_am
 INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_amount`,`total_quanlity`,`created_at`,`updated_at`,`status`,`date_input`) VALUES ('33','4','2','1','450000','30','2021-06-04 08:35:53','2021-06-04 08:35:53','1','2021-06-17');
 
 INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_amount`,`total_quanlity`,`created_at`,`updated_at`,`status`,`date_input`) VALUES ('34','4','4','1','750000','50','2021-06-04 08:48:03','2021-06-04 08:50:08','1','2021-06-08');
-
-INSERT INTO tbl_inward_slip (`id`,`user_id`,`vendor_id`,`warehouse_id`,`total_amount`,`total_quanlity`,`created_at`,`updated_at`,`status`,`date_input`) VALUES ('35','1','2','1','800000','40','2021-06-10 10:06:05','2021-06-10 10:06:05','1','2021-06-10');
 
 
 CREATE TABLE `tbl_gallery` (
@@ -860,7 +858,7 @@ CREATE TABLE `tbl_customer` (
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `customer_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`updated_at`,`address`,`customer_token`) VALUES ('1','đức nguyễn trung','ductrungthug@gmail.com','$2y$10$pmaiaGVW4lURZXL6oj.oW.SsVBPa2Apm7L.p66A1Y2CP/V2C044.6','0386258039','2021-05-17 21:49:00','2021-05-17 21:49:00','số 4 lố 236 khut3, thành tô, hải an, hải phòng',NULL);
@@ -878,8 +876,6 @@ INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`u
 INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`updated_at`,`address`,`customer_token`) VALUES ('7','lung thị linh','linh@gmail.com','$2y$10$bgXRBuSMcX6gAMvJ2N54w.fOxtH0qwscgT2U51gWXstxfKXRIbhcG','0386258039','2021-06-05 00:13:29','2021-06-05 00:13:29','số 4 lố 236 khut3, thành tô, hải an, hải phòng',NULL);
 
 INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`updated_at`,`address`,`customer_token`) VALUES ('8','Đại Đức','thichgaytoi@gmail.com',NULL,NULL,'2021-06-09 12:36:06','2021-06-09 12:36:06',NULL,NULL);
-
-INSERT INTO tbl_customer (`id`,`name`,`email`,`password`,`phone`,`created_at`,`updated_at`,`address`,`customer_token`) VALUES ('9','Elizabeth Chiquitoez','koowtswenm_1574355019@tfbnw.net',NULL,NULL,'2021-06-10 08:33:26','2021-06-10 08:33:26',NULL,NULL);
 
 
 CREATE TABLE `tbl_coupon` (
@@ -1043,7 +1039,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('117','2014_10_12_000000_create_users_table','1');
@@ -1187,3 +1183,5 @@ INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('189','2021_06_06_1919
 INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('190','2021_06_06_214453_alter_add_column_return_warehouse_in_tbl_return_voucher_detail','44');
 
 INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('191','2021_06_07_012757_alter_tbl_warehouse_product_col_quantiy_cancel','45');
+
+INSERT INTO migrations (`id`,`migration`,`batch`) VALUES ('192','2021_06_10_010000_create_tbl_backup_file','46');

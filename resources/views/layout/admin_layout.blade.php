@@ -106,6 +106,10 @@ strong.mr-auto {padding-left: 10px;}
                             class="btn btn-success btn-head">Đơn hàng ({{ $countOrderNew }})</button></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('get_list_return') }}" class="nav-link"><button type="button"
+                            class="btn btn-dark btn-head">Phiếu trả hàng</button></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ route('back_up_list') }}" class="nav-link"><button type="button"
                             class="btn btn-warning btn-head">Khôi phục</button></a>
                 </li>
