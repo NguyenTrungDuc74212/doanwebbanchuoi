@@ -286,7 +286,9 @@ public function save_exchange(Request $req,$order_code)
         $voucher_detail->return_quantity = $quantity[$i];
         $voucher_detail->return_warehouse_id = $warehouse_product_id[$i];
         $voucher_detail->save();  
+        
 
+        dd($req->all());
 
         do{              
            /*khi số lượng đổi < số lượng hiện tại trong kho*/
