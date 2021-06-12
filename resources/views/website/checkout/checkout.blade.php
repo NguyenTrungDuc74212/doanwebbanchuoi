@@ -1,7 +1,6 @@
 @extends('website.layout_site.index')
 @section('content')
 <section id="layout-content">
-
 	<div class="container mb-5">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -156,9 +155,9 @@
 							</div>
 							<div class="col-sm-6">
 								<p><strong>Quý khách có thể thanh toán tiền mặt khi nhận hàng hoặc chuyển khoản theo thông tin sau</strong></p>
-								<p>STK: 03101014666664 <br>
-									Chủ tài khoản: Chử Quang Hà <br>
-								Ngân hàng: MSB - Chi nhánh Đống Đa</p>
+								<p>STK: 030058170700 <br>
+									Chủ tài khoản: NGUYỄN TRUNG ĐỨC <br>
+								Ngân hàng: SACCOMBANK - Chi nhánh Đinh Tiên Hoàng</p>
 							</div>
 						</div>
 					</section>

@@ -5,7 +5,7 @@
 	<title>Chuối Việt Nam | Chuối sạch 100%</title>
 	<meta name="description"
 	content="Chuối Việt Nam, Presh Banana cung ứng các sản phẩm từ chuối, cam kết 100% chuối sạch!" />
-	<link rel="canonical" href="https://muachuoi.xyz">
+	<link rel="canonical" href="{{ Request()->url() }}">
 	<meta name="robots" content="index, follow" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Chuối Việt Nam | Chuối sạch 100%" />
@@ -13,7 +13,7 @@
 	content="Chuối Việt Nam, Presh Banana cung ứng các sản phẩm từ chuối, cam kết 100% chuối sạch!" />
 	<meta property="og:image"
 	content="{{asset('public\public_site\image\img_share.jpg')}}" />
-	<meta property="og:url" content="https://muachuoi.xyz" />
+	<meta property="og:url" content="{{ Request()->url() }}" />
 	<meta property="og:locale" content="vi_VN" />
 	<meta property="fb:app_id" content="3205375276187307" />
 	<meta name="twitter:title" content="Chuối Việt Nam | Chuối sạch 100%">

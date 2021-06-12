@@ -718,6 +718,39 @@ strong.mr-auto {padding-left: 10px;}
 
 <script type="text/javascript">
     $(document).ready(function() {
+        chart_input_all();
+         var chart_input = new Morris.Bar({
+            element: 'chart_input',
+            lineColors: ['#609e4d','#FF6541','#c9940e'],  /*màu cột*/
+            pointFillColors: ['#269300'],
+            pointStrokeColors: ['black'],
+            parseTime:false,
+            hideHover: 'auto',
+            xkey: 'date_input',
+            stacked:true,
+            fillOpacity:0.3,
+            gridTextColor:'#269300',
+            ykeys: ['total_amount','total_quantity'],
+            labels: ['Tổng tiền nhập',' tổng số lượng'],
+            behaveLikeLine: true,
+            gridTextColor: ['#343a40'],
+        });
+         function chart_input_all(){
+            $.ajax({
+                url: '{{ route('chart_input_sheet') }}',
+                type: 'POST',
+                dataType:'JSON',
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(data) /*dữ liệu(data) trả về bên function*/
+                {
+                    chart_input.setData(data);
+                }     
+            });   
+        }
+
+
         chart_orders_30days();
         var chart = new Morris.Area({
             element: 'chart',
