@@ -61,131 +61,139 @@
     <div id="chart" style="height: 250px;"></div>
   </div>
   <div class="row">
-    <div class="col-lg-6">
-      <h3 class="text-center" style="color: #d46709;padding: 20px;">Sản phẩm sắp hết hàng</h3>
-      <table class="table table-bordered table-dark" style="background: #292424">
-        <thead>
-          <tr>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Ảnh</th>
-            <th scope="col">Số lượng hiện tại</th>
-            <th scope="col">Số lượng bán</th>
-            <th scope="col">Giá sản phẩm</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($product_stored as $value)
-          <tr>
-            <td>{{ $value->name }}</td>
-            <td><img src="{{asset('public/upload/product/'.$value->image)}}" alt="" style="width: 25%;"></td>
-            <td>{{ $value->quantity }}</td>
-            <td>{{ $value->product_sold }}</td>
-            <td>{{ $value->price }}</td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
-    <div class="col-lg-6">
-       <h3 class="text-center" style="color: #d46709;padding: 20px;">Mã giảm giá đã hết hạn</h3>
-      <table class="table table-bordered table-dark" style="background: #292424">
-        <thead>
-          <tr>
-            <th scope="col">Tên mã giảm giá</th>
-            <th scope="col">Code</th>
-            <th scope="col">Số lượng hiện tại</th>
-            <th scope="col">Phương thức</th>
-            <th scope="col">Giá trị giảm giá</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($coupon_expired as $value)
-          <tr>
-            <td>{{ $value->name }}</td>
-            <td>{{ $value->code }}</td>
-            <td>{{ $value->quanlity }}</td>
-            <td>{{ $value->method==1?'giảm theo tiền':'Giảm theo %' }}</td>
-            <td>{{ $value->method==1?currency_format($value->value_sale):$value->value_sale.'%' }}</td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
+   <div class="col-lg-12">
+    <h3 class="text-center" style="color: #d46709;padding: 20px;">Thống kê phiếu nhập</h3>
   </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h3 class="text-center" style="color: #d46709;padding: 20px;">Bài viết nhiều lượt xem nhất</h3>
-      <table class="table table-bordered table-dark" style="background: #292424">
-        <thead>
-          <tr>
-            <th scope="col">Tên bài viết</th>
-            <th scope="col">Lượt xem</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($post_top as $value)
-          <tr>
-            <td>{{ $value->title }}</td>
-            <td>{{ $value->view }}</td>
+  <div class="col-lg-12">
+    <div id="chart_input" style="height: 250px;"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <h3 class="text-center" style="color: #d46709;padding: 20px;">Sản phẩm sắp hết hàng</h3>
+    <table class="table table-bordered table-dark" style="background: #292424">
+      <thead>
+        <tr>
+          <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Ảnh</th>
+          <th scope="col">Số lượng hiện tại</th>
+          <th scope="col">Số lượng bán</th>
+          <th scope="col">Giá sản phẩm</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($product_stored as $value)
+        <tr>
+          <td>{{ $value->name }}</td>
+          <td><img src="{{asset('public/upload/product/'.$value->image)}}" alt="" style="width: 25%;"></td>
+          <td>{{ $value->quantity }}</td>
+          <td>{{ $value->product_sold }}</td>
+          <td>{{ $value->price }}</td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-6">
+   <h3 class="text-center" style="color: #d46709;padding: 20px;">Mã giảm giá đã hết hạn</h3>
+   <table class="table table-bordered table-dark" style="background: #292424">
+    <thead>
+      <tr>
+        <th scope="col">Tên mã giảm giá</th>
+        <th scope="col">Code</th>
+        <th scope="col">Số lượng hiện tại</th>
+        <th scope="col">Phương thức</th>
+        <th scope="col">Giá trị giảm giá</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($coupon_expired as $value)
+      <tr>
+        <td>{{ $value->name }}</td>
+        <td>{{ $value->code }}</td>
+        <td>{{ $value->quanlity }}</td>
+        <td>{{ $value->method==1?'giảm theo tiền':'Giảm theo %' }}</td>
+        <td>{{ $value->method==1?currency_format($value->value_sale):$value->value_sale.'%' }}</td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <h3 class="text-center" style="color: #d46709;padding: 20px;">Bài viết nhiều lượt xem nhất</h3>
+    <table class="table table-bordered table-dark" style="background: #292424">
+      <thead>
+        <tr>
+          <th scope="col">Tên bài viết</th>
+          <th scope="col">Lượt xem</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($post_top as $value)
+        <tr>
+          <td>{{ $value->title }}</td>
+          <td>{{ $value->view }}</td>
 
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
   </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h3 class="text-center" style="color: #d46709;padding: 20px;">Thống kê sản phẩm bán chạy</h3>
-      <table class="table table-bordered table-dark" style="background: #292424">
-        <thead>
-          <tr class="text-center">
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Ảnh</th>
-            <th scope="col">Số lượng bán</th>
-            <th scope="col">Đơn vị</th>
-            <th scope="col">Giá sản phẩm</th>
-          </tr>
-        </thead>
-        <tbody class="text-center">
-          @foreach ($product_top as $value)
-          <tr>
-            <td>{{ $value->name }}</td>
-            <td><img src="{{asset('public/upload/product/'.$value->image)}}" alt="" style="width: 25%;"></td>
-            <td>{{ ($value->product_sold) }}</td>
-            <td>{{ $value->unit }}</td>
-            <td>{{ currency_format($value->price) }}</td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <h3 class="text-center" style="color: #d46709;padding: 20px;">Thống kê sản phẩm bán chạy</h3>
+    <table class="table table-bordered table-dark" style="background: #292424">
+      <thead>
+        <tr class="text-center">
+          <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Ảnh</th>
+          <th scope="col">Số lượng bán</th>
+          <th scope="col">Đơn vị</th>
+          <th scope="col">Giá sản phẩm</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        @foreach ($product_top as $value)
+        <tr>
+          <td>{{ $value->name }}</td>
+          <td><img src="{{asset('public/upload/product/'.$value->image)}}" alt="" style="width: 25%;"></td>
+          <td>{{ ($value->product_sold) }}</td>
+          <td>{{ $value->unit }}</td>
+          <td>{{ currency_format($value->price) }}</td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
   </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h3 class="text-center" style="color: #d46709;padding: 20px;">Thống kê truy cập</h3>
-      <table class="table table-bordered table-dark" style="background: #292424">
-        <thead>
-          <tr>
-            <th scope="col">Đang online</th>
-            <th scope="col">Tổng tháng trước</th>
-            <th scope="col">Tổng tháng này</th>
-            <th scope="col">Tổng 1 năm</th>
-            <th scope="col">Tổng truy cập</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ $visitor_count_online }}</td>
-            <td>{{ $visitor_lastmonth_count }}</td>
-            <td>{{ $visitor_thismonth_count }}</td>
-            <td>{{ $visitor_oneyear_count }}</td>
-            <td>{{ $visitors_total }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <h3 class="text-center" style="color: #d46709;padding: 20px;">Thống kê truy cập</h3>
+    <table class="table table-bordered table-dark" style="background: #292424">
+      <thead>
+        <tr>
+          <th scope="col">Đang online</th>
+          <th scope="col">Tổng tháng trước</th>
+          <th scope="col">Tổng tháng này</th>
+          <th scope="col">Tổng 1 năm</th>
+          <th scope="col">Tổng truy cập</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ $visitor_count_online }}</td>
+          <td>{{ $visitor_lastmonth_count }}</td>
+          <td>{{ $visitor_thismonth_count }}</td>
+          <td>{{ $visitor_oneyear_count }}</td>
+          <td>{{ $visitors_total }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
 </div>
 <style>
   table {

@@ -40,6 +40,7 @@ Route::get('Dashboard','AuthController@dashboard')->name('trangchu_admin');
 Route::post('/filter-by-date','AuthController@filter_date')->name('filter_date');
 Route::post('filter-date-selection','AuthController@order_filter')->name('order_filter');
 Route::post('filter-30-days','AuthController@order_30_day')->name('order_30_day');
+Route::post('input-chart','AuthController@chart_input_sheet')->name('chart_input_sheet');
 
 
 // category_product

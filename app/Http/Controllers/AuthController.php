@@ -16,6 +16,7 @@ use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Post;
 use Carbon\Carbon;
+use App\Models\InputSheet;
 use App\Http\Requests\changeRequest;
 use App\Http\Requests\UserRegisterRequest;
 use Gate;
@@ -66,7 +67,15 @@ class AuthController extends Controller
 	//mã giảm giá đã hết hạn
 		$coupon_expired = Coupon::where('coupon_date_end','<',$today)->get();
 
-		return view('admin.dashboard.dashboard_view',compact('visitors_total','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_count_online','product_top','post_top','product_stored','coupon_expired'));
+	//Thống kê phiếu nhập
+		$min_date_input = InputSheet::min('date_input');
+		$max_date_input = InputSheet::max('date_input');
+
+        $total_inputSheet =  DB::table('tbl_inward_slip')->select(DB::raw('SUM(total_amount) AS TongTienPhieuNhap, SUM(total_quanlity) AS TongSoLuong,date_input'))->whereBetween('date_input',array($min_date_input,$max_date_input))->groupBy('date_input')->get();
+
+       
+
+		return view('admin.dashboard.dashboard_view',compact('visitors_total','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_count_online','product_top','post_top','product_stored','coupon_expired','total_inputSheet'));
 	}
 	public function filter_date(Request $req)
 	{
@@ -273,6 +282,22 @@ class AuthController extends Controller
         $customer = DB::table('tbl_customer')->leftJoin('tbl_order','tbl_customer.id','=','tbl_order.customer_id')->selectRaw('tbl_customer.*,count(tbl_order.id) AS SoDonHang')->groupByRaw('id,name,email,phone,address,password,created_at,updated_at,customer_token')->get();
         
 		return view('admin.auth.list_customer',compact('customer')); 
+	}
+	public function chart_input_sheet(Request $req)
+	{
+		$min_date_input = InputSheet::min('date_input');
+		$max_date_input = InputSheet::max('date_input');
+
+          $total_inputSheet =  DB::table('tbl_inward_slip')->select(DB::raw('SUM(total_amount) AS TongTienPhieuNhap, SUM(total_quanlity) AS TongSoLuong,date_input'))->whereBetween('date_input',array($min_date_input,$max_date_input))->groupBy('date_input')->get();
+
+          foreach ($total_inputSheet as $value) {
+			$chart_data[] = array(
+				'date_input' =>$value->date_input,
+				'total_amount' =>$value->TongTienPhieuNhap,
+				'total_quantity' =>$value->TongSoLuong,
+			);
+		}
+		echo $result = json_encode($chart_data);
 	}
 
 }
