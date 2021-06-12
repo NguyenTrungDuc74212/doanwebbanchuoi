@@ -711,6 +711,7 @@ strong.mr-auto {padding-left: 10px;}
     $('#table_order').DataTable();
     $('#table_customer').DataTable();
     $('#table_coupon').DataTable();
+    $('#table_order').DataTable();
   } );
 </script>
 <script type="text/javascript">

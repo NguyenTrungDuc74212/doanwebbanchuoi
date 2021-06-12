@@ -315,7 +315,7 @@ class ProductController extends Controller
 			$date=Carbon::parse($req->date)->format('d-m-Y');
 			$cancelProduct=CancelProduct::join('tbl_warehouse_product','warehouse_product_id','=','tbl_warehouse_product.id')
 			->where('cancel_date',$date)
-			->where('tbl_warehouse_product.warehouse_id',$req->id_warehouse)
+			->where('tbl_warehouse_product.warehouse_id',$req->id_warehouse)->select('tbl_cancel_product.*')
 			->get();
 		}elseif($req->date==null&&$req->warehouse_id!=-1){
 			$date=Carbon::parse($req->date)->format('d-m-Y');
@@ -323,6 +323,7 @@ class ProductController extends Controller
 			$cancelProduct=CancelProduct::
 			join('tbl_warehouse_product','warehouse_product_id','=','tbl_warehouse_product.id')
 			->where('tbl_warehouse_product.warehouse_id',$req->id_warehouse)
+			->select('tbl_cancel_product.*')
 			->get();
 		}
 		elseif($req->date!=null&&$req->warehouse_id==-1){
@@ -330,6 +331,7 @@ class ProductController extends Controller
 			$cancelProduct=CancelProduct::
 			join('tbl_warehouse_product','warehouse_product_id','=','tbl_warehouse_product.id')
 			->where('cancel_date',$date)
+			->select('tbl_cancel_product.*')
 			->get();
 		}
 		if($req->date==null&&$req->warehouse_id==-1){

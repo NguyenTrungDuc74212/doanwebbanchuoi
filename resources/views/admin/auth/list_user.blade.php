@@ -32,8 +32,8 @@
 						<th>Email</th>
 						<th>Phone</th>
 						<th>Admin</th>
-						<th>Author</th>
-						<th>User</th>
+						<th>Người post bài</th>
+						<th>Thủ Kho</th>
 					</tr>
 				</thead>
 				<tbody>

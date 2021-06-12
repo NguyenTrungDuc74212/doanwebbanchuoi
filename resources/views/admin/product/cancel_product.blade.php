@@ -33,6 +33,7 @@
 			<table class="table table-hover text-nowrap text-center" id="table_product">
 				<thead>
 					<tr class="tr-admin">
+                        <th>Mã SP</th>
 						<th>Hình minh họa</th>
 						<th>Tên sản phẩm</th>
 						<th>Tổng số lượng</th>
@@ -44,11 +45,14 @@
 				<tbody>
 					@foreach ($cancelProduct as $value)
 					<tr>
+                        <td>
+                            SP{{$value->warehouse_product->product->id}}
+                        </td>
 						<td>
 							<img src="{{asset('public/upload/product/'.$value->warehouse_product->product->image)}}" height="100" width="100">
 						</td>
 						<td>{{ $value->warehouse_product->product->name }}</td>
-						<td><input disabled class="form-control my-input-quantity" name="quantity[]" min="1" max="{{$value->quantity_cancel}}" type="number" value="{{$value->quantity_cancel}}"></td>
+						<td>{{$value->quantity_cancel}}</td>
 						<td>{{currency_format($value->warehouse_product->product->price) }}</td>
                         <td>
                             @if(strtotime($value->warehouse_product->expiration_date)<=getDayExpirationComing(1)&&strtotime($value->expiration_date)>getDayExpirationComing(2))
@@ -59,7 +63,7 @@
                             <span class="badge badge-success"> Còn hạn</span>
                             @endif
                             <br>
-                            {{$value->expiration_date}}
+                            {{$value->warehouse_product->expiration_date}}
                         </td>
                         <td>{{$value->cancel_date}}</td>
 					</tr>
