@@ -8,6 +8,8 @@ use App\Models\Gallery;
 use App\Models\Warehouse;
 use App\Models\WarehouseProduct;
 use App\Models\PriceProduct;
+use App\Models\CancelProduct;
+use Carbon\Carbon;
 use App\Http\Requests\addProductRequest;
 use App\Http\Requests\editProductRequest;
 use Str;
@@ -263,6 +265,18 @@ class ProductController extends Controller
 		{
 			$warehouse_product=WarehouseProduct::find($id[$i]);
 			if($warehouse_product->status!=2){
+				$productCancel=CancelProduct::where('cancel_date',Carbon::now()->format('d-m-Y'))->where('warehouse_product_id',$id[$i])->first();
+				if($productCancel!=null)
+				{
+				$productCancel->quantity_cancel+=$quantity[$i];
+				$productCancel->save();
+				}else{
+					$productCancel=new CancelProduct();
+					$productCancel->cancel_date=Carbon::now()->format('d-m-Y');
+					$productCancel->warehouse_product_id=$id[$i];
+					$productCancel->quantity_cancel=$quantity[$i];
+					$productCancel->save();
+				}
 				if($quantity[$i]<$warehouse_product->quantity)
 				{
 					$warehouse_product->product->quantity-=$quantity[$i];

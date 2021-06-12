@@ -21,4 +21,8 @@ class WarehouseProduct extends Model
     {
         return $this->belongsTo(Product::class,'product_id','id');
     }
+    public function cancel_product()
+    {
+    	return $this->hasMany(CancelProduct::class,'warehouse_product_id','id');
+    }
 }

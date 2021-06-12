@@ -71,25 +71,30 @@
 				<tr>
 					<td rowspan="{{count($item->warehouse_order)+1}}">SP{{$item->product->id}}</td>
 					<input type="hidden" value="{{ $item->id }}" disabled name="order_detail[]" class="input{{$item->product_id}}">
-					<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->product->name}}</td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format($item->product->price)}}</td>
+					<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->product->name}}</td>
 					<td rowspan="{{count($item->warehouse_order)+1}}"><input type="number" value="{{$item->soluong}}" disabled name="quantity[]" class="text-center input{{$item->product_id}}" min="1" required="" max="{{ $item->soluong }}"></td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">{{$item->coupon}}%</td>
 					<td rowspan="{{count($item->warehouse_order)+1}}">{{currency_format(($item->price_current)*($item->soluong)*((100-$item->coupon)/100))}}</td>
-
+					<td>
 					@foreach ($item->warehouse_order as $value)
+					
 					<tr>
 						<td>{{$value->warehouse_product->warehouse->warehouse_name}}</td>
 						<td>{{$value->quantity}}</td>
-						<input type="hidden" value="{{ $value->warehouse_product_id }}" name="warehouse_product_id[]">
 					</tr>
+			
 					@endforeach
+				</td>
+					<td>
 					@foreach ($voucher->return_detail as $item)
+					
 					<tr>
 						<td>{{$item->warehouse_product->warehouse->warehouse_name}}</td>
 						<td>{{$item->return_quantity}}</td>
 					</tr>
 					@endforeach
+				</td>
 					
 				</tr>
 				@endforeach
@@ -170,3 +175,6 @@
 </style>
 {{-- thay đổi trạng thái của đơn hàng --}}
 @stop
+
+
+
