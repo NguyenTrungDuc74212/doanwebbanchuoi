@@ -1,5 +1,15 @@
 @extends('website.layout_site.index')
 @section('content')
+{{-- @push('seo-meta')
+<meta name="description"
+content="Chuối Việt Nam, Presh Banana cung ứng các sản phẩm từ chuối, cam kết 100% chuối sạch!" />
+<meta name="keywords" content="{{ $category->meta_keywords }}">
+<meta property="og:title" content="Chuối Việt Nam | Chuối sạch 100%" />
+<meta property="og:description"
+content="Chuối Việt Nam, Presh Banana cung ứng các sản phẩm từ chuối, cam kết 100% chuối sạch!" />
+<meta name="twitter:image"
+content="{{asset('public\public_site\image\img_share.jpg')}}" />
+@endpush --}}
 <section id="layout-content">
     <div class="fixed-container mb-5"><img class="banner" src="public/public_site/image/img_banner_cate.png" alt="Hoa quả sạch Fuji"></div>
     <div class="container" id="list-product-page">
@@ -23,112 +33,18 @@
                         @endif
                         <div class="rate">
                             @if($item->total_quantity>0)
-                               <p class="status-product">Còn hàng</p>
+                            <p class="status-product">Còn hàng</p>
                             @else
-                                <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
-                            @endif
-                        </div>
-                    <div class="card-img hvr-grow">
-                        <a href="{{route('get_product_detail',$item->slug)}}"><img class="card-img-top"
-                            src="{{asset('public/upload/product/'.$item->image)}}" id="withlist_product_img_{{ $item->id }}"
-                            alt="{{$item->name}}"></a>
-                            <div class="box-control">
-                                <div class="item">
-                                    <button class="cart_thanhtoan" data-id="{{ $item->id }}" type="button" style="display: block;
-                                    margin: 0 auto;
-                                    background: 0 0;
-                                    border: 0;
-                                    cursor: pointer;
-                                    color: #269300;">
-                                    <i class="fas fa-shopping-cart"></i></button>
-                                    <span class="text">Thêm giỏ hàng</span>
-                                </div>
-                                <div class="item">
-                                    <button class="button_withlist_1" onclick="add_withlist(this.id)" id="{{ $item->id }}" type="button" style="display: block;
-                                    margin: 0 auto;
-                                    background: 0 0;
-                                    border: 0;
-                                    cursor: pointer;
-                                    color: #269300;">
-                                    <i class="fas fa-heart"></i></button>
-                                    <span class="text">Like sản phẩm</span>
-                                </div>
-                                <div class="item">
-                                    <a href="{{route('get_product_detail',$item->slug)}}" class="cart_product_url_{{ $item->id }}"><i class="fas fa-plus"></i></a>
-                                    <span class="text">Xem chi tiết</span>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" value="{{ $item->id }}" class="cart_product_id_{{$item->id}}">
-                        <input type="hidden" value="{{ $item->name }}" class="cart_product_name_{{$item->id}}">
-                        <input type="hidden" value="{{ $item->image}}" class="cart_product_image_{{$item->id}}">
-                        <input type="hidden" value="1" class="cart_product_qty_{{$item->id}}">
-                        <input type="hidden" value="{{$item->quantity}}" class="cart_product_storage_{{$item->id}}">
-                        <input type="hidden" value="{{$item->unit}}" class="cart_product_unit_{{$item->id}}">
-                        <input type="hidden" value="{{$item->persent_discount}}" class="cart_product_discount_{{$item->id}}">
-                        @if (Session::get('id_customer'))
-                        <input type="hidden" value="{{ Session::get('id_customer') }}" id="customer_id">
-                        @endif
-                        <div class="card-body">
-                            <h2><a href="{{route('get_product_detail',$item->slug)}}">{{$item->name}}</a></h2>
-                            <div class="box-price">
-                                @if($item->persent_discount>0)
-                                <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}/{{$item->unit}}</div>
-                                <div class="old-price">{{currency_format($item->price)}}/{{$item->unit}}</div>
-                                <input type="hidden" value="{{ $item->price*((100-$item->persent_discount)/100)}}" class="cart_product_price_{{$item->id}}">
-                                <input type="hidden" value="{{ $item->price}}" class="cart_product_price_off_{{$item->id}}">
-                                @else
-                                <div class="price">{{currency_format($item->price)}}/{{$item->unit}}</div>
-                                <input type="hidden" value="{{ $item->price}}" class="cart_product_price_{{$item->id}}">
-                                <input type="hidden" value="{{ $item->price}}" class="cart_product_price_off_{{$item->id}}">
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- Card -->
-            </div>
-            @endforeach
-        </div>
-        <ul class="pagination">
-            {{ $product->appends(Request()->all())}}
-        </ul>
-
-        <section class="viewed mb-5">
-            @if($product_watched!=null)
-            <div class="title-section">Sản phẩm vừa xem</div>
-            <div class="row mb-5 mt-3">
-                <div class="col-md-3">
-                    <div class="card">
-                        <form>
-                          @csrf
-                          @if($product_watched->persent_discount>0)
-                          <div class="discount">{{$product_watched->persent_discount}}%</div>
-                          @endif
-                          @php
-                          $total_quantity=0;
-                              foreach ($product_watched->warehouse_product as $value) {
-                                  if($value->status==0)
-                                  {
-                                      $total_quantity+=$value->quantity;
-                                  }
-                              }
-                          @endphp
-                          <div class="rate">
-                            @if($total_quantity>0)
-                               <p class="status-product">Còn hàng</p>
-                            @else
-                                <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
+                            <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
                             @endif
                         </div>
                         <div class="card-img hvr-grow">
-
-                            <a href="{{route('get_product_detail',$product_watched->slug)}}"><img class="card-img-top"
-                                src="{{asset('public/upload/product/'.$product_watched->image)}}" id="withlist_product_img_{{ $product_watched->id }}"
-                                alt="{{$product_watched->name}}"></a>
+                            <a href="{{route('get_product_detail',$item->slug)}}"><img class="card-img-top"
+                                src="{{asset('public/upload/product/'.$item->image)}}" id="withlist_product_img_{{ $item->id }}"
+                                alt="{{$item->name}}"></a>
                                 <div class="box-control">
                                     <div class="item">
-                                        <button class="cart_thanhtoan" data-id="{{ $product_watched->id }}" type="button" style="display: block;
+                                        <button class="cart_thanhtoan" data-id="{{ $item->id }}" type="button" style="display: block;
                                         margin: 0 auto;
                                         background: 0 0;
                                         border: 0;
@@ -138,7 +54,7 @@
                                         <span class="text">Thêm giỏ hàng</span>
                                     </div>
                                     <div class="item">
-                                        <button class="button_withlist_1" onclick="add_withlist(this.id)" id="{{ $product_watched->id }}" type="button" style="display: block;
+                                        <button class="button_withlist_1" onclick="add_withlist(this.id)" id="{{ $item->id }}" type="button" style="display: block;
                                         margin: 0 auto;
                                         background: 0 0;
                                         border: 0;
@@ -148,33 +64,33 @@
                                         <span class="text">Like sản phẩm</span>
                                     </div>
                                     <div class="item">
-                                        <a href="{{route('get_product_detail',$product_watched->slug)}}" class="cart_product_url_{{ $product_watched->id }}"><i class="fas fa-search fa-2x"></i></a>
+                                        <a href="{{route('get_product_detail',$item->slug)}}" class="cart_product_url_{{ $item->id }}"><i class="fas fa-plus"></i></a>
                                         <span class="text">Xem chi tiết</span>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" value="{{ $product_watched->id }}" class="cart_product_id_{{$product_watched->id}}">
-                            <input type="hidden" value="{{ $product_watched->name }}" class="cart_product_name_{{$product_watched->id}}">
-                            <input type="hidden" value="{{ $product_watched->image}}" class="cart_product_image_{{$product_watched->id}}">
-                            <input type="hidden" value="1" class="cart_product_qty_{{$product_watched->id}}">
-                            <input type="hidden" value="{{$product_watched->quantity}}" class="cart_product_storage_{{$product_watched->id}}">
-                            <input type="hidden" value="{{$product_watched->unit}}" class="cart_product_unit_{{$product_watched->id}}">
-                            <input type="hidden" value="{{$product_watched->persent_discount}}" class="cart_product_discount_{{$product_watched->id}}">
-                                        @if (Session::get('id_customer'))
-                                            <input type="hidden" value="{{ Session::get('id_customer') }}" id="customer_id">
-                                        @endif
+                            <input type="hidden" value="{{ $item->id }}" class="cart_product_id_{{$item->id}}">
+                            <input type="hidden" value="{{ $item->name }}" class="cart_product_name_{{$item->id}}">
+                            <input type="hidden" value="{{ $item->image}}" class="cart_product_image_{{$item->id}}">
+                            <input type="hidden" value="1" class="cart_product_qty_{{$item->id}}">
+                            <input type="hidden" value="{{$item->quantity}}" class="cart_product_storage_{{$item->id}}">
+                            <input type="hidden" value="{{$item->unit}}" class="cart_product_unit_{{$item->id}}">
+                            <input type="hidden" value="{{$item->persent_discount}}" class="cart_product_discount_{{$item->id}}">
+                            @if (Session::get('id_customer'))
+                            <input type="hidden" value="{{ Session::get('id_customer') }}" id="customer_id">
+                            @endif
                             <div class="card-body">
-                                <h2><a href="{{route('get_product_detail',$product_watched->slug)}}">{{$product_watched->name}}</a></h2>
+                                <h2><a href="{{route('get_product_detail',$item->slug)}}">{{$item->name}}</a></h2>
                                 <div class="box-price">
-                                    @if($product_watched->persent_discount>0)
-                                    <div class="price">{{currency_format($product_watched->price*((100-$product_watched->persent_discount)/100))}}/{{$product_watched->unit}}</div>
-                                    <div class="old-price">{{currency_format($product_watched->price)}}/{{$product_watched->unit}}</div>
-                                    <input type="hidden" value="{{ $product_watched->price*((100-$product_watched->persent_discount)/100)}}" class="cart_product_price_{{$product_watched->id}}">
-                                    <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_off_{{$product_watched->id}}">
+                                    @if($item->persent_discount>0)
+                                    <div class="price">{{currency_format($item->price*((100-$item->persent_discount)/100))}}/{{$item->unit}}</div>
+                                    <div class="old-price">{{currency_format($item->price)}}/{{$item->unit}}</div>
+                                    <input type="hidden" value="{{ $item->price*((100-$item->persent_discount)/100)}}" class="cart_product_price_{{$item->id}}">
+                                    <input type="hidden" value="{{ $item->price}}" class="cart_product_price_off_{{$item->id}}">
                                     @else
-                                    <div class="price">{{currency_format($product_watched->price)}}/{{$product_watched->unit}}</div>
-                                    <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_{{$product_watched->id}}">
-                                    <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_off_{{$product_watched->id}}">
+                                    <div class="price">{{currency_format($item->price)}}/{{$item->unit}}</div>
+                                    <input type="hidden" value="{{ $item->price}}" class="cart_product_price_{{$item->id}}">
+                                    <input type="hidden" value="{{ $item->price}}" class="cart_product_price_off_{{$item->id}}">
                                     @endif
                                 </div>
                             </div>
@@ -182,9 +98,103 @@
                     </div>
                     <!-- Card -->
                 </div>
+                @endforeach
             </div>
-            @endif
-        </section>
-    </div>
-</section>
-@endsection
+            <ul class="pagination">
+                {{ $product->appends(Request()->all())}}
+            </ul>
+
+            <section class="viewed mb-5">
+                @if($product_watched!=null)
+                <div class="title-section">Sản phẩm vừa xem</div>
+                <div class="row mb-5 mt-3">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <form>
+                              @csrf
+                              @if($product_watched->persent_discount>0)
+                              <div class="discount">{{$product_watched->persent_discount}}%</div>
+                              @endif
+                              @php
+                              $total_quantity=0;
+                              foreach ($product_watched->warehouse_product as $value) {
+                                  if($value->status==0)
+                                  {
+                                      $total_quantity+=$value->quantity;
+                                  }
+                              }
+                              @endphp
+                              <div class="rate">
+                                @if($total_quantity>0)
+                                <p class="status-product">Còn hàng</p>
+                                @else
+                                <p class="status-product" style="background-color: #b90f0fde !important;">Hết hàng</p>
+                                @endif
+                            </div>
+                            <div class="card-img hvr-grow">
+
+                                <a href="{{route('get_product_detail',$product_watched->slug)}}"><img class="card-img-top"
+                                    src="{{asset('public/upload/product/'.$product_watched->image)}}" id="withlist_product_img_{{ $product_watched->id }}"
+                                    alt="{{$product_watched->name}}"></a>
+                                    <div class="box-control">
+                                        <div class="item">
+                                            <button class="cart_thanhtoan" data-id="{{ $product_watched->id }}" type="button" style="display: block;
+                                            margin: 0 auto;
+                                            background: 0 0;
+                                            border: 0;
+                                            cursor: pointer;
+                                            color: #269300;">
+                                            <i class="fas fa-shopping-cart"></i></button>
+                                            <span class="text">Thêm giỏ hàng</span>
+                                        </div>
+                                        <div class="item">
+                                            <button class="button_withlist_1" onclick="add_withlist(this.id)" id="{{ $product_watched->id }}" type="button" style="display: block;
+                                            margin: 0 auto;
+                                            background: 0 0;
+                                            border: 0;
+                                            cursor: pointer;
+                                            color: #269300;">
+                                            <i class="fas fa-heart"></i></button>
+                                            <span class="text">Like sản phẩm</span>
+                                        </div>
+                                        <div class="item">
+                                            <a href="{{route('get_product_detail',$product_watched->slug)}}" class="cart_product_url_{{ $product_watched->id }}"><i class="fas fa-search fa-2x"></i></a>
+                                            <span class="text">Xem chi tiết</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="{{ $product_watched->id }}" class="cart_product_id_{{$product_watched->id}}">
+                                <input type="hidden" value="{{ $product_watched->name }}" class="cart_product_name_{{$product_watched->id}}">
+                                <input type="hidden" value="{{ $product_watched->image}}" class="cart_product_image_{{$product_watched->id}}">
+                                <input type="hidden" value="1" class="cart_product_qty_{{$product_watched->id}}">
+                                <input type="hidden" value="{{$product_watched->quantity}}" class="cart_product_storage_{{$product_watched->id}}">
+                                <input type="hidden" value="{{$product_watched->unit}}" class="cart_product_unit_{{$product_watched->id}}">
+                                <input type="hidden" value="{{$product_watched->persent_discount}}" class="cart_product_discount_{{$product_watched->id}}">
+                                @if (Session::get('id_customer'))
+                                <input type="hidden" value="{{ Session::get('id_customer') }}" id="customer_id">
+                                @endif
+                                <div class="card-body">
+                                    <h2><a href="{{route('get_product_detail',$product_watched->slug)}}">{{$product_watched->name}}</a></h2>
+                                    <div class="box-price">
+                                        @if($product_watched->persent_discount>0)
+                                        <div class="price">{{currency_format($product_watched->price*((100-$product_watched->persent_discount)/100))}}/{{$product_watched->unit}}</div>
+                                        <div class="old-price">{{currency_format($product_watched->price)}}/{{$product_watched->unit}}</div>
+                                        <input type="hidden" value="{{ $product_watched->price*((100-$product_watched->persent_discount)/100)}}" class="cart_product_price_{{$product_watched->id}}">
+                                        <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_off_{{$product_watched->id}}">
+                                        @else
+                                        <div class="price">{{currency_format($product_watched->price)}}/{{$product_watched->unit}}</div>
+                                        <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_{{$product_watched->id}}">
+                                        <input type="hidden" value="{{ $product_watched->price}}" class="cart_product_price_off_{{$product_watched->id}}">
+                                        @endif
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Card -->
+                    </div>
+                </div>
+                @endif
+            </section>
+        </div>
+    </section>
+    @endsection
