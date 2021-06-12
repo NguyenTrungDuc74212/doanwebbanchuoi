@@ -77,11 +77,11 @@ Route::post('input-chart','AuthController@chart_input_sheet')->name('chart_input
 		Route::post('cancel-product','ProductController@cancel_product')->name('cancel_product');
 		//gallery
 		Route::get('add-gallery/{id}','ProductController@add_gallery')->name('add_gallery');
-	Route::post('select-gallery','ProductController@select_gallery')->name('select_gallery');
-	Route::post('insert-gallery/{id}','ProductController@insert_gallery')->name('insert_gallery');
-	Route::post('update_gallery_name','ProductController@update_gallery')->name('update_gallery');
-	Route::post('delete_gallery','ProductController@delete_gallery')->name('delete_gallery');
-	Route::post('update_image','ProductController@update_image')->name('update_image');
+		Route::post('select-gallery','ProductController@select_gallery')->name('select_gallery');
+		Route::post('insert-gallery/{id}','ProductController@insert_gallery')->name('insert_gallery');
+		Route::post('update_gallery_name','ProductController@update_gallery')->name('update_gallery');
+		Route::post('delete_gallery','ProductController@delete_gallery')->name('delete_gallery');
+		Route::post('update_image','ProductController@update_image')->name('update_image');
 
 	});
 
@@ -134,7 +134,9 @@ Route::post('input-chart','AuthController@chart_input_sheet')->name('chart_input
 		Route::get('order/get-by-status/{status}/{status_pay}','orderController@getByStatus')->name('get_by_status');
 		Route::get('view_exchange/{order_code}','orderController@get_view_exchange')->name('get_view_exchange');
 		Route::post('save_exchange/{order_code}','orderController@save_exchange')->name('save_exchange');
-
+		Route::get('product-cancel','ProductController@getViewProductCancel')->name('get_view_product_cancel');
+		Route::get('product-cancel/search','ProductController@getViewProductCancelSearch')->name('get_view_product_cancel_search');
+		
 	});
 
 
@@ -158,11 +160,11 @@ Route::post('input-chart','AuthController@chart_input_sheet')->name('chart_input
     Route::get('/insert_warehouse','WarehouseController@insert_warehouse')->name('view_insert_warehouse');
     Route::post('/save_warehouse','WarehouseController@save_warehouse')->name('save_warehouse');
     Route::get('list-warehouse','WarehouseController@list_warehouse')->name('list_warehouse');
-     Route::get('/xoa-warehouse/{id}','WarehouseController@delete_warehouse')->name('delete_warehouse');
-       Route::get('/sua-warehouse/{id}','WarehouseController@edit_warehouse')->name('edit_warehouse');
+    Route::get('/xoa-warehouse/{id}','WarehouseController@delete_warehouse')->name('delete_warehouse');
+    Route::get('/sua-warehouse/{id}','WarehouseController@edit_warehouse')->name('edit_warehouse');
     Route::post('/update-warehouse/{id}','WarehouseController@update_warehouse')->name('update_warehouse');
 
-    //inward slip
+    //inwardslip
     Route::get('/insert_input','inputSheetController@insert_input')->name('view_insert_input');
     Route::post('/save_input','inputSheetController@save_input')->name('save_input');
     Route::post('/load-more','inputSheetController@load_input_sheet')->name('load_input_sheet');
@@ -172,16 +174,14 @@ Route::post('input-chart','AuthController@chart_input_sheet')->name('chart_input
     Route::post('/update-input/{id}','inputSheetController@update_input')->name('update_input');
     Route::post('change-status','inputSheetController@change_status')->name('change_status');
     Route::post('load-edit','inputSheetController@load_input_sheet_edit')->name('load_input_sheet_edit');
-     Route::get('/view-input/{id}','inputSheetController@view_input')->name('view_input');
-     
+    Route::get('/view-input/{id}','inputSheetController@view_input')->name('view_input');
+    
      //Quản lý khách hàng
      Route::get('list-customer','AuthController@list_customer')->name('list_customer');
 
      //Quản lý phiếu  đổi trả
      Route::get('list-return-voucher','returnVoucherController@get_list_return')->name('get_list_return');
      Route::get('detail-return/{code}','returnVoucherController@view_detail_return')->name('view_detail_return');
-
-
 });
 
 Route::get('test', function() {
@@ -269,5 +269,4 @@ Route::post('like-product-ajax','likeProductController@like_product_ajax')->name
 // notification
 Route::get('order/get-detail/{id}/{notification_id}','orderController@getOrderDetail')->name('order_get_detail_by_notification');
 Route::get('notification/delete-all','orderController@deleteNotifications')->name('delete_all_notifications');
-
 /* end website*/

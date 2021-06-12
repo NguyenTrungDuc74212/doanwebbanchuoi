@@ -429,6 +429,12 @@ strong.mr-auto {padding-left: 10px;}
                                             <p>Liệt kê sản phẩm</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('get_view_product_cancel') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Sản phẩm hỏng lỗi</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">

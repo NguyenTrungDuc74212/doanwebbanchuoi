@@ -300,5 +300,46 @@ class ProductController extends Controller
 		}
 		return redirect()->back();
 	}
+	public function getViewProductCancel()
+	{
+		$id_warehouse=-1;
+		$warehouse=Warehouse::all();
+		$now=Carbon::now();
+		$cancelProduct=CancelProduct::where('cancel_date',$now->format('d-m-Y'))->get();
+		return view('admin.product.cancel_product',compact('warehouse','id_warehouse','cancelProduct'));
+	}
+	public function getViewProductCancelSearch(Request $req)
+	{
+		if($req->date!=null&&$req->warehouse_id!=-1)
+		{
+			$date=Carbon::parse($req->date)->format('d-m-Y');
+			$cancelProduct=CancelProduct::join('tbl_warehouse_product','warehouse_product_id','=','tbl_warehouse_product.id')
+			->where('cancel_date',$date)
+			->where('tbl_warehouse_product.warehouse_id',$req->id_warehouse)
+			->get();
+		}elseif($req->date==null&&$req->warehouse_id!=-1){
+			$date=Carbon::parse($req->date)->format('d-m-Y');
+			
+			$cancelProduct=CancelProduct::
+			join('tbl_warehouse_product','warehouse_product_id','=','tbl_warehouse_product.id')
+			->where('tbl_warehouse_product.warehouse_id',$req->id_warehouse)
+			->get();
+		}
+		elseif($req->date!=null&&$req->warehouse_id==-1){
+			$date=Carbon::parse($req->date)->format('d-m-Y');
+			$cancelProduct=CancelProduct::
+			join('tbl_warehouse_product','warehouse_product_id','=','tbl_warehouse_product.id')
+			->where('cancel_date',$date)
+			->get();
+		}
+		if($req->date==null&&$req->warehouse_id==-1){
+			$now=Carbon::now();
+			$cancelProduct=CancelProduct::where('cancel_date',$now->format('d-m-Y'))->get();
+		}
+		$id_warehouse=$req->id_warehouse;
+		$warehouse=Warehouse::all();
+	
+		return view('admin.product.cancel_product',compact('warehouse','id_warehouse','cancelProduct'));
+	}
 	
 }
