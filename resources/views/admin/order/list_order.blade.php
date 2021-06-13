@@ -49,7 +49,7 @@
 		</div>
 		<!-- /.card-header -->
 		<div class="card-body table-responsive p-0">
-			<table class="table table-hover text-center">
+			<table class="table table-hover text-center" id="table_order">
 				<thead  class="text-nowrap">
 					<tr class="tr-admin">
 						<th>Đơn hàng</th>
@@ -101,7 +101,7 @@
 	</div>
 	<!-- /.card -->
 </div>
-<div class="card-footer">
+{{-- <div class="card-footer">
 	{{ $orders->appends(Request()->all())}}
-</div>
+</div> --}}
 @stop
