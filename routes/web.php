@@ -146,6 +146,11 @@ Route::post('input-chart','AuthController@chart_input_sheet')->name('chart_input
 		Route::post('save-user','AuthController@save_user')->name('save-user');
 	});
 
+   
+   //warehouse
+  Route::group(['middleware'=>'roleUser'], function() {
+
+
 	//vendors
 	Route::get('list-vendors','VendorController@list_vendor')->name('list_vendor');
 	Route::get('/insert_vendor','VendorController@insert_vendor')->name('view_insert_vendor');
@@ -153,9 +158,7 @@ Route::post('input-chart','AuthController@chart_input_sheet')->name('chart_input
     Route::get('/xoa-vendor/{id}','VendorController@delete_vendor')->name('delete_vendor');
     Route::get('/sua-vendor/{id}','VendorController@edit_vendor')->name('edit_vendor');
     Route::post('/update-vendor/{id}','VendorController@update_vendor')->name('update_vendor');
-   
-   //warehouse
-  Route::group(['middleware'=>'roleUser'], function() {
+    
     Route::get('/insert_warehouse','WarehouseController@insert_warehouse')->name('view_insert_warehouse');
     Route::post('/save_warehouse','WarehouseController@save_warehouse')->name('save_warehouse');
     Route::get('list-warehouse','WarehouseController@list_warehouse')->name('list_warehouse');
